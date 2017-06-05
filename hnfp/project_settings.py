@@ -175,6 +175,7 @@ INSTALLED_APPS = [
     'core',
     'compressor',
     ### BEGIN INSERTED INSTALLED APPS ###
+    "hnfp", 
     "features", 
     "manipulators", 
     "accounts", 
