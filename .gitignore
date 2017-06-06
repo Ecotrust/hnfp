@@ -2,3 +2,4 @@
 .DS_Store
 .idea
 hnfp.egg-info
+node_modules/
