@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include hnfp/static *
+recursive-include hnfp/templates *
