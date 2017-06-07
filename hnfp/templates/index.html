@@ -1,11 +1,123 @@
 {% extends "base.html" %}
 {% load static %}
-{% block extra_head %}
-  <link rel="stylesheet" href="{% static '/css/materialize.css' %}">
-  <link rel="stylesheet" href="{% static '/css/starter.css' %}">
+
+{% block extra_css %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{% static '/css/materialize.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static '/css/starter.css' %}" media="screen,projection"/>
 {% endblock %}
 
+{% block extra_head %}
+  <meta name="theme-color">
+  <meta name="description" content="Hoonah Native Forest Partnership">
+  <meta name="robots" content="index,follow"><!-- All Search Engines -->
+  <meta name="googlebot" content="index,follow"><!-- Google Specific -->
+
+  <!-- Links to a JSON file that specifies "installation" credentials for web applications -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- iOS Add to Home Screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="App Title">
+  <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
+
+  <!-- Android -->
+  <meta name="theme-color" content="#E64545">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="highres-icon.png">
+
+{% endblock %}
+
+{% block header %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block content %}
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <h1 class="header center orange-text">Starter Template</h1>
+      <div class="row center">
+        <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+      </div>
+      <div class="row center">
+        <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light orange">Get Started</a>
+      </div>
+    </div>
+  </div>
+  <section>
+    <!--   Icon Section   -->
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+          <h5 class="center">Speeds up development</h5>
+
+          <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+        </div>
+      </div>
+
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+          <h5 class="center">User Experience Focused</h5>
+
+          <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+        </div>
+      </div>
+
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+          <h5 class="center">Easy to work with</h5>
+
+          <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+
+{% block footer %}
+<div class="page-footer orange">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">Company Bio</h5>
+        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+      </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">Settings</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Link 1</a></li>
+          <li><a class="white-text" href="#!">Link 2</a></li>
+          <li><a class="white-text" href="#!">Link 3</a></li>
+          <li><a class="white-text" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+      <div class="col l3 s12">
+        <h5 class="white-text">Connect</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Link 1</a></li>
+          <li><a class="white-text" href="#!">Link 2</a></li>
+          <li><a class="white-text" href="#!">Link 3</a></li>
+          <li><a class="white-text" href="#!">Link 4</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+    Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+    </div>
+  </div>
+</div>
+{% endblock footer %}
+
 {% block extra_js %}
+
   <script src="{% static '/js/localforage/localforage.min.js' %}"></script>
   <script src="{% static '/js/materialize/materialize.min.js' %}"></script>
   <script src="{% static '/js/materialize/starter.js' %}"></script>

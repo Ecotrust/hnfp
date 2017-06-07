@@ -1,0 +1,27 @@
+{% load static %}
+<nav class="light-blue lighten-1" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Hoonah Stewards</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#">Navbar Link</a></li>
+      <li>
+        {% if user.is_authenticated %}
+          <a href="{% url 'account:index' %}">{{ user.first_name }} <span class="fa fa-user"></span></a>
+        {% else %}
+          <a href="{% url 'account:index' %}?next={{ request.path }}">LOG IN <span class="fa fa-user"></span></a>
+        {% endif %}
+      </li>
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      <li><a href="#">Navbar Link</a></li>
+      <li>
+        {% if user.is_authenticated %}
+          <a href="{% url 'account:index' %}">{{ user.first_name }} <span class="fa fa-user"></span></a>
+        {% else %}
+          <a href="{% url 'account:index' %}?next={{ request.path }}">LOG IN <span class="fa fa-user"></span></a>
+        {% endif %}
+      </li>
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
