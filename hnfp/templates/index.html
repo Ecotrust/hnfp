@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static '/css/materialize.css' %}">
+  <link rel="stylesheet" href="{% static '/css/starter.css' %}">
+{% endblock %}
 
 {% block extra_js %}
   <script src="{% static '/js/localforage/localforage.min.js' %}"></script>
-  <script src="{% static '/js/app.min.js' %}" charset="utf-8"></script>
+  <script src="{% static '/js/materialize/materialize.min.js' %}"></script>
+  <script src="{% static '/js/materialize/starter.js' %}"></script>
+  <script src="{% static '/js/app.js' %}" charset="utf-8"></script>
+  <script src="{% static '/js/offline.js' %}" charset="utf-8"></script>
 {% endblock %}
