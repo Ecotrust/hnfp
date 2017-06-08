@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block site_style %}{% endblock site_style %}
+
 {% block extra_css %}
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static '/css/materialize.css' %}" media="screen,projection"/>
@@ -14,25 +16,26 @@
   <meta name="googlebot" content="index,follow"><!-- Google Specific -->
 
   <!-- Links to a JSON file that specifies "installation" credentials for web applications -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="./manifest.json">
 
   <!-- iOS Add to Home Screen -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="App Title">
-  <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
+  <!-- <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png"> -->
 
   <!-- Android -->
   <meta name="theme-color" content="#E64545">
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="highres-icon.png">
+  <!-- <link rel="icon" sizes="192x192" href="highres-icon.png"> -->
 {% endblock %}
 
 {% block header %}
-  {% include 'navbar.html' %}
+  {% include 'hnfp/navbar.html' %}
+  {% include 'hnfp/modal.html' %}
 {% endblock %}
 
-{% block content %}
+{% block outer_content %}
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <h1 class="header center orange-text">Starter Template</h1>
@@ -44,7 +47,7 @@
       </div>
     </div>
   </div>
-  <section>
+  <section class="section">
     <!--   Icon Section   -->
     <div class="row">
       <div class="col s12 m4">
@@ -75,7 +78,7 @@
       </div>
     </div>
   </section>
-{% endblock content %}
+{% endblock outer_content %}
 
 {% block footer %}
 <div class="page-footer orange">
@@ -116,10 +119,9 @@
 {% endblock footer %}
 
 {% block extra_js %}
-
   <script src="{% static '/js/localforage/localforage.min.js' %}"></script>
   <script src="{% static '/js/materialize/materialize.min.js' %}"></script>
   <script src="{% static '/js/materialize/starter.js' %}"></script>
-  <script src="{% static '/js/app.js' %}" charset="utf-8"></script>
-  <script src="{% static '/js/offline.js' %}" charset="utf-8"></script>
+  <script src="{% static '/hnfp/js/app.hnfp.js' %}" charset="utf-8"></script>
+  <script src="{% static '/hnfp/js/offline.js' %}" charset="utf-8"></script>
 {% endblock %}

@@ -112,7 +112,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/hnfp/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
@@ -175,15 +175,15 @@ INSTALLED_APPS = [
     'core',
     'compressor',
     ### BEGIN INSERTED INSTALLED APPS ###
-    "hnfp", 
-    "features", 
-    "manipulators", 
-    "accounts", 
-    "data_manager", 
-    "drawing", 
-    "rpc4django", 
-    "visualize", 
-    "nursery", 
+    "hnfp",
+    "features",
+    "manipulators",
+    "accounts",
+    "data_manager",
+    "drawing",
+    "rpc4django",
+    "visualize",
+    "nursery",
     ### END INSERTED INSTALLED APPS ###
 ]
 
