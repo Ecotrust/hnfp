@@ -13,4 +13,10 @@ $('.modal').modal({
 
 $(document).ready( function() {
   $('.parallax').parallax();
+  $('.button-collapse').sideNav();
+  $('.slider').slider({
+    'indicators': false
+  });
+  // initial pause slider
+  $('.slider').slider('pause');
 });

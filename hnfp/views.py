@@ -19,3 +19,10 @@ def home(request):
         'cta':'Become a steward',
     }
     return HttpResponse(template.render(context, request))
+
+def survey(request):
+    template = loader.get_template('hnfp/land_use_survey.html')
+    context = {
+        'page': 'survey',
+    }
+    return HttpResponse(template.render(context, request))

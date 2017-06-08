@@ -5,8 +5,8 @@
 
 {% block extra_css %}
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="{% static '/css/materialize.css' %}" media="screen,projection"/>
-  <link rel="stylesheet" href="{% static '/css/starter.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static '/hnfp/css/materialize.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static '/hnfp/css/style.css' %}" media="screen,projection"/>
 {% endblock %}
 
 {% block extra_head %}
@@ -112,16 +112,15 @@
   </div>
   <div class="footer-copyright">
     <div class="container">
-    Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
     </div>
   </div>
 </div>
 {% endblock footer %}
 
 {% block extra_js %}
-  <script src="{% static '/js/localforage/localforage.min.js' %}"></script>
-  <script src="{% static '/js/materialize/materialize.min.js' %}"></script>
-  <script src="{% static '/js/materialize/starter.js' %}"></script>
+  <script src="{% static '/hnfp/js/localforage/localforage.min.js' %}"></script>
+  <script src="{% static '/hnfp/js/materialize/materialize.min.js' %}"></script>
+  <script src="{% static '/hnfp/js/materialize/starter.js' %}"></script>
   <script src="{% static '/hnfp/js/app.hnfp.js' %}" charset="utf-8"></script>
   <script src="{% static '/hnfp/js/offline.js' %}" charset="utf-8"></script>
 {% endblock %}
