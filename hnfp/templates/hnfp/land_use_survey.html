@@ -1,30 +1,36 @@
 {% extends "hnfp/index.html" %}
 {% load static %}
 
+{% block extra_head %}
+  {{ block.super }}
+  <link href="{% static '/hnfp/css/materialize_stepper.css' %}" rel="stylesheet">
+{% endblock extra_head %}
+
 {% block outer_content %}
 <main>
-  <div class="row">
-    <form class="col s12">
-      <section id="form-step-one">
-        <div class="row">
-          <div class="input-field col s12 l6">
-            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-            <label for="first_name">first name</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="last_name" type="text" class="validate">
-            <label for="last_name">last name</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="email" type="email" class="validate">
-            <label for="email">email</label>
-          </div>
-          <div class="input-field col s12 l6">
-            <input id="email" type="email" class="validate">
-            <label for="email">phone</label>
-          </div>
+  <ul class="stepper horizontal">
+   <li class="step active">
+      <div class="step-title waves-effect">basic information</div>
+      <div class="step-content">
+         <div class="row">
+            <div class="input-field col s12 l6">
+              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+              <label for="first_name">first name</label>
+            </div>
+            <div class="input-field col s12 l6">
+              <input id="last_name" type="text" class="validate">
+              <label for="last_name">last name</label>
+            </div>
+            <div class="input-field col s12 l6">
+              <input id="email" type="email" class="validate">
+              <label for="email">email</label>
+            </div>
+            <div class="input-field col s12 l6">
+              <input id="email" type="email" class="validate">
+              <label for="email">phone</label>
+            </div>
         </div>
-        <div class="row center">
+        <div class="row">
           <div class="input-field col s12 l6 offset-l3">
             <input id="password" type="password" class="validate">
             <label for="password">Password</label>
@@ -34,13 +40,14 @@
             <label for="password">password repeat</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col s6 offset-s3">
-            <a href="#form-step-two" class="btn">Next <i class="material-icons right">chevron_right</i></a>
-          </div>
+        <div class="step-actions">
+          <button class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">chevron_right</i></button>
         </div>
-      </section>
-      <section id="form-step-two">
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-title waves-effect">Location</div>
+      <div class="step-content">
         <div class="input-field col s12 l6">
           <input placeholder="City" id="first_name" type="text" class="validate">
           <label for="city">city</label>
@@ -53,13 +60,15 @@
           <input id="zip" type="text" class="validate">
           <label for="zip">zip</label>
         </div>
-        <div class="row">
-          <div class="col s6 offset-s3">
-            <a href="#form-step-two" class="btn">Next <i class="material-icons right">chevron_right</i></a>
-          </div>
+        <div class="step-actions">
+          <button class="waves-effect waves-dark btn-flat previous-step"><i class="material-icons left">chevron_left</i> Previous</button>
+          <button class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">chevron_right</i></button>
         </div>
-      </section>
-      <section id="form-step-three">
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-title waves-effect">Your land use</div>
+      <div class="step-content">
         <div class="input-field col s12">
           <p>
             <input type="checkbox" id="hunt-deer" />
@@ -90,18 +99,41 @@
             <label for="hunt-deer">Hunt deer</label>
           </p>
         </div>
-        <div class="row">
-          <div class="col s6 offset-s3">
-            <a href="#form-step-two" class="btn">Next <i class="material-icons right">chevron_right</i></a>
-          </div>
+        <div class="step-actions">
+          <button class="waves-effect waves-dark btn-flat previous-step"><i class="material-icons left">chevron_left</i> Previous</button>
+          <button class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">chevron_right</i></button>
         </div>
-      </section>
-    </form>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-title waves-effect">Your land use</div>
+      <div class="step-content">
+        
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-actions">
+         <button class="waves-effect waves-dark btn" type="submit">SUBMIT</button>
+      </div>
+    </li>
+  </ul>
+
+  <div class="row">
+    <ul class="pagination">
+      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+      <li class="active"><a href="#!">1</a></li>
+      <li class="waves-effect"><a href="#!">2</a></li>
+      <li class="waves-effect"><a href="#!">3</a></li>
+      <li class="waves-effect"><a href="#!">4</a></li>
+      <li class="waves-effect"><a href="#!">5</a></li>
+      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
   </div>
 </main>
 {% endblock outer_content %}
 
 {% block extra_js %}
   {{ block.super }}
+  <script src="{% static '/hnfp/js/materialize/materialize_stepper.js' %}"></script>
   <script src="{% static '/hnfp/js/form.js' %}"></script>
 {% endblock extra_js %}
