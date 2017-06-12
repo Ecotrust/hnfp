@@ -13,6 +13,9 @@
 .teal {
   color: #57a6a2;
 }
+.bg-teal {
+  background: #57a6a2;
+}
 
 .green_light {
   color: #e4efee;
@@ -35,26 +38,38 @@
   global
   --------------------*/
 
+body {
+  font-family: 'function', sans-serif;
+  font-weight: normal;
+}
+
+main,
+.container,
+section,
+div {
+  font-size: 1.125em;
+}
+
 h1,
 h2,
 h3 {
   font-family: 'function', sans-serif;
   font-weight: 700;
-  line-height: 2;
+  line-height: 1.375;
   margin: 0 0 .5em;
 }
 
 h1 {
-  font-size: 3.25em;
-}
-h2 {
   font-size: 3em;
 }
+h2 {
+  font-size: 1.5em;
+}
 h3 {
-  font-size: 1.75em;
+  font-size: 2em;
 }
 h4 {
-  font-size: 1.25em;
+  font-size: 1.5em;
 }
 
 nav *,
@@ -64,23 +79,44 @@ nav ul li a {
   color: #000;
 }
 
+#logo-container.brand-logo {
+  padding: 15px 0;
+}
+
+  .brand-logo img {
+    display: inline-block;
+    height: 26px;
+  }
+
 /*--------------------
   home
   --------------------*/
 
 .parallax-container {
-  height: 40vh;
+  height: 42vh;
   width: 100%;
 }
 
 .hero {
   color: #fff;
-  padding-top: 10%;
+  padding-top: 8%;
   text-align: center;
 }
 
   .hero h2 {
     text-align: justify;
+  }
+
+.section-top-bg {
+    position: relative;
+}
+
+  .section-top-bg-img {
+    left: -25%;
+    position: absolute;
+    top: -50px;
+    width: 150%;
+    z-index: -1;
   }
 
 .icon-block {

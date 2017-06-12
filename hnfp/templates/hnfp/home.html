@@ -5,16 +5,19 @@
 <main>
   <div class="parallax-container">
     <div class="parallax">
-      <img src="{% static 'hnfp/img/bg.jpg' %}">
+      <img src="{% static 'hnfp/img/bg_mountain.jpg' %}">
     </div>
     <section class="row hero">
       <div class="col s10 m8 l6 offset-s1 offset-m2 offset-l3">
-        <h2 class="col s10 offset-s1">{{ tagline }}</h2>
+        <h2 class="col s12">{{ tagline }}</h2>
         <a href="/survey" class="waves-effect waves-light btn-large">{{ cta }} <i class="material-icons right">launch</i></a>
       </div>
     </section>
   </div>
   <section class="section white">
+    <div class="section-top-bg">
+      <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img">
+    </div>
     <div class="row container">
       <div class="col s12 center flow-text">
         <h1>Coming together to create a shared vision for our lands.</h1>

@@ -1,6 +1,6 @@
 {% load static %}
 <nav class="white" role="navigation">
-  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><img src="{% static 'img/logo.svg' %}" /></a>
+  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="#" class="black-text">Navbar Link</a></li>
       <li>
@@ -18,7 +18,7 @@
         {% if user.is_authenticated %}
           <a href="{% url 'account:index' %}">{{ user.first_name }} <span class="fa fa-user"></span></a>
         {% else %}
-          <a href="{% url 'account:index' %}?next={{ request.path }}">LOG IN <span class="fa fa-user"></span></a>
+          <a class="waves-effect waves-light" href="#modal1">log in</a>
         {% endif %}
       </li>
     </ul>
