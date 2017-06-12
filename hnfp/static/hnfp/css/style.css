@@ -1,21 +1,54 @@
 /*--------------------
+  colors
+  --------------------*/
+
+.black {
+  color: #000;
+}
+
+.red {
+  color: #d53f38;
+}
+
+.teal {
+  color: #57a6a2;
+}
+
+.green_light {
+  color: #e4efee;
+}
+
+.blue_grey {
+  color: #5d85b7;
+}
+
+.blue_dark {
+  color: #2b384a;
+}
+
+.magenta {
+  color: #9e005d;
+}
+
+
+/*--------------------
   global
   --------------------*/
 
-.red {
-  color: #a02002;
-}
-
 h1,
-h2 {
-  margin: 0 0 1.5em;
+h2,
+h3 {
+  font-family: 'function', sans-serif;
+  font-weight: 700;
+  line-height: 2;
+  margin: 0 0 .5em;
 }
 
 h1 {
-  font-size: 2.125em;
+  font-size: 3.25em;
 }
 h2 {
-  font-size: 2em;
+  font-size: 3em;
 }
 h3 {
   font-size: 1.75em;
