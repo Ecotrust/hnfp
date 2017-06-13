@@ -5,5 +5,5 @@ Hoonah Native Forest Partnership
 
 ### Resources  
 
-- [Photo Library](https://www.flickr.com/photos/129958772@N08/albums)  
+- [See Wiki](https://github.com/Ecotrust/HNFP/wiki)  
 
