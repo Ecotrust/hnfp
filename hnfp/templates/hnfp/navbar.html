@@ -5,9 +5,9 @@
       <li><a href="#" class="black-text">Navbar Link</a></li>
       <li>
         {% if user.is_authenticated %}
-          <a href="{% url 'account:index' %}">{{ user.first_name }} <span class="fa fa-user"></span></a>
+          <a href="{% url 'account:index' %}">{{ user.first_name }}</a>
         {% else %}
-          <a class="waves-effect waves-light" href="#modal1">log in</a>
+          <a class="waves-effect waves-light" href="#modal1"><i class="material-icons">account_circle</i></a>
         {% endif %}
       </li>
     </ul>
@@ -16,9 +16,9 @@
       <li><a href="#">Navbar Link</a></li>
       <li>
         {% if user.is_authenticated %}
-          <a href="{% url 'account:index' %}">{{ user.first_name }} <span class="fa fa-user"></span></a>
+          <a href="{% url 'account:index' %}">{{ user.first_name }}</a>
         {% else %}
-          <a class="waves-effect waves-light" href="#modal1">log in</a>
+          <a class="waves-effect waves-light" href="#modal1"><i class="material-icons">account_circle</i></a>
         {% endif %}
       </li>
     </ul>

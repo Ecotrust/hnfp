@@ -4,7 +4,6 @@
 {% block site_style %}{% endblock site_style %}
 
 {% block extra_css %}
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{% static '/hnfp/css/materialize.css' %}" media="screen,projection"/>
   <link rel="stylesheet" href="{% static '/hnfp/css/style.css' %}" media="screen,projection"/>
 {% endblock %}
@@ -67,22 +66,7 @@
 {% endblock outer_content %}
 
 {% block footer %}
-<div class="page-footer bg-teal">
-  <div class="container">
-    <div class="row">
-      <div class="col l10 s6">
-        <p class="white-text"><a href="mailto:info@ hoonahstewards.com">info@ hoonahstewards.com</a></p>
-      </div>
-      <div class="col l2 s6">
-        <h5 class="white-text">Hoonah Stewards</h5>
-      </div>
-    </div>
-  </div>
-  <div class="footer-copyright">
-    <div class="container">
-    </div>
-  </div>
-</div>
+  {% include 'hnfp/footer.html' %}
 {% endblock footer %}
 
 {% block extra_js %}

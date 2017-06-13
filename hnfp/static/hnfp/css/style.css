@@ -1,4 +1,44 @@
 /*--------------------
+  fonts
+  --------------------*/
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/static/hnfp/fonts/MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url('/static/hnfp/fonts/MaterialIcons-Regular.woff2') format('woff2'),
+       url('/static/hnfp/fonts/MaterialIcons-Regular.woff') format('woff'),
+       url('/static/hnfp/fonts/MaterialIcons-Regular.ttf') format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+/*--------------------
   colors
   --------------------*/
 
@@ -33,13 +73,13 @@
   color: #9e005d;
 }
 
-
 /*--------------------
   global
   --------------------*/
 
 body {
   font-family: 'function', sans-serif;
+  font-size: 1em;
   font-weight: normal;
 }
 
@@ -115,7 +155,7 @@ nav ul li a {
     left: -25%;
     position: absolute;
     top: -50px;
-    width: 150%;
+    width: 200%;
     z-index: -1;
   }
 
@@ -129,4 +169,93 @@ nav ul li a {
 
 .home-mid .col {
   margin-bottom: 2em;
+}
+
+/*--------------------
+  survey
+  --------------------*/
+
+.survey-intro h2 {
+  margin: 0;
+}
+
+.border-survey-wrap {
+  border-bottom: 3px solid #2b384a;
+}
+
+.survey-wrap {
+  position: relative;
+}
+
+.survey-wrap:before {
+  background-image: url('/static/hnfp/hnfp/img/aurora.png');
+  background-size: cover;
+  background-position: 50%;
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.survey-wrap input {
+  background: rgba(255,255,255,0.5);
+}
+
+.step.active,
+.input-field label,
+.input-field input:focus + label.active {
+  color: #fff;
+}
+
+.survey-wrap .input-field input:focus,
+.survey-wrap .input-field input {
+  border-bottom: none;
+}
+
+.survey-wrap .input-field label {
+  text-indent: 5px;
+}
+
+ul.stepper .step:before {
+  background-color: rgba(255,255,255,0.5);
+}
+
+.survey-wrap ul.stepper .step.active:before,
+.survey-wrap ul.stepper .step.done:before {
+  background: rgba(255,255,255,0.75);
+  color: #000;
+}
+
+.survey-wrap ul.stepper .step.active .step-title {
+  font-weight: 700;
+  font-size: 1.3125em;
+  line-height: 1;
+}
+
+/*--------------------
+  media queries mq
+  --------------------*/
+
+@media only screen and (min-width: 48em) {
+
+  .section-top-bg-img {
+    left: -25%;
+    top: -68px;
+    width: 150%;
+  }
+
+  .hero h2 {
+    text-align: center;
+  }
+
+}
+
+@media only screen and (min-width: 64em) {
+  .section-top-bg-img {
+    left: -10%;
+    top: -74px;
+    width: 120%;
+  }
 }
