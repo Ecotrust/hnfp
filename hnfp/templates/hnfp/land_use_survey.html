@@ -4,14 +4,33 @@
 {% block extra_head %}
   {{ block.super }}
   <link href="{% static '/hnfp/css/materialize_stepper.css' %}" rel="stylesheet">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-selection.v1.js"></script>
+  <script src="https://d3js.org/d3-array.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
 {% endblock extra_head %}
+
+{% block header %}
+<nav class="white z-depth-0" role="navigation">
+  <ul class="right">
+    <li>
+      {% if user.is_authenticated %}
+        <a href="{% url 'account:index' %}">{{ user.first_name }}</a>
+      {% else %}
+        <a class="waves-effect waves-light" href="#modal1"><i class="material-icons">account_circle</i></a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+{% endblock %}
 
 {% block outer_content %}
 <main>
   <section class="section survey-intro">
     <div class="row">
-      <div class="col s6 offset-s3">
-        <img src="{% static 'hnfp/img/logo.svg' %}" />
+      <div class="col s8 offset-s2 l4 offset-l4">
+        <a href="/"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
       </div>
     </div>
     <div class="row">
@@ -42,29 +61,25 @@
         {% include './survey_location.html' %}
       </li>
       <li class="step">
-        {% include './survey_land_use.html' %}
-      </li>
-      <li class="step">
         {% include './survey_forest_use.html' %}
       </li>
       <li class="step">
-        <div class="step-actions">
-           <button class="waves-effect waves-dark btn" type="submit">SUBMIT</button>
+        {% include './survey_land_use_rank.html' %}
+      </li>
+      <li class="step">
+        {% include './survey_regions.html' %}
+      </li>
+      <li class="step">
+        <div class="step-title waves-effect">Your land use</div>
+        <div class="step-content">
+          <div class="row">
+            <div class="step-actions col s12 l6 offset-l3">
+              <button class="waves-effect waves-dark btn hoverable" type="submit">SUBMIT</button>
+            </div>
+          </div>
         </div>
       </li>
     </ul>
-
-    <div class="row">
-      <ul class="pagination">
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-        <li class="active"><a href="#!">1</a></li>
-        <li class="waves-effect"><a href="#!">2</a></li>
-        <li class="waves-effect"><a href="#!">3</a></li>
-        <li class="waves-effect"><a href="#!">4</a></li>
-        <li class="waves-effect"><a href="#!">5</a></li>
-        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-      </ul>
-    </div>
   </section>
 </main>
 {% endblock outer_content %}

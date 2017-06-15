@@ -1,0 +1,34 @@
+<div class="step-title waves-effect">Your Land Use</div>
+<div class="step-content">
+  <div class="row">
+    <h5 class="flow-text">Rank the following activities 1-5 according to importance to you with 1 being most important.</h5>
+    <br />
+    <div class="input-field col s6">
+      <input type="number" id="rank_hunt" name="rank_hunt" value="0" />
+      <label for="rank_hunt">Hunt Deer</label>
+    </div>
+    <div class="input-field col s6">
+      <input type="number" id="rank_gather_herbs" name="rank_gather_herbs" value="0" />
+      <label for="rank_gather_herbs">Gather Herbs</label>
+    </div>
+    <div class="input-field col s6">
+      <input type="number" id="rank_fish" name="rank_fish" value="0" />
+      <label for="rank_fish">Fish</label>
+    </div>
+    <div class="input-field col s6">
+      <input type="number" id="rank_collect_berries" name="rank_collect_berries" value="0" />
+      <label for="rank_collect_berries">Collect Berries</label>
+    </div>
+    <div class="input-field col s6">
+      <input type="number" id="rank_gather_mushrooms" name="rank_gather_mushrooms" value="0" />
+      <label for="rank_gather_mushrooms">Gather Mushrooms</label>
+    </div>
+    <div class="input-field col s6">
+      <input type="number" id="rank_collect_firewood" name="rank_collect_firewood" value="0" />
+      <label for="rank_collect_firewood">Collect Firewood</label>
+    </div>
+  </div>
+  <div class="row">
+    {% include './survey_actions.html' %}
+  </div>
+</div>

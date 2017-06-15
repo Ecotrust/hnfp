@@ -92,7 +92,9 @@ div {
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5 {
   font-family: 'function', sans-serif;
   font-weight: 700;
   line-height: 1.375;
@@ -184,54 +186,144 @@ nav ul li a {
 }
 
 .survey-wrap {
+  background: rgba(0,0,0,0.4);
   position: relative;
+  overflow: hidden;
+}
+
+.survey-wrap:before,
+.survey-wrap:after {
+  content: '';
+  position: absolute;
 }
 
 .survey-wrap:before {
-  background-image: url('/static/hnfp/hnfp/img/aurora.png');
+  background-image: url('/static/hnfp/hnfp/img/aurora@2x.png');
   background-size: cover;
+  background-attachment: local;
   background-position: 50%;
-  bottom: 0;
-  content: '';
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
+  bottom: -14%;
+  left: -5%;
+  right: -5%;
+  top: -5%;
+  z-index: -1;
+}
+
+.survey-wrap:after {
+  background-image: url('/static/hnfp/hnfp/img/mountain_ridge_blue.svg');
+  background-size: cover;
+  bottom: -10%;
+  height: 25%;
+  left: -10%;
+  right: -10%;
+  width: 150%;
+  z-index: -1;
 }
 
 .survey-wrap input {
   background: rgba(255,255,255,0.5);
 }
 
+.survey-wrap h5 {
+  font-weight: 700;
+}
+
+.survey-wrap em {
+    font-size: .8125em;
+}
+
+.survey-wrap .inline {
+  display: inline-block;
+}
+
 .step.active,
 .input-field label,
-.input-field input:focus + label.active {
+.input-field input:focus + label.active,
+.survey-wrap ul.stepper .step {
   color: #fff;
 }
 
 .survey-wrap .input-field input:focus,
 .survey-wrap .input-field input {
   border-bottom: none;
+  padding-left: 4px;
 }
 
 .survey-wrap .input-field label {
   text-indent: 5px;
 }
 
-ul.stepper .step:before {
-  background-color: rgba(255,255,255,0.5);
+.survey-wrap ul.stepper .step:before {
+  background-color: rgba(255,255,255,0.4);
+  color: #000;
 }
 
-.survey-wrap ul.stepper .step.active:before,
-.survey-wrap ul.stepper .step.done:before {
+.survey-wrap ul.stepper .step.done {
+  color: #ccc;
+}
+
+.survey-wrap ul.stepper .step.active:before {
   background: rgba(255,255,255,0.75);
   color: #000;
+}
+
+.survey-wrap ul.stepper .step.done:before {
+  background: rgba(255,255,255,0.75);
+  color: #57a6a2;
 }
 
 .survey-wrap ul.stepper .step.active .step-title {
   font-weight: 700;
   font-size: 1.3125em;
   line-height: 1;
+}
+
+.step-actions .btn,
+.previous-step {
+  font-size: .75em;
+  height: auto;
+  line-height: 2.5;
+  text-transform: none;
+}
+
+.step-actions .btn i {
+  font-size: 1.375em;
+  line-height: 1.8125;
+}
+
+.next-step {
+  background: transparent;
+  border: 3px solid #fff;
+}
+
+.previous-step {
+    color: #aaa;
+}
+
+.survey-wrap .input-field label:not(.label-icon).active {
+  font-size: .6125em;
+  transform: translate(-4px,-150%);
+}
+
+.survey-wrap input[type="checkbox"] + label {
+  color: #fff;
+}
+
+.survey-wrap input[type="checkbox"]:not(.filled-in) + label:after,
+[type="checkbox"].filled-in:not(:checked) + label:after {
+  border: 2px solid #fff;
+}
+
+.survey-wrap input[type="checkbox"] + label:before {
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+}
+
+.survey-wrap .inline-label label {
+  color: #fff;
+  font-size: .75em;
+  line-height: 3rem;
+  margin-left: 5px;
 }
 
 /*--------------------

@@ -2,27 +2,27 @@
 <div class="step-content">
   <div class="row">
     <div class="input-field col s12 l6">
-      <input id="first_name" type="text" class="validate" name="fname" autocomplete="given-name">
+      <input id="first_name" type="text" class="validate" name="fname" autocomplete="given-name" required>
       <label for="first_name">first name</label>
     </div>
     <div class="input-field col s12 l6">
-      <input id="last_name" type="text" class="validate" name="lname" autocomplete="family-name">
+      <input id="last_name" type="text" class="validate" name="lname" autocomplete="family-name" required>
       <label for="last_name">last name</label>
     </div>
     <div class="input-field col s12 l6">
-      <input id="email" type="email" class="validate" name="email" autocomplete="email">
+      <input id="email" type="email" class="validate" name="email" autocomplete="email" required>
       <label for="email" data-error="not a valid email" data-success="looks good">email</label>
     </div>
     <div class="input-field col s12 l6">
-      <input id="phone" type="tel" class="validate" name="phone" autocomplete="tel">
+      <input id="phone" type="tel" class="validate" name="phone" autocomplete="tel" required>
       <label for="phone" data-error="not a valid email" data-success="looks good">phone</label>
     </div>
     <div class="input-field col s12 l6 offset-l3">
-      <input id="password" type="password" class="validate" autocomplete="new-password">
+      <input id="password" type="password" class="validate" autocomplete="new-password" required>
       <label for="password">Password</label>
     </div>
-  </div>
-  <div class="step-actions">
-    <button class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">chevron_right</i></button>
+    <div class="step-actions col s12 l6 offset-l3">
+      <button class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">navigate_next</i></button>
+    </div>
   </div>
 </div>
