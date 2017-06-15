@@ -68,11 +68,17 @@
         {% include './survey_regions.html' %}
       </li>
       <li class="step">
-        <div class="step-title waves-effect">Your land use</div>
+        {% include './survey_your_profile_1.html' %}
+      </li>
+      <li class="step">
+        {% include './survey_your_profile_2.html' %}
+      </li>
+      <li class="step">
+        <div class="step-title waves-effect">Finish &amp; Submit</div>
         <div class="step-content">
           <div class="row">
             <div class="step-actions col s12 l6 offset-l3">
-              <button class="waves-effect waves-dark btn hoverable" type="submit">SUBMIT</button>
+              <button class="waves-effect waves-dark btn next-step hoverable" type="submit">Finish &amp; Submit</button>
             </div>
           </div>
         </div>

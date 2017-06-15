@@ -1,0 +1,32 @@
+<div class="step-title waves-effect">Your Profile</div>
+<div class="step-content">
+  <div class="row">
+    <h5 class="flow-text">How do you identify?</h5>
+    <p>
+      <input type="radio" name="gender" id="female" value="female" />
+      <label for="female">Female</label>
+    </p>
+    <p>
+      <input type="radio" name="gender" id="male" value="male" />
+      <label for="male">Male</label>
+    </p>
+    <p>
+      <input type="radio" name="gender" id="non-binary" value="non-binary" />
+      <label for="non-binary">How do you identify?</label>
+    </p>
+  </div>
+  <div class="row">
+    <h5 class="flow-text">Does your employment rely on the Hoonah Forest?</h5>
+    <p>
+      <input type="radio" name="forest-dependment-employment" id="yes" value="yes" />
+      <label for="yes">Yes</label>
+    </p>
+    <p>
+      <input type="radio" name="forest-dependment-employment" id="no" value="no" />
+      <label for="no">No</label>
+    </p>
+  </div>
+  <div class="row">
+    {% include './survey_actions.html' %}
+  </div>
+</div>
