@@ -3,16 +3,42 @@
 
 {% block outer_content %}
 <main>
-  <section class="section">
+  <section class="section welcome_steward">
     <div class="row">
       <h2 class="center">{{ title }}</h2>
+      <p class="center">You are now a Hoonah Steward</p>
     </div>
     <div class="row">
-      <div class="col s2 offset-s5 border-survey-wrap"></div>
+      <div class="col s4 l4 center">
+        <i><img src="{% static 'hnfp/img/icons/i_user.svg' %}" /></i>
+        <p class="flow-text"><strong>Head to your Dashboard</strong></p>
+      </div>
+      <div class="col s4 l4 center">
+        <i><img src="{% static 'hnfp/img/icons/i_checklist.svg' %}" /></i>
+        <p class="flow-text"><strong>Search for Jobs</strong></p>
+      </div>
+      <div class="col s4 l4 center">
+        <i><img src="{% static 'hnfp/img/icons/i_binoculars.svg' %}" /></i>
+        <p class="flow-text"><strong>Make your own Hunting/Gathering Map</strong></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s4 l4 center">
+        <i><img src="{% static 'hnfp/img/icons/i_alert_white.svg' %}" /></i>
+        <p class="flow-text"><strong>View &amp; Report Road Conditions</strong></p>
+      </div>
+      <div class="col s4 l4 center">
+        <i><img src="{% static 'hnfp/img/icons/i_comment.svg' %}" /></i>
+        <p class="flow-text"><strong>Contribute to the Forum</strong></p>
+      </div>
+      <div class="col s4 l4 center">
+        <i><img src="{% static 'hnfp/img/icons/i_rain.svg' %}" /></i>
+        <p class="flow-text"><strong>View Weather Conditions &amp; Alerts</strong></p>
+      </div>
     </div>
     <div class="row">
       <div class="col s12">
-        <h2 class="teal-text center">Take this 5 minute survey to activate your account</h2>
+        <h2 class="teal-text center"></h2>
       </div>
     </div>
     <div class="row">

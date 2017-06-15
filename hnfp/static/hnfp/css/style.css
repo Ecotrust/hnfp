@@ -346,6 +346,15 @@ path {
   width: 100%
 }
 
+.welcome_steward i img {
+  max-height: 4rem;
+  width: auto;
+}
+
+.welcome_steward p {
+  font-size: .75em;
+}
+
 /*--------------------
   media queries mq
   --------------------*/

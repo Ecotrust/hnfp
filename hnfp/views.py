@@ -30,6 +30,6 @@ def survey(request):
 def registered(request):
     template = loader.get_template('hnfp/welcome_steward.html')
     context = {
-        'page': 'Congradulations',
+        'title': 'Congradulations',
     }
     return HttpResponse(template.render(context, request))
