@@ -26,3 +26,10 @@ def survey(request):
         'page': 'survey',
     }
     return HttpResponse(template.render(context, request))
+
+def registered(request):
+    template = loader.get_template('hnfp/welcome_steward.html')
+    context = {
+        'page': 'Congradulations',
+    }
+    return HttpResponse(template.render(context, request))
