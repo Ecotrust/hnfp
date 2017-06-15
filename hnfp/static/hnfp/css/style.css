@@ -341,6 +341,11 @@ path {
   stroke: #fff;
 }
 
+#imgmap-img,
+#imgmap {
+  width: 100%
+}
+
 /*--------------------
   media queries mq
   --------------------*/
