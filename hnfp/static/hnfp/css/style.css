@@ -346,13 +346,35 @@ path {
   width: 100%
 }
 
-.welcome_steward i img {
-  max-height: 4rem;
-  width: auto;
+.cta-fixed-width {
+    border: 5px solid rgba(255,255,255,0.5);
+    border-radius: 50%;
+    color: #fff;
+    display: block;
+    font-size: 1em;
+    font-weight: 700;
+    height: 31vw;
+    margin: 0 auto;
+    text-align: center;
+    width: 31vw;
 }
 
 .welcome_steward p {
-  font-size: .75em;
+  font-size: .5em;
+  font-weight: 700;
+  line-height: 1.125;
+  margin: 0 10%;
+}
+
+.cta-round {
+  text-align: center;
+}
+
+.cta-round img {
+    display: block;
+    height: 26%;
+    margin: 16% auto 8%;
+    width: auto;
 }
 
 /*--------------------
