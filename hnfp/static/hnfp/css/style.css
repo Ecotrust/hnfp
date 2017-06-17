@@ -134,11 +134,6 @@ nav ul li a {
   home
   --------------------*/
 
-.parallax-container {
-  height: 42vh;
-  width: 100%;
-}
-
 .hero {
   color: #fff;
   padding-top: 8%;
@@ -174,6 +169,44 @@ nav ul li a {
 }
 
 /*--------------------
+  dashboard
+  --------------------*/
+
+.dashboard .bg {
+  height: 40vh;
+  position: relative;
+  width: 100%;
+}
+
+.dashboard .bg:before,
+.dashboard .bg:after {
+  content: '';
+  position: absolute;
+}
+
+.dashboard .bg:before {
+  background-image: url('/static/hnfp/hnfp/img/bg_mountain.jpg');
+  background-size: cover;
+  background-attachment: local;
+  background-position: 50%;
+  bottom: -2%;
+  left: -2%;
+  right: -2%;
+  top: -2%;
+  z-index: -1;
+}
+
+.dashboard .bg:after {
+  background-image: url('/static/hnfp/hnfp/img/mountain_ridge_white.svg');
+  background-size: cover;
+  bottom: -10%;
+  height: 25%;
+  left: -10%;
+  min-width: 150%;
+  z-index: -1;
+}
+
+/*--------------------
   survey
   --------------------*/
 
@@ -198,7 +231,7 @@ nav ul li a {
 }
 
 .survey-wrap:before {
-  background-image: url('/static/hnfp/hnfp/img/aurora@2x.png');
+  background-image: url('/static/hnfp/hnfp/img/aurora.jpg');
   background-size: cover;
   background-attachment: local;
   background-position: 50%;
