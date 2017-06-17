@@ -60,6 +60,9 @@
 .green_light {
   color: #e4efee;
 }
+.bg_green_light {
+    background: #e4efee;
+}
 
 .blue_grey {
   color: #5d85b7;
@@ -94,7 +97,8 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
   font-family: 'function', sans-serif;
   font-weight: 700;
   line-height: 1.375;
@@ -113,6 +117,10 @@ h3 {
 h4 {
   font-size: 1.5em;
 }
+h5 {
+  font-size: 1.375em;
+}
+
 
 nav *,
 nav .brand-logo,
@@ -173,7 +181,8 @@ nav ul li a {
   --------------------*/
 
 .dashboard .bg {
-  height: 40vh;
+  height: 6vh;
+  overflow: hidden;
   position: relative;
   width: 100%;
 }
@@ -199,11 +208,22 @@ nav ul li a {
 .dashboard .bg:after {
   background-image: url('/static/hnfp/hnfp/img/mountain_ridge_white.svg');
   background-size: cover;
-  bottom: -10%;
-  height: 25%;
+  bottom: 0%;
+  height: 60%;
   left: -10%;
   min-width: 150%;
   z-index: -1;
+}
+
+@media (min-width: 54em) {
+  .dashboard .bg {
+    height: 30vh;
+  }
+
+  .dashboard .bg:after {
+    bottom: -10%;
+    height: 25%;
+  }
 }
 
 /*--------------------
