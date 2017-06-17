@@ -30,6 +30,14 @@ def survey(request):
 def registered(request):
     template = loader.get_template('hnfp/welcome_steward.html')
     context = {
-        'title': 'Congradulations',
+        'title': 'Congratulations!',
+        'subtitle': 'You are now a Hoonah Steward',
+    }
+    return HttpResponse(template.render(context, request))
+
+def dashboard(request):
+    template = loader.get_template('hnfp/dashboard.html')
+    context = {
+        'title': '',
     }
     return HttpResponse(template.render(context, request))

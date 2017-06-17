@@ -1,0 +1,108 @@
+{% extends "hnfp/index.html" %}
+{% load static %}
+
+{% block outer_content %}
+<main>
+  <div class="parallax-container">
+    <div class="parallax">
+      <img src="{% static 'hnfp/img/bg_mountain.jpg' %}">
+    </div>
+    <section class="row hero">
+      <div class="col s10 m8 offset-s1 offset-m2">
+        <h2>{{ tagline }}</h2>
+        <a href="/survey" class="waves-effect waves-light btn-large">{{ cta }} <i class="material-icons right">launch</i></a>
+      </div>
+    </section>
+  </div>
+  <section class="section white">
+    <div class="section-top-bg">
+      <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img">
+    </div>
+    <div class="row container">
+      <div class="col s12 center flow-text">
+        <h1>Coming together to create a shared vision for our lands.</h1>
+      </div>
+      <div class="col s10 offset-s1 l6 offset-l3 center flow-text">
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euis mad mod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut.</p>
+      </div>
+    </div>
+    <div class="row container">
+      <div class="col s12 center flow-text">
+        <h3>What can you do as a steward?</h3>
+        <span>A statement about privacy.</span>
+      </div>
+    </div>
+    <div class="row container flow-text center">
+      <div class="col s5 l3">
+        <img src="//placebear.com/200/200" class="circle responsive-img" />
+        <p>Take the survey that will help inform future land use decisions</p>
+      </div>
+      <div class="col s5 offset-s2 l3">
+        <img src="//placebear.com/200/200" class="circle responsive-img" />
+        <p>Get notiﬁed when job opportunities related to land management arise</p>
+      </div>
+      <div class="col s5 l3">
+        <img src="//placebear.com/200/200" class="circle responsive-img" />
+        <p>Keep track of your hunting/gathering locations, quantities and dates</p>
+      </div>
+      <div class="col s5 offset-s2 l3">
+        <img src="//placebear.com/200/200" class="circle responsive-img" />
+        <p>Notify/report  alerts like road conditions so their repair can be prioritized</p>
+      </div>
+    </div>
+  </section>
+  <section class="section grey">
+    <div class="row container home-mid">
+      <div class="col s12 center flow-text">
+        <h3>The Partnership</h3>
+      </div>
+      <div class="col center s5 l4">
+        <img src="//place.manatee.lc/300/200.jpg" class="circle responsive-img" />
+      </div>
+      <div class="col center s5 offset-s2 l4">
+        <img src="//place.manatee.lc/300/200.jpg" class="circle responsive-img" />
+      </div>
+      <div class="col center s5 l4">
+        <img src="//place.manatee.lc/300/200.jpg" class="circle responsive-img" />
+      </div>
+      <div class="col center s5 offset-s2 l4">
+        <img src="//place.manatee.lc/300/200.jpg" class="circle responsive-img" />
+      </div>
+      <div class="col center s5 l4">
+        <img src="//place.manatee.lc/300/200.jpg" class="circle responsive-img" />
+      </div>
+      <div class="col center s5 offset-s2 l4">
+        <img src="//place.manatee.lc/300/200.jpg" class="circle responsive-img" />
+      </div>
+    </div>
+  </section>
+  <section class="section white">
+    <div class="row container">
+      <div class="card horizontal hide-on-med-and-down">
+        <div class="card-image">
+          <img src="http://lorempixel.com/300/700/nature/1">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content flow-text">
+            <h3>our land management plan</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euis mod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            <a class="btn-large waves-effect waves-light">launch app<i class="material-icons">launch</i></a>
+          </div>
+        </div>
+      </div>
+      <div class="card hide-on-med-and-up">
+        <div class="card-image">
+          <img src="http://lorempixel.com/300/150/nature/3">
+          <a class="btn-floating btn-large halfway-fab waves-effect waves-light"><i class="material-icons">launch</i></a>
+        </div>
+        <div class="card-stacked">
+          <div class="card-content flow-text">
+            <h3>our land management plan</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euis mod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock outer_content %}
