@@ -17,3 +17,9 @@
   </section>
 </main>
 {% endblock outer_content %}
+
+{% block extra_js %}
+  {{ block.super }}
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="{% static '/hnfp/js/form.js' %}"></script>
+{% endblock extra_js %}
