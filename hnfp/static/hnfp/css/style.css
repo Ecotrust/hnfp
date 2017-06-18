@@ -67,6 +67,9 @@
 .blue_grey {
   color: #5d85b7;
 }
+.bg_blue_grey {
+  background:#5d85b7;
+}
 
 .blue_dark {
   color: #2b384a;
@@ -124,13 +127,22 @@ h6 {
   font-size: 1.25em;
 }
 
-.btn-border-blue {
+.btn-border-blue,
+.btn-border-light-blue {
   background: transparent;
   border: 3px solid #2b384a;
   color: #2b384a;
   font-weight: 700;
   height: auto;
   line-height: 2.5;
+  text-transform: none;
+}
+
+.btn-border-light-blue {
+  background: transparent;
+  border: 3px solid #5d85b7;
+  color: #5d85b7;
+  font-weight: 700;
   text-transform: none;
 }
 
@@ -141,9 +153,30 @@ h6 {
 }
 
 .btn-border-blue i,
-.btn-border-white i {
+.btn-border-white i,
+.btn-border-light-blue i {
   font-size: 1.75em;
   line-height: 1.5;
+}
+
+.i_add {
+  background: #5d85b7;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-block;
+  font-size: 1em;
+  font-style: normal;
+  height: 1.125rem;
+  line-height: 1.18675rem;
+  width: 1.125rem;
+}
+
+.block {
+  display: block;
+}
+
+.full {
+  width: 100%;
 }
 
 /*--------------------
