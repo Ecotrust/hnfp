@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="row">
+  <div class="col s2 brand-logo">
+    <img src="{% static 'hnfp/img/icons/i_news.svg' %}" />
+  </div>
+  <div class="col s10">
+    <h5 class="flow-text">From the Forum</h5>
+  </div>
+</div>
+
+<div class="row">
+  <section class="col s12 bg_green_light">
+    <!-- TODO add foreach blog post loop -->
+    <article>
+      <div class="row">
+        <h4 class="center">Headline Title</h4>
+        <h5 class="center">Subhead</h5>
+        <p class="center">data</p>
+      </div>
+      <div class="row">
+        <div class="col s2">
+          <a href="/forum" class="brand-logo"><img src="{% static 'hnfp/img/icons/i_comment.svg' %}" /></a>
+        </div>
+        <div class="col s10">
+          article
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+
+<div class="row">
+  <a href="" class="waves-effect waves-dark flow-text btn btn-border-blue right">Go to Forum <i class="material-icons right">navigate_next<i></a>
+</div>

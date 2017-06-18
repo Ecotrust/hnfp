@@ -90,7 +90,7 @@ main,
 .container,
 section,
 div {
-  font-size: 1.125em;
+  font-size: 1em;
 }
 
 h1,
@@ -119,6 +119,9 @@ h4 {
 }
 h5 {
   font-size: 1.375em;
+}
+h6 {
+  font-size: 1.25em;
 }
 
 .btn-border-blue {
@@ -463,6 +466,13 @@ path {
   --------------------*/
 
 @media only screen and (min-width: 48em) {
+
+  main,
+  .container,
+  section,
+  div {
+    font-size: 1.125em;
+  }
 
   .section-top-bg-img {
     left: -25%;

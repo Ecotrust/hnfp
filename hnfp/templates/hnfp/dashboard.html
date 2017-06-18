@@ -6,13 +6,19 @@
   <div class="bg">&nbsp;</div>
   <section class="section">
     <div class="row container">
-      <aside class="col s12 l4 flow-text">
-        <a class="btn" href="#">Invite friends</a>
-      </aside>
-      <div class="col s12 l8 flow-text">
+      <div class="col s12 l8 flow-text right">
         {% include './dashboard/weather.html' %}
         {% include './dashboard/alerts.html' %}
+        {% include './dashboard/blog.html' %}
       </div>
+      <aside class="col s12 l4 flow-text left">
+        <div class="row">
+          <a class="btn btn-border-blue" href="#">Invite friends</a>
+        </div>
+        {% include './dashboard/events.html' %}
+        {% include './dashboard/open_positions.html' %}
+        {% include './dashboard/observations.html' %}
+      </aside>
     </div>
   </section>
 </main>
