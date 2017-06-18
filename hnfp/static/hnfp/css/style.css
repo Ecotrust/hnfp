@@ -121,6 +121,31 @@ h5 {
   font-size: 1.375em;
 }
 
+.btn-border-blue {
+  background: transparent;
+  border: 3px solid #2b384a;
+  color: #2b384a;
+  font-weight: 700;
+  height: auto;
+  line-height: 2.5;
+  text-transform: none;
+}
+
+.btn-border-white,
+.next-step {
+  background: transparent;
+  border: 3px solid #fff;
+}
+
+.btn-border-blue i,
+.btn-border-white i {
+  font-size: 1.75em;
+  line-height: 1.5;
+}
+
+/*--------------------
+  header
+  --------------------*/
 
 nav *,
 nav .brand-logo,
@@ -341,11 +366,6 @@ nav ul li a {
 .step-actions .btn i {
   font-size: 1.375em;
   line-height: 1.8125;
-}
-
-.next-step {
-  background: transparent;
-  border: 3px solid #fff;
 }
 
 .previous-step {
