@@ -167,7 +167,7 @@ h6 {
   font-size: 1em;
   font-style: normal;
   height: 1.125rem;
-  line-height: 1.18675rem;
+  line-height: 1.25rem;
   width: 1.125rem;
 }
 
@@ -177,6 +177,10 @@ h6 {
 
 .full {
   width: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 /*--------------------
@@ -274,6 +278,23 @@ nav ul li a {
   left: -10%;
   min-width: 150%;
   z-index: -1;
+}
+
+.pre-footer {
+  position: relative;
+  padding: 2rem 0 5rem;
+}
+
+.pre-footer:after {
+  background-image: url('/static/hnfp/hnfp/img/mountain_ridge_blue.svg');
+  background-size: 125% auto;
+  background-position: 50% top;
+  bottom: 0;
+  content: '';
+  height: 5rem;
+  left: 0;
+  position: absolute;
+  width: 100%;
 }
 
 @media (min-width: 54em) {
