@@ -297,15 +297,18 @@ nav ul li a {
   width: 100%;
 }
 
-@media (min-width: 54em) {
-  .dashboard .bg {
-    height: 30vh;
-  }
+/*--------------------
+  observations
+  --------------------*/
 
-  .dashboard .bg:after {
-    bottom: -10%;
-    height: 25%;
-  }
+.observations .select-wrapper .caret {
+  color: #fff;
+}
+
+.observations .select-wrapper .select-dropdown {
+  border: none;
+  font-size: 1.375em;
+  margin-bottom: 0;
 }
 
 /*--------------------
@@ -538,6 +541,17 @@ path {
     text-align: center;
   }
 
+}
+
+@media (min-width: 54em) {
+  .dashboard .bg {
+    height: 30vh;
+  }
+
+  .dashboard .bg:after {
+    bottom: -10%;
+    height: 25%;
+  }
 }
 
 @media only screen and (min-width: 64em) {

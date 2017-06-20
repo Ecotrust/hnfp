@@ -1,0 +1,141 @@
+{% extends "hnfp/index.html" %}
+{% load static %}
+
+{% block outer_content %}
+<main class="observations">
+  <div class="bg">&nbsp;</div>
+  <section class="section">
+    <div class="row">
+      <div class="col s12 l9">
+        <h5>{{ title }} <!-- TODO add year --></h5>
+      </div>
+      <div class="input-field col s12 l3 bg-teal white-text">
+        <select>
+          <option value="2017" selected>2017</option>
+          <option value="">No previous data yet availble</option>
+        </select>
+        <label>Year</label>
+      </div>
+    </div>
+  </div>
+  <section class="section bg_green_light">
+    <div class="row">
+      <!-- TODO add knockout loop for icons -->
+      <div class="col s4 l3">
+        <div class="col s6 brand-logo">
+          <img src="{% static 'hnfp/img/icons/i_bear.svg' %}" />
+        </div>
+        <div class="col s6">
+          <span id="bear" data-bind="bear"></span> <strong class="flow-text">Bear</strong>
+        </div>
+      </div>
+      <div class="col s4 l3">
+        <div class="col s6 brand-logo">
+          <img src="{% static 'hnfp/img/icons/i_deer.svg' %}" />
+        </div>
+        <div class="col s6">
+          <span id="deer-kills" data-bind="deer_kills"></span> <strong class="flow-text">Deer</strong>
+        </div>
+      </div>
+      <div class="col s4 l3">
+        <div class="col s6 brand-logo">
+          <img src="{% static 'hnfp/img/icons/i_shrimp.svg' %}" />
+        </div>
+        <div class="col s6">
+          <span id="shrimp-caught" data-bind="shrimp_caught"></span> <strong class="flow-text">Shrimp</strong>
+        </div>
+      </div>
+      <div class="col s4 l3">
+        <div class="col s6 brand-logo">
+          <img src="{% static 'hnfp/img/icons/i_berries.svg' %}" />
+        </div>
+        <div class="col s6">
+          <span id="berries-picked" data-bind="berries_picked"></span> <strong class="flow-text">Berries</strong>
+        </div>
+      </div>
+      <div class="col s4 l3">
+        <div class="col s6 brand-logo">
+          <img src="{% static 'hnfp/img/icons/i_firewood.svg' %}" />
+        </div>
+        <div class="col s6">
+          <span id="firewood-collected" data-bind="firewood_collected"></span> <strong class="flow-text">Firewood</strong>
+        </div>
+      </div>
+      <div class="col s4 l3">
+        <div class="col s6 brand-logo">
+          <img src="{% static 'hnfp/img/icons/i_fungi.svg' %}" />
+        </div>
+        <div class="col s6">
+          <span id="fungi-foraged" data-bind="fungi_foraged"></span> <strong class="flow-text">Mushrooms</strong>
+        </div>
+        <div class="col s4 l3">
+          <div class="col s6 brand-logo">
+            <img src="{% static 'hnfp/img/icons/i_star.svg' %}" />
+          </div>
+          <div class="col s6">
+            <span id="custom-entry" data-bind="custom_entry"></span> <strong class="flow-text">Custom Entry</strong>
+          </div>
+        </div>
+        <div class="col s4 l3">
+          <div class="col s6 brand-logo">
+            <img src="{% static 'hnfp/img/icons/i_crab.svg' %}" />
+          </div>
+          <div class="col s6">
+            <span id="crab-trapped" data-bind="crab_trapped"></span> <strong class="flow-text">Crab</strong>
+          </div>
+        </div>
+        <div class="col s4 l3">
+          <div class="col s6 brand-logo">
+            <img src="{% static 'hnfp/img/icons/i_fish.svg' %}" />
+          </div>
+          <div class="col s6">
+            <span id="fish-caught" data-bind="fish_caught"></span> <strong class="flow-text">Fish</strong>
+          </div>
+        </div>
+        <div class="col s4 l3">
+          <div class="col s6 brand-logo">
+            <img src="{% static 'hnfp/img/icons/i_shellfish.svg' %}" />
+          </div>
+          <div class="col s6">
+            <span id="shellfish-harvested" data-bind="shellfish_harvested"></span> <strong class="flow-text">Shellfish</strong>
+          </div>
+        </div>
+        <div class="col s4 l3">
+          <div class="col s6 brand-logo">
+            <img src="{% static 'hnfp/img/icons/i_eye.svg' %}" />
+          </div>
+          <div class="col s6">
+            <span id="observed" data-bind="observed"></span> <strong class="flow-text">Observed</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="row">
+      <div id="map"></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="row">
+      <form action="#" class="col s12 l6 left">
+        <div class="input-field">
+          <input class="checkbox" type="checkbox" checked name="datashare" id="datashare" />
+          <label for="datashare">Share with land managers</label>
+        </div>
+        <p><em>Your information will be anonymized</em></p>
+      </form>
+      <div class="col s12 l6 right">
+        <div class="col s8">
+          <a href="" class="blue_grey center"><i class="i_add">+</i> Add/Edit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock outer_content %}
+
+{% block extra_js %}
+  {{ block.super }}
+  <script src="{% static '/hnfp/js/observations.js' %}"></script>
+{% endblock extra_js %}

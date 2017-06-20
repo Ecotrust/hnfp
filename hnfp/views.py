@@ -41,3 +41,10 @@ def dashboard(request):
         'title': '',
     }
     return HttpResponse(template.render(context, request))
+
+def observations(request):
+    template = loader.get_template('hnfp/observations.html')
+    context = {
+        'title': 'My Hunt/Gather/Observe Map',
+    }
+    return HttpResponse(template.render(context, request))
