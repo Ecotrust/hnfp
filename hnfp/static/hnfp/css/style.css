@@ -128,7 +128,8 @@ h6 {
 }
 
 .btn-border-blue,
-.btn-border-light-blue {
+.btn-border-light-blue,
+.btn-border-blue-grey {
   background: transparent;
   border: 3px solid #2b384a;
   color: #2b384a;
@@ -159,7 +160,9 @@ h6 {
   line-height: 1.5;
 }
 
-.i_add {
+.i_add,
+.btn-border-blue .i_add,
+.btn-border-light-blue .i_add {
   background: #5d85b7;
   border-radius: 50%;
   color: #fff;
@@ -301,15 +304,84 @@ nav ul li a {
   observations
   --------------------*/
 
+.observations .blue_dark label {
+  color: #2b384a
+}
+
+  .observations .blue_dark input[type="checkbox"]:not(.filled-in) + label:before,
+  .observations .blue_dark input[type="checkbox"]:not(.filled-in) + label:after,
+  .observations .blue_dark input[type="checkbox"] + label:before,
+  .observations .blue_dark input[type="checkbox"] + label:after {
+    border: none;
+    border-radius: 50%;
+    background: rgba(43,56,74,0.2);
+    color: #5d85b7;
+  }
+
+.observations .add-btn {
+  line-height: 3rem;
+}
+
+.observations i.i_add {
+  font-size: 1.5625em;
+  line-height: 1.4375rem;
+  height: 1.4375rem;
+  margin-right: .5rem;
+  width: 1.4375rem;
+  vertical-align: middle;
+}
+
 .observations .select-wrapper .caret {
-  color: #fff;
+  color: #5d85b7;
 }
 
 .observations .select-wrapper .select-dropdown {
   border: none;
-  font-size: 1.375em;
+  color: #5d85b7;
+  font-size: 1em;
   margin-bottom: 0;
 }
+
+.observations .collapsible {
+  border: none;
+  box-shadow: none;
+}
+
+.observations .collapsible li {
+  margin: 0;
+}
+
+.observations .collapsible .collapsible-header {
+  border: none;
+  color: #5d85b7;
+  display: inline-block;
+  font-weight: 700;
+}
+
+  .observations .collapsible .collapsible-header.active {
+    background: #e4efee;
+  }
+
+    .observations .collapsible .collapsible-header.active i {
+      transform: rotate(90deg);
+    }
+
+.observations .collapsible .collapsible-body {
+  background: #e4efee;
+  padding: 1rem .5rem 0;
+}
+
+  .observations .collapsible .collapsible-body .row {
+    margin-bottom: 0;
+  }
+
+  .observations .collapsible .collapsible-body .s6 {
+    margin-bottom: 1rem;
+  }
+
+  .observations .collapsible .collapsible-body .flow-text {
+    font-size: 1em;
+  }
 
 /*--------------------
   survey

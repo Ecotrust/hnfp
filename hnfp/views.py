@@ -45,6 +45,7 @@ def dashboard(request):
 def observations(request):
     template = loader.get_template('hnfp/observations.html')
     context = {
-        'title': 'My Hunt/Gather/Observe Map',
+        'title': 'My Hunt, Gather, Observe Map',
+        'year': '2017',
     }
     return HttpResponse(template.render(context, request))
