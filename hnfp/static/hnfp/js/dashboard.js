@@ -3,7 +3,7 @@ var getJSON = function(dataURL, successCallback, errorCallback) {
     // Return the $.ajax promise
     return $.ajax({
       type: 'GET',
-      dataType: 'json',
+      dataType: 'jsonp',
       url: dataURL,
       success: successCallback,
       error: errorCallback
@@ -11,19 +11,21 @@ var getJSON = function(dataURL, successCallback, errorCallback) {
 }
 
 $(document).ready(function() {
-  navigator.geolocation.getCurrentPosition(geolocate);
 
-  var marineURL = 'https://api.darksky.net/forecast/5dee4e51a4b71918ffe3ad18e83db386/';
+  var position = navigator.geolocation.getCurrentPosition(geolocate),
+      marineURL = 'https://api.darksky.net/forecast/5dee4e51a4b71918ffe3ad18e83db386/';
 
   function geolocate(pos) {
-    marineURL = '//api.darksky.net/forecast/5dee4e51a4b71918ffe3ad18e83db386/' + pos.coords;
+    console.log(pos);
+    console.log(marineURL + pos.coords.latitude + ',' + pos.coords.longitude);
+    return marineURL + pos.coords;
   }
 
-  getJSON(marineURL, loadMarine);
+  getJSON(position, loadMarine);
 
   function loadMarine(data) {
     console.log(data);
-    $('#marineforecast').html(data);
+    $('#marineforecast').html(data.main.humidity);
   }
 });
 
