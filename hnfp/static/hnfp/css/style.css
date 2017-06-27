@@ -38,6 +38,17 @@
   font-feature-settings: 'liga';
 }
 
+@font-face {
+  font-family: 'function';
+  font-style: normal;
+  font-weight: normal;
+  src: local('function'),
+       local('function_regular'),
+       url('/static/hnfp/fonts/function.woff2') format('woff2'),
+       url('/static/hnfp/fonts/function.woff') format('woff'),
+       url('/static/hnfp/fonts/MaterialIcons-Regular.ttf') format('truetype');
+}
+
 /*--------------------
   colors
   --------------------*/
