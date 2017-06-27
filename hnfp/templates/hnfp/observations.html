@@ -4,6 +4,7 @@
 {% block outer_content %}
 <main class="observations">
   <div class="bg">&nbsp;</div>
+  <div id="new-observation"></div>
   <section class="section">
     <div class="row">
       <div class="col s8 l9">
@@ -132,7 +133,7 @@
   <section class="section">
     <div class="row">
       <div class="col s12 l6 center">
-        <a href="" class="waves-effect waves-dark flow-text btn btn-border-light-blue add-btn"><i class="i_add">+</i> Add to Map</a>
+        <a href="" id="add-observation-btn" class="waves-effect waves-dark flow-text btn btn-border-light-blue add-btn"><i class="i_add">+</i> Add to Map</a>
       </div>
 
       <form action="#" class="col s12 l6 left blue_dark center">
@@ -149,13 +150,28 @@
 
 {% block extra_js %}
   {{ block.super }}
+  <script src="{% static 'bower_components/amplify/lib/amplify.min.js' %}"></script>
+  <script src="{% static 'bower_components/jquery-migrate/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'bower_components/jquery.bbq/jquery.ba-bbq.js' %}"></script>
+  <script src="{% static 'bower_components/bootstrap3-typeahead/bootstrap3-typeahead.js' %}"></script>
+  <script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
+  <script charset="utf-8">
+      $.widget.bridge('uitooltip', $.ui.tooltip);
+  </script>
+  <script src="{% static 'js/jsonrpc.js' %}"></script>
+
   <script src="//maps.google.com/maps/api/js?key=AIzaSyBi-xi_EGuQYsWsT0N1F3KXbz3oqaHKfzs"></script>
+
+  <script src="{% static 'js/lib/openlayers/OpenLayers-marco-min.js' %}"></script>
+  <script src="{% static 'bower_components/bigscreen/bigscreen.js' %}"></script>
+  <script src="{% static 'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js' %}"></script>
+
+  <script src="{% static 'js/controls.js' %}"></script>
+
   <script src="{% static 'js/lib/lodash.min.js' %}"></script>
   <script src="{% static 'js/lib/knockout-3.3.0.js' %}"></script>
   <script src="{% static 'js/lib/knockout.mapping-2.4.1.js' %}"></script>
   <script src="{% static 'js/knockout-bindings.js' %}"></script>
-  <script src="{% static 'js/lib/openlayers/OpenLayers-marco-min.js' %}"></script>
-  <script src="{% static 'js/controls.js' %}"></script>
   <script src="{% static 'js/contextual_menu.js' %}"></script>
   <script src="{% static 'js/fixtures.js' %}"></script>
   <script src="{% static 'hnfp/js/map.js' %}"></script>
@@ -167,5 +183,6 @@
   <script src="{% static 'js/models.js' %}"></script>
   <script src="{% static 'js/server.js' %}"></script>
   <script src="{% static 'hnfp/js/app.js' %}"></script>
-  <script src="{% static '/hnfp/js/observations.js' %}"></script>
+
+  <script src="{% static 'hnfp/js/observations.js' %}"></script>
 {% endblock extra_js %}

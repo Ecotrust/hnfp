@@ -49,3 +49,8 @@ def observations(request):
         'year': '2017',
     }
     return HttpResponse(template.render(context, request))
+
+def new_observation(request):
+    template = loader.get_template('hnfp/new_observation.html')
+    context = {}
+    return HttpResponse(template.render(context, request))

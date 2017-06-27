@@ -95,23 +95,6 @@ $(document).ready(function() {
   };
   OpenLayers.Tile.Image.useBlankTile=false;
 
-  // if we have the hash state go ahead and load it now
-  /*if (app.hash && !app.loginHash) {
-    console.log('document ready without #login hash');
-    app.loadStateFromHash(app.hash);
-  } */
-  // handle coordinate indicator on pointer
-  $('#map').bind('mouseleave mouseenter', function(e) {
-    $('#pos').toggle();
-  });
-  $('#map').bind('mousemove', function(e) {
-    $('#pos').css({
-      left: e.pageX + 20,
-      top: e.pageY + 20
-    });
-  });
-
-
   $('.form-search').find('.btn').on('click', function(event) {
      $(event.target).closest('form').find('input').val(null).focus();
   });
@@ -295,7 +278,6 @@ $('#left-panel .panel-heading h4 a.collapse-button').click(function(){
     // $('#left-panel').width('')
   }
 });
-
 
 var cloneForm = '.clone-wms-form';
 //wms layer modal

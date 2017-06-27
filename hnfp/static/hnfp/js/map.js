@@ -22,7 +22,7 @@ app.init = function () {
         }
     }));
 
-    openStreetMap = new OpenLayers.Layer.OSM("Open Street Map", "http://a.tile.openstreetmap.org/${z}/${x}/${y}.png", {
+    openStreetMap = new OpenLayers.Layer.OSM("Open Street Map", "http://a.tile.openstreetmap.org/${z}/${x}/${y}@2x.png", {
         sphericalMercator: true,
         isBaseLayer: true,
         visibility: false,
@@ -55,9 +55,9 @@ app.init = function () {
         type: google.maps.MapTypeId.SATELLITE,
         sphericalMercator: true,
         isBaseLayer: true,
-        visibility: false,
         numZoomLevels: 18,
         MAX_ZOOM_LEVEL: 17,
+        zoomDuration: 10,
         attribution: "Basemap by Google",
         textColor: "white"
     });
@@ -515,16 +515,6 @@ app.init = function () {
         new ContextualMenu.Item("Delete Wind Energy Siting", app.viewModel.scenarios.deleteWindEnergySiting, 'fa fa-times-circle red')
     ];
 
-    $(function() {
-        // manually bind up the context menu here, otherwise ko will complain
-        // that we're binding the same element twice (MP's viewmodel applies
-        // to the entire page
-        //ContextualMenu.Init(app.menus, document.querySelector('#context-menu'))
-        app.menuModel = new ContextualMenu.Model(app.menus, document.querySelector('#context-menu'));
-        // fix for top nav's negative margin
-        app.menuModel.setCorrectionOffset(0, 0);
-        ko.applyBindings(app.menuModel, document.querySelector('#context-menu'));
-    });
 };
 
 app.addLayerToMap = function(layer) {
