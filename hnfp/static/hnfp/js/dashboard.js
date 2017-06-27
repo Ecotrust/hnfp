@@ -1,36 +1,6 @@
-// Generic function to make an AJAX call
-var getJSON = function(dataURL, successCallback, errorCallback) {
-    // Return the $.ajax promise
-    return $.ajax({
-      type: 'GET',
-      dataType: 'jsonp',
-      url: dataURL,
-      success: successCallback,
-      error: errorCallback
-    });
-}
-
-$(document).ready(function() {
-
-  var position = navigator.geolocation.getCurrentPosition(geolocate),
-      marineURL = 'https://api.darksky.net/forecast/5dee4e51a4b71918ffe3ad18e83db386/';
-
-  function geolocate(pos) {
-    console.log(pos);
-    console.log(marineURL + pos.coords.latitude + ',' + pos.coords.longitude);
-    return marineURL + pos.coords;
-  }
-
-  getJSON(position, loadMarine);
-
-  function loadMarine(data) {
-    console.log(data);
-    $('#marineforecast').html(data.main.humidity);
-  }
-});
-
 (function getWeather() {
   var weatherDOM = $('#openweathermap'),
+      marineDOM = $('#marineforecast'),
       metric = false;
 
   $.ajax({
@@ -58,6 +28,20 @@ $(document).ready(function() {
     error: function(jqXHR, textStatus, errorThrown) {
       console.warn(jqXHR + textStatus);
       weatherDOM.html(errorThrown);
+  	}
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://api.darksky.net/forecast/5dee4e51a4b71918ffe3ad18e83db386/58.109190,-135.444947',
+    dataType: 'jsonp',
+    success: function(data) {
+      console.log(data);
+      marineDOM.html(data.currently.summary);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.warn(jqXHR + textStatus);
+      marineDOM.html(errorThrown);
   	}
   });
 })();
