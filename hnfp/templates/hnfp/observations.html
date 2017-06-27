@@ -18,7 +18,7 @@
       </div>
     </div>
   </section>
-  <section class="section">
+  <section>
     <div class="row">
       <div class="col s12">
         <ul class="collapsible" data-collapsible="accordion">
@@ -122,13 +122,13 @@
       </div>
     </div>
   </section>
-  <section class="section">
-    <div class="row">
-      <div class="col s12">
+  <div class="row">
+    <section class="col s12 map-wrap">
+      <div id="map-wrapper">
         <div id="map"></div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
   <section class="section">
     <div class="row">
       <div class="col s12 l6 center">
@@ -149,5 +149,23 @@
 
 {% block extra_js %}
   {{ block.super }}
+  <script src="//maps.google.com/maps/api/js?key=AIzaSyBi-xi_EGuQYsWsT0N1F3KXbz3oqaHKfzs"></script>
+  <script src="{% static 'js/lib/lodash.min.js' %}"></script>
+  <script src="{% static 'js/lib/knockout-3.3.0.js' %}"></script>
+  <script src="{% static 'js/lib/knockout.mapping-2.4.1.js' %}"></script>
+  <script src="{% static 'js/knockout-bindings.js' %}"></script>
+  <script src="{% static 'js/lib/openlayers/OpenLayers-marco-min.js' %}"></script>
+  <script src="{% static 'js/controls.js' %}"></script>
+  <script src="{% static 'js/contextual_menu.js' %}"></script>
+  <script src="{% static 'js/fixtures.js' %}"></script>
+  <script src="{% static 'hnfp/js/map.js' %}"></script>
+  <script src="{% static 'js/state.js' %}"></script>
+  <script src="{% static 'js/bookmarks.js' %}"></script>
+  <script src="{% static 'js/scenarios.js' %}"></script>
+  <script src="{% static 'js/reports.js' %}"></script>
+  <script src="{% static 'js/drawing.js' %}"></script>
+  <script src="{% static 'js/models.js' %}"></script>
+  <script src="{% static 'js/server.js' %}"></script>
+  <script src="{% static 'hnfp/js/app.js' %}"></script>
   <script src="{% static '/hnfp/js/observations.js' %}"></script>
 {% endblock extra_js %}

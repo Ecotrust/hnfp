@@ -12,17 +12,29 @@
   <section class="section">
     <div class="row container">
       <div class="col s12 l8 flow-text right">
-        {% include './dashboard/weather.html' %}
-        {% include './dashboard/alerts.html' %}
-        {% include './dashboard/blog.html' %}
+        <section class="section">
+          {% include './dashboard/weather.html' %}
+        </section>
+        <section class="section">
+          {% include './dashboard/alerts.html' %}
+        </section>
+        <section class="section">
+          {% include './dashboard/observations.html' %}
+        </section>
       </div>
       <aside class="col s12 l4 flow-text left">
-        <div class="row hide-on-med-and-down">
+        <section class="section">
+          {% include './dashboard/blog.html' %}
+        </section>
+        <section class="section">
+          {% include './dashboard/events.html' %}
+        </section>
+        <section class="section">
+          {% include './dashboard/open_positions.html' %}
+        </section>
+        <section class="row hide-on-med-and-down">
           <a class="btn btn-border-blue" href="#">Invite friends</a>
-        </div>
-        {% include './dashboard/events.html' %}
-        {% include './dashboard/open_positions.html' %}
-        {% include './dashboard/observations.html' %}
+        </section>
       </aside>
     </div>
   </section>
@@ -64,6 +76,6 @@
   <script src="{% static 'js/drawing.js' %}"></script>
   <script src="{% static 'js/models.js' %}"></script>
   <script src="{% static 'js/server.js' %}"></script>
-  <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static 'hnfp/js/app.js' %}"></script>
   <script src="{% static '/hnfp/js/dashboard.js' %}"></script>
 {% endblock extra_js %}

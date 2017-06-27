@@ -25,11 +25,13 @@ app.init = function () {
     openStreetMap = new OpenLayers.Layer.OSM("Open Street Map", "http://a.tile.openstreetmap.org/${z}/${x}/${y}.png", {
         sphericalMercator: true,
         isBaseLayer: true,
+        visibility: false,
         textColor: "black",
         numZoomLevels: 20,
         minZoomLevel: 0,
         maxZoomLevel: 19
     });
+
     googleStreet = new OpenLayers.Layer.Google("Streets", {
         sphericalMercator: true,
         isBaseLayer: true,
@@ -69,7 +71,7 @@ app.init = function () {
         visibility: false
     });
 
-    map.addLayers([openStreetMap, googleStreet, googleTerrain, googleSatellite, googleHybrid]);
+    map.addLayers([googleSatellite, openStreetMap, googleStreet, googleTerrain, googleHybrid]);
 
     map.addControl(new SimpleLayerSwitcher());
 

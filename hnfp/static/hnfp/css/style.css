@@ -312,8 +312,25 @@ nav ul li a {
 }
 
 /*--------------------
+  map
+  --------------------*/
+
+.dashboard .map-wrap {
+  padding: 0;
+}
+
+#map-wrapper {
+  height: 60vh;
+  width: 100%;
+}
+
+/*--------------------
   observations
   --------------------*/
+
+.observations section:not(.section) .row {
+  margin-bottom: 0;
+}
 
 .observations .blue_dark label {
   color: #2b384a
