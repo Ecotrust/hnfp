@@ -32,6 +32,35 @@ app.init = function () {
         maxZoomLevel: 19
     });
 
+    mapboxSat = new OpenLayers.Layer.XYZ("Natural Earth", [
+      "http://a.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
+      "http://b.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
+      "http://c.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
+      "http://d.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww"
+    ], {
+        attribution: "Tiles &copy; <a href='http://mapbox.com/'>MapBox</a>",
+        sphericalMercator: true,
+        wrapDateLine: true,
+        numZoomLevels: 18,
+        MAX_ZOOM_LEVEL: 17,
+    });
+
+    /* bing = new OpenLayers.Layer.Bing('bing', {
+        key: "ApTJzdkyN1DdFKkRAE6QIDtzihNaf6IWJsT-nQ_2eMoO4PN__0Tzhl2-WgJtXFSp",
+        type: "Aerial",
+        name: "Bing Aerial",
+        transitionEffect: 'resize'
+    }); */
+
+    stamen = new OpenLayers.Layer.XYZ( 'Natural Earth', [
+      'http://a.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg',
+      'http://b.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg',
+      'http://c.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg',
+      'http://d.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg'
+    ], {
+        attributions:'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL'
+    });
+
     googleStreet = new OpenLayers.Layer.Google("Streets", {
         sphericalMercator: true,
         isBaseLayer: true,
@@ -71,7 +100,7 @@ app.init = function () {
         visibility: false
     });
 
-    map.addLayers([googleSatellite, openStreetMap, googleStreet, googleTerrain, googleHybrid]);
+    map.addLayers([stamen, mapboxSat, googleSatellite, openStreetMap, googleStreet, googleTerrain, googleHybrid]);
 
     map.addControl(new SimpleLayerSwitcher());
 
