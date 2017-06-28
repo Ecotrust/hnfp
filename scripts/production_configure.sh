@@ -65,11 +65,6 @@ fi
 
 
 echo Running Deployment Scripts
-# if [[ ! -x "$CORE/scripts/vagrant_provision0.sh" ]]; then
-#   sudo -u ubuntu chmod +x $CORE/scripts/vagrant_provision0.sh
-# fi
-#
-# sudo -u ubuntu $CORE/scripts/vagrant_provision0.sh xenial 3.5.0 9.5
 
 $CORE/scripts/vagrant_provision.sh marineplanner-core marineplanner marineplanner $CORE
 
