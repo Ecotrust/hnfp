@@ -131,11 +131,24 @@
     </section>
   </div>
   <section class="section">
-    <div class="row">
-      <div class="col s12 l6 center">
-        <a href="" id="add-observation-btn" class="waves-effect waves-dark flow-text btn btn-border-light-blue add-btn"><i class="i_add">+</i> Add to Map</a>
-      </div>
 
+    <div class="row">
+      <div class="relative height">
+        <div class="col s12 l6 center">
+          <div class="fixed-action-btn toolbar click-to-toggle absolute">
+            <a href="" id="add-observation-btn" class="waves-effect waves-dark flow-text btn btn-border-light-blue add-btn"><i class="i_add">+</i> Add to Map</a>
+            <ul>
+              <li><a class="waves-effect waves-light"><img src="{% static 'hnfp/img/icons/i_fish.svg' %}" /></a></li>
+              <li><a class="waves-effect waves-light"><img src="{% static 'hnfp/img/icons/i_fish.svg' %}" /></a></li>
+              <li><a class="waves-effect waves-light"><i class="material-icons">format_quote</i></a></li>
+              <li><a class="waves-effect waves-light"><i class="material-icons">format_quote</i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
       <form action="#" class="col s12 l6 left blue_dark center">
         <div class="input-field">
           <input class="checkbox" type="checkbox" name="datashare" id="datashare" />

@@ -7,6 +7,7 @@ $(document).ready(function() {
   });
   $('#add-observation-btn').click( function(e) {
     e.preventDefault();
+    Materialize.fadeInImage('#new-observation-form');
     observations.addNew();
   })
 });

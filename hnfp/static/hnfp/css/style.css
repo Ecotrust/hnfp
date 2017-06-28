@@ -197,6 +197,18 @@ h6 {
   overflow: hidden;
 }
 
+.relative {
+  position: relative;
+}
+
+.relative.height {
+  height: 70px;
+}
+
+.absolute {
+  position: absolute;
+}
+
 /*--------------------
   header
   --------------------*/
@@ -320,8 +332,7 @@ nav ul li a {
 }
 
 #map-wrapper {
-  height: 60vh;
-  width: 100%;
+  height: 50vh;
 }
 
 /*--------------------
@@ -410,6 +421,23 @@ nav ul li a {
   .observations .collapsible .collapsible-body .flow-text {
     font-size: 1em;
   }
+
+
+.relative.height .center .absolute {
+  left: 25%;
+  transition: (-50%,0);
+  width: 50%;
+}
+
+.observations .toolbar.active ul {
+  background-color: #fff;
+  z-index: 1;
+}
+
+.relative.height ul img {
+  height: 100%;
+  max-width: 100%;
+}
 
 /*--------------------
   survey
