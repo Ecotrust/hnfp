@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^dashboard', views.dashboard),
     url(r'^observations', views.observations),
     url(r'^new_observation', views.new_observation),
-    url(r'^', views.index, name='index'),
+    url(r'^', views.home, name='index'),
 ]

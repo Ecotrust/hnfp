@@ -1,8 +1,7 @@
 {% load static %}
 <nav class="white" role="navigation">
-  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#" class="black-text">Navbar Link</a></li>
       <li>
         {% if user.is_authenticated %}
           <a href="{% url 'account:index' %}">{{ user.first_name }}</a>
@@ -16,10 +15,9 @@
     <ul id="nav-mobile" class="side-nav">
       {% if user.is_authenticated %}
         <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/map">My Maps</a></li>
-        <li><a href="/alert">Alerts</a></li>
-        <li><a href="/landuse">Land Use Map</a></li>
-        <li><a href="/landuse">Land Forum</a></li>
+        <li><a href="/observations">My Maps</a></li>
+        <li><a href="/dashboard">Alerts</a></li>
+        <li><a href="/forum">Land Forum</a></li>
         <li><div class="divider"></div></li>
         <li><a class="subheader">Profile</a></li>
         <li>

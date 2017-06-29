@@ -22,28 +22,17 @@ app.init = function () {
         }
     }));
 
-    openStreetMap = new OpenLayers.Layer.OSM("Open Street Map", "http://a.tile.openstreetmap.org/${z}/${x}/${y}@2x.png", {
-        sphericalMercator: true,
-        isBaseLayer: true,
-        visibility: false,
-        textColor: "black",
-        numZoomLevels: 20,
-        minZoomLevel: 0,
-        maxZoomLevel: 19
-    });
-
-    mapboxSat = new OpenLayers.Layer.XYZ("Natural Earth", [
-      "http://a.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
-      "http://b.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
-      "http://c.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
-      "http://d.tiles.mapbox.com/v4/mapbox.streets-satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww"
+    /* mapboxSat = new OpenLayers.Layer.XYZ("Satellite", [
+      "http://a.tiles.mapbox.com/v4/mapbox.satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
+      "http://b.tiles.mapbox.com/v4/mapbox.satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
+      "http://c.tiles.mapbox.com/v4/mapbox.satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww",
+      "http://d.tiles.mapbox.com/v4/mapbox.satellite/${z}/${x}/${y}@2x.png?access_token=pk.eyJ1IjoiZGljY2Zpc2giLCJhIjoiUkU3MFVYSSJ9.t7UjJG0B-4qVMpHbPMcVww"
     ], {
         attribution: "Tiles &copy; <a href='http://mapbox.com/'>MapBox</a>",
         sphericalMercator: true,
         wrapDateLine: true,
-        numZoomLevels: 18,
-        MAX_ZOOM_LEVEL: 17,
-    });
+        numZoomLevels: 12,
+    }); */
 
     /* bing = new OpenLayers.Layer.Bing('bing', {
         key: "ApTJzdkyN1DdFKkRAE6QIDtzihNaf6IWJsT-nQ_2eMoO4PN__0Tzhl2-WgJtXFSp",
@@ -52,14 +41,18 @@ app.init = function () {
         transitionEffect: 'resize'
     }); */
 
-    stamen = new OpenLayers.Layer.XYZ( 'Natural Earth', [
-      'http://a.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg',
-      'http://b.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg',
-      'http://c.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg',
-      'http://d.tile.stamen.com/terrain-background/{z}/{x}/{y}.jpg'
+    /* stamen = new OpenLayers.Layer.XYZ( 'Hillshade', [
+      'http://a.tile.stamen.com/terrain/${z}/${x}/${y}@2x.png',
+      'http://b.tile.stamen.com/terrain/${z}/${x}/${y}@2x.png',
+      'http://c.tile.stamen.com/terrain/${z}/${x}/${y}@2x.png',
+      'http://d.tile.stamen.com/terrain/${z}/${x}/${y}@2x.png'
     ], {
-        attributions:'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL'
-    });
+        attributions:'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL',
+        sphericalMercator: true,
+        wrapDateLine: true,
+        numZoomLevels: 18,
+        MAX_ZOOM_LEVEL: 17,
+    }); */
 
     googleStreet = new OpenLayers.Layer.Google("Streets", {
         sphericalMercator: true,
@@ -70,6 +63,7 @@ app.init = function () {
         attribution: "Basemap by Google",
         textColor: "black"
     });
+
     googleTerrain = new OpenLayers.Layer.Google("Terrain", {
         type: google.maps.MapTypeId.TERRAIN,
         sphericalMercator: true,
@@ -80,7 +74,8 @@ app.init = function () {
         attribution: "Basemap by Google",
         textColor: "black"
     });
-    googleSatellite = new OpenLayers.Layer.Google("Satellite", {
+
+    /* googleSatellite = new OpenLayers.Layer.Google("Aerial", {
         type: google.maps.MapTypeId.SATELLITE,
         sphericalMercator: true,
         isBaseLayer: true,
@@ -89,32 +84,43 @@ app.init = function () {
         zoomDuration: 10,
         attribution: "Basemap by Google",
         textColor: "white"
-    });
-    googleHybrid = new OpenLayers.Layer.Google("Hybrid", {
+    }); */
+
+
+    hereAerial = new OpenLayers.Layer.XYZ('Aerial', 'https://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/satellite.day/${z}/${x}/${y}/256/png8?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q', {
+      isBaseLayer: true,
+      numZoomLevels: 20,
+      attribution: "Basemap by Here",
+      textColor: "white"
+    })
+
+    /* googleHybrid = new OpenLayers.Layer.Google("Hybrid", {
         type: google.maps.MapTypeId.HYBRID,
         sphericalMercator: true,
         isBaseLayer: true,
-        numZoomLevels: 18,
-        MAX_ZOOM_LEVEL: 17,
+        numZoomLevels: 22,
+        zoomDuration: 1,
         attribution: "Basemap by Google",
-        visibility: false
+        visibility: false,
+        textColor: "white"
     });
+    */
 
-    map.addLayers([stamen, mapboxSat, googleSatellite, openStreetMap, googleStreet, googleTerrain, googleHybrid]);
+    map.addLayers([hereAerial, googleStreet, googleTerrain]);
 
     map.addControl(new SimpleLayerSwitcher());
 
     //Scale Bar
     var scalebar = new OpenLayers.Control.ScaleBar( {
         displaySystem: "english",
-        minWidth: 100, //default
-        maxWidth: 150, //default
+        minWidth: 50,
+        maxWidth: 100,
         divisions: 2, //default
         subdivisions: 2, //default
         showMinorMeasures: false //default
     });
 
-    map.addControl(scalebar);
+    // map.addControl(scalebar);
 
     //enables zooming to a given extent on the map by holding down shift key while dragging the mouse
     map.zoomBox = new OpenLayers.Control.ZoomBox({});
