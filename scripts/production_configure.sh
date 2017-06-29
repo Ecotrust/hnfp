@@ -13,22 +13,23 @@ CORE=${SCRIPTS_DIR%/scripts*}
 # You can either change this line explicitly, or pass the name in as an argument
 # APP_NAME=$1
 APP_NAME=HNFP
+MOD_NAME=hnfp
 
 # "DEFAULT" installs the basic marineplanner modules. You can take more control below
 MODULES="DEFAULT"
 
 # If you know where you want your django app folder, uncomment and set the line below
-PROJ_FOLDER=$CORE/apps/HNFP/hnfp
+PROJ_FOLDER=$CORE/apps/hnfp/hnfp
 
 cd $CORE/apps
   ### Uncomment the modules you want included in this project, or leave modules as "DEFAULT":
   echo 'Cloning dependency repositories'
-  if [ -n "$APP_NAME" ]; then
-    if [ ! -d $APP_NAME ]; then git clone https://github.com/Ecotrust/$APP_NAME.git; fi
-  else
-    APP_NAME=mp_docs
-    mkdir $CORE/apps/$APP_NAME
-  fi
+  if [ -n "$MOD_NAME" ]; then
+    if [ ! -d $MOD_NAME ]; then git clone https://github.com/Ecotrust/$APP_NAME.git $MOD_NAME; fi
+  # else
+  #   APP_NAME=mp_docs
+  #   mkdir $CORE/apps/$APP_NAME
+  fi 
   if [ $MODULES == "DEFAULT" ]; then
     if [ ! -d madrona-features ]; then git clone https://github.com/Ecotrust/madrona-features.git; fi
     if [ ! -d madrona-manipulators ]; then git clone https://github.com/Ecotrust/madrona-manipulators.git; fi
@@ -65,11 +66,6 @@ fi
 
 
 echo Running Deployment Scripts
-# if [[ ! -x "$CORE/scripts/vagrant_provision0.sh" ]]; then
-#   sudo -u ubuntu chmod +x $CORE/scripts/vagrant_provision0.sh
-# fi
-#
-# sudo -u ubuntu $CORE/scripts/vagrant_provision0.sh xenial 3.5.0 9.5
 
 $CORE/scripts/vagrant_provision.sh marineplanner-core marineplanner marineplanner $CORE
 
