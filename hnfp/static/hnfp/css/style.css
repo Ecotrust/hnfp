@@ -5,12 +5,12 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url('/static/hnfp/fonts/MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: url('/static/hnfp/fonts/material/MaterialIcons-Regular.eot'); /* For IE6-8 */
   src: local('Material Icons'),
        local('MaterialIcons-Regular'),
-       url('/static/hnfp/fonts/MaterialIcons-Regular.woff2') format('woff2'),
-       url('/static/hnfp/fonts/MaterialIcons-Regular.woff') format('woff'),
-       url('/static/hnfp/fonts/MaterialIcons-Regular.ttf') format('truetype');
+       url('/static/hnfp/fonts/material/MaterialIcons-Regular.woff2') format('woff2'),
+       url('/static/hnfp/fonts/material/MaterialIcons-Regular.woff') format('woff'),
+       url('/static/hnfp/fonts/material/MaterialIcons-Regular.ttf') format('truetype');
 }
 
 .material-icons {
@@ -44,9 +44,8 @@
   font-weight: normal;
   src: local('function'),
        local('function_regular'),
-<<<<<<< HEAD
-       url('/static/hnfp/fonts/function.woff2') format('woff2'),
-       url('/static/hnfp/fonts/function.woff') format('woff');
+       url('/static/hnfp/fonts/function/function.woff2') format('woff2'),
+       url('/static/hnfp/fonts/function/function.woff') format('woff');
 }
 
 @font-face {
@@ -56,7 +55,7 @@
   src: local('function'),
        local('function_regular'),
        url('/static/hnfp/fonts/function/function_bold.woff2') format('woff2'),
-       url('/static/hnfp/fonts/function/function_bold.woff') format('woff');
+       url('/static/hnfp/fonts/function/function_bold.woff') format('woff');git
 }
 
 /*--------------------
