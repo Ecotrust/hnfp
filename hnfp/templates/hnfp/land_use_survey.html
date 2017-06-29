@@ -48,39 +48,41 @@
   </section>
 
   <section class="section survey-wrap">
-    <ul class="stepper horizontal">
-      <li class="step active">
-        {% include './survey/survey_basic_info.html' %}
-      </li>
-      <li class="step">
-        {% include './survey/survey_location.html' %}
-      </li>
-      <li class="step">
-        {% include './survey/survey_forest_use.html' %}
-      </li>
-      <li class="step">
-        {% include './survey/survey_land_use_rank.html' %}
-      </li>
-      <li class="step">
-        {% include './survey/survey_regions.html' %}
-      </li>
-      <li class="step">
-        {% include './survey/survey_your_profile_1.html' %}
-      </li>
-      <li class="step">
-        {% include './survey/survey_your_profile_2.html' %}
-      </li>
-      <li class="step">
-        <div class="step-title waves-effect">Finish &amp; Submit</div>
-        <div class="step-content">
-          <div class="row">
-            <div class="step-actions col s12 l6 offset-l3">
-              <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit">Finish &amp; Submit</button>
+    <div class="container">
+      <ul class="stepper horizontal">
+        <li class="step active">
+          {% include './survey/survey_basic_info.html' %}
+        </li>
+        <li class="step">
+          {% include './survey/survey_location.html' %}
+        </li>
+        <li class="step">
+          {% include './survey/survey_forest_use.html' %}
+        </li>
+        <li class="step">
+          {% include './survey/survey_land_use_rank.html' %}
+        </li>
+        <li class="step">
+          {% include './survey/survey_regions.html' %}
+        </li>
+        <li class="step">
+          {% include './survey/survey_your_profile_1.html' %}
+        </li>
+        <li class="step">
+          {% include './survey/survey_your_profile_2.html' %}
+        </li>
+        <li class="step">
+          <div class="step-title waves-effect">Finish &amp; Submit</div>
+          <div class="step-content">
+            <div class="row">
+              <div class="step-actions col s12 l6 offset-l3">
+                <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit">Finish &amp; Submit</button>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </section>
 </main>
 {% endblock outer_content %}

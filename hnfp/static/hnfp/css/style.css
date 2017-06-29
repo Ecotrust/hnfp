@@ -120,10 +120,9 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
   font-family: 'function_bold', sans-serif;
-  font-weight: 700;
+  font-weight: normal;
   line-height: 1.375;
   margin: 0 0 .5em;
 }
@@ -144,7 +143,10 @@ h5 {
   font-size: 1.375em;
 }
 h6 {
-  font-size: 1.25em;
+  font-family: 'function', sans-serif;
+  font-size: 1.125em;
+  font-weight: normal;
+  margin: 0 0 .5em;
 }
 
 .btn-border-blue,
@@ -509,6 +511,14 @@ nav ul li a {
   background: rgba(255,255,255,0.5);
 }
 
+.survey-wrap .range-field label {
+  color: #fff;
+}
+
+.survey-wrap input[type=range] {
+  border: none;
+}
+
 .survey-wrap h5 {
   font-weight: 700;
 }
@@ -539,33 +549,53 @@ nav ul li a {
 }
 
 .survey-wrap ul.stepper .step:before {
-  background-color: rgba(255,255,255,0.4);
-  color: #000;
+  background-color: rgba(255,255,255,0.15);
+  color: transparent;
+  height: 18px;
+  line-height: 18px;
+  opacity: 0;
+  top: 12px;
+  width: 18px;
 }
 
 .survey-wrap ul.stepper .step.done {
-  color: #ccc;
+  color: rgba(255,255,255,.65);
 }
 
 .survey-wrap ul.stepper .step.active:before {
-  background: rgba(255,255,255,0.75);
-  color: #000;
+  background: rgba(255,255,255,0.15);
+  color: transparent;
 }
 
 .survey-wrap ul.stepper .step.done:before {
-  background: rgba(255,255,255,0.75);
-  color: #57a6a2;
+  background: rgba(255,255,255,0);
+  color: rgba(255,255,255,0.8);
+  opacity: 1;
+}
+
+.survey-wrap ul.stepper .step .step-title {
+  font-family: 'function_bold';
+  font-size: 1.1875em;
+  display: inline-block;
+  margin: 0 -10px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-left: 36px;
 }
 
 .survey-wrap ul.stepper .step.active .step-title {
-  font-weight: 700;
+  font-family: 'function_bold';
   font-size: 1.3125em;
+  font-weight: normal;
   line-height: 1;
+}
+
+.survey-wrap ul.stepper .step-content {
+  margin-left: 26px;
 }
 
 .step-actions .btn,
 .previous-step {
-  font-size: .75em;
   height: auto;
   line-height: 2.5;
   text-transform: none;
@@ -578,11 +608,6 @@ nav ul li a {
 
 .previous-step {
     color: #aaa;
-}
-
-.survey-wrap .input-field label:not(.label-icon).active {
-  font-size: .6125em;
-  transform: translate(-4px,-150%);
 }
 
 .survey-wrap input[type="checkbox"] + label {

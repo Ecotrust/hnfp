@@ -14,10 +14,10 @@
 
     <ul id="nav-mobile" class="side-nav">
       {% if user.is_authenticated %}
-        <li><a href="/dashboard">Dashboard</a></li>
-        <li><a href="/observations">My Maps</a></li>
-        <li><a href="/dashboard">Alerts</a></li>
-        <li><a href="/forum">Land Forum</a></li>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'observations' %}">My Maps</a></li>
+        <li><a href="{% url 'dashboard' %}">Alerts</a></li>
+        <li><a href="">Land Forum</a></li>
         <li><div class="divider"></div></li>
         <li><a class="subheader">Profile</a></li>
         <li>
