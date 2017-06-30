@@ -1,0 +1,44 @@
+body {
+  background-color: transparent;
+  letter-spacing: 0.025em;
+  line-height: 1.375;
+}
+
+header + div {
+  min-height: auto;
+}
+
+header {
+  padding-bottom: 0;
+}
+
+.container {
+  margin: auto;
+  padding: 0;
+}
+
+.container:before,
+.container:after {
+  content: '';
+  display: inline-block;
+}
+
+.container:after {
+  clear: auto;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #2b384a;
+  width: auto;
+}
+
+.center {
+  position: static;
+  top: auto;
+  transform: none;
+  width: auto;
+}
+
+p {
+  margin: 0 0 1em;
+}

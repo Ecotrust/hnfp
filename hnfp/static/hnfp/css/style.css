@@ -104,6 +104,7 @@
   --------------------*/
 
 body {
+  color: #2b384a;
   font-family: 'function', sans-serif;
   font-size: 1em;
   font-weight: normal;
@@ -235,7 +236,7 @@ nav ul li a {
 }
 
 #logo-container.brand-logo {
-  padding: 15px 0;
+  // padding: 15px 0;
 }
 
   .brand-logo img {

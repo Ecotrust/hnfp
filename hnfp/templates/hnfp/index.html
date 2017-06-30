@@ -3,11 +3,6 @@
 
 {% block site_style %}{% endblock site_style %}
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static '/hnfp/css/materialize.css' %}" media="screen,projection"/>
-  <link rel="stylesheet" href="{% static '/hnfp/css/style.css' %}" media="screen,projection"/>
-{% endblock %}
-
 {% block extra_head %}
   <meta name="theme-color">
   <meta name="description" content="Hoonah Native Forest Partnership">
@@ -27,6 +22,12 @@
   <meta name="theme-color" content="#E64545">
   <meta name="mobile-web-app-capable" content="yes">
   <!-- <link rel="icon" sizes="192x192" href="highres-icon.png"> -->
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static '/hnfp/css/overwrite.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static '/hnfp/css/materialize.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static '/hnfp/css/style.css' %}" media="screen,projection"/>
 {% endblock %}
 
 {% block header %}
