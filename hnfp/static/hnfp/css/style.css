@@ -258,7 +258,9 @@ nav ul li a {
   }
 
 .section-top-bg {
-    position: relative;
+  overflow: hidden;
+  position: relative;
+  width: 100%:
 }
 
   .section-top-bg-img {
