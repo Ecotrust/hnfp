@@ -14,7 +14,7 @@ VAGRANT_CORE=\\/usr\\/local\\/apps\\/$PROJECT_NAME
 
 ### APP_NAME is the name on the application you are developing.
 # You can either change this line explicitly, or pass the name in as an argument
-APP_NAME=$1
+APP_NAME=hnfp
 
 # "DEFAULT" installs the basic marineplanner modules. You can take more control below
 MODULES="DEFAULT"
@@ -85,7 +85,7 @@ fi
 ### Copy and Link templates to full generated files
 # Generate Vagrantfile
 echo Replacing $PROJ_FOLDER/Vagrantfile
-cp $CORE/Vagrantfile.template $PROJ_FOLDER/Vagrantfile
+# cp $CORE/Vagrantfile.template $PROJ_FOLDER/Vagrantfile
 # This allows us to maintain vagrant scope in the provision scripts, and
 ### local scope during setup.
 sed -i '' 's/\#\#\#PROJ_DIR\#\#\#/'"$VAGRANT_PROJ_FOLDER"'/' $PROJ_FOLDER/Vagrantfile
@@ -95,19 +95,19 @@ fi
 
 #Generate basic provisoning script
 echo Replacing $PROJ_FOLDER/vagrant_provision.sh
-cp vagrant_provision.sh.template $PROJ_FOLDER/vagrant_provision.sh
+# cp vagrant_provision.sh.template $PROJ_FOLDER/vagrant_provision.sh
 if [ ! -e $SCRIPTS_DIR/vagrant_provision.sh ]; then
   ln -s $PROJ_FOLDER/vagrant_provision.sh $SCRIPTS_DIR/vagrant_provision.sh
 fi
 
 #Generate project urls file
 echo Replacing $PROJ_FOLDER/proj_urls.py
-cp $CORE/marineplanner/marineplanner/urls.py.template $PROJ_FOLDER/proj_urls.py
+# cp $CORE/marineplanner/marineplanner/urls.py.template $PROJ_FOLDER/proj_urls.py
 
 # $PROJ_SETTINGS=$PROJ_FOLDER/project_settings.py
 #Copy project settings to the project folder to be preserved in its project repository
 echo Replacing $PROJ_FOLDER/settings.py
-cp $CORE/marineplanner/marineplanner/settings.py.template $PROJ_FOLDER/project_settings.py
+# cp $CORE/marineplanner/marineplanner/settings.py.template $PROJ_FOLDER/project_settings.py
 
 echo
 
