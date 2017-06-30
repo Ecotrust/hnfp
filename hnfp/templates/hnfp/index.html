@@ -25,14 +25,14 @@
 {% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static '/hnfp/css/overwrite.css' %}" media="screen,projection"/>
-  <link rel="stylesheet" href="{% static '/hnfp/css/materialize.css' %}" media="screen,projection"/>
-  <link rel="stylesheet" href="{% static '/hnfp/css/style.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static 'hnfp/css/overwrite.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static 'hnfp/css/materialize.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static 'hnfp/css/style.css' %}" media="screen,projection"/>
 {% endblock %}
 
 {% block header %}
-  {% include 'hnfp/navbar.html' %}
-  {% include 'hnfp/modal.html' %}
+  {% include './navbar.html' %}
+  {% include './modal.html' %}
 {% endblock %}
 
 {% block outer_content %}
@@ -41,24 +41,15 @@
       <h1 class="header center orange-text">Hoonah Stewards</h1>
     </div>
   </div>
-  <section class="section">
-      <div class="col s12">
-        <div class="icon-block">
-          <h2 class="center"><i class="material-icons">settings</i></h2>
-          <h5 class="center">Economy</h5>
-        </div>
-      </div>
-    </div>
-  </section>
 {% endblock outer_content %}
 
 {% block footer %}
-  {% include 'hnfp/footer.html' %}
+  {% include './footer.html' %}
 {% endblock footer %}
 
 {% block extra_js %}
-  <script src="{% static '/hnfp/js/localforage/localforage.min.js' %}"></script>
-  <script src="{% static '/hnfp/js/materialize/materialize.min.js' %}"></script>
-  <script src="{% static '/hnfp/js/app.hnfp.js' %}" charset="utf-8"></script>
-  <script src="{% static '/hnfp/js/offline.js' %}" charset="utf-8"></script>
+  <script src="{% static 'hnfp/js/localforage/localforage.min.js' %}"></script>
+  <script src="{% static 'hnfp/js/materialize/materialize.min.js' %}"></script>
+  <script src="{% static 'hnfp/js/app.hnfp.js' %}" charset="utf-8"></script>
+  <script src="{% static 'hnfp/js/offline.js' %}" charset="utf-8"></script>
 {% endblock %}

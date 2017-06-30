@@ -1,11 +1,11 @@
 body {
   background-color: transparent;
   letter-spacing: 0.025em;
-  line-height: 1.375;
+  // line-height: 1.375;
 }
 
 header + div {
-  min-height: auto;
+  // min-height: auto;
 }
 
 header {
@@ -19,17 +19,17 @@ header {
 
 .container:before,
 .container:after {
-  content: '';
-  display: inline-block;
+  // content: '';
+  // display: inline-block;
 }
 
 .container:after {
-  clear: auto;
+  // clear: auto;
 }
 
 h1,h2,h3,h4,h5,h6 {
-  color: #2b384a;
-  width: auto;
+  /* color: #2b384a;
+  width: auto; */
 }
 
 .center {
