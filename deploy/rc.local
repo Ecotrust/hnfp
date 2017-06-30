@@ -11,18 +11,17 @@
 #
 # By default this script does nothing.
 
-/usr/local/apps/marineplanner-core/apps/hnfp/deploy/restart_nginx.sh &
 
 TIME=`/bin/date +20%y/%m/%d-%H:%M:%S`
 
 /bin/echo $TIME' - running uwsgi' >> /var/log/rc.local.log 2>&1
 
-if [ -e /usr/local/apps/marineplanner-core/env/bin/uwsgi ]; then
-  /bin/echo 'virtual-env uwsgi EXISTS!' >> /var/log/rc.local.log 2>&1
-  /usr/local/apps/marineplanner-core/env/bin/uwsgi --ini /usr/local/apps/marineplanner-core/apps/hnfp/deploy/marineplanner.ini --uid www-data --gid www-data >> /var/log/rc.local.log 2>&1
-else
-  /bin/echo 'virtual-env uwsgi DOES NOT EXIST!' >> /var/log/rc.local.log 2>&1
-  /usr/bin/uwsgi --ini /usr/local/apps/marineplanner-core/apps/hnfp/deploy/marineplanner.ini --uid www-data --gid www-data >> /var/log/rc.local.log 2>&1
+
+if [ ! -e /usr/local/apps/marineplanner-core/apps/hnfp/deploy/marineplanner.ini ]; then
+  /bin/sleep 5
 fi
+/usr/bin/uwsgi --ini /usr/local/apps/marineplanner-core/apps/hnfp/deploy/marineplanner.ini  >> /var/log/rc.local.log 2>&1 &
+
+/usr/local/apps/marineplanner-core/apps/hnfp/deploy/restart_nginx.sh &
 
 exit 0
