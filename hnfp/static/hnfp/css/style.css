@@ -260,7 +260,7 @@ nav ul li a {
   --------------------*/
 
 .hero {
-  padding-top: 8%;
+  padding-top: 24%;
   text-align: center;
 }
 
@@ -286,7 +286,19 @@ nav ul li a {
   }
 
 .section-bottom-bg {
+  min-height: 60px;
+  overflow: hidden;
+  position: relative;
   top: 0;
+  width: 100%:
+}
+
+.section-bottom-bg .section-top-bg-img {
+  top: 0;
+  z-index: 0;
+}
+.section-prefooter {
+    padding-bottom: 0;
 }
 
 .icon-block {
@@ -310,7 +322,7 @@ nav ul li a {
 }
 
 .section-footer {
-  padding: 80px 0;
+  padding: 40px 0;
 }
 
 .parallax-container {
@@ -780,6 +792,9 @@ path {
     height: 25%;
   }
 
+  .hero {
+    padding-top: 12%;
+  }
 
   #logo-container.brand-logo {
     left: 50%;
@@ -790,6 +805,10 @@ path {
   .cta-fixed-width {
     height: 14rem;
     width: 14rem;
+  }
+
+  .section-bottom-bg {
+    min-height: 100px;
   }
 }
 
