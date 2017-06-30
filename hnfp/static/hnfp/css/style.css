@@ -104,6 +104,7 @@
   --------------------*/
 
 body {
+  color: #2b384a;
   font-family: 'function', sans-serif;
   font-size: 1em;
   font-weight: normal;
@@ -235,7 +236,7 @@ nav ul li a {
 }
 
 #logo-container.brand-logo {
-  padding: 15px 0;
+  // padding: 15px 0;
 }
 
   .brand-logo img {
@@ -258,7 +259,9 @@ nav ul li a {
   }
 
 .section-top-bg {
-    position: relative;
+  overflow: hidden;
+  position: relative;
+  width: 100%:
 }
 
   .section-top-bg-img {
@@ -303,7 +306,7 @@ nav ul li a {
 }
 
 .dashboard .bg:before {
-  background-image: url('/static/hnfp/hnfp/img/bg_mountain.jpg');
+  background-image: url('/static/hnfp/img/bg_mountain.jpg');
   background-size: cover;
   background-attachment: local;
   background-position: 50%;
@@ -315,7 +318,7 @@ nav ul li a {
 }
 
 .dashboard .bg:after {
-  background-image: url('/static/hnfp/hnfp/img/mountain_ridge_white.svg');
+  background-image: url('/static/hnfp/img/mountain_ridge_white.svg');
   background-size: cover;
   bottom: 0%;
   height: 60%;
@@ -330,7 +333,7 @@ nav ul li a {
 }
 
 .pre-footer:after {
-  background-image: url('/static/hnfp/hnfp/img/mountain_ridge_blue.svg');
+  background-image: url('/static/hnfp/img/mountain_ridge_blue.svg');
   background-size: 125% auto;
   background-position: 50% top;
   bottom: 0;
@@ -486,7 +489,7 @@ nav ul li a {
 }
 
 .survey-wrap:before {
-  background-image: url('/static/hnfp/hnfp/img/aurora.jpg');
+  background-image: url('/static/hnfp/img/aurora.jpg');
   background-size: cover;
   background-attachment: local;
   background-position: 50%;
@@ -498,7 +501,7 @@ nav ul li a {
 }
 
 .survey-wrap:after {
-  background-image: url('/static/hnfp/hnfp/img/mountain_ridge_blue.svg');
+  background-image: url('/static/hnfp/img/mountain_ridge_blue.svg');
   background-size: cover;
   bottom: -10%;
   height: 25%;
