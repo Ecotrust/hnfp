@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^dashboard/', views.dashboard, name='dashboard'),
     url(r'^observations/', views.observations, name='observations'),
     url(r'^new_observation/', views.new_observation, name='new_observation'),
+    url(r'^sw(.*.js)$', views.sw_js, name='sw_js'),
     url(r'^', views.home, name='index'),
 ]

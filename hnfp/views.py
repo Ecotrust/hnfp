@@ -54,3 +54,12 @@ def new_observation(request):
     template = loader.get_template('hnfp/new_observation.html')
     context = {}
     return HttpResponse(template.render(context, request))
+
+def sw_js(request):
+    from django.views.decorators.cache import never_cache
+    from django.template.loader import get_template
+    @never_cache
+    def sw_js(request, js):
+        template = get_template('sw.js')
+        html = template.render()
+        return HttpResponse(html, content_type="application/x-javascript")

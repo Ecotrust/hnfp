@@ -1,9 +1,10 @@
 {
-  "name": "HNFP",
-  "short_name": "HNFP",
+  "name": "hnfp",
+  "short_name": "hnfp",
   "start_url": "/dashboard",
-  "display": "standalone",
+  "display": "minimal-ui",
   "background_color": "#fff",
+  "theme_color": "#57a6a2",
   "description": "Hoonah Native Forest Partnership",
   "icons": [{
     "src": "images/touch/homescreen48.png",
