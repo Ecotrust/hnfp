@@ -150,7 +150,7 @@ h6 {
   font-family: 'function', sans-serif;
   font-size: 1.125em;
   font-weight: normal;
-  margin: 0 0 .5em;
+  margin: 0 0 .75em;
 }
 
 .btn-border-blue,
@@ -160,8 +160,7 @@ h6 {
   border: 3px solid #2b384a;
   color: #2b384a;
   font-family: 'function_bold', sans-serif;
-  font-size: 1.08125em;
-  font-weight: bold;
+  font-size: 1.06125em;
   height: auto;
   text-transform: none;
 }
@@ -332,9 +331,12 @@ nav ul li a {
 .home-page .cta-fixed-width {
   border: 8px solid #e4efee;
   color: #2b384a;
-  font-size: .8125em;
+  font-family: 'function', sans-serif;
+  font-size: .75em;
+  height: 40vw;
   margin: 0 auto 4rem;
   padding: 10px;
+  width: 40vw;
 }
 
   .home-page .cta-round div:first-child,
@@ -733,8 +735,8 @@ path {
   border: 4px solid rgba(255,255,255,0.5);
   border-radius: 50%;
   display: block;
+  font-family: 'function_bold', sans-serif;
   font-size: 1em;
-  font-weight: 700;
   height: 30vw;
   margin: 0 auto 1em;
   text-align: center;
@@ -805,6 +807,12 @@ path {
   .cta-fixed-width {
     height: 14rem;
     width: 14rem;
+  }
+
+  .home-page .cta-fixed-width {
+    border: 8px solid #e4efee;
+    font-size: .8125em;
+    padding: 10px;
   }
 
   .section-bottom-bg {
