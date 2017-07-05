@@ -786,6 +786,7 @@ path {
 
 .welcome_steward {
     min-height: 100vh;
+    width: 100%;
 }
 
 .welcome_steward p {
@@ -874,14 +875,27 @@ path {
   }
 
   .cta-fixed-width {
-    height: 14rem;
-    width: 14rem;
+    height: 12rem;
+    margin-bottom: 3rem;
+    width: 12rem;
   }
 
   .home-page .cta-fixed-width {
     border: 8px solid #e4efee;
     font-size: 1em;
     padding: 12px;
+  }
+
+  .welcome_steward .cta-fixed-width {
+    border: 8px solid #e4efee;
+  }
+
+  .welcome_steward .cta-fixed-width:hover {
+    border: 8px solid #fff;
+  }
+
+  .welcome_steward p {
+    font-size: .875em;
   }
 
   .section-bottom-bg {
