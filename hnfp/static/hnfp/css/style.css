@@ -246,6 +246,10 @@ h6 {
   padding-top: 3rem;
 }
 
+nav a.disabled {
+  color: #e4efee;
+}
+
 /*--------------------
   header
   --------------------*/
@@ -258,6 +262,12 @@ nav .tabs .tab a,
 nav .tabs a:active {
   color: #2b384a;
   font-family: 'function_bold', sans-serif;
+}
+
+nav .tabs .tab.disabled a {
+  color: #aaa;
+  font-family: 'function', sans-serif;
+  font-size: .8375em;
 }
 
 nav .tabs {
