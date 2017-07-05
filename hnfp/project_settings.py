@@ -28,7 +28,7 @@ SECRET_KEY = '-u*-d*&7j=c7a7&k5u6e61b4-t=d8ce^2k=jhox#cn8iy8m_%d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 
 # Application definition
@@ -183,11 +183,17 @@ INSTALLED_APPS = [
     "manipulators",
     "accounts",
     "data_manager",
-    "drawing",
-    "rpc4django",
     "visualize",
     "nursery",
+    "drawing",
+    "rpc4django",
     ### END INSERTED INSTALLED APPS ###
+    ### BEGIN MISSING APPS ###
+    "captcha",
+    "import_export",
+    'social.apps.django_app.default',
+    'social_django',
+    ### END MISSING APPS ###
 ]
 
 try:
@@ -204,6 +210,9 @@ try:
     from marineplanner.local_settings import *
 except ImportError:
     pass
+
+RECAPTCHA_PUBLIC_KEY = '6Lc30ScUAAAAAE64HuxC_zXrUlEuZxIlZy-WFYf-'
+RECAPTCHA_PRIVATE_KEY = '6Lc30ScUAAAAAFq-pBBz161BKPMrRPvDajNuJu3G'
 
 # This seems to help with some backward compatibility
 import django

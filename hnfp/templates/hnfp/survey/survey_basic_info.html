@@ -2,27 +2,30 @@
 <div class="step-content">
   <div class="row">
     <div class="input-field col s12 l6">
-      <input id="first_name" type="text" class="validate" name="fname" autocomplete="given-name" required>
-      <label for="first_name">first name</label>
+      <input id="first_name" type="text" class="validate" name="fname" autocomplete="given-name" name="real_name" required>
+      <label for="first_name">Name</label>
     </div>
     <div class="input-field col s12 l6">
-      <input id="last_name" type="text" class="validate" name="lname" autocomplete="family-name" required>
+      <input id="last_name" type="text" class="validate" name="lname" autocomplete="family-name" name="preferred_name" required>
       <label for="last_name">last name</label>
     </div>
     <div class="input-field col s12 l6">
-      <input id="email" type="email" class="validate" name="email" autocomplete="email" required>
+      <input id="email" type="email" class="validate" name="email" autocomplete="email" name="email" required>
       <label for="email" data-error="not a valid email" data-success="looks good">email</label>
     </div>
     <div class="input-field col s12 l6">
       <input id="phone" type="tel" class="validate" name="phone" autocomplete="tel" required>
-      <label for="phone" data-error="not a valid email" data-success="looks good">phone</label>
+      <label for="phone" data-error="not a valid email" data-success="looks good" name="phone">phone</label>
     </div>
-    <div class="input-field col s12 l6 offset-l3">
-      <input id="password" type="password" class="validate" autocomplete="new-password" required>
+    <div class="input-field col s12 l6">
+      <input id="id_password" type="password" class="validate" name="password" autocomplete="new-password" required>
       <label for="password">Password</label>
     </div>
-    <div class="step-actions col s12 l6 offset-l3">
-      <button class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">navigate_next</i></button>
+    <div class="col s12 l6">
+      <!-- <div class="g-recaptcha" data-sitekey="6Lc30ScUAAAAAE64HuxC_zXrUlEuZxIlZy-WFYf-"></div> -->
+    </div>
+    <div class="step-actions col s12 l6">
+      <button id="btn-register" class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">navigate_next</i></button>
     </div>
   </div>
 </div>

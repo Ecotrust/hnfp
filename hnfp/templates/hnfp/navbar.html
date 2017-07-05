@@ -1,46 +1,53 @@
 {% load static %}
-<nav class="white" role="navigation">
-  <div class="nav-wrapper container">
-    <a id="logo-container" href="/" class="brand-logo">
-      <img src="{% static 'hnfp/img/logo.svg' %}" />
-    </a>
-    <ul class="right hide-on-med-and-down">
-      {% if user.is_authenticated %}
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'observations' %}">My Maps</a></li>
-        <li><a href="{% url 'dashboard' %}">Alerts</a></li>
-        <li><a href="">Land Forum</a></li>
-        <li><div class="divider"></div></li>
-        <li><a class="subheader">Profile</a></li>
-        <li>
-          <div class="userView">
-            <a href="{% url 'account:index' %}"><img class="circle" src="{% static 'hnfp/img/joe.png' %}"></a>
-            <a href=""><span class="white-text name">{{ user.first_name }}</span></a>
-          </div>
-        </li>
-      {% else %}
-        <li><a class="waves-effect waves-light" href="#modal1">Log in</a></li>
-      {% endif %}
-    </ul>
-    <ul id="nav-mobile" class="side-nav">
-      {% if user.is_authenticated %}
-        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-        <li><a href="{% url 'observations' %}">My Maps</a></li>
-        <li><a href="{% url 'dashboard' %}">Alerts</a></li>
-        <li><a href="">Land Forum</a></li>
-        <li><div class="divider"></div></li>
-        <li><a class="subheader">Profile</a></li>
-        <li>
-          <div class="userView">
-            <a href="{% url 'account:index' %}"><img class="circle" src="{% static 'hnfp/img/joe.png' %}"></a>
-            <a href=""><span class="white-text name">{{ user.first_name }}</span></a>
-          </div>
-        </li>
-      {% else %}
-        <li><a class="waves-effect waves-light" href="#modal1">Log in</a></li>
-        <li><a class="waves-effect waves-light" href="#modal1">Become A Hoonah Steward</a></li>
-      {% endif %}
-    </ul>
-    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-  </div>
+  {% if user.is_authenticated %}
+  <nav role="navigation" class="nav-extended white">
+    <div class="nav-wrapper">
+        <a id="logo-container" href="/" class="brand-logo">
+          <img src="{% static 'hnfp/img/logo.svg' %}" />
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li>
+            <div class="userView">
+              <a href="{% url 'account:index' %}"><!-- <img class="circle" src="{% static 'hnfp/img/.png' %}"> --><span class="name">Hi {{ user.first_name }}</span></a>
+            </div>
+          </li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li><a href="{% url 'observations' %}">My Maps</a></li>
+          <li><a href="{% url 'dashboard' %}">Alerts</a></li>
+          <!-- <li><a href="{% url 'dashboard' %}" class="tab">Land Use Map</a></li> -->
+          <!-- <li><a href="{% url 'dashboard' %}" class="tab">Land Use Forum</a></li> -->
+          <li><div class="divider"></div></li>
+          <li><a class="subheader">Hi {{ user.first_name }}</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-content hide-on-med-and-down">
+        <ul class="tabs">
+          <li class="tab blue_dark"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="tab"><a href="{% url 'observations' %}">My Maps</a></li>
+          <li class="tab"><a href="{% url 'dashboard' %}">Alerts</a></li>
+          <!-- <li><a href="{% url 'dashboard' %}" class="tab">Land Use Map</a></li> -->
+          <!-- <li class="tab"><a href="{% url 'dashboard' %}">Land Forum</a></li> -->
+        </ul>
+      </div>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </nav>
+  {% else %}
+    <nav role="navigation" class="nav-extended white">
+      <div class="nav-wrapper">
+        <a id="logo-container" href="/" class="brand-logo">
+          <img src="{% static 'hnfp/img/logo.svg' %}" />
+        </a>
+        <ul class="right hide-on-med-and-down">
+          <li><a class="waves-effect waves-light" href="#modal1">Log in</a></li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a class="waves-effect waves-light" href="#modal1">Log in</a></li>
+        </ul>
+      </div>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </nav>
+  {% endif %}
 </nav>

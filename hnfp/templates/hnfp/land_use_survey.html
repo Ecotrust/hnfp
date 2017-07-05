@@ -3,92 +3,99 @@
 
 {% block extra_head %}
   {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'js/lib/openlayers/theme/default/style.css' %}">
   <link href="{% static 'hnfp/css/materialize_stepper.css' %}" rel="stylesheet">
 {% endblock extra_head %}
 
-{% block header %}
-<nav class="white z-depth-0" role="navigation">
-  <ul class="right">
-    <li>
-      {% if user.is_authenticated %}
-        <a href="{% url 'account:index' %}">{{ user.first_name }}</a>
-      {% else %}
-        <a class="waves-effect waves-light" href="#modal1"><i class="material-icons">account_circle</i></a>
-      {% endif %}
-    </li>
-  </ul>
-</nav>
-{% endblock %}
-
 {% block outer_content %}
 <main>
-  <section class="section survey-intro">
-    <div class="row">
-      <div class="col s8 offset-s2 l4 offset-l4">
-        <a href="/"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
+  <section class="section survey-intro padding-top">
+    <div class="container">
+      <div class="row">
+        <div class="col s8 offset-s2 l4 offset-l4">
+          <a href="/"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col s2 offset-s5 border-survey-wrap"></div>
-    </div>
-    <div class="row">
-      <div class="col s12">
-        <h2 class="teal-text center">Take this 5 minute survey to activate your account</h2>
+      <div class="row">
+        <div class="col s2 offset-s5 border-survey-wrap"></div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col s2 offset-s5 m1 offset-m2">
-        <img src="{% static 'hnfp/img/icons/i_clipboard.svg' %}" />
+      <div class="row">
+        <div class="col s12">
+          <h2 class="teal-text center">Take this 5 minute survey to activate your account</h2>
+        </div>
       </div>
-      <div class="col s1 hide-on-small-only border-right"></div>
-      <div class="col s12 m8 offset-m2 flow-text">
-        <p>This short survey will help the Hoonah Native Forest Partnership understand how the community uses the forests and what the priorities are for management decisions. All personal information will be masked and only shared in aggregate with other users.</p>
+      <div class="row">
+        <div class="container center">
+          <img src="{% static 'hnfp/img/icons/i_clipboard.svg' %}" class="row-icon" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 l8 offset-l2 flow-text">
+          <p>This short survey will help the Hoonah Native Forest Partnership understand how the community uses the forests and what the priorities are for management decisions. All personal information will be masked and only shared in aggregate with other users.</p>
+        </div>
       </div>
     </div>
   </section>
-
   <section class="section survey-wrap">
     <div class="container">
-      <ul class="stepper horizontal">
-        <li class="step active">
-          {% include './survey/survey_basic_info.html' %}
-        </li>
-        <li class="step">
-          {% include './survey/survey_location.html' %}
-        </li>
-        <li class="step">
-          {% include './survey/survey_forest_use.html' %}
-        </li>
-        <li class="step">
-          {% include './survey/survey_land_use_rank.html' %}
-        </li>
-        <li class="step">
-          {% include './survey/survey_regions.html' %}
-        </li>
-        <li class="step">
-          {% include './survey/survey_your_profile_1.html' %}
-        </li>
-        <li class="step">
-          {% include './survey/survey_your_profile_2.html' %}
-        </li>
-        <li class="step">
-          <div class="step-title waves-effect">Finish &amp; Submit</div>
-          <div class="step-content">
-            <div class="row">
-              <div class="step-actions col s12 l6 offset-l3">
-                <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit">Finish &amp; Submit</button>
+
+      <form class="login-form" id="register-form">
+        {% csrf_token %}
+        <ul class="stepper horizontal">
+          <li class="step active">
+            {% include './survey/survey_basic_info.html' %}
+          </li>
+          <li class="step">
+            {% include './survey/survey_location.html' %}
+          </li>
+          <li class="step">
+            {% include './survey/survey_forest_use.html' %}
+          </li>
+          <li class="step">
+            {% include './survey/survey_land_use_rank.html' %}
+          </li>
+          <li class="step" data-event="surveyMap.init()">
+            <div class="step-title waves-effect">Regions &amp; Frequency</div>
+            <div class="step-content">
+              <h6>Which area(s) within the Hoonah Forest have you been to within the last year?</h6>
+              <em>Select one region at a time and answer follow up questions</em>
+              <br />
+              <div id="survey-map-wrapper">
+                <div id="survey-map"></div>
+              </div>
+              <div class="row">
+                {% include './survey/survey_actions.html' %}
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
-    </div>
+          </li>
+          <li class="step">
+            {% include './survey/survey_your_profile_1.html' %}
+          </li>
+          <li class="step">
+            {% include './survey/survey_your_profile_2.html' %}
+          </li>
+          <li class="step">
+            <div class="step-title waves-effect">Finish &amp; Submit</div>
+            <div class="step-content">
+              <div class="row">
+                <div class="step-actions col s12 l6 offset-l3">
+                  <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit">Finish &amp; Submit</button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </form>
   </section>
 </main>
 {% endblock outer_content %}
 
 {% block extra_js %}
   {{ block.super }}
+  <script src="{% static 'js/lib/openlayers/OpenLayers-marco-min.js' %}"></script>
+  <script src="{% static 'hnfp/js/form_map.js' %}"></script>
+  <!-- form -->
   <script src="{% static '/hnfp/js/materialize/materialize_stepper.js' %}"></script>
   <script src="{% static '/hnfp/js/form.js' %}"></script>
 {% endblock extra_js %}
