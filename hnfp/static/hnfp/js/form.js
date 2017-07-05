@@ -21,3 +21,7 @@ $('#btn-register').on( 'click', function() {
     console.log(res);
   });
 });
+
+$('#submit-form').on( 'click', function(e) {
+  this.form.submit();
+});

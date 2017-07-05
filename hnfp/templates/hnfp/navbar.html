@@ -1,7 +1,7 @@
 {% load static %}
   {% if user.is_authenticated %}
-  <nav role="navigation" class="nav-extended white">
-    <div class="nav-wrapper">
+    <nav role="navigation" class="nav-extended white">
+      <div class="nav-wrapper">
         <a id="logo-container" href="/" class="brand-logo">
           <img src="{% static 'hnfp/img/logo.svg' %}" />
         </a>
@@ -16,8 +16,8 @@
           <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
           <li><a href="{% url 'observations' %}">My Maps</a></li>
           <li><a href="{% url 'dashboard' %}">Alerts</a></li>
-          <!-- <li><a href="{% url 'dashboard' %}" class="tab">Land Use Map</a></li> -->
-          <!-- <li><a href="{% url 'dashboard' %}" class="tab">Land Use Forum</a></li> -->
+          <li><a href="{% url 'dashboard' %}" class="tab">Land Use Map (coming soon)</a></li>
+          <li><a href="{% url 'dashboard' %}" class="tab">Land Use Forum (coming soon)</a></li>
           <li><div class="divider"></div></li>
           <li><a class="subheader">Hi {{ user.first_name }}</a></li>
         </ul>
@@ -28,26 +28,26 @@
           <li class="tab blue_dark"><a href="{% url 'dashboard' %}">Dashboard</a></li>
           <li class="tab"><a href="{% url 'observations' %}">My Maps</a></li>
           <li class="tab"><a href="{% url 'dashboard' %}">Alerts</a></li>
-          <!-- <li><a href="{% url 'dashboard' %}" class="tab">Land Use Map</a></li> -->
-          <!-- <li class="tab"><a href="{% url 'dashboard' %}">Land Forum</a></li> -->
+          <li><a href="{% url 'dashboard' %}" class="tab">Land Use Map (coming soon)</a></li>
+          <li><a href="{% url 'dashboard' %}" class="tab">Land Use Forum (coming soon)</a></li>
         </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </nav>
   {% else %}
-    <nav role="navigation" class="nav-extended white">
+    <nav role="navigation" class="white">
       <div class="nav-wrapper">
         <a id="logo-container" href="/" class="brand-logo">
           <img src="{% static 'hnfp/img/logo.svg' %}" />
         </a>
         <ul class="right hide-on-med-and-down">
-          <li><a class="waves-effect waves-light" href="#modal1">Log in</a></li>
+          <li><a class="waves-effect waves-light" href="{% url 'account:login' %}">Log in</a></li>
         </ul>
         <ul id="nav-mobile" class="side-nav">
-          <li><a class="waves-effect waves-light" href="#modal1">Log in</a></li>
+          <li><a class="waves-effect waves-light" href="{% url 'account:login' %}">Log in</a></li>
         </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
-      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </nav>
   {% endif %}
 </nav>

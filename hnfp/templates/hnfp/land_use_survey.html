@@ -39,7 +39,7 @@
   <section class="section survey-wrap">
     <div class="container">
 
-      <form class="login-form" id="register-form">
+      <form class="login-form" method="POST" action="/registered/" id="register-form">
         {% csrf_token %}
         <ul class="stepper horizontal">
           <li class="step active">
@@ -60,6 +60,7 @@
               <h6>Which area(s) within the Hoonah Forest have you been to within the last year?</h6>
               <em>Select one region at a time and answer follow up questions</em>
               <br />
+              <p>Coming Soon</p>
               <div id="survey-map-wrapper">
                 <div id="survey-map"></div>
               </div>
@@ -78,7 +79,7 @@
             <div class="step-title waves-effect">Finish &amp; Submit</div>
             <div class="step-content">
               <div class="row">
-                <div class="step-actions col s12 l6 offset-l3">
+                <div class="step-actions col s12 l6">
                   <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit">Finish &amp; Submit</button>
                 </div>
               </div>
