@@ -1,7 +1,23 @@
 $(document).ready( function() {
   $('.stepper').activateStepper();
-  var formAction = function formSubmission() {
-    var action = document.querySelector('form');
-    action.action = '/registered';
-  };
+});
+
+$('#btn-register').on( 'click', function() {
+  var regForm = document.getElementById('register-form'),
+      formData = new FormData( regForm );
+  $.ajax({
+    url : '/registering/',
+    method: 'POST',
+    data : formData,
+    contentType: false,
+    processData: false,
+    success: function() {
+      console.log('success');
+    },
+    error: function() {
+      console.log('error');
+    }
+  }).done( function(res) {
+    console.log(res);
+  });
 });
