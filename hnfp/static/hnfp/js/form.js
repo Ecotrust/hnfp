@@ -23,6 +23,6 @@ $('#btn-register').on( 'click', function() {
 });
 
 $('#submit-form').on( 'click', function(e) {
-  e.preventDefualt();
+  e.preventDefault();
   window.location.pathname = '/dashboard/';
 });
