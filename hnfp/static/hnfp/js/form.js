@@ -24,5 +24,5 @@ $('#btn-register').on( 'click', function() {
 
 $('#submit-form').on( 'click', function(e) {
   e.preventDefualt();
-  location.pathname = '/dashboard/';
+  window.location.pathname = '/dashboard/';
 });
