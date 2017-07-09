@@ -448,6 +448,53 @@ nav .tabs .tab {
   width: 100%;
 }
 
+#forecast,
+#marine,
+#tides {
+  border-bottom: 2px solid #fff;
+  overflow: hidden;
+  padding: .5rem .5rem 1rem;
+}
+
+#forecast,
+#tides {
+  text-align: center;
+}
+
+#tides {
+  border-bottom: none;
+}
+
+#forecast h4, #marine h4, #tides h4 {
+  font-size: 1.3125em;
+  margin: .75rem 0;
+}
+
+#forecast p {
+  padding: 0 1rem;
+}
+
+#marine strong {
+  font-size: .8125em;
+}
+
+#marine {
+  padding-bottom: 1rem;
+}
+
+.tide-block div {}
+
+.tide-block p {
+  font-size: .8125em;
+  margin-bottom: .25em;
+}
+
+.tide-block p strong {
+  font-size: 1.25em;
+}
+
+.tide-block em {}
+
 /*--------------------
   map
   --------------------*/

@@ -7,7 +7,7 @@
     url: 'https://api.darksky.net/forecast/5dee4e51a4b71918ffe3ad18e83db386/58.1097,-135.4435',
     dataType: 'jsonp',
     success: function(data) {
-      weatherDOM.html(data.minutely.summary);
+      weatherDOM.html('<p>' + data.hourly.summary + '</p>');
       let current = data.currently;
       let marineData = {
         'nearest storm': current.nearestStormDistance,
@@ -20,9 +20,8 @@
       };
       for (var prop in marineData) {
         if (marineData.hasOwnProperty(prop)) {
-          console.log(prop + ': ' + marineData[prop]);
           if (marineData[prop] !== undefined) {
-            marineDOM.append('<strong>' + prop + '</strong>: ' + marineData[prop] + '<br />').addClass('weather-block');
+            marineDOM.append('<div class="col s5 offset-s1 right-align"><strong>' + prop + '</strong>:</div><div class="col s5 offset-s1 left-align">' + marineData[prop] + '</div>').addClass('weather-block');
           }
         }
       }
@@ -33,39 +32,39 @@
   });
 })();
 
-Date.prototype.yyyymmdd = function() {
-  var mm = this.getMonth() + 1; // getMonth() is zero-based
-  var dd = this.getDate();
-  return [this.getFullYear(), (mm>9 ? '' : '0') + mm, (dd>9 ? '' : '0') + dd].join('');
-};
-
-Date.prototype.daysInFuture = function(days) {
-  if (days === undefined) {
-    var days = 0;
-  }
-  return new Date( date.getFullYear(), date.getMonth(), date.getDate() + days );
-};
-
-var date = new Date();
-
 var weather = {
-  tidesDOM: function() {
-    let tidesDOM = $('#tideforecast');
-    return tidesDOM
+  yyyymmdd: function(date, daysInFuture) {
+    var mm = date.getMonth() + 1; // getMonth() is zero-based
+    if (daysInFuture > 0) {
+      var dd = date.getDate() + daysInFuture;
+    } else {
+      var dd = date.getDate();
+    }
+    return [date.getFullYear(), (mm>9 ? '' : '0') + mm, (dd>9 ? '' : '0') + dd].join('');
+  },
+  daysInFuture: function(days) {
+    if (days === undefined) {
+      var days = 0;
+    }
+    return new Date( date.getFullYear(), date.getMonth(), date.getDate() + days );
   },
   getTides: function() {
-    var date = new Date(),
-        tmrw = new Date( date.getFullYear(), date.getMonth(), date.getDate() + 1 ),
-        futureDate = date.daysInFuture(5).yyyymmdd(),
-        today = date.yyyymmdd(),
-        tmrw = tmrw.yyyymmdd();
+    let date = new Date(),
+        tmrw = weather.yyyymmdd(date, 1),
+        today = weather.yyyymmdd(date);
 
     $.ajax({
       type: 'GET',
-      url:'https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&begin_date=' + today + '&end_date=' + futureDate + '&datum=MLLW&station=9452438&time_zone=lst_ldt&units=english&interval=hilo&format=json',
+      url:'https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&begin_date=' + today + '&end_date=' + today + '&datum=MLLW&station=9452438&time_zone=lst_ldt&units=english&interval=hilo&format=json',
       dataType: 'json',
       success: function(data) {
-        JSON.parse(data);
+        data.predictions.forEach(function(el, i, arr) {
+          var tideDOM = $('#tideforecast');
+          let time = el.t,
+              v = el.v,
+              type = el.type;
+          tideDOM.append('<div class="col s3 center"><p><strong>' + type + '</strong></p><p>' + time + '</p><p><em>' + v + '</em></p></div>').addClass('tide-block');
+        })
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.warn(jqXHR + textStatus);
