@@ -153,6 +153,11 @@ h6 {
   margin: 0 0 .75em;
 }
 
+strong {
+  font-family: 'function_bold', sans-serif;
+  font-weight: normal;
+}
+
 .btn-border-blue,
 .btn-border-light-blue,
 .btn-border-blue-grey {
