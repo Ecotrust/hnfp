@@ -4,12 +4,6 @@ from hnfp.models import Question, Category, Survey, Response, AnswerText, Answer
 from django.utils.safestring import mark_safe
 import uuid
 
-# blatantly stolen from
-# http://stackoverflow.com/questions/5935546/align-radio-buttons-horizontally-in-django-forms?rq=1
-class HorizontalRadioRenderer(forms.RadioSelect.renderer):
-  def render(self):
-    return mark_safe(u'\n'.join([u'%s\n' % w for w in self]))
-
 class ResponseForm(models.ModelForm):
 	class Meta:
 		model = Response
@@ -27,12 +21,11 @@ class ResponseForm(models.ModelForm):
 		data = kwargs.get('data')
 		for q in survey.questions():
 			if q.question_type == Question.TEXT:
-				self.fields["question_%d" % q.pk] = forms.CharField(label=q.text,
-					widget=forms.Textarea)
+				self.fields["question_%d" % q.pk] = forms.CharField(label=q.text, widget=forms.Textarea)
 			elif q.question_type == Question.RADIO:
 				question_choices = q.get_choices()
 				self.fields["question_%d" % q.pk] = forms.ChoiceField(label=q.text,
-					widget=forms.RadioSelect(renderer=HorizontalRadioRenderer),
+					widget=forms.RadioSelect,
 					choices = question_choices)
 			elif q.question_type == Question.SELECT:
 				question_choices = q.get_choices()
@@ -78,8 +71,7 @@ class ResponseForm(models.ModelForm):
 		response.interview_uuid = self.uuid
 		response.save()
 
-		# create an answer object for each question and associate it with this
-		# response.
+		# create an answer object for each question and associate it with this response.
 		for field_name, field_value in self.cleaned_data.iteritems():
 			if field_name.startswith("question_"):
 				# warning: this way of extracting the id is very fragile and
@@ -103,10 +95,6 @@ class ResponseForm(models.ModelForm):
 				elif q.question_type == Question.INTEGER:
 					a = AnswerInteger(question = q)
 					a.body = field_value
-				print "creating answer to question %d of type %s" % (q_id, a.question.question_type)
-				print a.question.text
-				print 'answer value:'
-				print field_value
 				a.response = response
 				a.save()
 		return response

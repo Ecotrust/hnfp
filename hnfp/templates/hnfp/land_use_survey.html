@@ -1,5 +1,5 @@
 {% extends "hnfp/index.html" %}
-{% load static %}
+{% load static survey_extras %}
 
 {% block extra_head %}
   {{ block.super }}
@@ -38,6 +38,22 @@
   </section>
   <section class="section survey-wrap">
     <div class="container">
+
+      <!-- survey form needs to be finished
+      <form action="/survey/{{survey.id}}/" method="post">
+        {% csrf_token %}
+        <ul class="stepper horizontal">
+          <li class="step active">
+    			{% for field in response_form %}
+    				<div class="field-wrapper">
+    					{{ field.errors }}
+    					<label class="label-inline">{{ field.label }}</label>
+              {{ field }}
+    				</div>
+			    {% endfor %}
+          </li>
+			    </ul>
+      </form> -->
 
       <form class="login-form" method="POST" action="/registered/" id="register-form">
         {% csrf_token %}

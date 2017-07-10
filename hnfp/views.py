@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 # Create your views here.
 from django.http import HttpResponse
-from django.template import loader
+from django.template import loader, RequestContext
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model, authenticate, login
@@ -23,6 +23,10 @@ from accounts.widgets import BSLeftIconTextInput, BSLeftIconPasswordInput,\
     BSLeftIconEmailInput
 from django.core.exceptions import ValidationError
 from captcha.fields import ReCaptchaField
+
+# survey
+from hnfp.models import Question, Survey, Category
+from hnfp.forms import ResponseForm
 
 def index(request):
     template = loader.get_template('hnfp/index.html')
@@ -77,8 +81,17 @@ def registering(request):
 
 def survey(request):
     template = loader.get_template('hnfp/land_use_survey.html')
+    survey = Survey.objects.get(id=1)
+    if request.method == 'POST':
+        form = ResponseForm(request.POST, survey=survey)
+        if form.is_valid():
+            response = form.save()
+    else:
+        form = ResponseForm(survey=survey)
     context = {
         'page': 'survey',
+        'response_form': form,
+        'survey': survey,
     }
     return HttpResponse(template.render(context, request))
 
