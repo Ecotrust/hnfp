@@ -100,8 +100,8 @@ def dashboard(request):
 def alert(request, alert_id):
     return HttpResponse("You're looking at alert %s." % alert_id)
 
-def observations(request):
-    template = loader.get_template('hnfp/observations.html')
+def observation(request):
+    template = loader.get_template('hnfp/observation.html')
     context = {
         'title': 'My Hunt, Gather, Observe Map',
         'year': '2017',
@@ -112,6 +112,9 @@ def new_observation(request):
     template = loader.get_template('hnfp/new_observation.html')
     context = {}
     return HttpResponse(template.render(context, request))
+
+def observation_detail(request, observation_id):
+    return HttpResponse("You're looking at observation %s." % observation_id)
 
 def sw_js(request, js):
     template = get_template('sw.js')
