@@ -97,6 +97,9 @@ def dashboard(request):
     }
     return HttpResponse(template.render(context, request))
 
+def alert(request, alert_id):
+    return HttpResponse("You're looking at alert %s." % alert_id)
+
 def observations(request):
     template = loader.get_template('hnfp/observations.html')
     context = {
