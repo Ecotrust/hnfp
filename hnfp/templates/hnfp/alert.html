@@ -1,0 +1,34 @@
+{% extends "hnfp/index.html" %}
+{% load static %}
+
+{% block outer_content %}
+  <div class="row">
+    <div class="col s2 brand-logo">
+      <img src="{% static 'hnfp/img/icons/i_alert_darkblue.svg' %}" />
+    </div>
+    <div class="col s10">
+      <h5 class="flow-text">Alerts</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <section class="col s12 l6 bg_green_light hide-on-med-and-down">
+      <div id="map-panel">
+        <section class="container">
+          <div class="col s12">
+            <!-- TODO add foreach KO loop for alerts -->
+          </div>
+        </section>
+      </div>
+    </section>
+    <section class="col s12 l6 map-wrap">
+      <div id="map-wrapper">
+        <div id="map"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="row center">
+    <a href="" class="waves-effect waves-dark flow-text btn btn-border-light-blue">Report an Alert <i class="material-icons right">navigate_next<i></a>
+  </div>
+{% endblock outer_content %}
