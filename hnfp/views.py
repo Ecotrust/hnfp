@@ -100,8 +100,7 @@ def dashboard(request):
 def alert(request):
     template = loader.get_template('hnfp/alert.html')
     context = {
-        'title': 'My Hunt, Gather, Observe Map',
-        'year': '2017',
+        'title': 'Alerts',
     }
     return HttpResponse(template.render(context, request))
 

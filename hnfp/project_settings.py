@@ -174,6 +174,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.contenttypes',
+    ### ADD DJANGO APPS ###
+    'django.contrib.gis',
+    ### END ADD APPS ###
     'marineplanner',
     'core',
     'compressor',
