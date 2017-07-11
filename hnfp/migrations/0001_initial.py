@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('drawing', '0003_auto_20170704_1741'),
+        ('drawing', '0003_auto_20170706_1438'),
     ]
 
     operations = [

@@ -81,7 +81,12 @@ def registering(request):
 
 def survey(request):
     template = loader.get_template('hnfp/land_use_survey.html')
-    survey = Survey.objects.get(id=1)
+
+    if Survey.objects.all():
+        survey = Survey.objects.order_by('id')[0]
+    else:
+        survey = 'not yet ready'
+
     if request.method == 'POST':
         form = ResponseForm(request.POST, survey=survey)
         if form.is_valid():
