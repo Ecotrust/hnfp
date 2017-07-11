@@ -186,10 +186,10 @@ INSTALLED_APPS = [
     "manipulators",
     "accounts",
     "data_manager",
-    "visualize",
-    "nursery",
     "drawing",
     "rpc4django",
+    "visualize",
+    "nursery",
     "django_comments_xtd",
     "django_comments",
     ### END INSERTED INSTALLED APPS ###
