@@ -29,6 +29,7 @@ urlpatterns = [
     url(r"^data_manager/", include("data_manager.urls")),
     url(r"^drawing/", include("drawing.urls")),
     url(r"^visualize/", include("visualize.urls")),
+    url(r'^comments/', include('django_comments_xtd.urls')),
     url(r"^hnfp/", include("hnfp.urls")),
     url(r"^", include("hnfp.urls"))
 

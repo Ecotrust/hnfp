@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
+from django.views.generic import ListView, DateDetailView
 from . import views
+from hnfp.models import Post
 
 urlpatterns = [
     url(r'^home/', views.home, name='home'),
@@ -12,6 +14,10 @@ urlpatterns = [
     url(r'^observation/$', views.observation, name='observation'),
     url(r'^observation/new/', views.new_observation, name='new_observation'),
     url(r'^observation/(?P<observation_id>[0-9]+)/', views.observation_detail, name='observation_detail'),
+    url(r'^forum/$', ListView.as_view(model=Post, paginate_by=3), name='post-list'),
+    url(r'^forum/(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$',
+        DateDetailView.as_view(date_field="publish", model=Post),
+        name='post-detail'),
     url(r'^sw(.*.js)$', views.sw_js, name='sw_js'),
     url(r'^', views.home, name='index'),
 ]

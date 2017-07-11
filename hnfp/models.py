@@ -4,7 +4,42 @@ from drawing.models import AOI as drawing_AOI
 from features.registry import register
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
+from django.utils import timezone
 
+# blog posts for forum
+class PublicManager(models.Manager):
+    def get_queryset(self):
+        return super(PublicManager, self).get_queryset()\
+                                         .filter(publish__lte=timezone.now())
+
+
+class Post(models.Model):
+    STATUS_CHOICES = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+    )
+    title = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
+    body = models.TextField()
+    allow_comments = models.BooleanField('allow comments', default=True)
+    publish = models.DateTimeField(default=timezone.now)
+    objects = PublicManager()  # Our custom manager.
+
+    class Meta:
+        ordering = ('-publish',)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('blog:post-detail',
+                       kwargs={'year': self.publish.year,
+                               'month': self.publish.strftime('%b'),
+                               'day': self.publish.strftime('%d'),
+                               'slug': self.slug})
+
+# registration survey
 class Survey(models.Model):
 	name = models.CharField(max_length=400)
 	description = models.TextField()

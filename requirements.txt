@@ -5,3 +5,4 @@ social.apps.django_app.default
 social_django
 django-recaptcha
 captcha
+django-comments-xtd

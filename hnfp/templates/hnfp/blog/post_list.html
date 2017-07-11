@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="page-header text-center">Blog</h3>
+
+{% for object in object_list %}
+<h4>
+  <a href="{{ object.get_absolute_url }}">
+    {{ object.title }}
+  </a>
+</h4>
+<p class="date">
+  Published {{ object.publish }}
+</p>
+{{ object.body|truncatewords:30|linebreaks }}
+{% endfor %}
+
+<div class="text-center">
+  <ul class="pagination pagination-sm">
+    {% if page_obj.has_previous %}
+    <li>
+	  <a href="{% url 'blog:post-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+    </li>
+    {% endif %}
+    {% if page_obj.has_next %}
+    <li>
+	  <a href="{% url 'blog:post-list' %}?page={{ page_obj.next_page_number }}">next</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+{% endblock %}

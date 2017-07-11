@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+<h3 class="page-header text-center">{{ object.title }}</h3>
+<p class="small text-center">{{ object.publish|date:"l, j F Y" }}</p>
+<p>
+  {{ object.body|linebreaks }}
+</p>
+<div class="text-center" style="padding-top:20px">
+  <a href="{% url 'blog:post-list' %}">Back to the post list</a>
+</div>
+{% endblock %}

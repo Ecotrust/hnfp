@@ -190,6 +190,8 @@ INSTALLED_APPS = [
     "nursery",
     "drawing",
     "rpc4django",
+    "django_comments_xtd",
+    "django_comments",
     ### END INSERTED INSTALLED APPS ###
     ### BEGIN MISSING APPS ###
     "captcha",
@@ -216,6 +218,16 @@ except ImportError:
 
 RECAPTCHA_PUBLIC_KEY = '6Lc30ScUAAAAAE64HuxC_zXrUlEuZxIlZy-WFYf-'
 RECAPTCHA_PRIVATE_KEY = '6Lc30ScUAAAAAFq-pBBz161BKPMrRPvDajNuJu3G'
+
+COMMENTS_APP = 'django_comments_xtd'
+COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_CONFIRM_EMAIL = True
+
+EMAIL_HOST = "smtp.mail.com"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = "alias@mail.com"
+EMAIL_HOST_PASSWORD = "yourpassword"
+DEFAULT_FROM_EMAIL = "Helpdesk <helpdesk@yourdomain>"
 
 # This seems to help with some backward compatibility
 import django

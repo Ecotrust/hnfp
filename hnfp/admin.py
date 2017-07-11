@@ -2,6 +2,20 @@ from hnfp.models import Question, Category, Survey, Response, AnswerText, Answer
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from hnfp.models import Post
+
+# Blog posts for forum
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'publish', 'allow_comments')
+    list_filter = ('publish',)
+    search_fields = ('title', 'body')
+    prepopulated_fields = {'slug': ('title',)}
+    date_hierarchy = 'publish'
+    ordering = ['publish']
+    fieldsets = ((None,
+                  {'fields': ('title', 'slug', 'body',
+                              'allow_comments', 'publish',)}),)
 
 # Register your models here.
 class QuestionInline(admin.TabularInline):
