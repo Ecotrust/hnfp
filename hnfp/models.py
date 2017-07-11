@@ -13,7 +13,6 @@ class PublicManager(models.Manager):
         return super(PublicManager, self).get_queryset()\
                                          .filter(publish__lte=timezone.now())
 
-
 class Post(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
@@ -33,7 +32,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post-detail',
+        return reverse('post-detail',
                        kwargs={'year': self.publish.year,
                                'month': self.publish.strftime('%b'),
                                'day': self.publish.strftime('%d'),

@@ -25,7 +25,7 @@ from django.core.exceptions import ValidationError
 from captcha.fields import ReCaptchaField
 
 # survey
-from hnfp.models import Question, Survey, Category
+from hnfp.models import Question, Survey, Category, Post, PublicManager
 from hnfp.forms import ResponseForm
 
 def index(request):
