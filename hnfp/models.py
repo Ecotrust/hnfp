@@ -22,8 +22,6 @@ class AOI(drawing_AOI):
         # form_template = 'aoi/form.html'
         form_template = 'hnfp/aoi/form.html'
         show_template = 'aoi/show.html'
-Contact GitHub API Training Shop Blog About
-
 
 # blog posts for forum
 class PublicManager(models.Manager):
