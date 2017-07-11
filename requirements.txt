@@ -1,6 +1,7 @@
 livereload
 django-livereload
 import_export
+django-import-export
 social.apps.django_app.default
 social_django
 django-recaptcha
