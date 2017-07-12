@@ -21,7 +21,7 @@
       for (var prop in marineData) {
         if (marineData.hasOwnProperty(prop)) {
           if (marineData[prop] !== undefined) {
-            marineDOM.append('<div class="col s5 offset-s1 right-align"><strong>' + prop + '</strong>:</div><div class="col s5 offset-s1 left-align">' + marineData[prop] + '</div>').addClass('weather-block');
+            marineDOM.append('<div class="col s6"><div class="col s8 right-align"><strong>' + prop + '</strong>:</div><div class="col s4 left-align">' + marineData[prop] + '</div></div>').addClass('weather-block');
           }
         }
       }

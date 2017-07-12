@@ -1,0 +1,22 @@
+{% extends "hnfp/index.html" %}
+
+
+{% block outer_content %}
+  <main class="dashboard">
+    <div class="bg">&nbsp;</div>
+    <section class="section container">
+      <div class="row">
+        <article>
+          <h1 class="page-header text-center">{{ object.title }}</h1>
+          <p class="small text-center">{{ object.publish|date:"l, j F Y" }}</p>
+          <p>{{ post.body|linebreaks }}</p>
+        </article>
+      </div>
+    </section>
+    <section class="section container">
+      <div class="row">
+        <a href="/forum/" class="waves-effect waves-dark btn btn-border-light-blue"><i class="material-icons right">navigate_before</i> Back to forum</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}

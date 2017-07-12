@@ -1,0 +1,40 @@
+{% extends "hnfp/index.html" %}
+
+
+{% block outer_content %}
+  <main class="dashboard">
+    <div class="bg">&nbsp;</div>
+    <section class="container section">
+      <div class="row">
+        {% for object in object_list %}
+          <article>
+            <h4>
+              <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+            </h4>
+            <p class="date"><em>{{ object.publish }}</em></p>
+            <p>{{ object.body|truncatewords:100|linebreaks }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+    <section class="section container center">
+      <ul class="pagination pagination-sm">
+        {% if page_obj.has_previous %}
+        <li>
+    	     <a href="{% url 'blog:post-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+        </li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li>
+    	     <a href="{% url 'blog:post-list' %}?page={{ page_obj.next_page_number }}">next</a>
+        </li>
+        {% endif %}
+      </ul>
+    </section>
+    <section class="section container">
+      <div class="row">
+        <a href="/dashboard/" class="waves-effect waves-dark btn btn-border-light-blue"><i class="material-icons right">navigate_before</i> Back to dashboard</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}

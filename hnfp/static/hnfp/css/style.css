@@ -80,6 +80,7 @@
 .green_light {
   color: #e4efee;
 }
+
 .bg_green_light {
     background: #e4efee;
 }
@@ -156,6 +157,10 @@ h6 {
 strong {
   font-family: 'function_bold', sans-serif;
   font-weight: normal;
+}
+
+p {
+  margin: 0 0 1.5rem;
 }
 
 .btn-border-blue,
@@ -454,7 +459,7 @@ nav .tabs .tab {
 #tides {
   border-bottom: 2px solid #fff;
   overflow: hidden;
-  padding: .5rem .5rem 1rem;
+  padding: 1rem 0;
 }
 
 #forecast,
@@ -468,11 +473,15 @@ nav .tabs .tab {
 
 #forecast h4, #marine h4, #tides h4 {
   font-size: 1.3125em;
-  margin: .75rem 0;
+  margin: 0 0 .75rem;
 }
 
 #forecast p {
   padding: 0 1rem;
+}
+
+#forecast p:last-child {
+  margin: 0;
 }
 
 #marine strong {
@@ -480,7 +489,7 @@ nav .tabs .tab {
 }
 
 #marine {
-  padding-bottom: 1rem;
+  padding-bottom: 1.25rem;
 }
 
 .tide-block div {}
@@ -496,6 +505,41 @@ nav .tabs .tab {
 
 .tide-block em {}
 
+.blog-roll h4 {
+  font-size: 2em;
+}
+
+.blog-roll .brand-logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.blog-roll h4.num,
+.blog-roll .comments p {
+  display: inline-block;
+  line-height: 1.75;
+  margin: 0 5px;
+  vertical-align: sup;
+}
+
+.blog-roll em {
+  font-size: 1em;
+}
+
+.observation-block p {
+  text-align: center;
+}
+
+.observation-block img {
+  display: block;
+  margin: 0 auto;
+  max-width: 50%;
+}
+
+.observation-block a {
+  opacity: .5;
+  pointer-events: none;
+}
 /*--------------------
   map
   --------------------*/
@@ -972,7 +1016,7 @@ path {
   }
 
   .btn-border-blue, .btn-border-light-blue, .btn-border-blue-grey {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   .btn-border-blue i,

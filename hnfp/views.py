@@ -123,8 +123,10 @@ def login(request):
 
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
+    posts = Post.objects.get_queryset()
     context = {
         'title': '',
+        'posts': posts,
     }
     return HttpResponse(template.render(context, request))
 
