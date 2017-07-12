@@ -57,6 +57,6 @@ class ResponseAdmin(admin.ModelAdmin):
 	readonly_fields = ('survey', 'created', 'updated', 'interview_uuid')
 
 admin.site.register(Question, QuestionInline)
-admin.site.register(Category, CategoryInline)
+# admin.site.register(Category, CategoryInline)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Response, ResponseAdmin)
