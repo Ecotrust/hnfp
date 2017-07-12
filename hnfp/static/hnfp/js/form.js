@@ -12,10 +12,10 @@ $('#btn-register').on( 'click', function() {
     contentType: false,
     processData: false,
     success: function() {
-      console.log('success');
+      console.log(data); 
     },
     error: function() {
-      console.log('error');
+      console.log(data);
     }
   }).done( function(res) {
     console.log(res);

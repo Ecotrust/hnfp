@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, render_to_response, HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from django.conf import settings
-from django.contrib.auth import get_user_model
+
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader, RequestContext
 
+from django.db import models
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model, authenticate, login
 
@@ -48,11 +50,11 @@ def registering(request):
     User = get_user_model()
 
     if request.method == 'POST':
-        real_name = request.POST['real_name']
-        preferred_name = request.POST['preferred_name']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
         email = request.POST['email']
         password = request.POST['password']
-        username = generate_username(email)
+        username = email
 
         user, created = get_user_model().objects.get_or_create(username=username)
         if not created:
@@ -63,15 +65,17 @@ def registering(request):
         user.email = email
         user.save()
 
-        user.userdata.real_name = real_name
-        user.userdata.preferred_name = preferred_name
+        user.userdata.real_name = first_name + last_name
+        user.userdata.preferred_name = first_name + last_name
         user.userdata.save()
 
-        login(request, user)
-
-        apply_user_permissions(user)
-
-        return HttpResponse(user, content_type="application/json")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            apply_user_permissions(user)
+            return HttpResponse(user, content_type="application/json")
+        else:
+            return render(request, 'accounts/login.html')
     else:
         template = loader.get_template('hnfp/land_use_survey.html')
         context = {
