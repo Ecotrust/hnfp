@@ -178,6 +178,7 @@ INSTALLED_APPS = [
     'marineplanner',
     'core',
     'compressor',
+    "import_export",
     ### BEGIN INSERTED INSTALLED APPS ###
     "hnfp",
     "features",
@@ -193,7 +194,6 @@ INSTALLED_APPS = [
     ### END INSERTED INSTALLED APPS ###
     ### BEGIN MISSING APPS ###
     "captcha",
-    "import_export",
     'social.apps.django_app.default',
     'social_django',
     ### END MISSING APPS ###
