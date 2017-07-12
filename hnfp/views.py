@@ -112,6 +112,15 @@ def registered(request):
     }
     return HttpResponse(template.render(context, request))
 
+def login(request):
+    template = loader.get_template('hnfp/login.html')
+    form = LogInForm()
+    context = {
+        'form': form,
+        'title': 'Log in',
+    }
+    return HttpResponse(template.render(context, request))
+
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
     context = {

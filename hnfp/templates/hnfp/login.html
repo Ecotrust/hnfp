@@ -1,0 +1,72 @@
+{% extends "accounts/login.html" %}
+{% load static %}
+
+{% block site_style %}{% endblock site_style %}
+
+{% block extra_head %}
+  <meta name="theme-color">
+  <meta name="description" content="Hoonah Native Forest Partnership">
+  <meta name="robots" content="index,follow"><!-- All Search Engines -->
+  <meta name="googlebot" content="index,follow"><!-- Google Specific -->
+
+  <!-- Links to a JSON file that specifies "installation" credentials for web applications -->
+  <link rel="manifest" href="./manifest.json">
+
+  <!-- iOS Add to Home Screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="App Title">
+  <link rel="apple-touch-icon" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
+  <link rel="apple-touch-icon-precomposed" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
+
+  <!-- Android -->
+  <meta name="theme-color" content="#E64545">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="{% static 'hnfp/img/touch/homescreen192.png' %}">
+  <link rel="icon" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'hnfp/css/materialize.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" href="{% static 'hnfp/css/style.css' %}" media="screen,projection"/>
+{% endblock %}
+
+{% block header %}
+  {% include './navbar.html' %}
+  {% include './modal.html' %}
+{% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="container">
+  <div class="login row">
+    <form class="login-form" method="POST" action="{% url 'account:index' %}{% if next %}?next={{ next }}{% endif %}">
+      {% csrf_token %}
+
+      {{ form.as_div }}
+
+      <div class="text-center">
+          <button class="btn btn-success btn-lg" onclick='this.form.submit()'>Log in &rarr;</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="col s6 center">
+        <!-- TODO <a href="{% url 'account:forgot_password' %}">Forgot password</a> -->
+      </div>
+      <div class="col s6 center">
+        <a href="{% url 'survey' %}">Become a steward</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+  {% include './footer.html' %}
+{% endblock footer %}

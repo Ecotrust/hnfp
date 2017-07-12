@@ -7,54 +7,52 @@
 {% endblock extra_css %}
 
 {% block outer_content %}
-<main class="dashboard">
-  <div class="bg">&nbsp;</div>
-  <section class="section">
-    <div class="row container">
-      <div class="col s12 l7 offset-l1 flow-text right">
-        <section class="section">
-          {% include './dashboard/weather.html' %}
-        </section>
-        <section class="section">
-          {% include './dashboard/alerts.html' %}
-        </section>
-        <section class="section">
-          {% include './dashboard/observation.html' %}
-        </section>
-      </div>
-      <aside class="col s12 l4 flow-text left">
-        <section class="section">
-          {% include './dashboard/blog.html' %}
-        </section>
-        <section class="section">
-          {% include './dashboard/events.html' %}
-        </section>
-        <section class="section">
-          {% include './dashboard/open_positions.html' %}
-        </section>
-        <section class="row">
-          <a class="btn btn-border-blue" href="#">Invite friends</a>
-        </section>
-      </aside>
-    </div>
-  </section>
-  <section class="bg_green_light overflow-hidden pre-footer">
-    <div class="container">
+  <main class="dashboard">
+    <div class="bg">&nbsp;</div>
+    <section class="container section">
       <div class="row">
-        <h3 class="center flow-text">Our partnership</h3>
-        <div class="col s4 center">
-          <img src="{% static 'hnfp/img/logo_nature_conservancy.svg' %}" />
+        <div class="col s12 l7 offset-l1 flow-text right">
+          <section class="section">
+            {% include './dashboard/weather.html' %}
+          </section>
+          <section class="section">
+            {% include './dashboard/alerts.html' %}
+          </section>
+          <section class="section">
+            {% include './dashboard/observation.html' %}
+          </section>
         </div>
-        <div class="col s4 center flow-text">
-          <img src="{% static 'hnfp/img/logo_nature_conservancy.svg' %}" />
-        </div>
-        <div class="col s4 center flow-text">
-          <img src="{% static 'hnfp/img/logo_nature_conservancy.svg' %}" />
+        <div class="col s12 l4 flow-text left">
+          <section class="section">
+            {% include './dashboard/blog.html' %}
+          </section>
+          <section class="section">
+            {% include './dashboard/events.html' %}
+          </section>
+          <section class="section">
+            {% include './dashboard/open_positions.html' %}
+          </section>
+          <section class="section">
+            <a class="btn btn-border-blue" href="#">Invite friends</a>
+          </section>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+    <section class="section bg_green_light overflow-hidden pre-footer">
+        <h3 class="center flow-text">Our partnership</h3>
+        <div class="row">
+          <div class="col s4 center">
+            <img src="{% static 'hnfp/img/logo_nature_conservancy.svg' %}" />
+          </div>
+          <div class="col s4 center">
+            <img src="{% static 'hnfp/img/logo_nature_conservancy.svg' %}" />
+          </div>
+          <div class="col s4 center">
+            <img src="{% static 'hnfp/img/logo_nature_conservancy.svg' %}" />
+          </div>
+        </div>
+    </section>
+  </main>
 {% endblock outer_content %}
 
 {% block extra_js %}

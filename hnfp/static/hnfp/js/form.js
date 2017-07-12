@@ -11,11 +11,11 @@ $('#btn-register').on( 'click', function() {
     data : formData,
     contentType: false,
     processData: false,
-    success: function() {
+    success: function(data) {
       console.log('success');
     },
     error: function() {
-      // console.log();
+      console.log('return error, but account may have been created');
     }
   }).done( function(res) {
     console.log(res);
