@@ -363,6 +363,7 @@ nav .tabs .tab {
 }
 
 .parallax-container {
+  height: 400px;
   width: 100%;
 }
 
@@ -371,10 +372,10 @@ nav .tabs .tab {
   color: #2b384a;
   font-family: 'function', sans-serif;
   font-size: .75em;
-  height: 40vw;
-  margin: 0 auto 4rem;
+  height: 42vw;
+  margin: 0 auto 3rem;
   padding: 10px;
-  width: 40vw;
+  width: 42vw;
 }
 
   .home-page .cta-round div:first-child,
@@ -959,6 +960,10 @@ path {
 
   main {
     font-size: 1em;
+  }
+
+  .parallax-container {
+    height: 500px;
   }
 
   .btn-border-blue, .btn-border-light-blue, .btn-border-blue-grey,

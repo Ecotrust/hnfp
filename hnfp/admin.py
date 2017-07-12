@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
-from hnfp.models import Post, Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple
+#from django.contrib.auth.admin import UserAdmin
+#from django.contrib.auth.models import User
+from hnfp.models import *
 
 
 # Blog posts for forum

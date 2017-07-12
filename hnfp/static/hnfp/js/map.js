@@ -161,30 +161,7 @@ app.init = function () {
 
         trigger: function(e) {
             var lonlat = map.getLonLatFromPixel(e.xy);
-            $.ajax({
-                dataType: "json",
-                url: '/landmapper/get_taxlot_json',
-                type: 'GET',
-                data: {
-                  'coords': [lonlat.lon, lonlat.lat]
-                },
-                success: function(data) {
-                    var format = new OpenLayers.Format.WKT();
-                    wkt = data.geometry;
-                    if (wkt == []) {
-                      window.alert('Taxlot info unavailable at this location - please draw instead.');
-                    } else {
-                      feature = format.read(wkt);
-                    }
-                    //Add feature to vector layer
-                    app.viewModel.scenarios.drawingFormModel.polygonLayer.addFeatures([feature]);
-                    app.viewModel.scenarios.drawingFormModel.hasShape(true);
-                },
-                error: function(error) {
-                    window.alert('Error retrieving taxlot - please draw instead.');
-                    console.log('error in map.js: Click Control trigger');
-                }
-            });
+            
         }
 
     });
