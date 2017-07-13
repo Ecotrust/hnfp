@@ -1071,11 +1071,11 @@ path {
     background: transparent !important;
   }
 
-  .dashboard .left {
+  .dashboard .col.left {
     border-right: 1.25em solid transparent;
   }
 
-  .dashboard .right {
+  .dashboard .col.right {
     border-left: 1.25em solid transparent;
   }
 
