@@ -293,6 +293,27 @@ nav .tabs .tab {
     height: 26px;
   }
 
+.nav-content {
+  text-align: center;
+}
+
+.nav-content a {
+  color: #5d85b7;
+  display: inline-block;
+  line-height: 3rem;
+  padding: 0 1.5rem 1.125rem;
+  text-align: center;
+  transition: .2s all ease-in-out;
+}
+
+.nav-content a:hover {
+  color: #2b384a;
+}
+
+.nav-content a.active {
+  color: #2b384a;
+}
+
 /*--------------------
   home
   --------------------*/
