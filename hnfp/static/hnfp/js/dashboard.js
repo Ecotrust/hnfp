@@ -75,4 +75,47 @@ var weather = {
 
 $(document).ready( function() {
   weather.getTides();
+  initmap();
 });
+
+var initmap = function() {
+
+  var map = new OpenLayers.Map('map', {
+      displayProjection: new OpenLayers.Projection("EPSG:4326"),
+      projection: "EPSG:3857"
+  });
+
+  map.addControl(new P97.Controls.LayerLoadProgress({
+      map: map,
+      element: null,
+      onStartLoading: function() {
+          this.element.show();
+      },
+      onLoading: function(num, max, percentStr) {
+          this.element.text(percentStr);
+      },
+      onFinishLoading: function() {
+          this.element.hide();
+      }
+  }));
+
+  googleStreet = new OpenLayers.Layer.Google("Streets", {
+      sphericalMercator: true,
+      isBaseLayer: true,
+      visibility: false,
+      numZoomLevels: 18,
+      MAX_ZOOM_LEVEL: 17,
+  });
+
+
+  map.addLayers([googleStreet]);
+
+
+  //enables zooming to a given extent on the map by holding down shift key while dragging the mouse
+  map.zoomBox = new OpenLayers.Control.ZoomBox({});
+
+  map.addControl(map.zoomBox);
+
+  map.setCenter(new OpenLayers.LonLat(-135.44, 58.10)
+      .transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")), 11);
+}

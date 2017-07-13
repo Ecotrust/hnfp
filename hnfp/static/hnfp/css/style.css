@@ -288,10 +288,6 @@ nav .tabs .tab {
   float: none;
 }
 
-#logo-container.brand-logo {
-  padding: 15px 0;
-}
-
   .brand-logo img {
     display: inline-block;
     height: 26px;
@@ -545,11 +541,29 @@ nav .tabs .tab {
   --------------------*/
 
 .dashboard .map-wrap {
+  height: 480px;
+  overflow: hidden;
   padding: 0;
+  position: relative;
+  width: 100%;
 }
 
-#map-wrapper {
-  height: 50vh;
+.dashboard #map {
+  bottom: 0;
+  height: 60%;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+#map-panel {
+  background-color: #e4efee;
+  height: 40%;
+  left: 0;
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .SimpleLayerSwitcher {
@@ -569,6 +583,31 @@ nav .tabs .tab {
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+#map div.olControlZoom {
+  background: rgba(255,255,255,0.8);
+  bottom: auto;
+  right: 0;
+  top: 0;
+  padding: 0;
+}
+
+#map div.olControlZoom .olButton {
+  display: inline-block;
+  background: transparent;
+  color: #000;
+  font-size: 1em;
+  height: auto;
+  line-height: 2rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 2rem;
+}
+
+#map div.olControlZoom .olButton.olControlZoomOut {
+  font-size: 1.5em;
 }
 
 /*--------------------
@@ -1001,6 +1040,10 @@ path {
 
 @media only screen and (min-width: 64em) {
 
+  .container {
+    width: 78%;
+  }
+
   main {
     font-size: 1em;
   }
@@ -1026,5 +1069,31 @@ path {
 
   .step-actions {
     background: transparent !important;
+  }
+
+  .dashboard .left {
+    border-right: 1.25em solid transparent;
+  }
+
+  .dashboard .right {
+    border-left: 1.25em solid transparent;
+  }
+
+  .dashboard #map {
+    height: 100%;
+    left: 40%;
+    width: 60%;
+  }
+
+  #map-panel {
+    height: 100%;
+    left: 0;
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .container {
+    max-width: 1380px
   }
 }
