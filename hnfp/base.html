@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block site_style %}{% endblock site_style %}
-
 {% block icomoon %}{% endblock %}
 
 {% block extra_head %}
@@ -15,20 +13,17 @@
 
 {% block header %}
   {% include 'hnfp/blocks/navbar.html' %}
-  {% include 'hnfp/modal.html' %}
-{% endblock %}
+{% endblock header %}
 
 {% block outer_content %}
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <h1 class="header center orange-text">Hoonah Stewards</h1>
-    </div>
-  </div>
+<main>
+  {{ block.super }}
+</main>
 {% endblock outer_content %}
 
 {% block footer %}
   {% include 'hnfp/blocks/footer.html' %}
-{% endblock footer %}
+{% endblock %}
 
 {% block extra_js %}
   {% include 'hnfp/blocks/extra_js.html' %}

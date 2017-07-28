@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block header %}
-  {% include './navbar.html' %}
+  {% include './blocks/navbar.html' %}
   {% include './modal.html' %}
 {% endblock %}
 
@@ -40,17 +40,19 @@
 
 {% block content %}
 
-<div class="container">
+<section class="container section">
   <div class="login row">
-    <form class="login-form" method="POST" action="{% url 'account:index' %}{% if next %}?next={{ next }}{% endif %}">
-      {% csrf_token %}
+    <div class="col s8 offset-s2">
+      <form class="login-form" method="POST" action="{% url 'account:index' %}{% if next %}?next={{ next }}{% endif %}">
+        {% csrf_token %}
 
-      {{ form.as_div }}
+        {{ form.as_div }}
 
-      <div class="text-center">
-          <button class="btn btn-success btn-lg" onclick='this.form.submit()'>Log in &rarr;</button>
-      </div>
-    </form>
+        <div class="align-center">
+            <button class="btn btn-success btn-lg" onclick='this.form.submit()'>Log in &rarr;</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <div class="row">
@@ -63,10 +65,10 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 {% endblock %}
 
 {% block footer %}
-  {% include './footer.html' %}
+  {% include './blocks/footer.html' %}
 {% endblock footer %}

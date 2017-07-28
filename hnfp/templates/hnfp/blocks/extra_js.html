@@ -1,0 +1,18 @@
+{% load static %}
+
+{% block extra_js %}
+  <script src="{% static 'hnfp/js/localforage/localforage.min.js' %}"></script>
+  <script src="{% static 'hnfp/js/materialize/materialize.min.js' %}"></script>
+  <script src="{% static 'hnfp/js/app.hnfp.js' %}" charset="utf-8"></script>
+  <script src="{% static 'hnfp/js/offline.js' %}" charset="utf-8"></script>
+  <!-- google analytics - ecotrust -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-593604-29', 'auto');
+    ga('send', 'pageview');
+  </script>
+{% endblock %}
