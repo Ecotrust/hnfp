@@ -13,9 +13,12 @@
   <section class="bg_green_light section">
     <!-- TODO add events loop -->
     <div class="container">
-      <p class="center border-bottom">No open positions</p>
-      <!-- <h5 class="center border-bottom">No open positions</h5> -->
-      <!-- <p class="center"></p> -->
+      {% for job in jobs %}
+        <article class="job-post">
+          <h5 class="center border-bottom"><a href="/job/{{ job.id }}" >{{ job.title }}</a></h5>
+          <p class="center">{{ job.job_post|truncatechars_html:66 | safe }}</p>
+        </article>
+      {% endfor %}
     </div>
   </section>
 </div>

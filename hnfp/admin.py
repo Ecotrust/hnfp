@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from hnfp.models import Post, PublicManager, Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple, AOI
+from features.registry import register
+from hnfp.models import Post, PublicManager, Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple, AOI, JobOpportunity
 
 
 # Blog posts for forum
@@ -60,3 +61,4 @@ class ResponseAdmin(admin.ModelAdmin):
 # admin.site.register(Category, CategoryInline)
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Response, ResponseAdmin)
+admin.site.register(JobOpportunity)

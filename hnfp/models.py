@@ -6,6 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 @register
@@ -13,7 +14,7 @@ class AOI(drawing_AOI):
 
     class Options:
         verbose_name = 'Area of Interest'
-        icon_url = 'marco/img/aoi.png'
+        icon_url = 'hnfp/img/aoi.png'
         export_png = False
         manipulators = []
         # optional_manipulators = ['clipping.manipulators.ClipToShoreManipulator']
@@ -163,3 +164,21 @@ class AnswerSelectMultiple(AnswerBase):
 
 class AnswerInteger(AnswerBase):
 	body = models.IntegerField(blank=True, null=True)
+
+# Job Postings
+class JobOpportunity(models.Model):
+	title = models.CharField(max_length=400)
+	posted = models.DateTimeField(auto_now_add=True)
+	description = RichTextField(blank=True, null=True, config_name="custom") #ckeditor
+	is_html = models.BooleanField(default=False, help_text='Use HTML editor')
+	html_content = models.TextField(blank=True, null=True, help_text='html if use html == True')
+	jop_post_doc = models.FileField(blank=True, upload_to='job-post/')
+
+	class Meta:
+		verbose_name_plural = 'Job Opportunities'
+
+	def __unicode__(self):
+		return unicode("%s" % (self.page))
+
+	def __str__(self):
+		return self.title

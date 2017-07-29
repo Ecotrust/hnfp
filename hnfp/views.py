@@ -27,7 +27,7 @@ from django.core.exceptions import ValidationError
 from captcha.fields import ReCaptchaField
 
 # survey
-from hnfp.models import Question, Survey, Category, Post, PublicManager
+from hnfp.models import Question, Survey, Category, Post, PublicManager, JobOpportunity
 from hnfp.forms import ResponseForm
 
 def index(request):
@@ -124,10 +124,20 @@ def login(request):
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
     posts = Post.objects.get_queryset()
+    jobs = JobOpportunity.objects.order_by('posted')[:5]
+    for job in jobs:
+        try:
+            if job.is_html:
+                job.job_post = job.html_content
+            else:
+                job.job_post = job.description
+        except Exception as e:
+            job.job_post = "<h3>No Jobs Posted</h3>"
     context = {
         'title': '',
         'posts': posts,
     }
+    context['jobs'] = jobs
     return HttpResponse(template.render(context, request))
 
 def alert(request):
@@ -155,6 +165,26 @@ def new_observation(request):
 
 def observation_detail(request, observation_id):
     return HttpResponse("You're looking at observation %s." % observation_id)
+
+def job(request):
+    template = loader.get_template('hnfp/job.html')
+    jobs = JobOpportunity.objects.order_by('posted')
+    for job in jobs:
+        try:
+            if job.is_html:
+                job.job_post = job.html_content
+            else:
+                job.job_post = job.description
+        except Exception as e:
+            job.job_post = "<h3>No Jobs Posted</h3>"
+    context = {
+        'title': 'Jobs',
+    }
+    context['jobs'] = jobs
+    return HttpResponse(template.render(context, request))
+
+def job_detail(request, job_id):
+    return HttpResponse("You're looking at job %s." % job_id)
 
 def sw_js(request, js):
     template = get_template('sw.js')

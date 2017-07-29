@@ -129,7 +129,7 @@ h5 {
   font-family: 'function_bold', sans-serif;
   font-weight: normal;
   line-height: 1.375;
-  margin: 1.5em 0;
+  margin: 0 0 1.5rem;
 }
 
 h1 {
@@ -558,6 +558,32 @@ nav .tabs .tab {
   opacity: .5;
   pointer-events: none;
 }
+
+.job-post {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+  .job-post:after {
+    background: #2b384a;
+    bottom: 0;
+    content: '';
+    left: 40%;
+    height: 5px;
+    position: absolute;
+    width: 20%;
+  }
+
+.job-post h5 {
+  color: #5d85b7;
+}
+
+.job-post p {
+  font-size: .8125em;
+  text-align: center;
+}
+
 /*--------------------
   map
   --------------------*/
