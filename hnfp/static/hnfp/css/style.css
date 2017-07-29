@@ -455,6 +455,32 @@ nav .tabs .tab {
   z-index: -1;
 }
 
+.dashboard p {
+  font-size: .8125em;
+}
+
+.dashboard h3 {
+  font-size: .875em;
+  line-height: 36px;
+  margin: 0;
+}
+
+.dashboard h4 {
+  font-size: 1em;
+}
+
+.dashboard h5 {
+  font-size: 1.125em;
+}
+
+.dashboard .col.brand-logo {
+  width: auto;
+  padding-left: 0;
+}
+.dashboard .brand-logo img {
+  height: 36px;
+}
+
 .pre-footer {
   position: relative;
   padding: 2rem 0 5rem;
@@ -472,12 +498,16 @@ nav .tabs .tab {
   width: 100%;
 }
 
+.weather-wrap.bg_green_light {
+  padding: 0rem 3rem;
+}
+
 #forecast,
 #marine,
 #tides {
   border-bottom: 2px solid #fff;
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 3rem 0;
 }
 
 #forecast,
@@ -490,12 +520,7 @@ nav .tabs .tab {
 }
 
 #forecast h4, #marine h4, #tides h4 {
-  font-size: 1.3125em;
-  margin: 0 0 .75rem;
-}
-
-#forecast p {
-  padding: 0 1rem;
+  margin: 0 0 1rem;
 }
 
 #forecast p:last-child {
@@ -504,10 +529,6 @@ nav .tabs .tab {
 
 #marine strong {
   font-size: .8125em;
-}
-
-#marine {
-  padding-bottom: 1.25rem;
 }
 
 .tide-block div {}
@@ -580,7 +601,6 @@ nav .tabs .tab {
 }
 
 .job-post p {
-  font-size: .8125em;
   text-align: center;
 }
 
@@ -1128,6 +1148,10 @@ path {
 
   .step-actions {
     background: transparent !important;
+  }
+
+  .weather-wrap.bg_green_light {
+    padding: 0rem 10%;
   }
 
   .dashboard .col.left {
