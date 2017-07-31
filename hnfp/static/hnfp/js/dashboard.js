@@ -123,14 +123,6 @@ var initmap = function() {
       }
   }));
 
-  googleStreet = new OpenLayers.Layer.Google("Streets", {
-      sphericalMercator: true,
-      isBaseLayer: true,
-      visibility: false,
-      numZoomLevels: 18,
-      MAX_ZOOM_LEVEL: 17,
-  });
-
   hereAerial = new OpenLayers.Layer.XYZ('Aerial', 'http://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/satellite.day/${z}/${x}/${y}/256/png8?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q', {
     isBaseLayer: true,
     numZoomLevels: 20,
@@ -138,19 +130,7 @@ var initmap = function() {
     textColor: "white"
   });
 
-    ESRITopo = new OpenLayers.Layer.XYZ(
-      "image",
-      "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}",
-      {
-          sphericalMercator: true,
-          textColor: "black",
-          numZoomLevels: 20,
-          wrapDateLine: true,
-          attribution: "Basemap by ESRI, USGS"
-      }
-    );
-
-  map.addLayers([hereAerial,googleStreet,ESRITopo]);
+  map.addLayers([hereAerial]);
 
 
   //enables zooming to a given extent on the map by holding down shift key while dragging the mouse
