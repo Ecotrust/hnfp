@@ -1,3 +1,8 @@
+$(document).ready( function() {
+  weather.getTides();
+  initmap();
+});
+
 (function getWeather() {
   var weatherDOM = $('#weatherforcast'),
       marineDOM = $('#marineforecast');
@@ -23,7 +28,7 @@
       for (let prop in weatherData) {
         if (weatherData.hasOwnProperty(prop)) {
           if (weatherData[prop] != undefined) {
-            weatherDOM.append('<div class="col s10 l12 offset-s1"><div class="col s8"><strong>' + prop + '</strong></div><div class="col s4 right-align">' + weatherData[prop] + '</div></div>').addClass('weather-block');
+            weatherDOM.append('<div class="col s12"><div class="col s8"><strong>' + prop + '</strong></div><div class="col s4 right-align">' + weatherData[prop] + '</div></div>').addClass('weather-block');
           }
         }
       }
@@ -39,7 +44,7 @@
       for (let prop in marineData) {
         if (marineData.hasOwnProperty(prop)) {
           if (marineData[prop] != undefined) {
-            marineDOM.append('<div class="col s10 l12 offset-s1"><div class="col s8"><strong>' + prop + '</strong></div><div class="col s4 right-align">' + marineData[prop] + '</div></div>').addClass('weather-block');
+            marineDOM.append('<div class="col s12"><div class="col s8"><strong>' + prop + '</strong></div><div class="col s4 right-align">' + marineData[prop] + '</div></div>').addClass('weather-block');
           }
         }
       }
@@ -73,15 +78,21 @@ var weather = {
 
     $.ajax({
       type: 'GET',
-      url:'https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&begin_date=today&datum=MLLW&station=9452438&time_zone=lst_ldt&units=english&interval=hilo&format=json',
+      url:'https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&date=today&datum=MLLW&station=9452438&time_zone=lst_ldt&units=english&interval=hilo&format=json',
       dataType: 'json',
       success: function(data) {
         data.predictions.forEach(function(el, i, arr) {
           var tideDOM = $('#tideforecast');
-          let time = el.t,
-              v = el.v,
+          let datetime = el.t,
+              year = datetime.substring(0, 4),
+              day = datetime.substring(8,10),
+              month = datetime.substring(5,7),
+              time = datetime.substring(11),
+              v = parseFloat(el.v),
               type = el.type;
-          tideDOM.append('<div class="col s3 center"><p><strong>' + type + '</strong></p><p>' + time + '</p><p><em>' + v + '</em></p></div>').addClass('tide-block');
+          let waterlevel = v.toFixed(2);
+          console.log(waterlevel);
+          tideDOM.append('<tr><td>' + month + '.' + day + '</td><td>' + time + '</td><td>' + waterlevel + '</td><td>' + type + '</td></tr>').addClass('tide-block');
         })
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -90,11 +101,6 @@ var weather = {
     });
   }
 };
-
-$(document).ready( function() {
-  weather.getTides();
-  initmap();
-});
 
 var initmap = function() {
 
@@ -125,8 +131,26 @@ var initmap = function() {
       MAX_ZOOM_LEVEL: 17,
   });
 
+  hereAerial = new OpenLayers.Layer.XYZ('Aerial', 'http://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/satellite.day/${z}/${x}/${y}/256/png8?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q', {
+    isBaseLayer: true,
+    numZoomLevels: 20,
+    attribution: "Basemap by Here",
+    textColor: "white"
+  });
 
-  map.addLayers([googleStreet]);
+    ESRITopo = new OpenLayers.Layer.XYZ(
+      "image",
+      "http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}",
+      {
+          sphericalMercator: true,
+          textColor: "black",
+          numZoomLevels: 20,
+          wrapDateLine: true,
+          attribution: "Basemap by ESRI, USGS"
+      }
+    );
+
+  map.addLayers([hereAerial,googleStreet,ESRITopo]);
 
 
   //enables zooming to a given extent on the map by holding down shift key while dragging the mouse

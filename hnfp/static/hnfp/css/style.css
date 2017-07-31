@@ -526,7 +526,8 @@ nav .tabs .tab {
   margin: 0;
 }
 
-#forecast > div > div {
+#forecast > div > div,
+#marine > div > div {
   line-height: 2rem;
 }
 
@@ -542,25 +543,10 @@ nav .tabs .tab {
   font-size: .8125em;
 }
 
-.tide-block p strong {
-  font-size: 1.25em;
+#tides th {
+  font-size: .9375em;
+  text-align: right;
 }
-
-.tide-block p {
-  font-size: .75em;
-}
-
-.tide-block div {}
-
-.tide-block p {
-  margin-bottom: .25em;
-}
-
-.tide-block p strong {
-  font-size: 1.125em;
-}
-
-.tide-block em {}
 
 .blog-roll h4 {
   font-size: 2em;
@@ -614,6 +600,15 @@ nav .tabs .tab {
     width: 20%;
   }
 
+  .job-post:last-of-type {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .job-post:last-of-type:after {
+    content: none;
+  }
+
 .job-post h5 {
   color: #5d85b7;
 }
@@ -627,7 +622,7 @@ nav .tabs .tab {
   --------------------*/
 
 .dashboard .map-wrap {
-  height: 480px;
+  height: 400px;
   overflow: hidden;
   padding: 0;
   position: relative;
@@ -636,19 +631,19 @@ nav .tabs .tab {
 
 .dashboard #map {
   bottom: 0;
-  height: 60%;
+  height: 100%;
   left: 0;
   position: absolute;
   width: 100%;
 }
 
+.alerts-wrap {
+  position: relative;
+}
+
 #map-panel {
   background-color: #e4efee;
-  height: 40%;
-  left: 0;
   padding: 1rem;
-  position: absolute;
-  top: 0;
   width: 100%;
 }
 
@@ -1084,6 +1079,11 @@ path {
     height: 250px;
     width: 250px;
   }
+
+  #tides th {
+    font-size: 1em;
+    text-align: center;
+  }
 }
 
 @media (min-width: 54em) {
@@ -1189,6 +1189,8 @@ path {
   #map-panel {
     height: 100%;
     left: 0;
+    position: absolute;
+    top: 0;
     width: 40%;
   }
 }

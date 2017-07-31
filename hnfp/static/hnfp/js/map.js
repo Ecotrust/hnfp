@@ -92,7 +92,7 @@ app.init = function () {
       numZoomLevels: 20,
       attribution: "Basemap by Here",
       textColor: "white"
-    })
+    });
 
     /* googleHybrid = new OpenLayers.Layer.Google("Hybrid", {
         type: google.maps.MapTypeId.HYBRID,
@@ -161,7 +161,7 @@ app.init = function () {
 
         trigger: function(e) {
             var lonlat = map.getLonLatFromPixel(e.xy);
-            
+
         }
 
     });

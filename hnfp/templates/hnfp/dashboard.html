@@ -45,30 +45,7 @@
         </div>
       </div>
       <div class="row container home-mid">
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_adfg.png' %}" class="responsive-img" />
-        </div>
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_cityofhoonah.jpg' %}" class="responsive-img" />
-        </div>
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_hia.jpg' %}" class="responsive-img" />
-        </div>
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_hoonahtotem.jpg' %}" class="responsive-img" />
-        </div>
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_nrcs.svg' %}" class="responsive-img" />
-        </div>
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_sealaska.jpg' %}" class="responsive-img" />
-        </div>
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_tnc.svg' %}" class="responsive-img" />
-        </div>
-        <div class="col center s4 l3">
-          <img src="{% static 'hnfp/img/logo_uaf.svg' %}" class="responsive-img" />
-        </div>
+        {% include 'hnfp/blocks/logos.html' %}
       </div>
     </section>
     <section class="section bg_green_light padding-top section-prefooter relative">

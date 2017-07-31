@@ -11,7 +11,7 @@
 
 <div class="row">
   <section class="bg_green_light weather-wrap">
-    <div class="col s10 offset-s1">
+    <div class="col s12 m10 offset-m1">
       <div id="forecast">
         <h4 class="center teal-text flow-text">Forecast</h4>
         <div id="weatherforcast"></div>
@@ -22,7 +22,17 @@
       </div>
       <div id="tides">
         <h4 class="center teal-text flow-text">Tide Report</h4>
-        <div id="tideforecast"></div>
+          <table class="highlight responsive-table centered">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Water Level (ft)</th>
+                <th>High/Low</th>
+              </tr>
+            </thead>
+            <tbody id="tideforecast"></tbody>
+          </table>
       </div>
     </div>
   </section>
