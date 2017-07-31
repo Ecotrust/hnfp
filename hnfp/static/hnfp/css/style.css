@@ -498,8 +498,8 @@ nav .tabs .tab {
   width: 100%;
 }
 
-.weather-wrap.bg_green_light {
-  padding: 0rem 3rem;
+.weather-wrap {
+  overflow: hidden;
 }
 
 #forecast,
@@ -510,7 +510,6 @@ nav .tabs .tab {
   padding: 3rem 0;
 }
 
-#forecast,
 #tides {
   text-align: center;
 }
@@ -527,19 +526,38 @@ nav .tabs .tab {
   margin: 0;
 }
 
-#marine strong {
+#forecast > div > div {
+  line-height: 2rem;
+}
+
+.weather-wrap > div > div > div > div:nth-of-type(2n+2) {
+  background: rgba(255,255,255,0.4);
+}
+
+.weather-wrap strong {
+  font-size: .9375em;
+}
+
+.weather-block {
   font-size: .8125em;
+}
+
+.tide-block p strong {
+  font-size: 1.25em;
+}
+
+.tide-block p {
+  font-size: .75em;
 }
 
 .tide-block div {}
 
 .tide-block p {
-  font-size: .8125em;
   margin-bottom: .25em;
 }
 
 .tide-block p strong {
-  font-size: 1.25em;
+  font-size: 1.125em;
 }
 
 .tide-block em {}
