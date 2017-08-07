@@ -416,6 +416,13 @@ nav .tabs .tab {
 .logo-ecotrust {
   max-width: 180px;
 }
+
+.logo-row img.responsive-img {
+  max-height: 120px;
+  margin-bottom: 3rem;
+  max-width: 200px;
+}
+
 /*--------------------
   dashboard
   --------------------*/
@@ -569,6 +576,15 @@ nav .tabs .tab {
   font-size: 1em;
 }
 
+.observation-block {
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+.observation-block .btn {
+  margin: 2rem 0 1.5rem;
+}
+
 .observation-block p {
   text-align: center;
 }
@@ -580,8 +596,6 @@ nav .tabs .tab {
 }
 
 .observation-block a {
-  opacity: .5;
-  pointer-events: none;
 }
 
 .job-post {
@@ -604,7 +618,7 @@ nav .tabs .tab {
     margin-bottom: 0;
     padding-bottom: 0;
   }
-  
+
   .job-post:last-of-type:after {
     content: none;
   }
@@ -847,6 +861,10 @@ nav .tabs .tab {
 
 .survey-wrap input {
   background: rgba(255,255,255,0.45);
+}
+
+.survey-wrap *:focus {
+  outline: 1px solid yellow;
 }
 
 .survey-wrap label {

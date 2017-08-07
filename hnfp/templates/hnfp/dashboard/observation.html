@@ -28,10 +28,10 @@
       </div>
     </div>
     <div class="container section">
-      <a href="/observations/" class="waves-effect flow-text btn btn-border-light-blue">Go to Map <i class="material-icons right">navigate_next</i></a>
+      <a href="{% url 'observation' %}" class="waves-effect btn btn-border-light-blue">Go to Map <i class="material-icons right">navigate_next</i></a>
     </div>
     <div class="container">
-      <a href="" class="blue_grey center"><i class="i_add">+</i> Add/Edit</a>
+      <a href="{% url 'new_observation' %}" class="center"><i class="i_add">+</i> Add/Edit</a>
     </div>
   </section>
 </div>

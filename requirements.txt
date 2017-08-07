@@ -1,3 +1,5 @@
+ckeditor
+django-ckeditor
 livereload
 django-livereload
 import_export
