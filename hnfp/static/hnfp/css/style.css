@@ -709,6 +709,25 @@ nav .tabs .tab {
   observations
   --------------------*/
 
+#drawing-form {
+  visibility: hidden;
+}
+
+#drawing-form.visible {
+  visibility: visible;
+}
+
+.observations #map-wrapper {
+  position: relative;
+}
+
+.observations #map {
+}
+
+.observations .collapsible {
+  margin-bottom: 0;
+}
+
 .observations section:not(.section) .row {
   margin-bottom: 0;
 }

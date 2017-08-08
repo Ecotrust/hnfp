@@ -1,7 +1,8 @@
 from django.conf.urls import url, include
 from django.views.generic import ListView, DateDetailView
 from . import views
-from hnfp.models import Post
+from hnfp.models import Post, AOI
+from features.views import form_resources
 
 urlpatterns = [
     url(r'^home/', views.home, name='home'),
@@ -14,6 +15,9 @@ urlpatterns = [
     url(r'^alert/(?P<alert_id>[0-9]+)/', views.alert_detail, name='alert_detail'),
     url(r'^observation/$', views.observation, name='observation'),
     url(r'^observation/new/', views.new_observation, name='new_observation'),
+    url(r"^features/aoi/form", form_resources,
+        kwargs={'model': AOI},
+        name="aoi_create_form"),
     url(r'^job/$', views.job, name='job'),
     url(r'^jobopportunity/(?P<job_id>[0-9]+)/', views.job_detail, name='job_detail'),
     url(r'^observation/(?P<observation_id>[0-9]+)/', views.observation_detail, name='observation_detail'),

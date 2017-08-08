@@ -104,40 +104,36 @@ var weather = {
 
 var initmap = function() {
 
-  var map = new OpenLayers.Map('map', {
-      displayProjection: new OpenLayers.Projection("EPSG:4326"),
-      projection: "EPSG:3857"
+  var mousePositionControl = new ol.control.MousePosition({
+    coordinateFormat: ol.coordinate.createStringXY(4),
+    projection: 'EPSG:4326',
+    // comment the following two lines to have the mouse position
+    // be placed within the map.
+    className: 'custom-mouse-position',
+    target: document.getElementById('mouse-position'),
+    undefinedHTML: '&nbsp;'
   });
 
-  map.addControl(new P97.Controls.LayerLoadProgress({
-      map: map,
-      element: null,
-      onStartLoading: function() {
-          this.element.show();
-      },
-      onLoading: function(num, max, percentStr) {
-          this.element.text(percentStr);
-      },
-      onFinishLoading: function() {
-          this.element.hide();
-      }
-  }));
-
-  hereAerial = new OpenLayers.Layer.XYZ('Aerial', 'http://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/satellite.day/${z}/${x}/${y}/256/png8?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q', {
-    isBaseLayer: true,
-    numZoomLevels: 20,
-    attribution: "Basemap by Here",
-    textColor: "white"
+  var map = new ol.Map({
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.XYZ({
+          preload: Infinity,
+          url:'//{1-4}.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q',
+          attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+              '<a href="http://developer.here.com">HERE</a>',
+        })
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.fromLonLat([-135.44, 58.10]),
+      zoom: 10
+    }),
+    controls: ol.control.defaults({
+      attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+        collapsible: false
+      })
+    }).extend([mousePositionControl]),
   });
-
-  map.addLayers([hereAerial]);
-
-
-  //enables zooming to a given extent on the map by holding down shift key while dragging the mouse
-  map.zoomBox = new OpenLayers.Control.ZoomBox({});
-
-  map.addControl(map.zoomBox);
-
-  map.setCenter(new OpenLayers.LonLat(-135.44, 58.10)
-      .transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913")), 11);
 }

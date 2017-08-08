@@ -1,8 +1,11 @@
 app.init = function () {
 
+  // var layerExtent = new OpenLayers.Bounds( -14050000, 3800000, -13000000 , 6300000);
+
     //to turn basemap indicator off (hide the plus sign)
     //see email from Matt on 7/26 2:24pm with list of controls
-    var map = new OpenLayers.Map(null, {
+    map = new OpenLayers.Map(null, {
+      // restrictedExtent: layerExtent,
         //allOverlays: true,
         displayProjection: new OpenLayers.Projection("EPSG:4326"),
         projection: "EPSG:3857"
@@ -32,6 +35,12 @@ app.init = function () {
         sphericalMercator: true,
         wrapDateLine: true,
         numZoomLevels: 12,
+    }); */
+
+    /* var hybrid = new OpenLayers.Layer.Bing({
+      name: "Hybrid",
+      key: 'AvD-cuulbvBqwFDQGNB1gCXDEH4S6sEkS7Yw9r79gOyCvd2hBvQYPaRBem8cpkjv',
+      type: "AerialWithLabels"
     }); */
 
     /* bing = new OpenLayers.Layer.Bing('bing', {
@@ -127,6 +136,7 @@ app.init = function () {
 
     map.addControl(map.zoomBox);
 
+    // ----- events
     map.events.register("moveend", null, function () {
         // update the url when we move
         app.updateUrl();

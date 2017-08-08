@@ -7,40 +7,51 @@ $(document).ready(function() {
   });
   $('#add-observation-btn').click( function(e) {
     e.preventDefault();
-    Materialize.fadeInImage('#new-observation-form');
-    observations.addNew();
-  })
+    var drawForm = $('#map-wrap').find('form')
+    drawForm.toggleClass('visible');
+    if ( drawForm.hasClass('visible') ) {
+      observations.initNew();
+    }
+  });
 });
 
 var observations = {
-    init: function() {
-
+  initNew: function() {
+    return $.ajax({
+        url: '/features/aoi/form/',
+        success: function(data) {
+            $('#drawing-form').html(form);
+        },
+        error: function (result) {
+            //debugger;
+        }
+    });
+  },
+  addNew: function(el) {
+    $.ajax({
+      url: 'hnfp/new_observation',
+    }).done(function(data) {
+      $( '#new-observation' ).html(data);
+    });
+  },
+  icons: {
+    'bear': {
+      'name': 'bear',
+      'icon': 'hnfp/img/icons/i_bear.svg',
+      'id': 'bear',
+      'databind': 'bear'
     },
-    addNew: function() {
-      $.ajax({
-        url: 'hnfp/new_observation',
-      }).done(function(data) {
-        $( '#new-observation' ).html(data);
-      });
+    'deer': {
+      'name': 'deer',
+      'icon': 'hnfp/img/icons/i_bear.svg',
+      'id': 'bear',
+      'databind': 'bear'
     },
-    icons: {
-      'bear': {
-        'name': 'bear',
-        'icon': 'hnfp/img/icons/i_bear.svg',
-        'id': 'bear',
-        'databind': 'bear'
-      },
-      'deer': {
-        'name': 'deer',
-        'icon': 'hnfp/img/icons/i_bear.svg',
-        'id': 'bear',
-        'databind': 'bear'
-      },
-      'fungi': {
-        'name': 'bear',
-        'icon': 'hnfp/img/icons/i_bear.svg',
-        'id': 'bear',
-        'databind': 'bear'
-      }
+    'fungi': {
+      'name': 'bear',
+      'icon': 'hnfp/img/icons/i_bear.svg',
+      'id': 'bear',
+      'databind': 'bear'
     }
+  }
 };
