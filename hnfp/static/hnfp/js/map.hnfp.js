@@ -73,7 +73,11 @@ function addInteraction() {
 
   map.addInteraction(draw);
 
-  draw.on('drawend', function(e) {
-    
+  draw.on('drawend', function(el) {
+    var drawForm = $('#new-observation');
+    drawForm.toggleClass('visible');
+    if ( drawForm.hasClass('visible') ) {
+      observations.initNew(el);
+    }
   });
 }

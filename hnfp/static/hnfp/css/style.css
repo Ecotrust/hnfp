@@ -99,6 +99,13 @@
   background: #2b384a;
 }
 
+.blue_light {
+  color: #dfeceb;
+}
+.bg_blue_light {
+  background: #dfeceb;
+}
+
 .magenta {
   color: #9e005d;
 }
@@ -423,6 +430,47 @@ nav .tabs .tab {
   max-width: 200px;
 }
 
+.hero-bg {
+  height: 200px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  position: relative;
+  width: 100%;
+}
+
+.hero-bg:before,
+.hero-bg:after {
+  content: '';
+  position: absolute;
+}
+
+.hero-bg:before {
+  background-image: url('/static/hnfp/img/bg_mountain.jpg');
+  background-size: cover;
+  background-attachment: local;
+  background-position: 50%;
+  bottom: -2%;
+  left: -2%;
+  right: -2%;
+  top: -2%;
+  z-index: -1;
+}
+
+  .observations .hero-bg:before {
+    background-image: url('/static/hnfp/img/bg_berries.png');
+  }
+
+.hero-bg:after {
+  background-image: url('/static/hnfp/img/mountain_ridge_white.svg');
+  background-size: cover;
+  bottom: -10px;
+  height: 60px;
+  left: -10%;
+  min-width: 120%;
+  z-index: -1;
+}
+
+
 /*--------------------
   dashboard
   --------------------*/
@@ -709,12 +757,71 @@ nav .tabs .tab {
   observations
   --------------------*/
 
-#drawing-form {
-  visibility: hidden;
+#new-observation.visible {
+  visibility: visible;
 }
 
-#drawing-form.visible {
-  visibility: visible;
+#new-observation {
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 0 6px #666;
+  height: 90%;
+  left: 5%;
+  overflow: scroll;
+  padding: 1rem 0;
+  position: absolute;
+  top: 5%;
+  visibility: hidden;
+  width: 30%;
+}
+
+#new-observation form,
+#new-observation input,
+#new-observation label,
+#new-observation textarea {
+  color: #4d4d4e;
+  font-family: 'function_bold', sans-serif;
+}
+
+#new-observation h2 {
+  color: #2b384a;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+  #new-observation h2:after {
+    bottom: -5px;
+    border-bottom: 5px solid #2b384a;
+    left: 40%;
+    content: '';
+    position: absolute;
+    width: 20%;
+  }
+
+#new-observation input:not(.file-path),
+#new-observation textarea {
+  background: #dfebea;
+  color: #4d4d4e;
+}
+
+#new-observation label {
+  text-indent: 4px;
+}
+
+#new-observation .btn {
+  line-height: 2.75rem;
+}
+
+.observations select.browser-default,
+#new-observation select.browser-default {
+  background: #dfebea;
+  color: #4d4d4e;
+  font-family: 'function_bold', sans-serif;
+  outline: none;
+}
+
+#new-observation select.browser-default {
+  margin-bottom: 1rem;
 }
 
 .observations #map-wrapper {
@@ -733,7 +840,7 @@ nav .tabs .tab {
 }
 
 .observations .blue_dark label {
-  color: #2b384a
+  color: #2b384a;
 }
 
   .observations .blue_dark input[type="checkbox"]:not(.filled-in) + label:before,
@@ -1124,6 +1231,11 @@ path {
 }
 
 @media (min-width: 54em) {
+
+  .hero-bg {
+    height: 300px;
+    margin-bottom: 4rem;
+  }
 
   .dashboard .bg {
     height: 30vh;

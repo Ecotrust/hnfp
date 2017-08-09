@@ -5,17 +5,18 @@
 
 {% block outer_content %}
 <main class="observations">
+  <div class="hero-bg">&nbsp;</div>
   <section class="container">
     <div class="row">
       <div class="col s8 l9">
         <h5>{{ title }} {{ year }}</h5>
       </div>
-      <div class="input-field col s4 l3 bg_green_light white-text">
-        <select>
-          <option value="" selected>Past Years</option>
-          <option value="">No previous data yet availble</option>
+      <div class="col s4 l3">
+        <select class="browser-default">
+          <option>Past Years</option>
+          <option value="one">No previous data yet availble</option>
+          <option value="two">22</option>
         </select>
-        <label>Year</label>
       </div>
     </div>
     <div class="row">
@@ -34,9 +35,9 @@
   <section class="container" style="height:500px;">
     <div id="map-wrapper">
       <div id="map" class="map"></div>
-      <div id="addentry">
-        <form id="drawing-form">
-        </form>
+      <div id="new-observation">
+        <form id="drawing-form"></form>
+      </div>
     </div>
   </section>
   <section class="section">
@@ -50,7 +51,7 @@
     <div class="row">
       <form action="#" class="col s12 l6 left blue_dark center">
         <div class="input-field">
-          <input class="checkbox" type="checkbox" name="datashare" id="datashare" />
+          <input class="checkbox" type="checkbox" name="datashare" id="datashare" class="bg_blue_light" />
           <label for="datashare">Share with land managers</label>
         </div>
         <p class="center"><em>Your information will be anonymized</em></p>
@@ -71,6 +72,8 @@
 
     <script src="{% static 'hnfp/js/localforage/localforage.min.js' %}"></script>
     <script src="{% static 'hnfp/js/materialize/materialize.min.js' %}"></script>
+
+    <script src="{% static 'js/scenarios.js' %}" charset="utf-8"></script>
     <script src="{% static 'hnfp/js/map.hnfp.js' %}" charset="utf-8"></script>
     <script src="{% static 'hnfp/js/app.hnfp.js' %}" charset="utf-8"></script>
     <script src="{% static 'hnfp/js/offline.js' %}" charset="utf-8"></script>

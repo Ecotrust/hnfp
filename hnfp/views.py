@@ -46,6 +46,17 @@ def home(request):
     }
     return HttpResponse(template.render(context, request))
 
+def observation_add(request):
+    User = get_user_model()
+
+    if request.method == 'POST':
+        observation_category = request.POST['first_name']
+        observation_type = request.POST['last_name']
+        email = request.POST['email']
+        password = request.POST['password']
+        username = email
+
+
 def registering(request):
     User = get_user_model()
 

@@ -1,27 +1,36 @@
 {% load static %}
-<form id="new-observation-form">
-  <div class="row">
-      <div class="row">
-        <div class="input-field col s12 m6">
-          <select class="icons">
-            <option value="" disabled selected>Add to map</option>
-            <option value="bear" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="left circle">Bear</option>
-            <option value="deer" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="left circle">Deer</option>
-            <option value="shrimp" data-icon="{% static 'hnfp/img/icons/i_shrimp.svg' %}" class="left circle">Shrimp</option>
-          </select>
-          <label>Add to map</label>
-        </div>
-        <div id="date-picker" class="section scrollspy">
-          <input type="text" class="datepicker">
-        </div>
-        <div id="time-picker" class="section scrollspy">
-          <input type="text" class="timepicker">
-        </div>
-        <div class="input-field col s12 l6">
-          <input id="last_name" type="textare" class="validate" name="lname" autocomplete="family-name" required>
-          <label for="last_name">Notes</label>
-        </div>
+<form id="new-observation-form" method="POST" action="/observation/add/">
+  <h2 class="center">Add entry</h2>
+  <section class="section container">
+    <select class="browser-default" name="observation_category">
+      <option disabled selected value="">Choose Category</option>
+      <option value="bear" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="circle">Bear</option>
+      <option value="deer" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Deer</option>
+      <option value="shrimp" data-icon="{% static 'hnfp/img/icons/i_shrimp.svg' %}" class="circle">Shrimp</option>
+    </select>
+    <select class="browser-default" name="observation_type">
+      <option disabled selected value="">Choose Type</option>
+      <option value="observation" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="circle">Observation</option>
+      <option value="gather" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Gather</option>
+      <option value="hunt" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Hunt</option>
+    </select>
+    <div class="input-field inline">
+      <input type="number" id="observation_tally" name="observation_tally" />
+      <label for="observation_tally">Tally</label>
+    </div>
+    <div class="file-field input-field">
+      <div class="btn btn-border-light-blue">
+        <span>Choose File</span>
+        <input type="file" name="observation_photo">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
       </div>
     </div>
-  </div>
-</from>
+    <div class="input-field">
+      <textarea id="comments" name="comments" class="materialize-textarea"></textarea>
+      <label for="comments">Comments</label>
+    </div>
+    <input placeholder="Date" id="observation_date" name="observation_date" type="text" class="timepicker">
+  </section>
+</form>

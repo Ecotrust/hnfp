@@ -1,57 +1,38 @@
 $(document).ready(function() {
-  $('select').material_select();
   $('.collapsible').collapsible();
-  $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 1 // Creates a dropdown of 15 years to control year
+  $('.timepicker').pickatime({
+    default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: false, // Use AM/PM or 24-hour format
+    donetext: 'Okay', // text for done-button
+    cleartext: 'Clear', // text for clear-button
+    canceltext: 'Cancel', // Text for cancel-button
+    autoclose: true, // automatic close timepicker
+    ampmclickable: true, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
   });
-  $('#add-observation-btn').click( function(e) {
-    e.preventDefault();
-    var drawForm = $('#map-wrap').find('form')
-    drawForm.toggleClass('visible');
-    if ( drawForm.hasClass('visible') ) {
-      observations.initNew();
-    }
-  });
+
 });
 
 var observations = {
-  initNew: function() {
+  initNew: function(el) {
     return $.ajax({
-        url: '/features/aoi/form/',
+        url: '/observation/new/',
         success: function(data) {
-            $('#drawing-form').html(form);
+            $( '#drawing-form' ).html(data);
         },
         error: function (result) {
             //debugger;
         }
+    }).done(function() {
+
     });
   },
   addNew: function(el) {
-    $.ajax({
+    return $.ajax({
       url: 'hnfp/new_observation',
     }).done(function(data) {
       $( '#new-observation' ).html(data);
     });
-  },
-  icons: {
-    'bear': {
-      'name': 'bear',
-      'icon': 'hnfp/img/icons/i_bear.svg',
-      'id': 'bear',
-      'databind': 'bear'
-    },
-    'deer': {
-      'name': 'deer',
-      'icon': 'hnfp/img/icons/i_bear.svg',
-      'id': 'bear',
-      'databind': 'bear'
-    },
-    'fungi': {
-      'name': 'bear',
-      'icon': 'hnfp/img/icons/i_bear.svg',
-      'id': 'bear',
-      'databind': 'bear'
-    }
   }
 };

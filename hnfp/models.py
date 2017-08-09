@@ -200,6 +200,7 @@ class Observation(models.Model):
 	observation_created = models.DateTimeField(auto_now_add=True)
 	observation_updated = models.DateTimeField(auto_now=True)
 	number_of_observers = models.IntegerField(blank=True, null=True)
+	observation_photo = models.ImageField()
 	observers = models.CharField(max_length=800)
 	location = models.ForeignKey(ObservationLocation, blank=True, null=True,)
 	comments = models.CharField(max_length=1600)
