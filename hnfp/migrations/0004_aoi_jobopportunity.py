@@ -15,16 +15,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='AOI',
-            fields=[
-                ('aoi_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='drawing.AOI')),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=('drawing.aoi',),
-        ),
-        migrations.CreateModel(
             name='JobOpportunity',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
