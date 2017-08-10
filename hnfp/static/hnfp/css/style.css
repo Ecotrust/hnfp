@@ -59,6 +59,13 @@
 }
 
 /*--------------------
+  materialize overrides
+  --------------------*/
+.clockpicker-canvas {
+  overflow: hidden !important;
+}
+
+/*--------------------
   colors
   --------------------*/
 

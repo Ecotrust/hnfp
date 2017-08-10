@@ -16,13 +16,13 @@
       <option value="hunt" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Hunt</option>
     </select>
     <div class="input-field inline">
-      <input type="number" id="observation_tally" name="observation_tally" />
+      <input type="number" id="observation_tally" name="observation_tally" value="" />
       <label for="observation_tally">Tally</label>
     </div>
     <div class="file-field input-field">
       <div class="btn btn-border-light-blue">
         <span>Choose File</span>
-        <input type="file" id="observation_photo" name="observation_photo">
+        <input type="file" id="observation_photo" name="observation_photo" value="">
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
@@ -32,7 +32,8 @@
       <textarea id="comments" name="comments" class="materialize-textarea"></textarea>
       <label for="comments">Comments</label>
     </div>
-    <input placeholder="Date" id="observation_date" name="observation_date" type="text" class="timepicker">
+    <input placeholder="Date" id="observation_date" name="observation_date" type="text" class="datepicker">
+    <input placeholder="Time" id="observation_time" name="observation_time" type="text" class="timepicker">
     <div class="input-field">
       <button type="submit" class="btn btn-border-light-blue" name="submit">Add to Map</button>
     </div>

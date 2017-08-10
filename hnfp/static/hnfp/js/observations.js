@@ -18,28 +18,35 @@ var observations = {
         fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
         donetext: 'Okay', // text for done-button
         cleartext: 'Clear', // text for clear-button
-        autoclose: true, // automatic close timepicker
-        ampmclickable: true, // make AM PM clickable
+        autoclose: false, // automatic close timepicker
         aftershow: function(){} //Function for after opening timepicker
+      });
+      $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 5,
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Ok',
+        closeOnSelect: false // Close upon selecting a date,
       });
       $('#drawing-form').submit(function(e) {
         e.preventDefault();
-        observations.addNew(e.target);
+        observations.create(e.target);
       })
     });
   },
-  addNew: function(form) {
-    console.log(form);
+  create: function(form) {
+    $form = $(form).serialize();
     return $.ajax({
       type: 'POST',
-      url: '/observation/add/',
-      data: $(form).serialize(),
+      url: '/observation/create/',
+      data: $form,
       success: function(data) {
-        console.log(data);
+        $('#drawing-form').html('');
       },
-      error: function (result) {
-        //debugger;
+      error: function (erro) {
+        $('#drawing-form').prepend(error);
       }
-    })
+    });
   }
 };

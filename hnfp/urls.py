@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^observation/$', views.observation, name='observation'),
     url(r'^observation/(?P<observation_id>[0-9]+)/', views.observation_detail, name='observation_detail'),
     url(r'^observation/new/', views.new_observation, name='new_observation'),
-    url(r'^observation/add/', views.observation_add, name='observation_add'),
+    url(r'^observation/create/', views.observation_create, name='observation_create'),
     url(r'^job/$', views.job, name='job'),
     url(r'^jobopportunity/(?P<job_id>[0-9]+)/', views.job_detail, name='job_detail'),
     url(r'^forum/$', ListView.as_view(model=Post, paginate_by=3), name='post-list'),

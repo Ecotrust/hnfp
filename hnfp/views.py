@@ -45,17 +45,21 @@ def home(request):
     }
     return HttpResponse(template.render(context, request))
 
-def observation_add(request):
+def observation_create(request):
     if request.method == 'POST':
         observation_category = request.POST['observation_category']
         observation_type = request.POST['observation_type']
         observation_tally = request.POST['observation_tally']
         comments = request.POST['comments']
+        observation_time = request.POST['observation_time']
         observation_date = request.POST['observation_date']
 
-        new_obj = Observation.objects.create(**kwargs);
+        cat = ObservationCategory.objects.only('id').get(observation_category=observation_category)
 
-        return HttpResponse(new_obj, content_type="application/json")
+        new_obj = Observation(category=cat, observation_type=observation_type, observation_tally=observation_tally, comments=comments, observation_date=observation_date);
+        new_obj.save()
+
+        return HttpResponse(status=201)
 
 
 def registering(request):
