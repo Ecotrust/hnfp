@@ -50,14 +50,12 @@ def observation_add(request):
         observation_category = request.POST['observation_category']
         observation_type = request.POST['observation_type']
         observation_tally = request.POST['observation_tally']
-        observation_photo = request.POST['observation_photo']
         comments = request.POST['comments']
         observation_date = request.POST['observation_date']
-        user = User.get_username()
 
         new_obj = Observation.objects.create(**kwargs);
 
-        return HttpResponse(form, content_type="application/json")
+        return HttpResponse(new_obj, content_type="application/json")
 
 
 def registering(request):
