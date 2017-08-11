@@ -2,12 +2,12 @@
 
 
 {% block outer_content %}
-  <main class="dashboard">
+  <main class="forum">
     <div class="bg">&nbsp;</div>
     <section class="container section">
       <div class="row">
         {% for object in object_list %}
-          <article>
+          <article class="col s12 l8 offset-l2">
             <h4>
               <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
             </h4>
@@ -33,7 +33,9 @@
     </section>
     <section class="section container">
       <div class="row">
-        <a href="/dashboard/" class="waves-effect waves-dark btn btn-border-light-blue"><i class="material-icons right">navigate_before</i> Back to dashboard</a>
+        <div class="col s12 l8 offset-l2">
+          <a href="/dashboard/" class="waves-effect waves-dark btn btn-border-light-blue"><i class="material-icons right">navigate_before</i> Back to dashboard</a>
+        </div>
       </div>
     </section>
   </main>
