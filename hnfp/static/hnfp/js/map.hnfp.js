@@ -8,6 +8,11 @@ var mousePositionControl = new ol.control.MousePosition({
   undefinedHTML: '&nbsp;'
 });
 
+if (ol.has.TOUCH) {
+  var allowMouseZoom = false;
+} else {
+  var allowMouseZoom = true;
+}
 var map = new ol.Map({
   target: 'map',
   layers: [
@@ -28,9 +33,13 @@ var map = new ol.Map({
       collapsible: false
     })
   }).extend([mousePositionControl]),
+  interactions: ol.interaction.defaults({
+    mouseWheelZoom: allowMouseZoom
+  })
 });
 
 var features = new ol.Collection();
+
 var featureOverlay = new ol.layer.Vector({
   source: new ol.source.Vector({features: features}),
   style: new ol.style.Style({
