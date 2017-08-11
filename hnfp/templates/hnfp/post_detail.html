@@ -2,15 +2,17 @@
 
 
 {% block outer_content %}
-  <main class="dashboard">
+  <main class="forum">
     <div class="bg">&nbsp;</div>
     <section class="section container">
       <div class="row">
-        <article>
-          <h1 class="page-header text-center">{{ object.title }}</h1>
-          <p class="small text-center">{{ object.publish|date:"l, j F Y" }}</p>
-          <p>{{ post.body|linebreaks }}</p>
-        </article>
+        <div class="col s12 l8 offset-l2">
+          <article>
+            <h1 class="page-header text-center">{{ object.title }}</h1>
+            <p class="small text-center">{{ object.publish|date:"l, j F Y" }}</p>
+            <p>{{ post.body|linebreaks }}</p>
+          </article>
+        </div>
       </div>
     </section>
     <section class="section container">

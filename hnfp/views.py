@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, render_to_response, HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from django.conf import settings
-
 # Create your views here.
 from django.http import HttpResponse
 from django.template import loader, RequestContext
@@ -11,24 +10,28 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model, authenticate, login
 
+# Accouts
 from accounts.actions import apply_user_permissions, send_password_reset_email, send_social_auth_provider_login_email, generate_username
 from accounts.models import EmailVerification, UserData, PasswordDictionary
 from accounts.forms import SignUpForm, ForgotPasswordForm, ResetPasswordForm, SocialAccountConfirmForm, LogInForm, UserDetailForm, ChangePasswordForm
 from accounts.signals import user_post_save
 from nursery.view_helpers import decorate_view
 
-
 from accounts.widgets import BSLeftIconTextInput, BSLeftIconPasswordInput, BSLeftIconEmailInput
 from django.core.exceptions import ValidationError
 from captcha.fields import ReCaptchaField
 
 # survey
-from hnfp.models import Question, Survey, Category, Post, PublicManager, JobOpportunity
+from hnfp.models import Question, Survey, Category, PublicManager
 from hnfp.forms import ResponseForm
-
 # observation
 from hnfp.models import Observation, ObservationLocation, ObservationCategory
+#forum
+from hnfp.models import Post
+#jobs
+from hnfp.models import JobOpportunity
 
+### VIEWS ###
 def index(request):
     template = loader.get_template('hnfp/index.html')
     context = {
@@ -165,7 +168,7 @@ def alert(request):
 
 def alert_detail(request, alert_id):
     return HttpResponse("You're looking at alert %s." % alert_id)
-
+    
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
     context = {
