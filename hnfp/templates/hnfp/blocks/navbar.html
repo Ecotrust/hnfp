@@ -18,10 +18,10 @@
           <li><a class="subheader" href="{% url 'account:index' %}">Hi {{ user.first_name }}</a></li>
           <li><div class="divider"></div></li>
           <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-          <li><a href="{% url 'dashboard' %}">My Maps</a></li>
+          <li><a href="{% url 'observation' %}">My Maps</a></li>
           <li><a href="{% url 'dashboard' %}">Alerts</a></li>
           <li><a href="{% url 'dashboard' %}">Land Use Map (coming soon)</a></li>
-          <li><a href="{% url 'dashboard' %}">Land Use Forum (coming soon)</a></li>
+          <li><a href="{% url 'forum' %}">Land Use Forum</a></li>
           <li><div class="divider"></div></li>
           <li><a href="{% url 'account:logout' %}">Sign out</a></li>
         </ul>
