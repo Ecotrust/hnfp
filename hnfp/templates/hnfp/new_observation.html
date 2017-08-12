@@ -1,41 +1,61 @@
 {% load static %}
 <form>
-  <h2 class="center">Add entry</h2>
   <section class="section container">
+    <section id="stepone" class="observation-location visible">
+      <h2 class="center">Add entry</h2>
+      <p class="center">New observation for my map</p>
+      <a onclick="observations.close()" class="btn-flat cancel">Cancel</a>
+      <a onclick="observations.startNew()" class="btn next btn-border-light-blue" id="start-observation">Start</a>
+    </section>
     {% csrf_token %}
-    <select class="browser-default" name="observation_category">
-      <option disabled selected value="">Choose Category</option>
-      <option value="bear" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="circle">Bear</option>
-      <option value="deer" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Deer</option>
-      <option value="shrimp" data-icon="{% static 'hnfp/img/icons/i_shrimp.svg' %}" class="circle">Shrimp</option>
-    </select>
-    <select class="browser-default" name="observation_type">
-      <option disabled selected value="">Choose Type</option>
-      <option value="observation" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="circle">Observation</option>
-      <option value="gather" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Gather</option>
-      <option value="hunt" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Hunt</option>
-    </select>
-    <div class="input-field inline">
-      <input type="number" id="observation_tally" name="observation_tally" value="" />
-      <label for="observation_tally">Tally</label>
-    </div>
-    <div class="file-field input-field">
-      <div class="btn btn-border-light-blue">
-        <span>Choose File</span>
-        <input type="file" id="observation_photo" name="observation_photo" value="">
+    <section id="steptwo">
+      <h4 class="center">Observation Location</h4>
+      <div class="input-field center">
+        <a class="btn small-btn btn-border-light-blue" id="use-my-location"><i class="material-icons left">my_location</i>Use My Location</a>
+        <a class="btn small-btn btn-border-light-blue" id="choose-from-map"><i class="material-icons left">pin_drop</i>Choose a Location From Map</a>
+        <input type="text" id="observation_location" name="observation_location" hidden />
       </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
+    </section>
+    <section id="stepthree">
+      <p>Is Location Correct?</p>
+      <a class="btn small-btn btn" id="loc-correct">Yes</a>
+      <a class="btn small-btn btn-flat" id="loc-edit">Edit</a>
+    </section>
+    <section id="stepfour">
+      <select class="browser-default" name="observation_category" required>
+        <option disabled selected value="">Choose Category</option>
+        <option value="bear" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="circle">Bear</option>
+        <option value="deer" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Deer</option>
+        <option value="shrimp" data-icon="{% static 'hnfp/img/icons/i_shrimp.svg' %}" class="circle">Shrimp</option>
+      </select>
+      <select class="browser-default" name="observation_type" required>
+        <option disabled selected value="">Choose Type</option>
+        <option value="observation" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="circle">Observation</option>
+        <option value="gather" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Gather</option>
+        <option value="hunt" data-icon="{% static 'hnfp/img/icons/i_deer.svg' %}" class="circle">Hunt</option>
+      </select>
+      <div class="input-field inline">
+        <input type="number" id="observation_tally" name="observation_tally" value="" />
+        <label for="observation_tally">Tally</label>
       </div>
-    </div>
-    <div class="input-field">
-      <textarea id="comments" name="comments" class="materialize-textarea"></textarea>
-      <label for="comments">Comments</label>
-    </div>
-    <input placeholder="Date" id="observation_date" name="observation_date" type="text" class="datepicker">
-    <input placeholder="Time" id="observation_time" name="observation_time" type="text" class="timepicker">
-    <div class="input-field">
-      <button type="submit" class="btn btn-border-light-blue" name="submit">Add to Map</button>
-    </div>
+      <div class="file-field input-field">
+        <div class="btn btn-border-light-blue">
+          <span>Choose File</span>
+          <input type="file" id="observation_photo" name="observation_photo" value="">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+      <div class="input-field">
+        <textarea id="comments" name="comments" class="materialize-textarea"></textarea>
+        <label for="comments">Comments</label>
+      </div>
+      <input placeholder="Date" id="observation_date" name="observation_date" type="text" class="datepicker">
+      <input placeholder="Time" id="observation_time" name="observation_time" type="text" class="timepicker">
+      <div class="input-field">
+        <button type="submit" class="btn btn-border-light-blue" name="submit">Add to Map</button>
+      </div>
+    </section>
   </section>
 </form>

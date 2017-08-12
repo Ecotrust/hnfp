@@ -13,6 +13,13 @@ if (ol.has.TOUCH) {
 } else {
   var allowMouseZoom = true;
 }
+
+var mapView = new ol.View({
+  center: ol.proj.fromLonLat([-135.44, 58.10]),
+  zoom: 10,
+  loadTilesWhileAnimating: true
+});
+
 var map = new ol.Map({
   target: 'map',
   layers: [
@@ -24,13 +31,10 @@ var map = new ol.Map({
       })
     })
   ],
-  view: new ol.View({
-    center: ol.proj.fromLonLat([-135.44, 58.10]),
-    zoom: 10
-  }),
+  view: mapView,
   controls: ol.control.defaults({
-    attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
-      collapsible: false
+    attributionOptions: ({
+      collapsible: true
     })
   }).extend([mousePositionControl]),
   interactions: ol.interaction.defaults({
@@ -39,7 +43,6 @@ var map = new ol.Map({
 });
 
 var features = new ol.Collection();
-
 var featureOverlay = new ol.layer.Vector({
   source: new ol.source.Vector({features: features}),
   style: new ol.style.Style({
@@ -61,7 +64,6 @@ var featureOverlay = new ol.layer.Vector({
 featureOverlay.setMap(map);
 
 var draw;
-
 function addInteraction() {
   draw = new ol.interaction.Draw({
     features: features,
@@ -81,12 +83,70 @@ function addInteraction() {
   });
 
   map.addInteraction(draw);
+  map.getInteractions().extend([selectInteraction]);
+  draw.set('selectable', true);
+}
 
-  draw.on('drawend', function(el) {
-    var drawForm = $('#new-observation');
-    drawForm.toggleClass('visible');
-    if ( drawForm.hasClass('visible') ) {
-      observations.initNew(el);
-    }
+var selectInteraction = new ol.interaction.Select({
+  condition: ol.events.condition.singleClick,
+  toggleCondition: ol.events.condition.shiftKeyOnly,
+  layers: function (layer) {
+    return layer.get('selectable') == true;
+  },
+  style: new ol.style.Style({
+      stroke: new ol.style.Stroke({
+      color: '#ff0000',
+      width: 2
+    })
+  })
+});
+
+function findLocation(stop) {
+
+  var geolocation = new ol.Geolocation({
+    tracking: true
+  });
+
+  if (stop) {
+    geolocation.setTracking(false);
+    observations.hideSpinner();
+  } else {
+    observations.showSpinner();
+  }
+
+  geolocation.on('change', function(e) {
+    var coordinates = geolocation.getPosition();
+    mapView.animate({
+      center: ol.proj.fromLonLat(coordinates),
+      zoom: 18,
+      duration: 6000
+    });
+    observations.hideSpinner();
+    positionFeature.setGeometry(ol.proj.fromLonLat(coordinates) ? new ol.geom.Point(ol.proj.fromLonLat(coordinates)) : null);
+  });
+
+  geolocation.on('error', function(error) {
+    Materialize.toast('Location not found. Use map instead.', 6000);
+  });
+
+  var positionFeature = new ol.Feature();
+  positionFeature.setStyle(new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 6,
+      fill: new ol.style.Fill({
+        color: '#00ffdd'
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#fff',
+        width: 2
+      })
+    })
+  }));
+
+  return new ol.layer.Vector({
+    map: map,
+    source: new ol.source.Vector({
+      features: [positionFeature]
+    })
   });
 }

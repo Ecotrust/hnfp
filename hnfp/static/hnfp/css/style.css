@@ -760,25 +760,55 @@ nav .tabs .tab {
   font-size: 1.5em;
 }
 
+.preloader-wrapper {
+  display: block;
+  margin: 0 auto;
+}
+.preloader-wrapper:not(.active) {
+  height: 0;
+}
+
 /*--------------------
   observations
   --------------------*/
 
+#stepone, #steptwo, #stepthree, #stepfour {
+  display: none;
+}
+
+#stepone.visible, #steptwo.visible, #stepthree.visible, #stepfour.visible {
+  display: block;
+}
+
 #new-observation.visible {
-  visibility: visible;
+  display: block;
 }
 
 #new-observation {
   background: rgba(255,255,255,0.96);
   box-shadow: 0 0 6px #666;
-  height: 90%;
+  display: none;
+  height: 45%;
   left: 5%;
   overflow: scroll;
-  padding: 1rem 0;
+  padding: 0;
   position: absolute;
-  top: 5%;
-  visibility: hidden;
-  width: 30%;
+  top: 50%;
+  width: 90%;
+}
+
+  #new-observation.tall {
+    height: 80%;
+    top: 10%;
+  }
+
+  #new-observation.short {
+    height: 20%;
+    top: 75%;
+  }
+
+#new-observation .progress {
+  margin: 0;
 }
 
 #new-observation form,
@@ -791,7 +821,7 @@ nav .tabs .tab {
 
 #new-observation h2 {
   color: #2b384a;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   padding-bottom: 1rem;
   position: relative;
 }
@@ -817,6 +847,16 @@ nav .tabs .tab {
 
 #new-observation .btn {
   line-height: 2.75rem;
+}
+
+.small-btn.btn {
+  font-size: .8125em;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.small-btn.btn i {
+  line-height: inherit;
 }
 
 .observations select.browser-default,
@@ -940,6 +980,16 @@ nav .tabs .tab {
 .relative.height ul img {
   height: 100%;
   max-width: 100%;
+}
+
+.file-path-wrapper {
+  clear: both;
+  display: block;
+  padding-left: 0;
+}
+
+.file-path-wrapper input {
+  font-size: .8125em;
 }
 
 /*--------------------
@@ -1295,6 +1345,13 @@ path {
 
   .section-bottom-bg {
     min-height: 100px;
+  }
+
+  #new-observation,
+  #new-observation.tall {
+    height: 90%;
+    top: 5%;
+    width: 35%;
   }
 }
 

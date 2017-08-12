@@ -1,13 +1,54 @@
 $(document).ready(function() {
   $('.collapsible').collapsible();
+  $('#add-observation-btn').click(function() {
+    observations.initNew();
+  })
 });
 
+$newObservationWrapper = $('#new-observation');
+$drawingForm = $( '#drawing-form' );
+
 var observations = {
-  initNew: function(el) {
+  startNew: function() {
+    $('#stepone').removeClass('visible');
+    $('#steptwo').addClass('visible');
+    $('#use-my-location').click(function() {
+      findLocation();
+      $('#steptwo').removeClass('visible');
+      $('#stepthree').addClass('visible');
+      $newObservationWrapper.addClass('short');
+      $('#loc-correct').click(function() {
+        $('#stepthree').removeClass('visible');
+        $('#stepfour').addClass('visible');
+        $newObservationWrapper.removeClass('short');
+        $newObservationWrapper.addClass('tall');
+      });
+      $('#loc-edit').click(function() {
+        // TODO edit added point
+      });
+    });
+  },
+  close: function() {
+    $newObservationWrapper.find('form').html('');
+    $newObservationWrapper.removeClass('visible tall');
+  },
+  showSpinner: function() {
+    $('.preloader-wrapper').addClass('active');
+  },
+  hideSpinner: function() {
+    $('.preloader-wrapper').removeClass('active');
+  },
+  initNew: function() {
+    $newObservationWrapper
+    $newObservationWrapper.toggleClass('visible');
+    if (!$newObservationWrapper.hasClass('visible')) {
+      $drawingForm.html('');
+      return;
+    }
     return $.ajax({
         url: '/observation/new/',
         success: function(data) {
-            $( '#drawing-form' ).html(data);
+            $drawingForm.html(data);
         },
         error: function (result) {
             //debugger;
@@ -29,9 +70,12 @@ var observations = {
         close: 'Ok',
         closeOnSelect: false // Close upon selecting a date,
       });
-      $('#drawing-form').submit(function(e) {
+      $drawingForm.submit(function(e) {
         e.preventDefault();
         observations.create(e.target);
+        observations.close();
+        let stopTracking = true;
+        findLocation(stopTracking);
       })
     });
   },
@@ -42,10 +86,10 @@ var observations = {
       url: '/observation/create/',
       data: $form,
       success: function(data) {
-        $('#drawing-form').html('');
+        $drawingForm.html('');
       },
-      error: function (erro) {
-        $('#drawing-form').prepend(error);
+      error: function (error) {
+        $drawingForm.prepend(error);
       }
     });
   }
