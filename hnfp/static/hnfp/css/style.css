@@ -300,6 +300,10 @@ nav .tabs .tab {
     height: 26px;
   }
 
+  nav .brand-logo {
+    padding: 15px 0;
+  }
+
 .nav-content {
   text-align: center;
 }

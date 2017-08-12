@@ -126,6 +126,8 @@ function findLocation(stop) {
   });
 
   geolocation.on('error', function(error) {
+    geolocation.setTracking(false);
+    observations.hideSpinner();
     Materialize.toast('Location not found. Use map instead.', 6000);
   });
 

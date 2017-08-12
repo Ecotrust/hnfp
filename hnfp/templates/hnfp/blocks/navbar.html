@@ -8,14 +8,14 @@
         <ul class="right hide-on-med-and-down">
           <li>
             <div class="userView">
-              <a href="{% url 'account:index' %}"><!-- <img class="circle" src="{% static 'hnfp/img/.png' %}"> --> Hi {{ user.first_name }}</a>
+              <a href="{% url 'account:index' %}"><!-- <img class="circle" src="{% static 'hnfp/img/.png' %}"> --> {{ user.first_name }}</a>
             </div>
           </li>
           <li><a href="{% url 'account:logout' %}">Sign out</a></li>
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
-          <li><a class="subheader" href="{% url 'account:index' %}">Hi {{ user.first_name }}</a></li>
+          <li><a class="subheader" href="{% url 'account:index' %}">{{ user.first_name }}</a></li>
           <li><div class="divider"></div></li>
           <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
           <li><a href="{% url 'observation' %}">My Maps</a></li>
@@ -30,10 +30,10 @@
 
       <div class="nav-content hide-on-med-and-down">
           <a href="{% url 'dashboard' %}">Dashboard</a>
-          <a href="{% url 'dashboard' %}">My Maps</a>
+          <a href="{% url 'observation' %}">My Maps</a>
           <a href="{% url 'dashboard' %}">Alerts</a>
           <a class="disabled" href="{% url 'dashboard' %}">Land Use Map</a>
-          <a href="forum/">Land Use Forum</a>
+          <a href="/forum/">Land Use Forum</a>
       </div>
     </nav>
   {% else %}
