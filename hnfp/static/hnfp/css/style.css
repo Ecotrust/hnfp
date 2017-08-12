@@ -637,7 +637,13 @@ nav .tabs .tab {
 }
 
 .observation-block .btn {
+  font-size: .875em;
   margin: 2rem 0 1.5rem;
+  padding: 0 0 0 1rem;
+}
+
+.observation-block .btn i {
+  font-size: 3rem;
 }
 
 .observation-block p {
@@ -648,9 +654,6 @@ nav .tabs .tab {
   display: block;
   margin: 0 auto;
   max-width: 50%;
-}
-
-.observation-block a {
 }
 
 .job-post {
@@ -1363,6 +1366,11 @@ path {
 
   main {
     font-size: 1em;
+  }
+
+  .dashboard .bg:after {
+    bottom: 0%;
+    height: 30%;
   }
 
   .parallax-container {
