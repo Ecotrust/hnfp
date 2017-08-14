@@ -42,9 +42,9 @@ var map = new ol.Map({
   })
 });
 
-var features = new ol.Collection();
-var featureOverlay = new ol.layer.Vector({
-  source: new ol.source.Vector({features: features}),
+var locObs = new ol.source.Vector();
+var locObsLayer = new ol.layer.Vector({
+  source: locObs,
   style: new ol.style.Style({
     fill: new ol.style.Fill({
       color: 'rgba(255, 255, 255, 0.2)'
@@ -61,12 +61,13 @@ var featureOverlay = new ol.layer.Vector({
     })
   })
 });
-featureOverlay.setMap(map);
+locObsLayer.setMap(map);
 
-var draw;
+var modify = new ol.interaction.Modify({source: locObs});
+map.addInteraction(modify);
 function addInteraction() {
   draw = new ol.interaction.Draw({
-    features: features,
+    features: locObs,
     type: 'Point',
     style: new ol.style.Style({
       image: new ol.style.Circle({
@@ -101,9 +102,11 @@ var selectInteraction = new ol.interaction.Select({
   })
 });
 
+// geolocation tracker var
+var geolocation;
 function findLocation(stop) {
 
-  var geolocation = new ol.Geolocation({
+  geolocation = new ol.Geolocation({
     tracking: true
   });
 
@@ -130,25 +133,6 @@ function findLocation(stop) {
     observations.hideSpinner();
     Materialize.toast('Location not found. Use map instead.', 6000);
   });
-
-  var positionFeature = new ol.Feature();
-  positionFeature.setStyle(new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 6,
-      fill: new ol.style.Fill({
-        color: '#00ffdd'
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#fff',
-        width: 2
-      })
-    })
-  }));
-
-  return new ol.layer.Vector({
-    map: map,
-    source: new ol.source.Vector({
-      features: [positionFeature]
-    })
-  });
+  let locPoint = new ol.geom.Point(ol.proj.transform(geolocation.getPosition()));
+  return locObs.addFeature( new ol.Feature(locPoint) );
 }
