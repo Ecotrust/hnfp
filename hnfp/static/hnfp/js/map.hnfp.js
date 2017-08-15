@@ -16,8 +16,7 @@ if (ol.has.TOUCH) {
 
 var mapView = new ol.View({
   center: ol.proj.fromLonLat([-135.44, 58.10]),
-  zoom: 10,
-  loadTilesWhileAnimating: true
+  zoom: 10
 });
 
 var map = new ol.Map({
@@ -45,61 +44,38 @@ var map = new ol.Map({
 var locObs = new ol.source.Vector();
 var locObsLayer = new ol.layer.Vector({
   source: locObs,
-  style: new ol.style.Style({
-    fill: new ol.style.Fill({
-      color: 'rgba(255, 255, 255, 0.2)'
-    }),
-    stroke: new ol.style.Stroke({
-      color: '#3399CC',
-      width: 1.25
-    }),
-    image: new ol.style.Circle({
-      radius: 10,
-      fill: new ol.style.Fill({
-        color: '#ffcc11'
-      })
-    })
-  })
+  map: map
 });
-locObsLayer.setMap(map);
+var locPoint = new ol.Feature();
+locPoint.setId(1);
+locObs.addFeature(locPoint);
+locPoint.setStyle(locStyle);
 
-var modify = new ol.interaction.Modify({source: locObs});
-map.addInteraction(modify);
-function addInteraction() {
-  draw = new ol.interaction.Draw({
-    features: locObs,
+var draw;
+function drawLocation() {
+  locPoint.setGeometry(new ol.geom.Point(mapView.getCenter()));
+  locPoint.setStyle(locStyle);
+
+  // remove select and add draw
+  // map.removeInteraction(selectInteraction);
+  /* draw = new ol.interaction.Draw({
+    source: locObs,
     type: 'Point',
-    style: new ol.style.Style({
-      image: new ol.style.Circle({
-        radius: 7,
-        fill: new ol.style.Fill({
-          color: '#d53f38'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#ffffff',
-          width: 1.5
-        })
-      })
-    })
-  });
+    style: drawStyle
+  }); */
 
-  map.addInteraction(draw);
-  map.getInteractions().extend([selectInteraction]);
-  draw.set('selectable', true);
+  //draw.on('drawend', function(evt) {
+    // remove draw and add select
+    // map.removeInteraction(draw);
+    map.addInteraction(selectInteraction);
+    editLocPoint();
+  //}, this);
+
+  // map.addInteraction(draw);
 }
 
 var selectInteraction = new ol.interaction.Select({
-  condition: ol.events.condition.singleClick,
-  toggleCondition: ol.events.condition.shiftKeyOnly,
-  layers: function (layer) {
-    return layer.get('selectable') == true;
-  },
-  style: new ol.style.Style({
-      stroke: new ol.style.Stroke({
-      color: '#ff0000',
-      width: 2
-    })
-  })
+  style: selectStyle
 });
 
 // geolocation tracker var
@@ -107,6 +83,7 @@ var geolocation;
 function findLocation(stop) {
 
   geolocation = new ol.Geolocation({
+    projection: mapView.getProjection(),
     tracking: true
   });
 
@@ -120,12 +97,15 @@ function findLocation(stop) {
   geolocation.on('change', function(e) {
     var coordinates = geolocation.getPosition();
     mapView.animate({
-      center: ol.proj.fromLonLat(coordinates),
+      center: coordinates,
       zoom: 18,
       duration: 6000
     });
     observations.hideSpinner();
-    positionFeature.setGeometry(ol.proj.fromLonLat(coordinates) ? new ol.geom.Point(ol.proj.fromLonLat(coordinates)) : null);
+    locPoint.setGeometry(new ol.geom.Point(coordinates));
+    geolocation.setTracking(false);
+    map.addInteraction(selectInteraction);
+    editLocPoint();
   });
 
   geolocation.on('error', function(error) {
@@ -133,6 +113,39 @@ function findLocation(stop) {
     observations.hideSpinner();
     Materialize.toast('Location not found. Use map instead.', 6000);
   });
-  let locPoint = new ol.geom.Point(ol.proj.transform(geolocation.getPosition()));
-  return locObs.addFeature( new ol.Feature(locPoint) );
 }
+
+// edit location marker
+var modify;
+function editLocPoint() {
+  modify = new ol.interaction.Modify({
+    features: selectInteraction.getFeatures()
+  });
+  map.addInteraction(modify);
+}
+
+var locStyle = new ol.style.Style({
+  image: new ol.style.Circle({
+    radius: 8,
+    fill: new ol.style.Fill({
+      color: '#00ffff'
+    }),
+    stroke: new ol.style.Stroke({
+      color: '#000000',
+      width: 2
+    })
+  })
+});
+
+var selectStyle = new ol.style.Style({
+  image: new ol.style.Circle({
+    radius: 8,
+    fill: new ol.style.Fill({
+      color: '#ffff00'
+    }),
+    stroke: new ol.style.Stroke({
+      color: '#ffffff',
+      width: 2
+    })
+  })
+});

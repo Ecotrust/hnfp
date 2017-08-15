@@ -14,18 +14,22 @@ var observations = {
     $('#steptwo').addClass('visible');
     $('#use-my-location').click(function() {
       findLocation();
-      $('#steptwo').removeClass('visible');
-      $('#stepthree').addClass('visible');
-      $newObservationWrapper.addClass('short');
-      $('#loc-correct').click(function() {
-        $('#stepthree').removeClass('visible');
-        $('#stepfour').addClass('visible');
-        $newObservationWrapper.removeClass('short');
-        $newObservationWrapper.addClass('tall');
-      });
-      $('#loc-edit').click(function() {
-        // TODO edit added point
-      });
+      observations.stepTwo();
+    });
+    $('#choose-from-map').click(function() {
+      drawLocation();
+      observations.stepTwo();
+    })
+  },
+  stepTwo: function() {
+    $('#steptwo').removeClass('visible');
+    $('#stepthree').addClass('visible');
+    $newObservationWrapper.addClass('short');
+    $('#loc-correct').click(function() {
+      $('#stepthree').removeClass('visible');
+      $('#stepfour').addClass('visible');
+      $newObservationWrapper.removeClass('short');
+      $newObservationWrapper.addClass('tall');
     });
   },
   close: function() {

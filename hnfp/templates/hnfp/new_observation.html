@@ -3,23 +3,28 @@
   <section class="section container">
     <section id="stepone" class="observation-location visible">
       <h2 class="center">Add entry</h2>
-      <p class="center">New observation for my map</p>
-      <a onclick="observations.close()" class="btn-flat cancel">Cancel</a>
-      <a onclick="observations.startNew()" class="btn next btn-border-light-blue" id="start-observation">Start</a>
+      <div class="input-field center">
+        <a onclick="observations.startNew()" class="btn next btn-border-light-blue" id="start-observation">Start</a>
+      </div>
+      <div class="input-field center">
+        <a onclick="observations.close()" class="btn-flat cancel">Cancel</a>
+      </div>
     </section>
     {% csrf_token %}
     <section id="steptwo">
       <h4 class="center">Observation Location</h4>
       <div class="input-field center">
-        <a class="btn small-btn btn-border-light-blue" id="use-my-location"><i class="material-icons left">my_location</i>Use My Location</a>
+        <a class="btn small-btn btn-border-light-blue" id="use-my-location"><i class="material-icons left">my_location</i>Use Current Location</a>
+      </div>
+      <div class="input-field center">
         <a class="btn small-btn btn-border-light-blue" id="choose-from-map"><i class="material-icons left">pin_drop</i>Choose a Location From Map</a>
+      </div>
         <input type="text" id="observation_location" name="observation_location" hidden />
       </div>
     </section>
     <section id="stepthree">
-      <p>Is Location Correct?</p>
-      <a class="btn small-btn btn" id="loc-correct">Yes</a>
-      <a class="btn small-btn btn-flat" id="loc-edit">Edit</a>
+      <p>Select and drag to adjust observation location.</p>
+      <a class="btn small-btn btn right" id="loc-correct">Next</a>
     </section>
     <section id="stepfour">
       <select class="browser-default" name="observation_category" required>

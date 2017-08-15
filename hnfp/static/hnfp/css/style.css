@@ -792,15 +792,15 @@ nav .tabs .tab {
 }
 
 #new-observation {
-  background: rgba(255,255,255,0.96);
+  background: rgba(255,255,255,0.94);
   box-shadow: 0 0 6px #666;
   display: none;
-  height: 45%;
+  height: 42%;
   left: 5%;
   overflow: scroll;
   padding: 0;
   position: absolute;
-  top: 50%;
+  top: 57%;
   width: 90%;
 }
 
@@ -852,12 +852,14 @@ nav .tabs .tab {
   text-indent: 4px;
 }
 
-#new-observation .btn {
+#new-observation .btn:not(.small-btn) {
+  font-size: 1.25em;
   line-height: 2.75rem;
 }
 
 .small-btn.btn {
   font-size: .8125em;
+  line-height: 2.5rem;
   margin-bottom: 1rem;
   padding: 0 1rem;
 }
