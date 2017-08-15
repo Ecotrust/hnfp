@@ -168,7 +168,7 @@ def alert(request):
 
 def alert_detail(request, alert_id):
     return HttpResponse("You're looking at alert %s." % alert_id)
-    
+
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
     context = {
@@ -204,8 +204,3 @@ def job(request):
 
 def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
-
-def sw_js(request, js):
-    template = get_template('sw.js')
-    html = template.render()
-    return HttpResponse(html, content_type="application/x-javascript")
