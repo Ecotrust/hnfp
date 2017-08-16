@@ -149,6 +149,5 @@ var selectStyle = new ol.style.Style({
 });
 
 function addToMap() {
-  map.removeInteraction(selectInteraction);
   map.removeInteraction(modify);
 }
