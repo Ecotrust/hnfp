@@ -26,11 +26,37 @@ var observations = {
     $('#stepthree').addClass('visible');
     $newObservationWrapper.addClass('short');
     $('#loc-correct').click(function() {
-      $('#stepthree').removeClass('visible');
-      $('#stepfour').addClass('visible');
-      $newObservationWrapper.removeClass('short');
-      $newObservationWrapper.addClass('tall');
+      observations.setInputLoc();
+      let hide = '#stepthree';
+      observations.showStepFour(hide);
     });
+  },
+  showStepFour: function(step) {
+    $(step).removeClass('visible');
+    $('#stepfour').addClass('visible');
+    $newObservationWrapper.removeClass('short');
+    $newObservationWrapper.addClass('tall');
+  },
+  backStepThree: function() {
+    var loc = getLocationPoint();
+    $('#stepchangeloc').addClass('visible');
+    $('#stepfour').removeClass('visible');
+    $newObservationWrapper.addClass('short');
+    $newObservationWrapper.removeClass('tall');
+    $('#loc-change').click(function() {
+      observations.setInputLoc();
+      let hide = '#stepchangeloc';
+      observations.showStepFour(hide);
+    });
+  },
+  locOkay: function() {
+    let hide = '#stepchangeloc';
+    observations.showStepFour(hide);
+  },
+  setInputLoc: function() {
+    let loc = getLocationPoint();
+    console.log(loc);
+    $('#observation_location').val(loc);
   },
   close: function() {
     $newObservationWrapper.find('form').html('');

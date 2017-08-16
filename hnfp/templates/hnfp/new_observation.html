@@ -4,10 +4,10 @@
     <section id="stepone" class="observation-location visible">
       <h2 class="center">Add entry</h2>
       <div class="input-field center">
-        <a onclick="observations.startNew()" class="btn next btn-border-light-blue" id="start-observation">Start</a>
+        <a onclick="observations.startNew()" class="btn next" id="start-observation">Start</a>
       </div>
       <div class="input-field center">
-        <a onclick="observations.close()" class="btn-flat cancel">Cancel</a>
+        <a onclick="observations.close()" class="btn-flat small-btn cancel">Cancel</a>
       </div>
     </section>
     {% csrf_token %}
@@ -19,14 +19,26 @@
       <div class="input-field center">
         <a class="btn small-btn btn-border-light-blue" id="choose-from-map"><i class="material-icons left">pin_drop</i>Choose a Location From Map</a>
       </div>
-        <input type="text" id="observation_location" name="observation_location" hidden />
-      </div>
     </section>
     <section id="stepthree">
-      <p>Select and drag to adjust observation location.</p>
-      <a class="btn small-btn btn right" id="loc-correct">Next</a>
+      <h4 class="center">Click Then Move to Adjust Point</h4>
+      <div class="input-field center">
+        <a onclick="observations.close()" class="btn-flat small-btn">Cancel</a>
+        <a class="btn small-btn btn-border-light-blue" id="loc-correct">NEXT <i class="material-icons right">navigate_next</i></a>
+      </div>
+    </section>
+    <section id="stepchangeloc">
+      <h4 class="center">Click Then Move to Adjust Point</h4>
+      <div class="input-field center">
+        <a onclick="observations.locOkay()" class="btn-flat small-btn">Cancel</a>
+        <a class="btn small-btn btn-border-light-blue" id="loc-change">OKAY <i class="material-icons right">navigate_next</i></a>
+      </div>
     </section>
     <section id="stepfour">
+      <div class="input-field" id="input-field-location">
+        <input type="text" id="observation_location" name="observation_location" val="" />
+        <a onclick="observations.backStepThree()" class="btn small-btn btn-border-light-blue">Change Location</a>
+      </div>
       <select class="browser-default" name="observation_category" required>
         <option disabled selected value="">Choose Category</option>
         <option value="bear" data-icon="{% static 'hnfp/img/icons/i_bear.svg' %}" class="circle">Bear</option>
@@ -58,8 +70,8 @@
       </div>
       <input placeholder="Date" id="observation_date" name="observation_date" type="text" class="datepicker">
       <input placeholder="Time" id="observation_time" name="observation_time" type="text" class="timepicker">
-      <div class="input-field">
-        <button type="submit" class="btn btn-border-light-blue" name="submit">Add to Map</button>
+      <div class="input-field center">
+        <button type="submit" class="btn" name="submit">Add to Map</button>
       </div>
     </section>
   </section>

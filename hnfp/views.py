@@ -50,6 +50,7 @@ def home(request):
 
 def observation_create(request):
     if request.method == 'POST':
+        observation_location = request.POST['observation_location']
         observation_category = request.POST['observation_category']
         observation_type = request.POST['observation_type']
         observation_tally = request.POST['observation_tally']

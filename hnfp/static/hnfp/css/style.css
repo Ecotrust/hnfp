@@ -779,11 +779,11 @@ nav .tabs .tab {
   observations
   --------------------*/
 
-#stepone, #steptwo, #stepthree, #stepfour {
+#stepone, #steptwo, #stepthree, #stepchangeloc, #stepfour {
   display: none;
 }
 
-#stepone.visible, #steptwo.visible, #stepthree.visible, #stepfour.visible {
+#stepone.visible, #steptwo.visible, #stepthree.visible, #stepchangeloc.visible, #stepfour.visible {
   display: block;
 }
 
@@ -795,12 +795,12 @@ nav .tabs .tab {
   background: rgba(255,255,255,0.94);
   box-shadow: 0 0 6px #666;
   display: none;
-  height: 42%;
+  height: 48%;
   left: 5%;
   overflow: scroll;
   padding: 0;
   position: absolute;
-  top: 57%;
+  top: 47%;
   width: 90%;
 }
 
@@ -810,8 +810,8 @@ nav .tabs .tab {
   }
 
   #new-observation.short {
-    height: 20%;
-    top: 75%;
+    height: 25%;
+    top: 70%;
   }
 
 #new-observation .progress {
@@ -826,10 +826,26 @@ nav .tabs .tab {
   font-family: 'function_bold', sans-serif;
 }
 
+#new-observation #observation_location {
+  background: transparent;
+  color: #777;
+  font-family: 'function', sans-serif;
+  margin: 0 0 .5rem;
+}
+
+#input-field-location {
+  margin-bottom: 1.5rem;
+}
+
+#input-field-location .btn {
+  box-shadow: none;
+}
+
 #new-observation h2 {
   color: #2b384a;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  line-height: 1;
+  margin: 0 0 2rem;
+  padding: 1rem 0;
   position: relative;
 }
 
@@ -853,15 +869,19 @@ nav .tabs .tab {
 }
 
 #new-observation .btn:not(.small-btn) {
-  font-size: 1.25em;
+  font-size: 1.125em;
   line-height: 2.75rem;
 }
 
 .small-btn.btn {
   font-size: .8125em;
   line-height: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   padding: 0 1rem;
+}
+
+.small-btn.btn-border-light-blue {
+  font-size: .875em;
 }
 
 .small-btn.btn i {
@@ -880,11 +900,16 @@ nav .tabs .tab {
   margin-bottom: 1rem;
 }
 
+.map-container {
+  height: 440px;
+}
+
 .observations #map-wrapper {
   position: relative;
 }
 
 .observations #map {
+  height: 100%;
 }
 
 .observations .collapsible {
