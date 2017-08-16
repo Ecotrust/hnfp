@@ -63,7 +63,7 @@ def observation_create(request):
         new_obj = Observation(category=cat, observation_type=observation_type, observation_tally=observation_tally, comments=comments, observation_date=observation_date);
         new_obj.save()
 
-        return HttpResponse(status=201)
+        return HttpResponseRedirect(status=201)
 
 
 def registering(request):

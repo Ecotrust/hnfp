@@ -55,7 +55,6 @@ var observations = {
   },
   setInputLoc: function() {
     let loc = getLocationPoint();
-    console.log(loc);
     $('#observation_location').val(loc);
   },
   close: function() {
@@ -103,9 +102,7 @@ var observations = {
       $drawingForm.submit(function(e) {
         e.preventDefault();
         observations.create(e.target);
-        observations.close();
-        let stopTracking = true;
-        findLocation(stopTracking);
+        addToMap();
       })
     });
   },
@@ -116,6 +113,7 @@ var observations = {
       url: '/observation/create/',
       data: $form,
       success: function(data) {
+        observations.close();
         $drawingForm.html('');
       },
       error: function (error) {

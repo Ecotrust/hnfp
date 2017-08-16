@@ -80,19 +80,12 @@ var selectInteraction = new ol.interaction.Select({
 
 // geolocation tracker var
 var geolocation;
-function findLocation(stop) {
+function findLocation() {
 
   geolocation = new ol.Geolocation({
     projection: mapView.getProjection(),
     tracking: true
   });
-
-  if (stop) {
-    geolocation.setTracking(false);
-    observations.hideSpinner();
-  } else {
-    observations.showSpinner();
-  }
 
   geolocation.on('change', function(e) {
     var coordinates = geolocation.getPosition();
@@ -154,3 +147,8 @@ var selectStyle = new ol.style.Style({
     })
   })
 });
+
+function addToMap() {
+  map.removeInteraction(selectInteraction);
+  map.removeInteraction(modify);
+}
