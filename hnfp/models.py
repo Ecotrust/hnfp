@@ -1,4 +1,5 @@
-from django.db import models
+# from django.db import model
+from django.contrib.gis.db import models
 from django.contrib.auth.models import User, Group
 from drawing.models import AOI as drawing_AOI
 from features.registry import register
@@ -184,15 +185,22 @@ class JobOpportunity(models.Model):
 		return self.title
 
 # observations
-class ObservationLocation(models.Model):
-	name = models.CharField(max_length=400)
-	latlng = models.CharField(max_length=60)
-
-class ObservationCategory(models.Model):
-	observation_category = models.CharField(max_length=400)
-
 class Observation(models.Model):
-	category = models.ForeignKey(ObservationCategory, blank=True, null=True,)
+	OBSERVATION_CATS = (
+		('bear', 'Bear'),
+		('deer', 'Dear'),
+		('medicinal_herbs', 'Medicinal Herbs'),
+		('shrimp', 'Shrimp'),
+		('berries', 'Berries'),
+		('firewood', 'Firewood'),
+		('mushrooms', 'Mushrooms'),
+		('crab', 'Crab'),
+		('fish', 'Fish'),
+		('shellfish', 'Shellfish'),
+		('custom', 'Custom'),
+	)
+
+	category = models.CharField(max_length=400, choices=OBSERVATION_CATS, default='custom')
 	customcategory = models.CharField(max_length=400, blank=True, null=True)
 	observation_date = models.CharField(max_length=100, blank=True, null=True)
 	observation_time = models.CharField(max_length=20, blank=True, null=True)
@@ -201,9 +209,9 @@ class Observation(models.Model):
 	observation_created = models.DateTimeField(auto_now_add=True)
 	observation_updated = models.DateTimeField(auto_now=True)
 	number_of_observers = models.IntegerField(default=1,blank=True, null=True)
-	observation_photo = models.FileField(upload_to='observation/', blank=True, null=True)
-	observers = models.CharField(max_length=800, default=1)
-	location = models.ForeignKey(ObservationLocation, blank=True, null=True,)
+	# observation_photo = models.FileField(upload_to='observation/', blank=True, null=True)
+	observer_username = models.CharField(max_length=800)
+	observation_location = models.PointField(blank=True, null=True)
 	comments = models.CharField(max_length=1600)
 
 	class Meta:
@@ -212,8 +220,15 @@ class Observation(models.Model):
 	def save(self, *args, **kwargs):
 		super(Observation, self).save(*args, **kwargs)
 
+	def get_categories():
+		cats = Observation.OBSERVATION_CATS
+		cats_list = []
+		for cat in cats:
+			cats_list.append(cat[0])
+		return cats_list
+
 	def __unicode__(self):
 		return unicode("%s" % (self.page))
 
 	def __str__(self):
-		return self.observers
+		return self.observer_username

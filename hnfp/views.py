@@ -25,7 +25,7 @@ from captcha.fields import ReCaptchaField
 from hnfp.models import Question, Survey, Category, PublicManager
 from hnfp.forms import ResponseForm
 # observation
-from hnfp.models import Observation, ObservationLocation, ObservationCategory
+from hnfp.models import Observation
 #forum
 from hnfp.models import Post
 #jobs
@@ -47,24 +47,6 @@ def home(request):
         'cta':'Become a steward',
     }
     return HttpResponse(template.render(context, request))
-
-def observation_create(request):
-    if request.method == 'POST':
-        observation_location = request.POST['observation_location']
-        observation_category = request.POST['observation_category']
-        observation_type = request.POST['observation_type']
-        observation_tally = request.POST['observation_tally']
-        comments = request.POST['comments']
-        observation_time = request.POST['observation_time']
-        observation_date = request.POST['observation_date']
-
-        cat = ObservationCategory.objects.only('id').get(observation_category=observation_category)
-
-        new_obj = Observation(category=cat, observation_type=observation_type, observation_tally=observation_tally, comments=comments, observation_date=observation_date);
-        new_obj.save()
-
-        return HttpResponseRedirect(status=201)
-
 
 def registering(request):
     User = get_user_model()
@@ -180,11 +162,31 @@ def observation(request):
 
 def new_observation(request):
     template = loader.get_template('hnfp/new_observation.html')
-    context = {}
+    obs_cats = Observation.get_categories()
+    context = {
+        'obs_cats': obs_cats,
+    }
     return HttpResponse(template.render(context, request))
 
 def observation_detail(request, observation_id):
     return HttpResponse("You're looking at observation %s." % observation_id)
+
+def observation_create(request):
+    if request.method == 'POST':
+        observation_location = request.POST['observation_location']
+        observation_category = request.POST['observation_category']
+        observation_type = request.POST['observation_type']
+        observation_tally = request.POST['observation_tally']
+        comments = request.POST['comments']
+        observation_time = request.POST['observation_time']
+        observation_date = request.POST['observation_date']
+        # observation_photo = request.FILES['observation_photo']
+        observer_username = request.user.username
+
+        new_obj = Observation(category=observation_category, observation_location=observation_location, observer_username=observer_username, observation_type=observation_type, observation_tally=observation_tally, comments=comments, observation_date=observation_date);
+        new_obj.save()
+
+        return HttpResponseRedirect(status=201)
 
 def job(request):
     template = loader.get_template('hnfp/job.html')

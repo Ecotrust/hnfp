@@ -243,24 +243,17 @@ p {
   font-size: 2.25em;
 }
 
+.btn-border-light-blue.add-btn i {
+  font-size: 1.5em;
+  line-height: 3rem;
+  margin-right: 6px;
+  vertical-align: top;
+}
+
 .btn-border-white,
 .next-step {
   background: transparent;
   border: 3px solid #fff;
-}
-
-.i_add,
-.btn-border-blue .i_add,
-.btn-border-light-blue .i_add {
-  background: #5d85b7;
-  border-radius: 50%;
-  color: #fff;
-  display: inline-block;
-  font-size: 2rem;
-  font-style: normal;
-  height: 1.6125rem;
-  line-height: 1.6125rem;
-  width: 1.6125rem;
 }
 
 /*--------------------
@@ -805,13 +798,13 @@ nav .tabs .tab {
 }
 
   #new-observation.tall {
-    height: 80%;
-    top: 10%;
+    height: 90%;
+    top: 5%;
   }
 
   #new-observation.short {
-    height: 25%;
-    top: 70%;
+    height: 30%;
+    top: 65%;
   }
 
 #new-observation .progress {
@@ -823,18 +816,18 @@ nav .tabs .tab {
 #new-observation label,
 #new-observation textarea {
   color: #4d4d4e;
-  font-family: 'function_bold', sans-serif;
+  margin: 0 0 1rem;
+}
+
+#new-observation textarea {
+  height: 2rem;
+  min-height: 2rem;
 }
 
 #new-observation #observation_location {
   background: transparent;
   color: #777;
   font-family: 'function', sans-serif;
-  margin: 0 0 .5rem;
-}
-
-#input-field-location {
-  margin-bottom: 1.5rem;
 }
 
 #input-field-location .btn {
@@ -860,8 +853,12 @@ nav .tabs .tab {
 
 #new-observation input:not(.file-path),
 #new-observation textarea {
-  background: #dfebea;
+//  background: #dfebea;
   color: #4d4d4e;
+}
+
+#new-observation input.file-path {
+  margin-bottom: 0;
 }
 
 #new-observation label {
@@ -888,20 +885,31 @@ nav .tabs .tab {
   line-height: inherit;
 }
 
-.observations select.browser-default,
-#new-observation select.browser-default {
+.observations select.browser-default {
   background: #dfebea;
   color: #4d4d4e;
   font-family: 'function_bold', sans-serif;
-  outline: none;
 }
 
 #new-observation select.browser-default {
-  margin-bottom: 1rem;
+  background: transparent;
+  color: #4d4d4e;
+  margin: .75rem 0 .75rem;
+  font-family: 'function', sans-serif;
+}
+
+#new-observation .select-icon {
+  display: block;
+  opacity: .8;
+  pointer-events: none;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  z-index: 9;
 }
 
 .map-container {
-  height: 440px;
+  height: 460px;
 }
 
 .observations #map-wrapper {
@@ -934,17 +942,12 @@ nav .tabs .tab {
     color: #5d85b7;
   }
 
-.observations .add-btn {
-  line-height: 3rem;
+.add-btn i {
+    font-size: 1em;
 }
 
-.observations i.i_add {
-  font-size: 1.5625em;
-  line-height: 1.4375rem;
-  height: 1.4375rem;
-  margin-right: .5rem;
-  width: 1.4375rem;
-  vertical-align: middle;
+.observations .add-btn {
+  line-height: 3rem;
 }
 
 .observations .select-wrapper .caret {
@@ -1016,11 +1019,7 @@ nav .tabs .tab {
   max-width: 100%;
 }
 
-.file-path-wrapper {
-  clear: both;
-  display: block;
-  padding-left: 0;
-}
+.file-path-wrapper {}
 
 .file-path-wrapper input {
   font-size: .8125em;
@@ -1330,6 +1329,10 @@ path {
     font-size: 1em;
     text-align: center;
   }
+
+  #new-observation .relative .material-icons {
+    display: none;
+  }
 }
 
 @media (min-width: 54em) {
@@ -1381,11 +1384,19 @@ path {
     min-height: 100px;
   }
 
-  #new-observation,
+  #new-observation {
+    height: 60%;
+    top: 35%;
+    width: 36%;
+  }
+
   #new-observation.tall {
     height: 90%;
     top: 5%;
-    width: 35%;
+  }
+  #new-observation.short {
+    height: 35%;
+    top: 60%;
   }
 }
 

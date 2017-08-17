@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from features.registry import register
-from hnfp.models import Post, PublicManager, Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple, AOI, JobOpportunity, Observation, ObservationLocation, ObservationCategory
+from hnfp.models import Post, PublicManager, Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple, AOI, JobOpportunity, Observation
 
 
 # Blog posts for forum
@@ -58,7 +58,7 @@ class ResponseAdmin(admin.ModelAdmin):
 	readonly_fields = ('survey', 'created', 'updated', 'interview_uuid')
 
 class ObservationAdmin(admin.ModelAdmin):
-	list_display = ('category', 'observers', 'observation_date')
+	list_display = ('category', 'observer_username', 'observation_date')
 	readonly_fields = ('observation_created', 'observation_updated')
 
 # admin.site.register(Question, QuestionInline)
@@ -67,5 +67,3 @@ admin.site.register(Survey, SurveyAdmin)
 admin.site.register(Response, ResponseAdmin)
 admin.site.register(JobOpportunity)
 admin.site.register(Observation, ObservationAdmin)
-admin.site.register(ObservationCategory)
-admin.site.register(ObservationLocation)

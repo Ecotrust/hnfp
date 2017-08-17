@@ -1,23 +1,17 @@
-var mousePositionControl = new ol.control.MousePosition({
-  coordinateFormat: ol.coordinate.createStringXY(4),
-  projection: 'EPSG:4326',
-  // comment the following two lines to have the mouse position
-  // be placed within the map.
-  className: 'custom-mouse-position',
-  target: document.getElementById('mouse-position'),
-  undefinedHTML: '&nbsp;'
-});
-
-if (ol.has.TOUCH) {
-  var allowMouseZoom = false;
-} else {
-  var allowMouseZoom = true;
-}
-
 var mapView = new ol.View({
   center: ol.proj.fromLonLat([-135.44, 58.10]),
   zoom: 10
 });
+
+var paramsObsMap = {
+  allowTouch: function() {
+    if (ol.has.TOUCH) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
 
 var map = new ol.Map({
   target: 'map',
@@ -35,9 +29,15 @@ var map = new ol.Map({
     attributionOptions: ({
       collapsible: true
     })
-  }).extend([mousePositionControl]),
+  }).extend([
+    new ol.control.MousePosition({
+      coordinateFormat: ol.coordinate.createStringXY(2),
+      projection: 'EPSG:4326',
+    }),
+    new ol.control.FullScreen()
+  ]),
   interactions: ol.interaction.defaults({
-    mouseWheelZoom: allowMouseZoom
+    mouseWheelZoom: paramsObsMap.allowTouch()
   })
 });
 
@@ -149,5 +149,9 @@ var selectStyle = new ol.style.Style({
 });
 
 function addToMap() {
+
+}
+
+function removeInterations() {
   map.removeInteraction(modify);
 }
