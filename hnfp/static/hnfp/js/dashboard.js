@@ -1,7 +1,6 @@
 $(document).ready( function() {
   weather.getWeather();
   weather.getTides();
-  initmap();
 });
 
 var weather = {

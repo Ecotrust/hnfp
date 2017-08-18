@@ -210,9 +210,3 @@ def job(request):
 
 def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
-
-def sw_js(request):
-    filename = '/static/hnfp/sw.js'
-    jsfile = open(filename, mode='rb')
-    response = HttpResponse(content=jsfile, content_type="application/javascript")
-    return response
