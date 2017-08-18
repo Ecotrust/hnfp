@@ -11,29 +11,35 @@
 
 <div class="row">
   <section class="bg_green_light weather-wrap">
-    <div class="col s12 m10 offset-m1">
-      <div id="forecast">
-        <h4 class="center teal-text flow-text">Forecast</h4>
+    <div id="forecast">
+      <div class="row">
+        <h4 class="center teal-text flow-text">Today's Forecast</h4>
+        <div id="forecast-summary"></div>
+      </div>
+      <div class="row">
+        <h4 class="center teal-text flow-text">Current</h4>
         <div id="weatherforcast"></div>
       </div>
-      <div id="marine">
+    </div>
+    <div id="marine">
+      <div class="row">
         <h4 class="center teal-text flow-text">Marine Conditions</h4>
         <div id="marineforecast"></div>
       </div>
-      <div id="tides">
-        <h4 class="center teal-text flow-text">Tide Report</h4>
-          <table class="highlight responsive-table centered">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Water Level (ft)</th>
-                <th>High/Low</th>
-              </tr>
-            </thead>
-            <tbody id="tideforecast"></tbody>
-          </table>
-      </div>
+    </div>
+    <div id="tides">
+      <h4 class="center teal-text flow-text">Tide Report</h4>
+      <table class="highlight responsive-table centered">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Water Level (ft)</th>
+            <th>High/Low</th>
+          </tr>
+        </thead>
+        <tbody id="tideforecast"></tbody>
+      </table>
     </div>
   </section>
 </div>

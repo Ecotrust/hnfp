@@ -58,6 +58,9 @@ def registering(request):
         password = request.POST['password']
         username = email
 
+        if get_user_model().objects.filter(username=username).exists():
+            return render(request, 'accounts/registration_error.html')
+
         user, created = get_user_model().objects.get_or_create(username=username)
         if not created:
             return render(request, 'accounts/registration_error.html')

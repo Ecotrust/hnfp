@@ -561,6 +561,11 @@ nav .tabs .tab {
   overflow: hidden;
 }
 
+#tempchart {
+  height: 200px;
+  width: 80%;
+}
+
 #forecast,
 #marine,
 #tides {
@@ -578,7 +583,7 @@ nav .tabs .tab {
 }
 
 #forecast h4, #marine h4, #tides h4 {
-  margin: 0 0 1rem;
+  margin: 0 0 1.5rem;
 }
 
 #forecast p:last-child {
@@ -587,19 +592,16 @@ nav .tabs .tab {
 
 #forecast > div > div,
 #marine > div > div {
-  line-height: 2rem;
+  line-height: 1.875rem;
+}
+
+#weatherforcast,
+#marineforecast {
+  font-size: .675em;
 }
 
 .weather-wrap > div > div > div > div:nth-of-type(2n+2) {
   background: rgba(255,255,255,0.4);
-}
-
-.weather-wrap strong {
-  font-size: .9375em;
-}
-
-.weather-block {
-  font-size: .8125em;
 }
 
 #tides th {
@@ -1012,6 +1014,10 @@ nav .tabs .tab {
 .observations .toolbar.active ul {
   background-color: #fff;
   z-index: 1;
+}
+
+.observations .switch {
+  margin: 1.5rem 0;
 }
 
 .relative.height ul img {
