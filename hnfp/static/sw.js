@@ -1,6 +1,6 @@
 if ('serviceWorker' in navigator) {
   console.log("Will the service worker register?");
-  navigator.serviceWorker.register('sw.js')
+  navigator.serviceWorker.register('static/sw.js')
     .then(function(reg){
       console.log("Yes, it did.");
     }).catch(function(err) {
