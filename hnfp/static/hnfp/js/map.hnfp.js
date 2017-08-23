@@ -13,20 +13,6 @@ var paramsObsMap = {
   }
 }
 
-function addToMap(newData) {
-  var newPoint = new ol.Feature();
-  console.log(newData);
-  observationPoints.addFeature(newPoint);
-  newPoint.setStyle(new ol.style.Style({
-    image: new ol.style.Icon({
-      src: '/static/hnfp/img/icons/i_bear.png',
-      width: 40
-    })
-  }));
-  let loc = getLocationPoint();
-  newPoint.setGeometry(new ol.geom.Point(locPoint.getGeometry()));
-}
-
 // layers
 var hereMap = new ol.layer.Tile({
   preload: Infinity,
@@ -58,8 +44,8 @@ const map = new ol.Map({
   })
 });
 
+// initial data
 var vectorSource = new ol.source.Vector();
-
 var vectorLayer = new ol.layer.Vector({
   source: vectorSource,
   map: map
@@ -78,15 +64,9 @@ for (var i = 1; i < user_obs_geo.length; i++) {
   let coords = ol.proj.fromLonLat(user_obs_geo[i].coordinates);
   newP.setGeometry(new ol.geom.Point(coords));
   newP.setStyle(new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 8,
-      fill: new ol.style.Fill({
-        color: '#000000'
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#ffffff',
-        width: 2
-      })
+    image: new ol.style.Icon({
+      src: '/static/hnfp/img/icons/i_bear.png',
+      scale: 0.5,
     })
   }));
 }
@@ -97,7 +77,7 @@ var locLayer = new ol.layer.Vector({
   map: map
 });
 var locPoint = new ol.Feature();
-locPoint.setId(0);
+locPoint.setId(1);
 locSource.addFeature(locPoint);
 locPoint.setStyle(locStyle);
 
@@ -109,6 +89,9 @@ var selectInteraction = new ol.interaction.Select({
 
 var draw;
 function drawLocation() {
+  if (!locLayer.getVisible()) {
+    locLayer.setVisible(true);
+  }
   locPoint.setGeometry(new ol.geom.Point(mapView.getCenter()));
   locPoint.setStyle(locStyle);
   map.addInteraction(selectInteraction);
@@ -182,4 +165,24 @@ var selectStyle = new ol.style.Style({
 
 function removeInterations() {
   map.removeInteraction(modify);
+}
+
+// Created new data
+function addToMap(newData) {
+  let l = newData.length - 1;
+  let newDataCoords = JSON.parse(newData[l].observation_location);
+  let point = new ol.Feature();
+  vectorSource.addFeature(point);
+  let coords = ol.proj.fromLonLat(newDataCoords.coordinates);
+  point.setGeometry(new ol.geom.Point(coords));
+  point.setStyle(new ol.style.Style({
+    image: new ol.style.Icon({
+      src: '/static/hnfp/img/icons/i_bear.png',
+      scale: 0.5
+    })
+  }));
+
+  if (locLayer.getVisible()) {
+    locLayer.setVisible(false);
+  }
 }

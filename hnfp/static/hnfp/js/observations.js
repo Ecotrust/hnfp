@@ -106,7 +106,6 @@ var observations = {
   },
   create: function(form) {
     $form = $(form).serialize();
-    console.log($form);
     return $.ajax({
       type: 'POST',
       url: '/observation/create/',
