@@ -24,7 +24,6 @@ class Migration(migrations.Migration):
                 ('observation_created', models.DateTimeField(auto_now_add=True)),
                 ('observation_updated', models.DateTimeField(auto_now=True)),
                 ('number_of_observers', models.IntegerField(blank=True, null=True)),
-                ('observers', models.CharField(max_length=800)),
                 ('comments', models.CharField(max_length=1600)),
             ],
             options={

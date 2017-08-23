@@ -1,5 +1,7 @@
 # from django.db import model
+from django.conf import settings
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User, Group
 from drawing.models import AOI as drawing_AOI
 from features.registry import register
@@ -200,25 +202,90 @@ class Observation(models.Model):
 		('custom', 'Custom'),
 	)
 
-	category = models.CharField(max_length=400, choices=OBSERVATION_CATS, default='custom')
-	customcategory = models.CharField(max_length=400, blank=True, null=True)
-	observation_date = models.CharField(max_length=100, blank=True, null=True)
-	observation_time = models.CharField(max_length=20, blank=True, null=True)
-	observation_type = models.CharField(max_length=400, blank=True, null=True)
-	observation_tally = models.IntegerField(blank=True, null=True)
-	observation_created = models.DateTimeField(auto_now_add=True)
-	observation_updated = models.DateTimeField(auto_now=True)
-	number_of_observers = models.IntegerField(default=1,blank=True, null=True)
-	# observation_photo = models.FileField(upload_to='observation/', blank=True, null=True)
-	observer_username = models.CharField(max_length=800)
-	observation_location = models.PointField(blank=True, null=True)
-	comments = models.CharField(max_length=1600)
+	category = models.CharField(
+		max_length=400,
+		choices=OBSERVATION_CATS,
+		default='custom'
+	)
+	customcategory = models.CharField(
+		max_length=400,
+		null=True,
+		blank=True,
+	)
+	observation_date = models.CharField(
+		max_length=100,
+		null=True,
+		blank=True
+	)
+	observation_time = models.CharField(
+		max_length=20,
+		blank=True,
+		null=True
+	)
+	observation_type = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True
+	)
+	observation_tally = models.CharField(
+		max_length=100,
+		default=1,
+		blank=True,
+		null=True,
+	)
+	observation_created = models.DateTimeField(
+		auto_now_add=True
+	)
+	observation_updated = models.DateTimeField(
+		auto_now=True
+	)
+	number_of_observers = models.CharField(
+		max_length=100,
+		default=1,
+		null=True,
+		blank=True,
+	)
+
+	observer_username = models.CharField(
+		max_length=800,
+		null=True,
+		blank=True,
+	)
+
+	observation_location = models.PointField(
+		srid=settings.GEOMETRY_DB_SRID,
+		default=None,
+		null=True,
+		blank=True,
+	)
+	comments = models.CharField(
+		max_length=20000,
+		default=None,
+		null=True,
+		blank=True,
+	)
+
+	def to_dict(self):
+		return {
+			'category': category,
+			'customcategory': custom_cat,
+			'observation_date': observation_date,
+			'observation_time': observation_time,
+			'observation_type': observation_type,
+			'observation_tally': observation_tally,
+			'observation_created': observation_created,
+			'observation_updated': observation_updated,
+			'number_of_observers': number_of_observers,
+			'observer_username': observer_username,
+			'observation_location': observation_location,
+			'comments': comments,
+		}
+
+	def __str__(self):
+		return "{}: `{}`".format(self.observation_location, self.category)
 
 	class Meta:
 		verbose_name_plural = 'Observations'
-
-	def save(self, *args, **kwargs):
-		super(Observation, self).save(*args, **kwargs)
 
 	def get_categories():
 		cats = Observation.OBSERVATION_CATS
@@ -226,9 +293,3 @@ class Observation(models.Model):
 		for cat in cats:
 			cats_list.append(cat[0])
 		return cats_list
-
-	def __unicode__(self):
-		return unicode("%s" % (self.page))
-
-	def __str__(self):
-		return self.observer_username

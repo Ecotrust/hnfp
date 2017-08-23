@@ -2,7 +2,7 @@ $(document).ready(function() {
   $('.collapsible').collapsible();
   $('#add-observation-btn').click(function() {
     observations.initNew();
-  })
+  });
 });
 
 $newObservationWrapper = $('#new-observation');
@@ -54,8 +54,7 @@ var observations = {
     observations.showStepFour(hide);
   },
   setInputLoc: function() {
-    let loc = getLocationPoint();
-    $('#observation_location').val(loc);
+    $('#observation_location').val(getLocationPoint());
   },
   close: function() {
     $newObservationWrapper.find('form').html('');
@@ -102,17 +101,18 @@ var observations = {
       $drawingForm.submit(function(e) {
         e.preventDefault();
         observations.create(e.target);
-        addToMap();
       })
     });
   },
   create: function(form) {
     $form = $(form).serialize();
+    console.log($form);
     return $.ajax({
       type: 'POST',
       url: '/observation/create/',
       data: $form,
       success: function(data) {
+        addToMap(data);
         observations.close();
         $drawingForm.html('');
       },

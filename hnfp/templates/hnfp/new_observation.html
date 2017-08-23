@@ -1,5 +1,5 @@
 {% load static %}
-<form enctype="multipart/form-data">
+<form action="/observation/create/" method="POST">
   <section class="section container">
     <section id="stepone" class="observation-location visible">
       <h2 class="center">Add entry</h2>
@@ -92,6 +92,7 @@
           <input placeholder="Time" id="observation_time" name="observation_time" type="text" class="timepicker">
         </div>
       </div>
+      <input type="hidden" id="uid_time" name="uid_time" />
       <div class="input-field center">
         <button type="submit" class="btn" name="submit">Add to Map</button>
       </div>

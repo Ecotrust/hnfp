@@ -1092,7 +1092,7 @@ nav .tabs .tab {
   z-index: -1;
 }
 
-.survey-wrap input {
+.survey-wrap input:not(.browser-default) {
   background: rgba(255,255,255,0.45);
 }
 
@@ -1137,7 +1137,6 @@ nav .tabs .tab {
 
 .survey-wrap .input-field input:focus,
 .survey-wrap .input-field input {
-  border-bottom: none;
   padding-left: 4px;
 }
 
@@ -1392,8 +1391,9 @@ path {
 
   #new-observation {
     height: 60%;
+    left: 2%;
     top: 35%;
-    width: 36%;
+    width: 38%;
   }
 
   #new-observation.tall {
@@ -1438,6 +1438,10 @@ path {
   .btn-border-white i,
   .btn-border-light-blue i {
     font-size: 3em;
+  }
+
+  .observations .btn-border-light-blue i {
+      font-size: 2em;
   }
 
   .hero {

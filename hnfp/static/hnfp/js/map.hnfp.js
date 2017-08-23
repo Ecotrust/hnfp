@@ -13,7 +13,7 @@ var paramsObsMap = {
   }
 }
 
-var map = new ol.Map({
+const map = new ol.Map({
   target: 'map',
   layers: [
     new ol.layer.Tile({
@@ -55,23 +55,8 @@ var draw;
 function drawLocation() {
   locPoint.setGeometry(new ol.geom.Point(mapView.getCenter()));
   locPoint.setStyle(locStyle);
-
-  // remove select and add draw
-  // map.removeInteraction(selectInteraction);
-  /* draw = new ol.interaction.Draw({
-    source: locObs,
-    type: 'Point',
-    style: drawStyle
-  }); */
-
-  //draw.on('drawend', function(evt) {
-    // remove draw and add select
-    // map.removeInteraction(draw);
-    map.addInteraction(selectInteraction);
-    editLocPoint();
-  //}, this);
-
-  // map.addInteraction(draw);
+  map.addInteraction(selectInteraction);
+  map.addInteraction(modify);
 }
 
 var selectInteraction = new ol.interaction.Select({
@@ -92,19 +77,19 @@ function findLocation() {
     mapView.animate({
       center: coordinates,
       zoom: 18,
-      duration: 6000
+      duration: 4000
     });
     observations.hideSpinner();
     locPoint.setGeometry(new ol.geom.Point(coordinates));
     geolocation.setTracking(false);
     map.addInteraction(selectInteraction);
-    editLocPoint();
+    map.addInteraction(modify);
   });
 
   geolocation.on('error', function(error) {
     geolocation.setTracking(false);
     observations.hideSpinner();
-    Materialize.toast('Location not found. Use map instead.', 6000);
+    Materialize.toast('Location not found. You may have a privay setting that prevents location tracking. Try to find location on map or try geolocation again.', 6000);
   });
 }
 
@@ -114,13 +99,9 @@ function getLocationPoint() {
 }
 
 // edit location marker
-var modify;
-function editLocPoint() {
-  modify = new ol.interaction.Modify({
-    features: selectInteraction.getFeatures()
-  });
-  map.addInteraction(modify);
-}
+var modify = new ol.interaction.Modify({
+  features: selectInteraction.getFeatures()
+});
 
 var locStyle = new ol.style.Style({
   image: new ol.style.Circle({
@@ -148,8 +129,23 @@ var selectStyle = new ol.style.Style({
   })
 });
 
-function addToMap() {
-
+var observationPoints = new ol.source.Vector();
+var observationPointsLayer = new ol.layer.Vector({
+  source: observationPoints,
+  map: map
+});
+function addToMap(newData) {
+  var newPoint = new ol.Feature();
+  console.log(newData);
+  observationPoints.addFeature(newPoint);
+  newPoint.setStyle(new ol.style.Style({
+    image: new ol.style.Icon({
+      src: '/static/hnfp/img/icons/i_bear.png',
+      width: 40
+    })
+  }));
+  let loc = getLocationPoint();
+  newPoint.setGeometry(new ol.geom.Point(locPoint.getGeometry()));
 }
 
 function removeInterations() {

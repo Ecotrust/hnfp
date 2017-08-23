@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, 
 from django.contrib.sessions.models import Session
 from django.conf import settings
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader, RequestContext
 
 from django.db import models
@@ -26,6 +26,7 @@ from hnfp.models import Question, Survey, Category, PublicManager
 from hnfp.forms import ResponseForm
 # observation
 from hnfp.models import Observation
+from django.contrib.gis.geos import Point
 #forum
 from hnfp.models import Post
 #jobs
@@ -172,24 +173,43 @@ def new_observation(request):
     return HttpResponse(template.render(context, request))
 
 def observation_detail(request, observation_id):
-    return HttpResponse("You're looking at observation %s." % observation_id)
+    return HttpResponse("You're looking at observation %s.")
 
 def observation_create(request):
+    import json
+
     if request.method == 'POST':
-        observation_location = request.POST['observation_location']
+        loc = request.POST['observation_location']
+        lp = loc.split(',')
+        observation_location = Point([float(lp[0]),float(lp[1])])
+
         observation_category = request.POST['observation_category']
         observation_type = request.POST['observation_type']
         observation_tally = request.POST['observation_tally']
         comments = request.POST['comments']
         observation_time = request.POST['observation_time']
         observation_date = request.POST['observation_date']
-        # observation_photo = request.FILES['observation_photo']
-        observer_username = request.user.username
 
-        new_obj = Observation(category=observation_category, observation_location=observation_location, observer_username=observer_username, observation_type=observation_type, observation_tally=observation_tally, comments=comments, observation_date=observation_date);
+        new_obj = Observation(
+            observation_location=observation_location,
+            category=observation_category,
+            observation_type=observation_type,
+            observation_date=observation_date,
+            observation_time=observation_time,
+            observation_tally=observation_tally,
+            comments=comments,
+            observer_username=request.user.username
+        );
         new_obj.save()
 
-        return HttpResponseRedirect(status=201)
+        content = []
+        content.append({
+            'category': new_obj.category,
+            'type': new_obj.observation_type,
+            'time': new_obj.observation_time,
+            'tally': new_obj.observation_tally,
+        })
+        return JsonResponse(content, safe=False)
 
 def job(request):
     template = loader.get_template('hnfp/job.html')
