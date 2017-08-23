@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ## remove for production
-    'livereload.middleware.LiveReloadScript'
+    # 'livereload.middleware.LiveReloadScript'
 ]
 
 ROOT_URLCONF = 'marineplanner.urls'
@@ -187,7 +187,7 @@ INSTALLED_APPS = [
     ### END ADD DJANGO APPS ###
 
     ### REMOVE for production apps ##
-    'livereload',
+    # 'livereload',
     ### END remove for prod ###
 
     ### ADD APPS ###

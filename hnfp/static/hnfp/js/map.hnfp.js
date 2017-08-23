@@ -89,9 +89,6 @@ var selectInteraction = new ol.interaction.Select({
 
 var draw;
 function drawLocation() {
-  if (!locLayer.getVisible()) {
-    locLayer.setVisible(true);
-  }
   locPoint.setGeometry(new ol.geom.Point(mapView.getCenter()));
   locPoint.setStyle(locStyle);
   map.addInteraction(selectInteraction);
@@ -181,8 +178,4 @@ function addToMap(newData) {
       scale: 0.5
     })
   }));
-
-  if (locLayer.getVisible()) {
-    locLayer.setVisible(false);
-  }
 }
