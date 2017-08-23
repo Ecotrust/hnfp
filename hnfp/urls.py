@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^home/', views.home, name='home'),
     url(r'^survey/', views.survey, name='survey'),
     url(r'^login/', views.login, name='login'),
+    url(r'^myaccount/', views.myaccount, name='myaccount'),
     url(r'^registering/', views.registering, name='registering'),
     url(r'^registered/', views.registered, name='registered'),
     url(r'^dashboard/', views.dashboard, name='dashboard'),

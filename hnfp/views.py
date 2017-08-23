@@ -128,6 +128,13 @@ def login(request):
     }
     return HttpResponse(template.render(context, request))
 
+def myaccount(request):
+    template = loader.get_template('hnfp/account.html')
+    context = {
+        'title': 'Profile',
+    }
+    return HttpResponse(template.render(context, request))
+
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
     posts = Post.objects.get_queryset()
