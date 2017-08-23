@@ -266,19 +266,21 @@ class Observation(models.Model):
 	)
 
 	def to_dict(self):
+		if self.observation_location is not None:
+			point = self.observation_location.geojson
+		else:
+			point = None
 		return {
-			'category': category,
-			'customcategory': custom_cat,
-			'observation_date': observation_date,
-			'observation_time': observation_time,
-			'observation_type': observation_type,
-			'observation_tally': observation_tally,
-			'observation_created': observation_created,
-			'observation_updated': observation_updated,
-			'number_of_observers': number_of_observers,
-			'observer_username': observer_username,
-			'observation_location': observation_location,
-			'comments': comments,
+			'category': self.category,
+			'customcategory': self.customcategory,
+			'observation_date': self.observation_date,
+			'observation_time': self.observation_time,
+			'observation_type': self.observation_type,
+			'observation_tally': self.observation_tally,
+			'number_of_observers': self.number_of_observers,
+			'observer_username': self.observer_username,
+			'observation_location': point,
+			'comments': self.comments,
 		}
 
 	def __str__(self):
@@ -293,3 +295,6 @@ class Observation(models.Model):
 		for cat in cats:
 			cats_list.append(cat[0])
 		return cats_list
+
+	def get_user_observations(username):
+		return Observation.objects.filter(observer_username=username)

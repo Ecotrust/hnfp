@@ -7,8 +7,6 @@ app.init = function () {
     map = new OpenLayers.Map(null, {
       // restrictedExtent: layerExtent,
         //allOverlays: true,
-        displayProjection: new OpenLayers.Projection("EPSG:4326"),
-        projection: "EPSG:3857"
     });
 
     map.addControl(new P97.Controls.LayerLoadProgress({

@@ -31,6 +31,7 @@ from django.contrib.gis.geos import Point
 from hnfp.models import Post
 #jobs
 from hnfp.models import JobOpportunity
+import json
 
 ### VIEWS ###
 def index(request):
@@ -158,9 +159,15 @@ def alert_detail(request, alert_id):
 
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
+    all_observation = []
+    get_obs = Observation.get_user_observations(request.user.username)
+    for x in get_obs:
+        dic = x.to_dict()
+        all_observation.append(dic)
     context = {
         'title': 'My Hunt, Gather, Observe Map',
         'year': '2017',
+        'user_observations': json.dumps(all_observation),
     }
     return HttpResponse(template.render(context, request))
 
@@ -176,13 +183,10 @@ def observation_detail(request, observation_id):
     return HttpResponse("You're looking at observation %s.")
 
 def observation_create(request):
-    import json
-
     if request.method == 'POST':
         loc = request.POST['observation_location']
         lp = loc.split(',')
         observation_location = Point([float(lp[0]),float(lp[1])])
-
         observation_category = request.POST['observation_category']
         observation_type = request.POST['observation_type']
         observation_tally = request.POST['observation_tally']
@@ -190,7 +194,7 @@ def observation_create(request):
         observation_time = request.POST['observation_time']
         observation_date = request.POST['observation_date']
 
-        new_obj = Observation(
+        new_obs = Observation(
             observation_location=observation_location,
             category=observation_category,
             observation_type=observation_type,
@@ -200,16 +204,9 @@ def observation_create(request):
             comments=comments,
             observer_username=request.user.username
         );
-        new_obj.save()
-
-        content = []
-        content.append({
-            'category': new_obj.category,
-            'type': new_obj.observation_type,
-            'time': new_obj.observation_time,
-            'tally': new_obj.observation_tally,
-        })
-        return JsonResponse(content, safe=False)
+        new_obs.save()
+        all_observation = [x.to_dict() for x in Observation.objects.filter(observer_username=request.user.username)]
+        return JsonResponse(all_observation, safe=False)
 
 def job(request):
     template = loader.get_template('hnfp/job.html')

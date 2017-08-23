@@ -13,16 +13,33 @@ var paramsObsMap = {
   }
 }
 
+function addToMap(newData) {
+  var newPoint = new ol.Feature();
+  console.log(newData);
+  observationPoints.addFeature(newPoint);
+  newPoint.setStyle(new ol.style.Style({
+    image: new ol.style.Icon({
+      src: '/static/hnfp/img/icons/i_bear.png',
+      width: 40
+    })
+  }));
+  let loc = getLocationPoint();
+  newPoint.setGeometry(new ol.geom.Point(locPoint.getGeometry()));
+}
+
+// layers
+var hereMap = new ol.layer.Tile({
+  preload: Infinity,
+  source: new ol.source.XYZ({
+    url:'//{1-4}.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q',
+    attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' + '<a href="http://developer.here.com">HERE</a>',
+  })
+});
+
 const map = new ol.Map({
   target: 'map',
   layers: [
-    new ol.layer.Tile({
-      preload: Infinity,
-      source: new ol.source.XYZ({
-        url:'//{1-4}.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q',
-        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' + '<a href="http://developer.here.com">HERE</a>',
-      })
-    })
+    hereMap
   ],
   view: mapView,
   controls: ol.control.defaults({
@@ -41,15 +58,54 @@ const map = new ol.Map({
   })
 });
 
-var locObs = new ol.source.Vector();
-var locObsLayer = new ol.layer.Vector({
-  source: locObs,
+var vectorSource = new ol.source.Vector();
+
+var vectorLayer = new ol.layer.Vector({
+  source: vectorSource,
+  map: map
+});
+
+// user_observations is set in observation.html & is contextual from a views obj
+var user_obs_geo = [];
+for (var i = 0; i < user_observations.length; i++) {
+  var geo = JSON.parse(user_observations[i].observation_location);
+  user_obs_geo.push(geo);
+}
+
+for (var i = 1; i < user_obs_geo.length; i++) {
+  let newP = new ol.Feature();
+  vectorSource.addFeature(newP);
+  let coords = ol.proj.fromLonLat(user_obs_geo[i].coordinates);
+  newP.setGeometry(new ol.geom.Point(coords));
+  newP.setStyle(new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 8,
+      fill: new ol.style.Fill({
+        color: '#000000'
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#ffffff',
+        width: 2
+      })
+    })
+  }));
+}
+
+var locSource = new ol.source.Vector();
+var locLayer = new ol.layer.Vector({
+  source: locSource,
   map: map
 });
 var locPoint = new ol.Feature();
-locPoint.setId(1);
-locObs.addFeature(locPoint);
+locPoint.setId(0);
+locSource.addFeature(locPoint);
 locPoint.setStyle(locStyle);
+
+// Interactions
+var selectInteraction = new ol.interaction.Select({
+  layers: [locLayer],
+  style: selectStyle
+});
 
 var draw;
 function drawLocation() {
@@ -58,10 +114,6 @@ function drawLocation() {
   map.addInteraction(selectInteraction);
   map.addInteraction(modify);
 }
-
-var selectInteraction = new ol.interaction.Select({
-  style: selectStyle
-});
 
 // geolocation tracker var
 var geolocation;
@@ -82,7 +134,6 @@ function findLocation() {
     observations.hideSpinner();
     locPoint.setGeometry(new ol.geom.Point(coordinates));
     geolocation.setTracking(false);
-    map.addInteraction(selectInteraction);
     map.addInteraction(modify);
   });
 
@@ -107,7 +158,7 @@ var locStyle = new ol.style.Style({
   image: new ol.style.Circle({
     radius: 8,
     fill: new ol.style.Fill({
-      color: '#00ffff'
+      color: '#000000'
     }),
     stroke: new ol.style.Stroke({
       color: '#000000',
@@ -120,7 +171,7 @@ var selectStyle = new ol.style.Style({
   image: new ol.style.Circle({
     radius: 8,
     fill: new ol.style.Fill({
-      color: '#ffff00'
+      color: '#000000'
     }),
     stroke: new ol.style.Stroke({
       color: '#ffffff',
@@ -128,25 +179,6 @@ var selectStyle = new ol.style.Style({
     })
   })
 });
-
-var observationPoints = new ol.source.Vector();
-var observationPointsLayer = new ol.layer.Vector({
-  source: observationPoints,
-  map: map
-});
-function addToMap(newData) {
-  var newPoint = new ol.Feature();
-  console.log(newData);
-  observationPoints.addFeature(newPoint);
-  newPoint.setStyle(new ol.style.Style({
-    image: new ol.style.Icon({
-      src: '/static/hnfp/img/icons/i_bear.png',
-      width: 40
-    })
-  }));
-  let loc = getLocationPoint();
-  newPoint.setGeometry(new ol.geom.Point(locPoint.getGeometry()));
-}
 
 function removeInterations() {
   map.removeInteraction(modify);

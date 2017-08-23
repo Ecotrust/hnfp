@@ -71,6 +71,7 @@
         <p>Share with land managers<br /><em>Your information will be anonymized</em></p>
     </div>
   </section>
+  {{user_observations}}
 </main>
 {% endblock outer_content %}
 
@@ -86,6 +87,9 @@
     <script src="{% static 'hnfp/js/localforage/localforage.min.js' %}"></script>
     <script src="{% static 'hnfp/js/materialize/materialize.min.js' %}"></script>
 
+    <script>
+      var user_observations = {{ user_observations|safe }};
+    </script>
     <script src="{% static 'js/scenarios.js' %}" charset="utf-8"></script>
     <script src="{% static 'hnfp/js/map.hnfp.js' %}" charset="utf-8"></script>
     <script src="{% static 'hnfp/js/app.hnfp.js' %}" charset="utf-8"></script>
@@ -101,6 +105,5 @@
       ga('send', 'pageview');
     </script>
   {% endblock mp_js %}
-
   <script src="{% static 'hnfp/js/observations.js' %}"></script>
 {% endblock extra_js %}
