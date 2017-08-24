@@ -294,7 +294,7 @@ nav .tabs .tab {
   }
 
   nav .brand-logo {
-    padding: 15px 0;
+    padding: 0;
   }
 
 .nav-content {
@@ -910,8 +910,10 @@ nav .tabs .tab {
   z-index: 9;
 }
 
-.map-container {
-  height: 460px;
+.map-container,
+#map-wrapper {
+  height: 400px;
+  max-height: 96vh;
 }
 
 .observations #map-wrapper {
@@ -1387,6 +1389,12 @@ path {
 
   .section-bottom-bg {
     min-height: 100px;
+  }
+
+  .observations .map-container,
+  .observations #map-wrapper {
+    height: 520px;
+    max-height: 98vh;
   }
 
   #new-observation {

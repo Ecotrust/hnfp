@@ -53,9 +53,11 @@ var vectorLayer = new ol.layer.Vector({
 
 // user_observations is set in observation.html & is contextual from a views obj
 var user_obs_geo = [];
-for (var i = 0; i < user_observations.length; i++) {
-  var geo = JSON.parse(user_observations[i].observation_location);
-  user_obs_geo.push(geo);
+if (typeof user_observations !== 'undefined') {
+  for (var i = 0; i < user_observations.length; i++) {
+    var geo = JSON.parse(user_observations[i].observation_location);
+    user_obs_geo.push(geo);
+  }
 }
 
 for (var i = 1; i < user_obs_geo.length; i++) {
@@ -86,6 +88,15 @@ var selectInteraction = new ol.interaction.Select({
   layers: [locLayer],
   style: selectStyle
 });
+
+var pointerInteraction = new ol.interaction.Pointer({
+  handleDownEvent: false,
+  handleDragEvent: false,
+  handleEvent: false,
+  handleMoveEvent: false,
+});
+map.addInteraction(pointerInteraction);
+
 
 var draw;
 function drawLocation() {
