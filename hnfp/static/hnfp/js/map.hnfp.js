@@ -15,6 +15,7 @@ var paramsObsMap = {
 
 // layers
 var hereMap = new ol.layer.Tile({
+  title: 'Satellite',
   preload: Infinity,
   source: new ol.source.XYZ({
     url:'//{1-4}.aerial.maps.cit.api.here.com/maptile/2.1/maptile/newest/satellite.day/{z}/{x}/{y}/256/png?app_id=p5jWgIultJxoVtXb03Xl&app_code=Cpj_I6Yx3J3yhVFE7aD12Q',
@@ -22,10 +23,17 @@ var hereMap = new ol.layer.Tile({
   })
 });
 
+var osm = new ol.layer.Tile({
+  title: 'Street',
+  source: new ol.source.OSM(),
+  visible: false
+});
+
 const map = new ol.Map({
   target: 'map',
   layers: [
-    hereMap
+    hereMap,
+    osm
   ],
   view: mapView,
   controls: ol.control.defaults({
@@ -43,6 +51,9 @@ const map = new ol.Map({
     mouseWheelZoom: paramsObsMap.allowTouch()
   })
 });
+
+var layerSwitcher = new ol.control.LayerSwitcher({});
+map.addControl(layerSwitcher);
 
 // initial data
 var vectorSource = new ol.source.Vector();
