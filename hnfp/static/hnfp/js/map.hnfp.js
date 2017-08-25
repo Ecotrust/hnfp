@@ -140,7 +140,9 @@ function findLocation() {
   geolocation.on('error', function(error) {
     geolocation.setTracking(false);
     observations.hideSpinner();
-    Materialize.toast('Location not found. You may have a privay setting that prevents location tracking. Try to find location on map or try geolocation again.', 6000);
+    Materialize.toast(`Location not found.
+      Privacy settings may be preventing location tracking.
+      Find location on the map or try again.`, 9000);
   });
 }
 
