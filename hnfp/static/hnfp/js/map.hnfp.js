@@ -52,25 +52,23 @@ var vectorLayer = new ol.layer.Vector({
 });
 
 // user_observations is set in observation.html & is contextual from a views obj
-var user_obs_geo = [];
 if (typeof user_observations !== 'undefined') {
   for (var i = 0; i < user_observations.length; i++) {
-    var geo = JSON.parse(user_observations[i].observation_location);
-    user_obs_geo.push(geo);
+    // collect data needed
+    let geo = JSON.parse(user_observations[i].observation_location),
+        coords = ol.proj.fromLonLat(geo.coordinates),
+        catURL = `/static/hnfp/img/icons/category/i_${user_observations[i].category}.png`;
+    // create points with icons
+    let newP = new ol.Feature();
+    vectorSource.addFeature(newP);
+    newP.setGeometry(new ol.geom.Point(coords));
+    newP.setStyle(new ol.style.Style({
+      image: new ol.style.Icon({
+        src: catURL,
+        scale: 0.5,
+      })
+    }));
   }
-}
-
-for (var i = 1; i < user_obs_geo.length; i++) {
-  let newP = new ol.Feature();
-  vectorSource.addFeature(newP);
-  let coords = ol.proj.fromLonLat(user_obs_geo[i].coordinates);
-  newP.setGeometry(new ol.geom.Point(coords));
-  newP.setStyle(new ol.style.Style({
-    image: new ol.style.Icon({
-      src: '/static/hnfp/img/icons/i_bear.png',
-      scale: 0.5,
-    })
-  }));
 }
 
 var locSource = new ol.source.Vector();
@@ -176,16 +174,21 @@ function removeInterations() {
 }
 
 // Created new data
-function addToMap(newData) {
-  let l = newData.length - 1;
-  let newDataCoords = JSON.parse(newData[l].observation_location);
-  let point = new ol.Feature();
+function addToMap(data) {
+  let l = data.length - 1,
+      newDataCoords = JSON.parse(data[l].observation_location),
+      cat = data[l].category,
+      // type = newData[l].observation_type,
+      // tally = newData[l].observation_tally,
+      point = new ol.Feature();
+
   vectorSource.addFeature(point);
-  let coords = ol.proj.fromLonLat(newDataCoords.coordinates);
+  let coords = ol.proj.fromLonLat(newDataCoords.coordinates),
+      catURL = `/static/hnfp/img/icons/category/i_${cat}.png`;
   point.setGeometry(new ol.geom.Point(coords));
   point.setStyle(new ol.style.Style({
     image: new ol.style.Icon({
-      src: '/static/hnfp/img/icons/i_bear.png',
+      src: catURL,
       scale: 0.5
     })
   }));
