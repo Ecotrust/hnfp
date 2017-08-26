@@ -234,3 +234,11 @@ def job(request):
 
 def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
+
+from django.views.decorators.cache import never_cache
+from django.template.loader import get_template
+@never_cache
+def serviceworker(request, js):
+    template = get_template('sw.js')
+    html = template.render()
+    return HttpResponse(html, content_type="application/x-javascript")
