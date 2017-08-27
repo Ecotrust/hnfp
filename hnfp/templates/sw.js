@@ -23,11 +23,11 @@ self.addEventListener('install', function(event) {
   );
 });
 
-self.addEventListener('fetch', function(event) {
+/* self.addEventListener('fetch', function(event) {
   // If a match isn't found in the cache, the response
   // will look like a connection error
   event.respondWith(caches.match(event.request));
-});
+}); */
 
 self.addEventListener('sync', function(event) {
   self.registration.showNotification("Sync event fired!");
