@@ -4,41 +4,21 @@
 {% block site_style %}{% endblock site_style %}
 
 {% block extra_head %}
-  <meta name="theme-color">
-  <meta name="description" content="Hoonah Native Forest Partnership">
-  <meta name="robots" content="index,follow"><!-- All Search Engines -->
-  <meta name="googlebot" content="index,follow"><!-- Google Specific -->
-
-  <!-- Links to a JSON file that specifies "installation" credentials for web applications -->
-  <link rel="manifest" href="./manifest.json">
-
-  <!-- iOS Add to Home Screen -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="App Title">
-  <link rel="apple-touch-icon" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
-  <link rel="apple-touch-icon-precomposed" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
-
-  <!-- Android -->
-  <meta name="theme-color" content="#E64545">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="{% static 'hnfp/img/touch/homescreen192.png' %}">
-  <link rel="icon" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
-{% endblock %}
+  {% include 'hnfp/blocks/extra_head.html' %}
+{% endblock extra_head %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'hnfp/css/materialize.css' %}" media="screen,projection"/>
-  <link rel="stylesheet" href="{% static 'hnfp/css/style.css' %}" media="screen,projection"/>
-{% endblock %}
+  {% include 'hnfp/blocks/extra_css.html' %}
+{% endblock extra_css %}
+
 
 {% block header %}
-  {% include './blocks/navbar.html' %}
-  {% include './modal.html' %}
+  {% include 'hnfp/blocks/navbar.html' %}
 {% endblock %}
 
 {% block stylesheets %}{% endblock stylesheets %}
 
-{% block content %}
+{% block outer_content %}
 
 <section class="container section">
   <div class="login row">
@@ -70,5 +50,9 @@
 {% endblock %}
 
 {% block footer %}
-  {% include './blocks/footer.html' %}
+  {% include 'hnfp/blocks/footer.html' %}
 {% endblock footer %}
+
+{% block extra_js %}
+  {% include 'hnfp/blocks/extra_js.html' %}
+{% endblock %}

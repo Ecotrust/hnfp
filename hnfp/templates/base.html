@@ -1,30 +1,51 @@
-{% extends "base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block icomoon %}{% endblock %}
+  <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
 
-{% block extra_head %}
-  {% include 'hnfp/blocks/extra_head.html' %}
-{% endblock extra_head %}
+  {% block extra_head %}
+    {% include 'hnfp/blocks/extra_head.html' %}
+  {% endblock extra_head %}
 
-{% block extra_css %}
-  {% include 'hnfp/blocks/extra_css.html' %}
-{% endblock extra_css %}
+  {% block site_style %}{% endblock site_style %}
 
-{% block header %}
-  {% include 'hnfp/blocks/navbar.html' %}
-{% endblock header %}
+  {% block extra_css %}
+    {% include 'hnfp/blocks/extra_css.html' %}
+  {% endblock extra_css %}
 
-{% block outer_content %}
-<main>
-  {{ block.super }}
-</main>
-{% endblock outer_content %}
+  {% block icomoon %}{% endblock %}
+</head>
+<body class="{% block body_class %}classless-page{% endblock %} {% block layout %}base{% endblock %}-layout">
 
-{% block footer %}
-  {% include 'hnfp/blocks/footer.html' %}
-{% endblock %}
+  <header>
+    {% block header %}
+      {% include 'hnfp/blocks/navbar.html' %}
+    {% endblock header %}
+  </header>
 
-{% block extra_js %}
-  {% include 'hnfp/blocks/extra_js.html' %}
-{% endblock %}
+  {% block outer_content %}
+  <main>
+    {{ block.super }}
+  </main>
+  {% endblock outer_content %}
+
+  <footer>
+    {% block footer %}
+      {% include 'hnfp/blocks/footer.html' %}
+    {% endblock %}
+  </footer>
+
+  <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+
+  {% block extra_js %}
+    {% include 'hnfp/blocks/extra_js.html' %}
+  {% endblock %}
+
+  {% block top-level %}{% endblock %}
+</body>
+</html>

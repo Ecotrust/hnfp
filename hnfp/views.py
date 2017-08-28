@@ -124,6 +124,7 @@ def login(request):
     form = LogInForm()
     context = {
         'form': form,
+        'next': '/dashboard/',
         'title': 'Log in',
     }
     return HttpResponse(template.render(context, request))
@@ -238,7 +239,12 @@ def job_detail(request, job_id):
 from django.views.decorators.cache import never_cache
 from django.template.loader import get_template
 @never_cache
-def serviceworker(request, js):
+def sw(request, js):
     template = get_template('sw.js')
+    html = template.render()
+    return HttpResponse(html, content_type="application/x-javascript")
+
+def manifest(request, json):
+    template = get_template('manifest.json')
     html = template.render()
     return HttpResponse(html, content_type="application/x-javascript")

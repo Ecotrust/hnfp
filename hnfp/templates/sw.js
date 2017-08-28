@@ -1,4 +1,5 @@
-var CACHE_NAME = 'Hoonah Stewards';
+var cacheName = 'hoonahs-stewards';
+var dataCacheName = 'hoonah-data';
 var urlsToCache = [
   '/',
   '/dashboard/',
@@ -15,7 +16,7 @@ var urlsToCache = [
 self.addEventListener('install', function(event) {
   // Perform install steps
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches.open(cacheName)
       .then(function(cache) {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
@@ -23,18 +24,36 @@ self.addEventListener('install', function(event) {
   );
 });
 
-/* self.addEventListener('fetch', function(event) {
-  // If a match isn't found in the cache, the response
-  // will look like a connection error
-  event.respondWith(caches.match(event.request));
-}); */
+self.addEventListener('activate', function(event) {
+  console.log('[ServiceWorker] Activate');
+  event.waitUntil(
+    caches.keys().then(function(keyList) {
+      return Promise.all(keyList.map(function(key) {
+        if (key !== cacheName && key !== dataCacheName) {
+          console.log('[ServiceWorker] Removing old cache', key);
+          return caches.delete(key);
+        }
+      }));
+    })
+  );
+  return self.clients.claim();
+});
+
+self.addEventListener('fetch', function(event) {
+  console.log('[Service Worker] Fetch', event.request.url);
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
 
 self.addEventListener('sync', function(event) {
-  self.registration.showNotification("Sync event fired!");
+  // self.registration.showNotification("Sync event fired!");
 });
 
 self.addEventListener('push', function(event) {
-  if (event.data.text() == 'new-alert') {
+  /* if (event.data.text() == 'new-alert') {
     event.waitUntil(
       caches.open('alerts').then(function(cache) {
         return fetch('/alerts.json').then(function(response) {
@@ -47,12 +66,12 @@ self.addEventListener('push', function(event) {
         });
       })
     );
-  }
+  } */
 });
 
 self.addEventListener('notificationclick', function(event) {
-  if (event.notification.tag == 'new-alert') {
+  /* if (event.notification.tag == 'new-alert') {
     // Assume that all of the resources needed to render /alert/ have previously been cached, e.g. as part of the install handler.
-    new WindowClient('/alert/');
-  }
+    new WindowClient('/dashboard/');
+  } */
 });
