@@ -236,14 +236,16 @@ def job(request):
 def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
 
+### offline
 from django.views.decorators.cache import never_cache
 from django.template.loader import get_template
 @never_cache
+# service worker
 def sw(request, js):
     template = get_template('sw.js')
     html = template.render()
     return HttpResponse(html, content_type="application/x-javascript")
-
+# app manifest
 def manifest(request, json):
     template = get_template('manifest.json')
     html = template.render()
