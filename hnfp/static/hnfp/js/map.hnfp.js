@@ -29,11 +29,23 @@ var osm = new ol.layer.Tile({
   visible: false
 });
 
+var hoonahRoads = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    url: 'https://openlayers.org/en/v4.3.1/examples/data/geojson/countries.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: new ol.style.Style({
+    fill: '#000',
+    stroke: '2'
+  })
+});
+
 const map = new ol.Map({
   target: 'map',
   layers: [
     hereMap,
-    osm
+    osm,
+    hoonahRoads
   ],
   view: mapView,
   controls: ol.control.defaults({

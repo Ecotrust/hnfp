@@ -238,15 +238,17 @@ def job_detail(request, job_id):
 
 ### offline
 from django.views.decorators.cache import never_cache
-from django.template.loader import get_template
 @never_cache
 # service worker
 def sw(request, js):
-    template = get_template('sw.js')
+    template = loader.get_template('sw.js')
     html = template.render()
-    return HttpResponse(html, content_type="application/x-javascript")
+    return HttpResponse({}, content_type="application/x-javascript")
 # app manifest
-def manifest(request, json):
-    template = get_template('manifest.json')
-    html = template.render()
-    return HttpResponse(html, content_type="application/x-javascript")
+def manifest(request,js):
+    from marineplanner.settings import BASE_DIR
+    import os
+    manifest_file = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'templates', 'manifest.json')
+    # manifest_file = '/usr/local/apps/marineplanner-core/apps/hnfp/hnfp/templates/manifest.json'
+    data = open(manifest_file, 'rb')
+    return HttpResponse(data, content_type='application/json', status=200)
