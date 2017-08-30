@@ -55,24 +55,6 @@ var weather = {
             }
           }
         }
-        var chart = bb.generate({
-          bindto: "#tempchart",
-          data: {
-            json: daily.data,
-            keys: {
-              x: 'time',
-              value: [
-                'temperatureMax',
-                'temperatureMin'
-              ]
-            }
-          },
-          axis: {
-            y: {
-             label: "°F"
-            }
-          }
-        });
         let marineData = {
           'Wind speeds of (mph)': current.windSpeed,
           'Wind bearing (°N)': current.windBearing,

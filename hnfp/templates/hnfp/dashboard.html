@@ -3,8 +3,7 @@
 
 {% block extra_css %}
   {{ block.super }}
-  <link rel="stylesheet" href="{% static 'hnfp/css/d3/billboard.min.css' %}" media="screen,projection"/>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.css">
+  <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/ol.css' %}" media="screen,projection"/>
   <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
 {% endblock extra_css %}
 
@@ -35,7 +34,7 @@
             {% include './dashboard/observation.html' %}
           </section>
           <section class="section">
-            <a class="btn btn-border-blue" href="#">Invite friends</a>
+            <a class="btn btn-border-blue disabled" href="#">Invite friends</a>
           </section>
         </div>
       </div>
@@ -68,11 +67,9 @@
   {% block custom_marco_ol3 %}{% endblock %}
   {% block mp_js %}
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.js"></script>
+    <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
     <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
 
-    <script src="{% static 'hnfp/js/d3/d3.min.js' %}"></script>
-    <script src="{% static 'hnfp/js/d3/billboard.min.js' %}"></script>
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>
     <script src="{% static 'hnfp/js/dashboard.js' %}"></script>
   {% endblock mp_js %}
