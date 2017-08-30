@@ -992,12 +992,17 @@ nav .tabs .tab {
   font-weight: 700;
 }
 
+.observations .collapsible .collapsible-header i {
+  vertical-align: bottom;
+}
+
   .observations .collapsible .collapsible-header.active {
     background: #e4efee;
   }
 
     .observations .collapsible .collapsible-header.active i {
       transform: rotate(90deg);
+      vertical-align: text-bottom;
     }
 
 .observations .collapsible .collapsible-body {
