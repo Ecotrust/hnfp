@@ -12,7 +12,7 @@
               <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
             </h4>
             <p class="date"><em>{{ object.publish }}</em></p>
-            <p>{{ object.body|truncatewords:100|linebreaks }}</p>
+            <p>{{ object.content|truncatewords:100|linebreaks }}</p>
           </article>
         {% endfor %}
       </div>

@@ -124,7 +124,6 @@ def login(request):
     form = LogInForm()
     context = {
         'form': form,
-        'next': '/dashboard/',
         'title': 'Log in',
     }
     return HttpResponse(template.render(context, request))

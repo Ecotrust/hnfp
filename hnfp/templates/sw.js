@@ -40,12 +40,11 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log('[Service Worker] Fetch', event.request.url);
-  event.respondWith(
+  /* event.respondWith(
     caches.match(event.request).then(function(response) {
       return response || fetch(event.request);
     })
-  );
+  ); */
 });
 
 self.addEventListener('sync', function(event) {

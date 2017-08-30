@@ -21,6 +21,7 @@ import accounts.urls
 
 urlpatterns = [
     url(r"^admin/?", admin.site.urls),
+    url(r"^hnfp/", include("hnfp.urls")),
     ### INSERT PROJECT URL INCLUDES HERE ###
     url(r"^features/", include("features.urls")),
     url(r"^manipulators/", include("manipulators.urls")),
@@ -30,7 +31,7 @@ urlpatterns = [
     url(r"^drawing/", include("drawing.urls")),
     url(r"^visualize/", include("visualize.urls")),
     url(r'^comments/', include('django_comments_xtd.urls')),
-    url(r"^hnfp/", include("hnfp.urls")),
+
     url(r"^", include("hnfp.urls")),
 
     ### END PROJECT URL INCLUDES ###
