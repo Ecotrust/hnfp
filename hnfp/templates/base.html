@@ -8,9 +8,6 @@
 
   <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
 
-  <!-- Links to a JSON file that specifies "installation" credentials for web applications -->
-  <link rel="manifest" href="/manifest.json" type="application/manifest+json">
-  
   {% block extra_head %}
     {% include 'hnfp/blocks/extra_head.html' %}
   {% endblock extra_head %}

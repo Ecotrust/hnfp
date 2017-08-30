@@ -3,6 +3,13 @@
 
 {% block title %}Hoonah Stewards{% endblock %}
 
+{% block extra_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'hnfp/css/d3/billboard.min.css' %}" media="screen,projection"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.css">
+  <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
+{% endblock extra_css %}
+
 {% block outer_content %}
 <main class="observations">
   <div class="hero-bg">&nbsp;</div>
@@ -82,10 +89,10 @@
   {% block mp_js %}
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.2.0/ol.js"></script>
-
+    <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
+    
     <script src="{% static 'hnfp/js/localforage/localforage.min.js' %}"></script>
     <script src="{% static 'hnfp/js/materialize/materialize.min.js' %}"></script>
-    <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
 
     <script>
       var user_observations = {{ user_observations|safe }};

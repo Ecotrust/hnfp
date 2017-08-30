@@ -241,9 +241,11 @@ from django.views.decorators.cache import never_cache
 @never_cache
 # service worker
 def sw(request, js):
-    template = loader.get_template('sw.js')
-    html = template.render()
-    return HttpResponse({}, content_type="application/x-javascript")
+    from marineplanner.settings import BASE_DIR
+    import os
+    service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'templates', 'sw.js')
+    data = open(service_worker, 'rb')
+    return HttpResponse(data, content_type='application/x-javascript', status=200)
 # app manifest
 def manifest(request,js):
     from marineplanner.settings import BASE_DIR

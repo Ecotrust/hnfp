@@ -30,22 +30,56 @@ var osm = new ol.layer.Tile({
 });
 
 var hoonahRoads = new ol.layer.Vector({
+  title: 'Roads',
   source: new ol.source.Vector({
-    url: 'https://openlayers.org/en/v4.3.1/examples/data/geojson/countries.geojson',
+    url: '/static/hnfp/js/data/hoonah_roads.geojson',
     format: new ol.format.GeoJSON()
   }),
   style: new ol.style.Style({
-    fill: '#000',
-    stroke: '2'
-  })
+    stroke: new ol.style.Stroke({
+      color: '#ddd83d',
+      width: 1.6
+    })
+  }),
+  opacity: .9,
+  visible: false
+});
+
+var hoonahLandOwners = new ol.layer.Vector({
+  title: 'Land Owner',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/hoonah_landownership.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: function(feature, resolution) {
+      var color = feature.getProperties().color;
+      return new ol.style.Style({
+        fill: new ol.style.Fill({
+          color: color
+        })
+      })
+  },
+  opacity: .6,
+  visible: false
 });
 
 const map = new ol.Map({
   target: 'map',
   layers: [
-    hereMap,
-    osm,
-    hoonahRoads
+    new ol.layer.Group({
+      title: 'Basemaps',
+      layers: [
+        hereMap,
+        osm
+      ]
+    }),
+    new ol.layer.Group({
+      title: 'Overlays',
+      layers: [
+        hoonahLandOwners,
+        hoonahRoads
+      ]
+    })
   ],
   view: mapView,
   controls: ol.control.defaults({

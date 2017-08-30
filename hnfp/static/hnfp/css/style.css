@@ -771,9 +771,11 @@ nav .tabs .tab {
   height: 0;
 }
 
-.layer-switcher button {
+.layer-switcher button,
+#map .layer-switcher button {
   background-color: rgba(0,60,136,.5);
-  background-size: contain;
+  background-image: url('/static/hnfp/img/icons/layers.png');
+  background-size: 80%;
   background-position: 50%;
   height: 1.375em;
   width: 1.375em;
