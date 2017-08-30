@@ -35,12 +35,33 @@ var hoonahRoads = new ol.layer.Vector({
     url: '/static/hnfp/js/data/hoonah_roads.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: new ol.style.Style({
-    stroke: new ol.style.Stroke({
-      color: '#ddd83d',
-      width: 1.6
+  style: function(feature, resolution) {
+    let road = '',
+        properties = feature.getProperties();
+    if (resolution < 16) {
+      if (properties.RD_NAME_PR === null) {
+        properties.RD_NAME_PR = '';
+      }
+      road = properties.RD_NAME_PR + '\n' + properties.RD_OWNER;
+    }
+    return new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: '#ddd83d',
+        width: 1.6
+      }),
+      text: new ol.style.Text({
+        font: '8px function, serif',
+        text: road,
+        fill: new ol.style.Fill({
+          color: '#666'
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#fff',
+          width: 2
+        })
+      })
     })
-  }),
+  },
   opacity: .9,
   visible: false
 });
@@ -52,12 +73,27 @@ var hoonahLandOwners = new ol.layer.Vector({
     format: new ol.format.GeoJSON()
   }),
   style: function(feature, resolution) {
-      var color = feature.getProperties().color;
-      return new ol.style.Style({
+    let color = feature.getProperties().color;
+    let lowner = '';
+    if (resolution < 75) {
+      lowner = feature.getProperties().LSNOTES;
+    }
+    return new ol.style.Style({
+      fill: new ol.style.Fill({
+        color: color
+      }),
+      text: new ol.style.Text({
+        text: lowner,
+        align: 'center',
         fill: new ol.style.Fill({
-          color: color
+          color: '#000'
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#fff',
+          width: 3
         })
       })
+    })
   },
   opacity: .6,
   visible: false
