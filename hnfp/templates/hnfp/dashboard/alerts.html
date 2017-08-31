@@ -13,7 +13,7 @@
   <section class="alerts-wrap">
     <div id="map-panel">
       <div class="bg-wrap">
-        <p>No current alerts</p>
+
       </div>
     </div>
     <div class="map-wrap">
@@ -25,3 +25,7 @@
 <div class="row right-align">
   <a href="{% url 'alert' %}" class="waves-effect waves-dark flow-text btn btn-border-light-blue">Go to Alerts <i class="material-icons right">navigate_next</i></a>
 </div>
+
+<script>
+  var all_alerts = {{ alerts|safe }};
+</script>

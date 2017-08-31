@@ -141,6 +141,12 @@ def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
     posts = Post.objects.get_queryset()
     jobs = JobOpportunity.objects.order_by('posted')[:5]
+    all_alerts = []
+    get_alerts = Alert.objects.all()
+    for a in get_alerts:
+        if a.alert_confirmed == True:
+            dic = a.to_dict()
+            all_alerts.append(dic)
     for job in jobs:
         try:
             if job.is_html:
@@ -152,6 +158,7 @@ def dashboard(request):
     context = {
         'title': '',
         'posts': posts,
+        'alerts': json.dumps(all_alerts),
     }
     context['jobs'] = jobs
     return HttpResponse(template.render(context, request))
@@ -166,7 +173,7 @@ def alert(request):
             all_alerts.append(dic)
     context = {
         'title': 'Alerts',
-        'alerts': json.dumps(all_alerts)
+        'alerts': json.dumps(all_alerts),
     }
     return HttpResponse(template.render(context, request))
 

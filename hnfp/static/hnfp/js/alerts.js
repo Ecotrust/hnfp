@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  $('.collapsible').collapsible();
   $('#new-alert-btn').click(function() {
     alerts.initNew();
   });
