@@ -298,3 +298,67 @@ class Observation(models.Model):
 
 	def get_user_observations(username):
 		return Observation.objects.filter(observer_username=username)
+
+# alerts
+class Alert(models.Model):
+	alert_date = models.CharField(
+		max_length=100,
+		null=True,
+		blank=True
+	)
+	alert_time = models.CharField(
+		max_length=20,
+		blank=True,
+		null=True
+	)
+	alert_type = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True
+	)
+	alert_created = models.DateTimeField(
+		auto_now_add=True
+	)
+	alert_updated = models.DateTimeField(
+		auto_now=True
+	)
+	alert_username = models.CharField(
+		max_length=800,
+		null=True,
+		blank=True,
+	)
+	alert_location = models.PointField(
+		srid=settings.GEOMETRY_DB_SRID,
+		default=None,
+		null=True,
+		blank=True,
+	)
+	alert_comment = models.CharField(
+		max_length=20000,
+		default=None,
+		null=True,
+		blank=True,
+	)
+
+	def to_dict(self):
+		if self.alert_location is not None:
+			point = self.alert_location.geojson
+		else:
+			point = None
+		return {
+			'alert_date': self.alert_date,
+			'alert_time': self.alert_time,
+			'alert_type': self.alert_type,
+			'alert_username': self.alert_username,
+			'alert_location': point,
+			'alert_comment': self.alert_comment,
+		}
+
+	def __str__(self):
+		return "{}: `{}`".format(self.alert_location, self.alert_type)
+
+	class Meta:
+		verbose_name_plural = 'Alerts'
+
+	def get_user_alerts(username):
+		return Alert.objects.filter(alert_username=username)

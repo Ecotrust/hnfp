@@ -3,38 +3,56 @@
 
 {% block extra_css %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.js'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.css'%}">
   <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
 {% endblock extra_css %}
 
 {% block outer_content %}
-  <div class="row">
-    <div class="col s2 brand-logo">
-      <img src="{% static 'hnfp/img/icons/i_alert_darkblue.svg' %}" />
-    </div>
-    <div class="col s10">
-      <h5 class="flow-text">{{ title }}</h5>
-    </div>
-  </div>
-
-  <div class="row">
-    <section class="col s12 l6 bg_green_light hide-on-med-and-down">
-      <div id="map-panel">
-        <section class="container">
-          <div class="col s12">
-            <!-- TODO add foreach KO loop for alerts -->
-          </div>
-        </section>
+  <main class="alerts">
+    <div class="hero-bg">&nbsp;</div>
+    <section class="container">
+      <div class="row">
+        <div class="col s12">
+          <h5 class="flow-text">{{ title }}</h5>
+        </div>
       </div>
     </section>
-    <section class="col s12 l6 map-wrap">
+
+    <section class="container map-container">
       <div id="map-wrapper">
-        <div id="map"></div>
+        <div id="map" class="map"></div>
+        <div id="map-panel">
+          <form id="alert-form" method="post" action="/alert/create/"></form>
+        </div>
       </div>
     </section>
-  </div>
 
-  <div class="row center">
-    <a href="" class="waves-effect waves-dark flow-text btn btn-border-light-blue">Report an Alert <i class="material-icons right">navigate_next<i></a>
-  </div>
+    <section class="container">
+      <div class="row">
+        <div class="relative height">
+          <div class="col s12">
+            <a id="new-alert-btn" class="btn btn-border-light-blue add-btn"><i class="material-icons">add_circle</i> Report an Alert</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 {% endblock outer_content %}
+
+{% block extra_js %}
+  {{ block.super }}
+
+  {% block gmaps_api_call %}{% endblock %}
+  {% block custom_marco_ol3 %}{% endblock %}
+  {% block mp_js %}
+    <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
+    <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
+
+    <script>
+      var all_alerts = {{ all_alerts|safe }};
+    </script>
+
+    <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>
+    <script src="{% static 'hnfp/js/alerts.js' %}"></script>
+  {% endblock mp_js %}
+{% endblock extra_js %}

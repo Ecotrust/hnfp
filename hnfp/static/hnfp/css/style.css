@@ -465,6 +465,10 @@ nav .tabs .tab {
     background-image: url('/static/hnfp/img/bg_berries.png');
   }
 
+  .alerts .hero-bg:before {
+    background-image: url('/static/hnfp/img/ianaj-osprey.jpg');
+  }
+
 .hero-bg:after {
   background-image: url('/static/hnfp/img/mountain_ridge_white.svg');
   background-size: cover;
@@ -783,6 +787,7 @@ nav .tabs .tab {
 
 /*--------------------
   observations
+  plus some alerts
   --------------------*/
 
 #stepone, #steptwo, #stepthree, #stepchangeloc, #stepfour {
@@ -793,11 +798,13 @@ nav .tabs .tab {
   display: block;
 }
 
-#new-observation.visible {
+#new-observation.visible,
+#new-alert {
   display: block;
 }
 
-#new-observation {
+#new-observation,
+#new-alert {
   background: rgba(255,255,255,0.94);
   box-shadow: 0 0 6px #666;
   display: none;
@@ -810,34 +817,37 @@ nav .tabs .tab {
   width: 90%;
 }
 
-  #new-observation.tall {
+  #new-observation.tall,
+  #new-alert.tall {
     height: 90%;
     top: 5%;
   }
 
-  #new-observation.short {
+  #new-observation.short,
+  #new-alert.short {
     height: 30%;
     top: 65%;
   }
 
-#new-observation .progress {
+#new-observation .progress,
+#new-alert .progress {
   margin: 0;
 }
 
-#new-observation form,
-#new-observation input,
-#new-observation label,
-#new-observation textarea {
+#new-observation form, #new-observation input, #new-observation label, #new-observation textarea,
+#new-alert form, #new-alert input, #new-alert label, #new-alert textarea {
   color: #4d4d4e;
   margin: 0 0 1rem;
 }
 
-#new-observation textarea {
+#new-observation textarea,
+#new-alert textarea {
   height: 2rem;
   min-height: 2rem;
 }
 
-#new-observation #observation_location {
+#new-observation #observation_location,
+#new-alert #alert_location {
   background: transparent;
   color: #777;
   font-family: 'function', sans-serif;
@@ -847,7 +857,8 @@ nav .tabs .tab {
   box-shadow: none;
 }
 
-#new-observation h2 {
+#new-observation h2,
+#new-alert h2 {
   color: #2b384a;
   line-height: 1;
   margin: 0 0 2rem;
@@ -855,7 +866,8 @@ nav .tabs .tab {
   position: relative;
 }
 
-  #new-observation h2:after {
+  #new-observation h2:after,
+  #new-alert h2:after {
     bottom: -5px;
     border-bottom: 5px solid #2b384a;
     left: 40%;
@@ -865,20 +877,25 @@ nav .tabs .tab {
   }
 
 #new-observation input:not(.file-path),
-#new-observation textarea {
+#new-observation textarea,
+#new-alert input:not(.file-path),
+#new-alert textarea {
 //  background: #dfebea;
   color: #4d4d4e;
 }
 
-#new-observation input.file-path {
+#new-observation input.file-path,
+#new-alert input.file-path {
   margin-bottom: 0;
 }
 
-#new-observation label {
+#new-observation label,
+#new-alert label {
   text-indent: 4px;
 }
 
-#new-observation .btn:not(.small-btn) {
+#new-observation .btn:not(.small-btn),
+#new-alert .btn:not(.small-btn) {
   font-size: 1.125em;
   line-height: 2.75rem;
 }
@@ -927,11 +944,11 @@ nav .tabs .tab {
   max-height: 96vh;
 }
 
-.observations #map-wrapper {
+#map-wrapper {
   position: relative;
 }
 
-.observations #map {
+#map {
   height: 100%;
 }
 
@@ -961,7 +978,8 @@ nav .tabs .tab {
     font-size: 1em;
 }
 
-.observations .add-btn {
+.observations .add-btn,
+.alerts .add-btn {
   line-height: 3rem;
 }
 
@@ -1029,12 +1047,14 @@ nav .tabs .tab {
   width: 50%;
 }
 
-.observations .toolbar.active ul {
+.observations .toolbar.active ul,
+.alerts .toolbar.active ul {
   background-color: #fff;
   z-index: 1;
 }
 
-.observations .switch {
+.observations .switch,
+.alerts .switch {
   margin: 1.5rem 0;
 }
 
@@ -1047,6 +1067,14 @@ nav .tabs .tab {
 
 .file-path-wrapper input {
   font-size: .8125em;
+}
+
+/*--------------------
+  alerts
+  --------------------*/
+
+#map-panel {
+  overflow: scroll;
 }
 
 /*--------------------
@@ -1490,8 +1518,8 @@ path {
 
   .dashboard #map {
     height: 100%;
-    left: 40%;
-    width: 60%;
+    left: 35%;
+    width: 65%;
   }
 
   #map-panel {
@@ -1499,7 +1527,7 @@ path {
     left: 0;
     position: absolute;
     top: 0;
-    width: 40%;
+    width: 35%;
   }
 }
 

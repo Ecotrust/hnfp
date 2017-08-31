@@ -32,6 +32,8 @@ from hnfp.models import Post
 #jobs
 from hnfp.models import JobOpportunity
 import json
+#alert
+from hnfp.models import Alert
 
 ### VIEWS ###
 def index(request):
@@ -156,13 +158,48 @@ def dashboard(request):
 
 def alert(request):
     template = loader.get_template('hnfp/alert.html')
+    all_alerts = []
+    get_alerts = Alert.objects.all()
+    for a in get_alerts:
+        dic = a.to_dict()
+        all_alerts.append(dic)
     context = {
         'title': 'Alerts',
+        'alerts': json.dumps(all_alerts)
+    }
+    return HttpResponse(template.render(context, request))
+
+def new_alert(request):
+    template = loader.get_template('hnfp/new_alert.html')
+    context = {
+        'category': ''
     }
     return HttpResponse(template.render(context, request))
 
 def alert_detail(request, alert_id):
     return HttpResponse("You're looking at alert %s." % alert_id)
+
+def alert_create(request):
+    if request.method == 'POST':
+        loc = request.POST['alert_location']
+        lp = loc.split(',')
+        alert_location = Point([float(lp[0]),float(lp[1])])
+        alert_type = request.POST['alert_type']
+        alert_comment = request.POST['alert_comment']
+        alert_time = request.POST['alert_time']
+        alert_date = request.POST['alert_date']
+
+        new_a = Alert(
+            alert_location=alert_location,
+            alert_type=alert_type,
+            alert_comment=alert_comment,
+            alert_time=alert_time,
+            alert_date=alert_date,
+            alert_username=request.user.username
+        );
+        new_a.save()
+        all_alerts = [x.to_dict() for x in Alert.objects.filter(alert_username=request.user.username)]
+        return JsonResponse(all_alerts, safe=False)
 
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
