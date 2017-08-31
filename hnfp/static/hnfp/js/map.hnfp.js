@@ -29,6 +29,26 @@ var osm = new ol.layer.Tile({
   visible: false
 });
 
+var wmtsParser = new ol.format.WMTSCapabilities();
+
+var topoURLCapabilities = fetch('https://services.arcgisonline.com/arcgis/rest/services/USA_Topo_Maps/MapServer/WMTS/1.0.0/WMTSCapabilities.xml')
+  .then(function(response) {
+    return response.text();
+  }).then(function(text) {
+    let result = wmtsParser.read(text);
+    let topoSource = ol.source.WMTS.optionsFromCapabilities(result, {
+      layer: 'USA_Topo_Maps',
+      matrixSet: 'EPSG:3857'
+    });
+    topoLayer.setSource(new ol.source.WMTS((topoSource)))
+  });
+
+let topoLayer = new ol.layer.Tile({
+  title: 'Topo',
+  visible: false
+});
+
+
 var hoonahRoads = new ol.layer.Vector({
   title: 'Roads',
   source: new ol.source.Vector({
@@ -106,7 +126,8 @@ const map = new ol.Map({
       title: 'Basemaps',
       layers: [
         hereMap,
-        osm
+        osm,
+        topoLayer
       ]
     }),
     new ol.layer.Group({
@@ -169,29 +190,11 @@ if (typeof all_alerts !== 'undefined') {
     let geo = JSON.parse(all_alerts[i].alert_location),
         coords = ol.proj.fromLonLat(geo.coordinates),
         a_id = all_alerts[i]['alert_id'];
+        style = styleAlert(a_id);
     let newA = new ol.Feature();
     vectorSource.addFeature(newA);
     newA.setGeometry(new ol.geom.Point(coords));
-    newA.setStyle(new ol.style.Style({
-      image: new ol.style.RegularShape({
-        points: 6,
-        fill: new ol.style.Fill({
-          color: 'red'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 2
-        }),
-        radius: 10,
-      }),
-      text: new ol.style.Text({
-        text: a_id.toString(),
-        align: 'center',
-        fill: new ol.style.Fill({
-          color: '#fff'
-        }),
-      })
-    }))
+    newA.setStyle(style)
   }
 }
 
@@ -295,6 +298,29 @@ var selectStyle = new ol.style.Style({
   })
 });
 
+function styleAlert(a_id) {
+  return new ol.style.Style({
+    image: new ol.style.RegularShape({
+      points: 6,
+      fill: new ol.style.Fill({
+        color: 'red'
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#fff',
+        width: 2
+      }),
+      radius: 10,
+    }),
+    text: new ol.style.Text({
+      text: a_id.toString(),
+      align: 'center',
+      fill: new ol.style.Fill({
+        color: '#fff'
+      }),
+    })
+  })
+}
+
 function removeInterations() {
   map.removeInteraction(modify);
 }
@@ -318,4 +344,17 @@ function addToMap(data) {
       scale: 0.5
     })
   }));
+}
+
+function addAlertsToMap(data) {
+  let l = data.length - 1,
+      newDataCoords = JSON.parse(data[l].alert_location),
+      type = data[l].alert_type,
+      point = new ol.Feature(),
+      a_id = data[l]['alert_id'];;
+      style = styleAlert(a_id);
+  vectorSource.addFeature(point);
+  let coords = ol.proj.fromLonLat(newDataCoords.coordinates);
+  point.setGeometry(new ol.geom.Point(coords));
+  point.setStyle(style);
 }

@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="row">
+<div class="row flow-text">
   <div class="col s2 brand-logo">
     <img src="{% static 'hnfp/img/icons/i_rain.svg' %}" />
   </div>
@@ -9,22 +9,26 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row flow-text">
   <section class="bg_green_light weather-wrap">
     <div id="forecast">
       <div class="row">
         <h4 class="center teal-text flow-text">Today's Forecast</h4>
-        <div id="forecast-summary"></div>
+        <div class="center" id="forecast-summary"></div>
       </div>
       <div class="row">
-        <h4 class="center teal-text flow-text">Current</h4>
-        <div id="weatherforcast"></div>
+        <h4 class="center teal-text flow-text margin-top">Current</h4>
+        <table class="highlight responsive-table">
+          <tbody id="weatherforcast"></tbody>
+        </table>
       </div>
     </div>
     <div id="marine">
       <div class="row">
         <h4 class="center teal-text flow-text">Marine Conditions</h4>
-        <div id="marineforecast"></div>
+        <table class="highlight responsive-table">
+          <tbody id="marineforecast"></tbody>
+        </table>
       </div>
     </div>
     <div id="tides">

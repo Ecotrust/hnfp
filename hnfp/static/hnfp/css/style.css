@@ -579,8 +579,14 @@ nav .tabs .tab {
 #marine,
 #tides {
   border-bottom: 2px solid #fff;
-  overflow: hidden;
-  padding: 3rem 0;
+  padding: 2rem 0;
+  width: 100%;
+  font-size: .675em;
+}
+
+#forecast,
+#marine {
+  padding: 2rem;
 }
 
 #tides {
@@ -591,26 +597,19 @@ nav .tabs .tab {
   border-bottom: none;
 }
 
+#forecast td,
+#marine td,
+#tides td {
+  padding: 5px 8px;
+}
+
 #forecast h4, #marine h4, #tides h4 {
-  margin: 0 0 1.5rem;
+  font-size: 1.5em;
+  margin: 0 0 1rem;
 }
 
-#forecast p:last-child {
-  margin: 0;
-}
-
-#forecast > div > div,
-#marine > div > div {
-  line-height: 1.875rem;
-}
-
-#weatherforcast,
-#marineforecast {
-  font-size: .675em;
-}
-
-.weather-wrap > div > div > div > div:nth-of-type(2n+2) {
-  background: rgba(255,255,255,0.4);
+#forecast .margin-top {
+  margin-top: 3rem;
 }
 
 #tides th {
@@ -722,8 +721,19 @@ nav .tabs .tab {
 }
 
 #map-panel {
-  background-color: #e4efee;
+  background-color: #e5e5e0;
   width: 100%;
+}
+
+#map-panel .container {
+  font-size: 1.3125em;
+  padding: 2rem 0;
+}
+
+#map-panel h3 {
+  color: red;
+  font-size: 1.125em;
+  text-transform: capitalize;
 }
 
 .add-to-map-section {

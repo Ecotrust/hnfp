@@ -142,11 +142,15 @@ def dashboard(request):
     posts = Post.objects.get_queryset()
     jobs = JobOpportunity.objects.order_by('posted')[:5]
     all_alerts = []
-    get_alerts = Alert.objects.all()
+    recent_alerts = []
+    get_alerts = Alert.objects.filter(alert_confirmed=True)
+    get_recent_alerts = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')[:2]
     for a in get_alerts:
-        if a.alert_confirmed == True:
-            dic = a.to_dict()
-            all_alerts.append(dic)
+        dic = a.to_dict()
+        all_alerts.append(dic)
+    for a in get_recent_alerts:
+        dic = a.to_dict()
+        recent_alerts.append(dic)
     for job in jobs:
         try:
             if job.is_html:
@@ -159,6 +163,7 @@ def dashboard(request):
         'title': '',
         'posts': posts,
         'alerts': json.dumps(all_alerts),
+        'recent_alerts': json.dumps(recent_alerts),
     }
     context['jobs'] = jobs
     return HttpResponse(template.render(context, request))

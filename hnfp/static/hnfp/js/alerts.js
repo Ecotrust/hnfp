@@ -110,7 +110,7 @@ var alerts = {
       url: '/alert/create/',
       data: $form,
       success: function(data) {
-        addToMap(data);
+        addAlertsToMap(data);
         alerts.close();
         $alertForm.html('');
       },

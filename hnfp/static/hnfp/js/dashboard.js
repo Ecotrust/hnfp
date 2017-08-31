@@ -1,6 +1,9 @@
 $(document).ready( function() {
   weather.getWeather();
   weather.getTides();
+  if (typeof recent_alerts !== 'undefined') {
+    alerts.recentAlerts(recent_alerts);
+  }
 });
 
 var weather = {
@@ -49,7 +52,7 @@ var weather = {
           if (weatherData.hasOwnProperty(prop)) {
             let wp = weatherData[prop];
             if (wp != undefined && prop != 'summary') {
-              weatherDOM.append('<div class="col s10 offset-s1 l12"><div class="col s8"><strong>' + prop + '</strong></div><div class="col s4 right-align">' + wp + '</div></div>').addClass('weather-block');
+              weatherDOM.append('<tr><td><strong>' + prop + '</strong></td><td>' + wp + '</td></tr>').addClass('weather-block');
             } else if (prop == 'summary') {
               $('#forecast-summary').append(`<div class="col s10 offset-s1 l12">${wp}</div>`);
             }
@@ -58,9 +61,9 @@ var weather = {
         let marineData = {
           'Wind speeds of (mph)': current.windSpeed,
           'Wind bearing (°N)': current.windBearing,
-          ' with gusts of (mph)': current.windGust,
+          'Gusts of': current.windGust,
 
-          '. The nearest storm is (mi)': current.nearestStormDistance,
+          'The nearest storm is': current.nearestStormDistance,
           ' bearing (°N)': current.nearestStormBearing,
 
           '. Visibility of (mi)': current.visibility,
@@ -72,7 +75,7 @@ var weather = {
               marineDOM.append('<div class="col s12">' + marineData[prop] + '</div>');
             }
             if (marineData[prop] != undefined) {
-              marineDOM.append('<div class="col s10 offset-s1 l12"><div class="col s8"><strong>' + prop + '</strong></div><div class="col s4 right-align">' + marineData[prop] + '</div></div>').addClass('weather-block');
+              marineDOM.append('<tr><td><strong>' + prop + '</strong></td><td>' + marineData[prop] + '</td></tr>');
             }
           }
         }
@@ -112,3 +115,17 @@ var weather = {
     });
   }
 };
+
+var alerts = {
+  recentAlerts: function(alerts) {
+    for (let alert of alerts) {
+      $('#map-panel').append(`<div class="row">
+        <div class="col s10 offset-s1">
+          <h3>${alert.alert_id}. ${alert.alert_type}</h3>
+          <p>${alert.alert_comment}</p>
+          <p><em>posted by ${alert.alert_username} ${alert.alert_date} ${alert.alert_time}</em></p>
+        </div>
+      </div>`);
+    }
+  }
+}

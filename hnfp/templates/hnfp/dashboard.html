@@ -12,7 +12,7 @@
     <div class="bg">&nbsp;</div>
     <section class="container section">
       <div class="row">
-        <div class="col s12 l8 flow-text right">
+        <div class="col s12 l8 right">
           <section class="section">
             {% include './dashboard/weather.html' %}
           </section>
@@ -68,7 +68,12 @@
   {% block mp_js %}
     <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
     <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
-    
+
+    <script>
+      var all_alerts = {{ alerts|safe }};
+      var recent_alerts = {{ recent_alerts|safe }}
+    </script>
+
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>
     <script src="{% static 'hnfp/js/dashboard.js' %}"></script>
   {% endblock mp_js %}

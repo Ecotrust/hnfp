@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="row">
+<div class="row flow-text">
   <div class="col s2 brand-logo">
     <img src="{% static 'hnfp/img/icons/i_alert_darkblue.svg' %}" />
   </div>
@@ -11,21 +11,13 @@
 
 <div class="row">
   <section class="alerts-wrap">
-    <div id="map-panel">
-      <div class="bg-wrap">
-
-      </div>
-    </div>
+    <div id="map-panel"></div>
     <div class="map-wrap">
       <div id="map" class="map"></div>
     </div>
   </section>
 </div>
 
-<div class="row right-align">
+<div class="row right-align flow-text">
   <a href="{% url 'alert' %}" class="waves-effect waves-dark flow-text btn btn-border-light-blue">Go to Alerts <i class="material-icons right">navigate_next</i></a>
 </div>
-
-<script>
-  var all_alerts = {{ alerts|safe }};
-</script>
