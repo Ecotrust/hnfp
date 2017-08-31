@@ -339,6 +339,9 @@ class Alert(models.Model):
 		null=True,
 		blank=True,
 	)
+	alert_confirmed = models.BooleanField(
+		default=False
+	)
 
 	def to_dict(self):
 		if self.alert_location is not None:
@@ -352,6 +355,7 @@ class Alert(models.Model):
 			'alert_username': self.alert_username,
 			'alert_location': point,
 			'alert_comment': self.alert_comment,
+			'alert_id': self.id,
 		}
 
 	def __str__(self):

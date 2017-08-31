@@ -10,7 +10,7 @@
 {% block outer_content %}
   <main class="alerts">
     <div class="hero-bg">&nbsp;</div>
-    <section class="container">
+    <section class="container section">
       <div class="row">
         <div class="col s12">
           <h5 class="flow-text">{{ title }}</h5>
@@ -20,14 +20,14 @@
 
     <section class="container map-container">
       <div id="map-wrapper">
-        <div id="map" class="map"></div>
         <div id="map-panel">
           <form id="alert-form" method="post" action="/alert/create/"></form>
         </div>
+        <div id="map" class="map"></div>
       </div>
     </section>
 
-    <section class="container">
+    <section class="section container add-to-map-section">
       <div class="row">
         <div class="relative height">
           <div class="col s12">
@@ -49,7 +49,7 @@
     <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
 
     <script>
-      var all_alerts = {{ all_alerts|safe }};
+      var all_alerts = {{ alerts|safe }};
     </script>
 
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>

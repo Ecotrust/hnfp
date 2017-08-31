@@ -319,6 +319,10 @@ nav .tabs .tab {
   color: #2b384a;
 }
 
+#nav-mobile .btn-flat {
+  text-align: left;
+}
+
 /*--------------------
   home
   --------------------*/
@@ -719,8 +723,11 @@ nav .tabs .tab {
 
 #map-panel {
   background-color: #e4efee;
-  padding: 1rem;
   width: 100%;
+}
+
+.add-to-map-section {
+  margin-top: 2rem;
 }
 
 .SimpleLayerSwitcher {
@@ -799,12 +806,13 @@ nav .tabs .tab {
 }
 
 #new-observation.visible,
-#new-alert {
+.alerts #map-panel.visible {
   display: block;
+  z-index: 2;
 }
 
 #new-observation,
-#new-alert {
+.alerts #map-panel {
   background: rgba(255,255,255,0.94);
   box-shadow: 0 0 6px #666;
   display: none;
@@ -818,36 +826,36 @@ nav .tabs .tab {
 }
 
   #new-observation.tall,
-  #new-alert.tall {
+  .alerts #map-panel .tall {
     height: 90%;
     top: 5%;
   }
 
   #new-observation.short,
-  #new-alert.short {
+  .alerts #map-panel .short {
     height: 30%;
     top: 65%;
   }
 
 #new-observation .progress,
-#new-alert .progress {
+.alerts #map-panel .progress {
   margin: 0;
 }
 
 #new-observation form, #new-observation input, #new-observation label, #new-observation textarea,
-#new-alert form, #new-alert input, #new-alert label, #new-alert textarea {
+#map-panel form, #map-panel input, #map-panel label, #map-panel textarea {
   color: #4d4d4e;
   margin: 0 0 1rem;
 }
 
 #new-observation textarea,
-#new-alert textarea {
+#map-panel textarea {
   height: 2rem;
   min-height: 2rem;
 }
 
 #new-observation #observation_location,
-#new-alert #alert_location {
+#map-panel #alert_location {
   background: transparent;
   color: #777;
   font-family: 'function', sans-serif;
@@ -858,7 +866,7 @@ nav .tabs .tab {
 }
 
 #new-observation h2,
-#new-alert h2 {
+#map-panel h2 {
   color: #2b384a;
   line-height: 1;
   margin: 0 0 2rem;
@@ -867,7 +875,7 @@ nav .tabs .tab {
 }
 
   #new-observation h2:after,
-  #new-alert h2:after {
+  #map-panel h2:after {
     bottom: -5px;
     border-bottom: 5px solid #2b384a;
     left: 40%;
@@ -878,24 +886,24 @@ nav .tabs .tab {
 
 #new-observation input:not(.file-path),
 #new-observation textarea,
-#new-alert input:not(.file-path),
-#new-alert textarea {
+#map-panel input:not(.file-path),
+#map-panel textarea {
 //  background: #dfebea;
   color: #4d4d4e;
 }
 
 #new-observation input.file-path,
-#new-alert input.file-path {
+#map-panel input.file-path {
   margin-bottom: 0;
 }
 
 #new-observation label,
-#new-alert label {
+#map-panel label {
   text-indent: 4px;
 }
 
 #new-observation .btn:not(.small-btn),
-#new-alert .btn:not(.small-btn) {
+#map-panel .btn:not(.small-btn) {
   font-size: 1.125em;
   line-height: 2.75rem;
 }
@@ -1072,6 +1080,10 @@ nav .tabs .tab {
 /*--------------------
   alerts
   --------------------*/
+
+#map-wrapper {
+  width: 100%;
+}
 
 #map-panel {
   overflow: scroll;
@@ -1436,23 +1448,28 @@ path {
   }
 
   .observations .map-container,
-  .observations #map-wrapper {
+  .observations #map-wrapper,
+  .alerts #map-wrapper,
+  .alerts .map-container {
     height: 520px;
     max-height: 98vh;
   }
 
-  #new-observation {
+  #new-observation,
+  .alerts #map-panel {
     height: 60%;
     left: 2%;
     top: 35%;
     width: 38%;
   }
 
-  #new-observation.tall {
+  #new-observation.tall,
+  .alerts #map-panel.tall {
     height: 90%;
     top: 5%;
   }
-  #new-observation.short {
+  #new-observation.short,
+  .alerts #map-panel.short {
     height: 35%;
     top: 60%;
   }
@@ -1518,11 +1535,15 @@ path {
 
   .dashboard #map {
     height: 100%;
-    left: 35%;
+    margin-left: 35%;
     width: 65%;
   }
 
-  #map-panel {
+  .alerts #map {
+    width: 100%;
+  }
+
+  .dashboard #map-panel {
     height: 100%;
     left: 0;
     position: absolute;

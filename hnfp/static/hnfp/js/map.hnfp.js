@@ -164,6 +164,37 @@ if (typeof user_observations !== 'undefined') {
   }
 }
 
+if (typeof all_alerts !== 'undefined') {
+  for (var i = 0; i < all_alerts.length; i++) {
+    let geo = JSON.parse(all_alerts[i].alert_location),
+        coords = ol.proj.fromLonLat(geo.coordinates),
+        a_id = all_alerts[i]['alert_id'];
+    let newA = new ol.Feature();
+    vectorSource.addFeature(newA);
+    newA.setGeometry(new ol.geom.Point(coords));
+    newA.setStyle(new ol.style.Style({
+      image: new ol.style.RegularShape({
+        points: 6,
+        fill: new ol.style.Fill({
+          color: 'red'
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#fff',
+          width: 2
+        }),
+        radius: 10,
+      }),
+      text: new ol.style.Text({
+        text: a_id.toString(),
+        align: 'center',
+        fill: new ol.style.Fill({
+          color: '#fff'
+        }),
+      })
+    }))
+  }
+}
+
 var locSource = new ol.source.Vector();
 var locLayer = new ol.layer.Vector({
   source: locSource,

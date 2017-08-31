@@ -36,15 +36,15 @@
     </section>
     <section id="stepfour">
       <div class="row">
-        <div class="input-field col s6" id="input-field-location">
+        <div class="input-field col s5" id="input-field-location">
             <input type="text" id="alert_location" name="alert_location" val="" />
         </div>
-        <div class="input-field col s6">
+        <div class="input-field col s7">
           <a onclick="alerts.backStepThree()" class="btn small-btn btn-border-light-blue">Change Location</a>
         </div>
       </div>
       <div class="row">
-        <div class="col s6 relative">
+        <div class="col s12 relative">
           <select class="browser-default" name="alert_type" required>
             <option value="">Choose Type</option>
             <option value="alert" class="circle">Alert</option>
@@ -56,9 +56,9 @@
       </div>
       <div class="row">
         <div class="file-field input-field col s12">
-          <div class="btn small-btn btn-border-light-blue">
+          <div class="btn disabled small-btn btn-border-light-blue">
             <span>Choose File</span>
-            <input type="file" id="alert_photo" name="alert_photo" >
+            <input type="file" disabled id="alert_photo" name="alert_photo" >
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text" placeholder="Image(s)">

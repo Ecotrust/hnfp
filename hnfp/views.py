@@ -161,8 +161,9 @@ def alert(request):
     all_alerts = []
     get_alerts = Alert.objects.all()
     for a in get_alerts:
-        dic = a.to_dict()
-        all_alerts.append(dic)
+        if a.alert_confirmed == True:
+            dic = a.to_dict()
+            all_alerts.append(dic)
     context = {
         'title': 'Alerts',
         'alerts': json.dumps(all_alerts)
@@ -198,7 +199,7 @@ def alert_create(request):
             alert_username=request.user.username
         );
         new_a.save()
-        all_alerts = [x.to_dict() for x in Alert.objects.filter(alert_username=request.user.username)]
+        all_alerts = [x.to_dict() for x in Alert.objects.all()]
         return JsonResponse(all_alerts, safe=False)
 
 def observation(request):
