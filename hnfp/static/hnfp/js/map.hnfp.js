@@ -29,25 +29,19 @@ var osm = new ol.layer.Tile({
   visible: false
 });
 
-var wmtsParser = new ol.format.WMTSCapabilities();
-
-var topoURLCapabilities = fetch('https://services.arcgisonline.com/arcgis/rest/services/USA_Topo_Maps/MapServer/WMTS/1.0.0/WMTSCapabilities.xml')
-  .then(function(response) {
-    return response.text();
-  }).then(function(text) {
-    let result = wmtsParser.read(text);
-    let topoSource = ol.source.WMTS.optionsFromCapabilities(result, {
-      layer: 'USA_Topo_Maps',
-      matrixSet: 'EPSG:3857'
-    });
-    topoLayer.setSource(new ol.source.WMTS((topoSource)))
-  });
-
-let topoLayer = new ol.layer.Tile({
+var topoLayer = new ol.layer.Tile({
   title: 'Topo',
   visible: false
 });
 
+var footpathLayer = new ol.layer.Image({
+  title: 'Footpaths',
+  source: new ol.source.ImageWMS({
+      url: 'https://seamlessrnc.nauticalcharts.noaa.gov/arcgis/rest/services/RNC/NOAA_RNC_Footprints/MapServer/0',
+      crossOrigin: 'anonymous'
+  }),
+  visible: false
+})
 
 var hoonahRoads = new ol.layer.Vector({
   title: 'Roads',
@@ -297,6 +291,20 @@ var selectStyle = new ol.style.Style({
     })
   })
 });
+
+var wmtsParser = new ol.format.WMTSCapabilities();
+
+var topoURLCapabilities = fetch('https://services.arcgisonline.com/arcgis/rest/services/USA_Topo_Maps/MapServer/WMTS/1.0.0/WMTSCapabilities.xml')
+  .then(function(response) {
+    return response.text();
+  }).then(function(text) {
+    let result = wmtsParser.read(text);
+    let topoSource = ol.source.WMTS.optionsFromCapabilities(result, {
+      layer: 'USA_Topo_Maps',
+      matrixSet: 'EPSG:3857'
+    });
+    topoLayer.setSource(new ol.source.WMTS((topoSource)))
+  });
 
 function styleAlert(a_id) {
   return new ol.style.Style({

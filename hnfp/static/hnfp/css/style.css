@@ -697,6 +697,16 @@ nav .tabs .tab {
 }
 
 /*--------------------
+  accounts
+  --------------------*/
+div.mapgroup {
+  display: block;
+  margin: 3rem auto;
+  width: 80%;
+  max-width: 48rem;
+}
+
+/*--------------------
   map
   --------------------*/
 

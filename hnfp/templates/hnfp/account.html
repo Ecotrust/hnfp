@@ -1,91 +1,52 @@
-{% extends "accounts/index.html" %}
+{% extends "hnfp/index.html" %}
 {% load static %}
 
-{% block site_style %}{% endblock site_style %}
+{% block outer_content %}
 
-{% block extra_head %}
-  <meta name="theme-color">
-  <meta name="description" content="Hoonah Native Forest Partnership">
-  <meta name="robots" content="index,follow"><!-- All Search Engines -->
-  <meta name="googlebot" content="index,follow"><!-- Google Specific -->
+<main class="account">
+  <section class="container section">
+    <div class="row">
+      <div class="col s12">
+        <h1>Hello, {{ user.first_name }}  {{ user.last_name }}</h1>
+        <p><!-- user description --> </p>
 
-  <!-- Links to a JSON file that specifies "installation" credentials for web applications -->
-  <link rel="manifest" href="./manifest.json">
+        <h3>Profile Information</h3>
+        <p>Name: {{ user.get_full_name }}</p>
+        <p>Preferred Name: {{ user.get_short_name }}</p>
+        <p>email: {{ user.email|default:"<i style='color:red'>No Email Address</i>" }}</p>
+        <p>
+        <a class="btn btn-success" href="{% url 'account:edit' %}">Edit my info</a>
+        {% if can_change_password %}
+        <a class="btn btn-success" href="{% url 'account:change_password' %}">Change my password</a>
+        {% endif %}
+        </p>
+        <p>
+        {% if user.is_superuser %}
+            <a class="btn btn-success" href="{{ admin_url }}">Go to the Django admin page</a>
+        {% endif %}
+        {% if user.is_staff %}
+            <a class="btn btn-success" href="/admin">Go to the CMS admin page</a>
+        {% endif %}
+        </p>
 
-  <!-- iOS Add to Home Screen -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="App Title">
-  <link rel="apple-touch-icon" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
-  <link rel="apple-touch-icon-precomposed" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
+        <!-- no need to verify anymore
+        {% if not user.userdata.email_verified %}
+        <blockquote class="warn" style="border-left-color: #ea3a54; background-color: #eee">
+            <p>Your email address has not been verified. </p>
+            <p>Please verify your email address to complete your registration.</p>
+            <form style="display:inline;" method="POST" action="{% url 'account:verify_new_email' %}">{% csrf_token %}
+                <button class='btn btn-success' onclick="this.form.submit()">Verify email</button>
+            </form>
+        </blockquote>
+        {% endif %}
+        -->
 
-  <!-- Android -->
-  <meta name="theme-color" content="#E64545">
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="{% static 'hnfp/img/touch/homescreen192.png' %}">
-  <link rel="icon" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
-{% endblock %}
-
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'hnfp/css/materialize.css' %}" media="screen,projection"/>
-  <link rel="stylesheet" href="{% static 'hnfp/css/style.css' %}" media="screen,projection"/>
-{% endblock %}
-
-{% block header %}
-  {% include './blocks/navbar.html' %}
-{% endblock %}
-
-{% block stylesheets %}{% endblock stylesheets %}
-
-{% block content %}
-
-<section class="container section">
-  <div class="row">
-    <div class="col s12">
-      <h1>Hello, {{ user.first_name }}  {{ user.last_name }}</h1>
-      <p><!-- user description --> </p>
-
-      <h3>Profile Information</h3>
-      <p>Name: {{ user.get_full_name }}</p>
-      <p>Preferred Name: {{ user.get_short_name }}</p>
-      <p>email: {{ user.email|default:"<i style='color:red'>No Email Address</i>" }}</p>
-      <p>
-      <a class="btn btn-success" href="{% url 'account:edit' %}">Edit my info</a>
-      {% if can_change_password %}
-      <a class="btn btn-success" href="{% url 'account:change_password' %}">Change my password</a>
-      {% endif %}
-      </p>
-      <p>
-      {% if user.is_superuser %}
-          <a class="btn btn-success" href="{{ admin_url }}">Go to the Django admin page</a>
-      {% endif %}
-      {% if user.is_staff %}
-          <a class="btn btn-success" href="/admin">Go to the CMS admin page</a>
-      {% endif %}
-      </p>
-
-      <!-- no need to verify anymore
-      {% if not user.userdata.email_verified %}
-      <blockquote class="warn" style="border-left-color: #ea3a54; background-color: #eee">
-          <p>Your email address has not been verified. </p>
-          <p>Please verify your email address to complete your registration.</p>
-          <form style="display:inline;" method="POST" action="{% url 'account:verify_new_email' %}">{% csrf_token %}
-              <button class='btn btn-success' onclick="this.form.submit()">Verify email</button>
-          </form>
-      </blockquote>
-      {% endif %}
-      -->
-
-  </div>
-  <div class="col-md-3">
-      <a class="btn btn-success" href="{% url 'account:logout' %}">Log out</a><br />
-  </div>
     </div>
-  </div>
-</section>
-
+    <div class="col-md-3">
+        <a class="btn btn-success" href="{% url 'account:logout' %}">Log out</a><br />
+    </div>
+      </div>
+    </div>
+  </section>
+</main>
 {% endblock %}
-
-{% block footer %}
-  {% include './blocks/footer.html' %}
-{% endblock footer %}

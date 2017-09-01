@@ -14,6 +14,7 @@ from django.contrib.auth import get_user_model, authenticate, login
 from accounts.actions import apply_user_permissions, send_password_reset_email, send_social_auth_provider_login_email, generate_username
 from accounts.models import EmailVerification, UserData, PasswordDictionary
 from accounts.forms import SignUpForm, ForgotPasswordForm, ResetPasswordForm, SocialAccountConfirmForm, LogInForm, UserDetailForm, ChangePasswordForm
+from accounts import views
 from accounts.signals import user_post_save
 from nursery.view_helpers import decorate_view
 
