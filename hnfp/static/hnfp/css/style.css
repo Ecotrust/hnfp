@@ -127,6 +127,9 @@ body {
   font-family: 'function', sans-serif;
   font-size: 1em;
   font-weight: normal;
+  min-height: 100vh;
+  padding-bottom: 50px;
+  position: relative;
 }
 
 main,
@@ -1391,8 +1394,16 @@ path {
   login
   --------------------*/
 
+.login-page {
+  padding: 12vh 0;
+}
+
 .classless-page h1 {
   text-align: center;
+}
+
+.login section.section {
+  margin: 0 auto 2rem;
 }
 
 /*--------------------
@@ -1400,8 +1411,13 @@ path {
   --------------------*/
 
 .page-footer {
-  position: relative;
+  bottom: 0;
+  min-height: 50px;
+  left: 0;
   padding: 0;
+  position: absolute;
+  right: 0;
+  width: 100%:
 }
 
 .page-footer .footer-copyright {
