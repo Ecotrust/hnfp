@@ -5,7 +5,7 @@
 <main class="home-page">
   <div class="parallax-container">
     <div class="parallax">
-      <img src="{% static 'hnfp/img/eagle_soar.jpg' %}">
+      <img src="{% static 'hnfp/img/bg_eagle.jpg' %}">
     </div>
     <section class="row hero">
       <div class="col s10 m8 offset-s1 offset-m2">
@@ -19,24 +19,26 @@
       <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img">
     </div>
     <div class="row container center margin-bottom">
-      <a href="{% url 'survey' %}" class="waves-effect waves-light btn-large btn-border-light-blue">{{ cta }} <i class="material-icons right">navigate_next</i></a>
+      <a href="{% url 'survey' %}" class="waves-effect home-cta waves-light btn-large btn-border-light-blue">{{ cta }} <i class="material-icons right">navigate_next</i></a>
     </div>
   </section>
   <section class="section white padding-top">
     <div class="row container">
-      <div class="col s12 flow-text">
+      <div class="col s12 l9 flow-text">
         <h2 class="teal-text">Coming together to create a shared vision for our lands.</h2>
       </div>
-      <div class="col s12 flow-text">
-        <p>The Hoonah Stewards application enables community members to participate in natural resource management decisions and improve communication with land managers. By providing localized information and tools for tracking personal activities, Hoonah Stewards can share information about what is important to the community.</p>
+      <div class="col s12 l9 offset-l3 flow-text">
+        <blockquote>The Hoonah Stewards application enables community members to participate in natural resource management decisions and improve communication with land managers. By providing localized information and tools for tracking personal activities, Hoonah Stewards can share information about what is important to the community.</blockquote>
       </div>
     </div>
   </section>
   <section class="section white padding-top">
     <div class="row container">
-      <div class="col s12 left flow-text">
+      <div class="col s12 l9 left flow-text">
         <h2 class="teal-text">What can you do as a steward?</h2>
-        <span>Hoonah Stewards can track their hunting and gathering, get updates about road conditions, and receive notifications about important events. Stewards can choose to share private information with land managers if they desire. If you chose to share, all personal information is masked for privacy.</span>
+      </div>
+      <div class="col s12 l9 offset-l3 flow-text">
+        <blockquote>Hoonah Stewards can track their hunting and gathering, get updates about road conditions, and receive notifications about important events. Stewards can choose to share private information with land managers if they desire. If you chose to share, all personal information is masked for privacy.</blockquote>
       </div>
     </div>
     <div class="row cta-round">
@@ -76,13 +78,13 @@
       <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img">
     </div>
     <div class="row container hide-on-small-only">
-      <div class="col s12 flow-text">
+      <div class="col s12 l9 flow-text">
         <h2 class="teal-text">Our shared land management plan</h2>
       </div>
-      <div class="col s10 offset-s1 l12">
-        <p class="flow-text">Find more information about land management activities currently underway or planned for the near future. Here you can read details about the management plans and provide feedback.</p>
+      <div class="col s10 offset-s1 l9 offset-l3 flow-text">
+        <blockquote class="margin-bottom">Find more information about land management activities currently underway or planned for the near future. Here you can read details about the management plans and provide feedback.</blockquote>
         <div class="margin-bottom">
-          <a href="{% url 'survey' %}" class="waves-effect waves-light btn-large btn-border-light-blue">Launch Map <i class="material-icons right">navigate_next</i></a>
+          <a href="{% url 'survey' %}" class="disabled waves-effect home-cta waves-light btn-large btn-border-light-blue">Launch Map <i class="material-icons right">navigate_next</i></a>
         </div>
       </div>
     </div>
@@ -92,7 +94,7 @@
       <div class="card">
           <div class="card-image">
             <img src="{% static 'hnfp/img/ianaj-solistice.jpg' %}">
-            <a class="btn-floating btn-large halfway-fab waves-effect waves-light"><i class="material-icons right">launch</i></a>
+            <a href="" class="disabled btn-floating btn-large halfway-fab waves-effect waves-light"><i class="material-icons right">launch</i></a>
           </div>
           <div class="card-content flow-text">
             <span class="card-title"><h2 class="teal-text">Our shared land management plan</h2></span>
@@ -101,13 +103,13 @@
       </div>
     </div>
   </section>
-  <section class="section white padding-top">
+  <section class="section bg_green_light padding-top">
     <div class="row container home-mid">
       <div class="col s12 flow-text">
         <h2 class="teal-text">Our Partnership</h2>
       </div>
     </div>
-    <div class="home-mid container">
+    <div class="home-mid container white padding-top">
       {% include 'hnfp/blocks/logos.html' %}
     </div>
   </section>
@@ -117,7 +119,19 @@
     </div>
   </section>
   <section class="section bg_blue_dark section-footer">
-
+    <div class="row container home-mid">
+      <div class="col s12 flow-text">
+        <h3 class="teal-text">Keep me updated on land management news</h3>
+        <form>
+          <div class="input-field col s12 l7">
+            <input type="text" disabled id="fname" placeholder="first name"/>
+            <input type="text" disabled id="lname" placeholder="last name" />
+            <input type="email" disabled id="email" placeholder="email" />
+            <input type="submit" disabled id="submit" text="Submit" class="btn btn-border-white" />
+          </div>
+        </form>
+      </div>
+    </div>
   </section>
 </main>
 {% endblock outer_content %}

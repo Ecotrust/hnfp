@@ -49,7 +49,7 @@ def home(request):
     context = {
         'page': 'home',
         'tagline': 'community + environment + economy',
-        'cta':'Become a steward',
+        'cta':'Become a Steward',
     }
     return HttpResponse(template.render(context, request))
 

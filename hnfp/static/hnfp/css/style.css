@@ -178,6 +178,10 @@ p {
   margin: 0 0 1.5rem;
 }
 
+blockquote {
+  border-left-color: #2b384a;
+}
+
 .block {
   display: block;
 }
@@ -338,16 +342,16 @@ nav .tabs .tab {
 
 .section-top-bg {
   overflow: hidden;
-  height: 80px;
+  height: 70px;
   position: relative;
-  top: -80px;
+  top: -70px;
   width: 100%:
 }
 
   .section-top-bg-img {
     left: -15%;
     position: absolute;
-    min-height: 90px;
+    min-height: 80px;
     top: 0;
     width: 180%;
     z-index: -1;
@@ -393,13 +397,23 @@ nav .tabs .tab {
   padding: 40px 0;
 }
 
+.section-footer .home-mid .col {
+  margin-bottom: 0;
+}
+
 .parallax-container {
   height: 400px;
   width: 100%;
 }
 
-.home-page .btn-border-light-blue {
-  font-size: 1.5em;
+.home-page .home-cta {
+  font-size: 2.25rem;
+  line-height: 6rem;
+}
+
+.home-page .home-cta i {
+  font-size: 3em;
+  line-height: 6rem;
 }
 
 .home-page .cta-fixed-width {
@@ -1376,8 +1390,42 @@ path {
 /*--------------------
   login
   --------------------*/
+
 .classless-page h1 {
   text-align: center;
+}
+
+/*--------------------
+  Footer
+  --------------------*/
+
+.page-footer {
+  position: relative;
+  padding: 0;
+}
+
+.page-footer .footer-copyright {
+  position: relative;
+}
+
+.fb_icon_wrap {
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+.fb_icon_wrap:before {
+  background: #2b384a;
+  content: '';
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 2px;
+}
+
+#fb_icon {
+  height: 16px;
+  margin: 0 5px 0 20px;
+  width: 16px;
 }
 
 /*--------------------
@@ -1447,8 +1495,8 @@ path {
 
   .home-page .cta-fixed-width {
     border: 8px solid #e4efee;
-    font-size: 1em;
-    padding: 12px;
+    font-size: .9375em;
+    padding: 24px;
   }
 
   .welcome_steward .cta-fixed-width {
@@ -1511,7 +1559,12 @@ path {
   }
 
   .parallax-container {
-    height: 500px;
+    height: 490px;
+  }
+
+  .parallax-container .parallax img {
+    bottom: 8%;
+    width: 100%;
   }
 
   .btn-border-blue, .btn-border-light-blue, .btn-border-blue-grey,
@@ -1534,7 +1587,7 @@ path {
   }
 
   .hero {
-    padding-top: 125px;
+    padding-top: 80px;
   }
 
   .step-actions {
