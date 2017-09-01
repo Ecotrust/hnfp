@@ -136,6 +136,6 @@ var alerts = {
     alert_div = alert_div.toString();
     var mapPanel = document.getElementById('map-panel');
     var pos = $('#map-panel').find('#' + alert_div).position();
-    $('#map-panel').scrollTop(pos.top);
+    $('#map-panel').slideUp( 300 ).slideDown( 300 ).scrollTop(pos.top);
   }
 }
