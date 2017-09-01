@@ -121,11 +121,21 @@ var alerts = {
     for (let alert of alerts) {
       $('#map-panel').append(`<div class="row">
         <div class="col s10 offset-s1">
-          <h3>${alert.alert_id}. ${alert.alert_type}</h3>
-          <p>${alert.alert_comment}</p>
-          <p><em>posted by ${alert.alert_username} ${alert.alert_date} ${alert.alert_time}</em></p>
+          <article id="alert_${alert.alert_id}">
+            <div class="hexagon">${alert.alert_id}</div>
+            <h3>${alert.alert_type}</h3>
+            <p><em>posted by ${alert.alert_username}<br />${alert.alert_date} ${alert.alert_time}</em></p>
+            <p>${alert.alert_comment}</p>
+          </article>
         </div>
       </div>`);
     }
+  },
+  scrollToAlert: function(alert_id) {
+    var alert_div ='alert_' + alert_id;
+    alert_div = alert_div.toString();
+    var mapPanel = document.getElementById('map-panel');
+    var pos = $('#map-panel').find('#' + alert_div).position();
+    $('#map-panel').scrollTop(pos.top);
   }
 }

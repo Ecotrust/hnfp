@@ -748,7 +748,7 @@ div.mapgroup {
 }
 
 #map-panel {
-  background-color: #e5e5e0;
+  background-color: #e4efee;
   width: 100%;
 }
 
@@ -985,7 +985,7 @@ div.mapgroup {
 
 .map-container,
 #map-wrapper {
-  height: 400px;
+  height: 320px;
   max-height: 96vh;
 }
 
@@ -1124,7 +1124,49 @@ div.mapgroup {
 
 #map-panel {
   overflow: scroll;
+  padding: 1rem 0;
+  max-height: 200px;
 }
+
+#map-panel article {
+  border-bottom: 1px solid #2b384a;
+  padding: 1rem 0;
+}
+
+#map-panel article p {
+  margin-bottom: .75rem;
+}
+
+.hexagon {
+  background: #d53f38;
+  color: #fff;
+  display: block;
+  font-size: .875em;
+  line-height: 16px;
+  margin-bottom: 1rem;
+  position: relative;
+  text-align: center;
+  width: 32px;
+  z-index: 1;
+}
+
+  .hexagon:before,
+  .hexagon:after {
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    content: '';
+    position: absolute;
+    left: 0;
+    z-index: -1;
+  }
+  .hexagon:before {
+    border-bottom: 8px solid #d53f38;
+    top: -8px;
+  }
+  .hexagon:after {
+    border-top: 8px solid #d53f38;
+    bottom: -8px;
+  }
 
 /*--------------------
   Forum
@@ -1537,6 +1579,10 @@ path {
   .alerts .map-container {
     height: 520px;
     max-height: 98vh;
+  }
+
+  #map-panel {
+    max-height: none;
   }
 
   #new-observation,

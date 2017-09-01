@@ -113,6 +113,7 @@ var hoonahLandOwners = new ol.layer.Vector({
   visible: false
 });
 
+// Map Object
 const map = new ol.Map({
   target: 'map',
   layers: [
@@ -188,7 +189,8 @@ if (typeof all_alerts !== 'undefined') {
     let newA = new ol.Feature();
     vectorSource.addFeature(newA);
     newA.setGeometry(new ol.geom.Point(coords));
-    newA.setStyle(style)
+    newA.setStyle(style);
+    newA.setProperties(all_alerts[i]);
   }
 }
 
@@ -208,14 +210,18 @@ var selectInteraction = new ol.interaction.Select({
   style: selectStyle
 });
 
-var pointerInteraction = new ol.interaction.Pointer({
-  handleDownEvent: false,
-  handleDragEvent: false,
-  handleEvent: false,
-  handleMoveEvent: false,
+var selectClick = new ol.interaction.Select({
+  condition: ol.events.condition.click
 });
-map.addInteraction(pointerInteraction);
-
+map.addInteraction(selectClick);
+selectClick.on('select', function(e) {
+  var feats = e.target.getFeatures();
+  feats.forEach(function(f,i) {
+    let aid = f.getProperties().alert_id;
+    console.log(aid);
+    alerts.scrollToAlert(aid);
+  });
+})
 
 var draw;
 function drawLocation() {
@@ -311,7 +317,7 @@ function styleAlert(a_id) {
     image: new ol.style.RegularShape({
       points: 6,
       fill: new ol.style.Fill({
-        color: 'red'
+        color: '#d53f38'
       }),
       stroke: new ol.style.Stroke({
         color: '#fff',
@@ -365,4 +371,20 @@ function addAlertsToMap(data) {
   let coords = ol.proj.fromLonLat(newDataCoords.coordinates);
   point.setGeometry(new ol.geom.Point(coords));
   point.setStyle(style);
+  point.setProperties(data[l]);
+  var selectClick = new ol.interaction.Select({
+    condition: ol.events.condition.click
+  });
+  map.addInteraction(selectClick);
+  selectClick.on('select', function(e) {
+    console.log(e.target.getFeatures());
+  })
+}
+
+function hideLocation() {
+  locLayer.setVisible(false);
+}
+
+function showLocation() {
+  locLayer.setVisible(true);
 }

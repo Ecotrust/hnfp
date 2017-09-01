@@ -145,7 +145,7 @@ def dashboard(request):
     all_alerts = []
     recent_alerts = []
     get_alerts = Alert.objects.filter(alert_confirmed=True)
-    get_recent_alerts = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')[:2]
+    get_recent_alerts = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')[:5]
     for a in get_alerts:
         dic = a.to_dict()
         all_alerts.append(dic)

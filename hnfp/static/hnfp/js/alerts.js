@@ -11,6 +11,7 @@ var alerts = {
   startNew: function() {
     $('#stepone').removeClass('visible');
     $('#steptwo').addClass('visible');
+    showLocation();
     $('#use-my-location').click(function() {
       findLocation();
       alerts.stepTwo();
@@ -111,11 +112,15 @@ var alerts = {
       data: $form,
       success: function(data) {
         addAlertsToMap(data);
+        hideLocation();
         alerts.close();
         $alertForm.html('');
+        Materialize.toast('Alert Report Submission Successful', 4000);
       },
       error: function (error) {
         $alertForm.prepend(error);
+        hideLocation();
+        Materialize.toast('Alert Report Submission Failed. Please Ensure You Have Internet Access & Try Again.', 6000);
       }
     });
   }
