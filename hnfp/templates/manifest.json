@@ -1,8 +1,8 @@
 {
   "name": "Hoonah Stewards | Hoonah Native Forest Partnership",
   "short_name": "Hoonah Stewards",
-  "scope": "/",
-  "start_url": "/dashboard/",
+  "scope": "https://www.hoonahstewards.net/",
+  "start_url": "https://www.hoonahstewards.net/dashboard/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#009688",
