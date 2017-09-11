@@ -601,9 +601,9 @@ nav .tabs .tab {
   font-size: .675em;
 }
 
-#forecast,
-#marine {
-  padding: 2rem;
+#forecast-summary {
+  border-bottom: 2px solid #fff;
+  padding-bottom: 2rem;
 }
 
 #tides {
@@ -614,19 +614,45 @@ nav .tabs .tab {
   border-bottom: none;
 }
 
+#forecast,
+#marine {
+  padding: 2rem;
+}
+
 #forecast td,
-#marine td,
-#tides td {
+#marine td {
   padding: 5px 8px;
 }
 
-#forecast h4, #marine h4, #tides h4 {
+.dashboard .collapsible {
+  border: none;
+  box-shadow: none;
+}
+
+.dashboard .collapsible .margin-top {
+  margin-top: 3rem;
+}
+
+.dashboard .collapsible h4 {
   font-size: 1.5em;
   margin: 0 0 1rem;
 }
 
-#forecast .margin-top {
-  margin-top: 3rem;
+.dashboard .collapsible-header,
+.dashboard .collapsible-body {
+  background: transparent;
+  border: none;
+}
+.dashboard .collapsible-header h4 {
+  flex: 1;
+}
+
+.dashboard .collapsible-header h4 i {
+  line-height: 2em;
+}
+
+#tides td {
+  text-align: center;
 }
 
 #tides th {
@@ -1514,7 +1540,8 @@ path {
     width: 250px;
   }
 
-  #tides th {
+  #tides th,
+  #tides td {
     font-size: 1em;
     text-align: center;
   }

@@ -1,16 +1,7 @@
 var cacheName = 'hoonahs-stewards';
 var dataCacheName = 'hoonah-data';
 var urlsToCache = [
-  '/',
-  '/dashboard/',
-  '/observation/',
-  '/observation/new',
-  '/observation/create',
-  '/hnfp/blocks/extra_css.html',
-  '/static/hnfp/css/style.css',
-  '/static/hnfp/css/materialize.css',
-  '/static/hnfp/css/materialize_stepper.css',
-  '/static/hnfp/css/materialize.css',
+  '/'
 ];
 
 self.addEventListener('install', function(event) {

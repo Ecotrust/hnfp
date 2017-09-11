@@ -54,7 +54,7 @@ var weather = {
             if (wp != undefined && prop != 'summary') {
               weatherDOM.append('<tr><td><strong>' + prop + '</strong></td><td>' + wp + '</td></tr>').addClass('weather-block');
             } else if (prop == 'summary') {
-              $('#forecast-summary').append(`<div class="col s10 offset-s1 l12">${wp}</div>`);
+              $('#forecast-summary').append(wp);
             }
           }
         }
@@ -62,17 +62,13 @@ var weather = {
           'Wind speeds of (mph)': current.windSpeed,
           'Wind bearing (°N)': current.windBearing,
           'Gusts of': current.windGust,
-
-          'The nearest storm is': current.nearestStormDistance,
-          ' bearing (°N)': current.nearestStormBearing,
-
-          '. Visibility of (mi)': current.visibility,
-          ' and a uv index of': current.uvIndex
+          'Distance to nearest storm': current.nearestStormDistance,
+          'Visibility of (mi)': current.visibility
         };
         for (let prop in marineData) {
           if (marineData.hasOwnProperty(prop)) {
             if ([prop] == 'summary') {
-              marineDOM.append('<div class="col s12">' + marineData[prop] + '</div>');
+              marineDOM.append('<div>' + marineData[prop] + '</div>');
             }
             if (marineData[prop] != undefined) {
               marineDOM.append('<tr><td><strong>' + prop + '</strong></td><td>' + marineData[prop] + '</td></tr>');
@@ -105,8 +101,7 @@ var weather = {
               v = parseFloat(el.v),
               type = el.type;
           let waterlevel = v.toFixed(2);
-          console.log(waterlevel);
-          tideDOM.append('<tr><td>' + month + '.' + day + '</td><td>' + time + '</td><td>' + waterlevel + '</td><td>' + type + '</td></tr>').addClass('tide-block');
+          tideDOM.append('<tr><td>' + month + '.' + day + '</td><td>' + type + '</td><td>' + waterlevel + '</td><td>' + time + '</td></tr>').addClass('tide-block');
         })
       },
       error: function(jqXHR, textStatus, errorThrown) {
