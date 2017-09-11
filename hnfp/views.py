@@ -142,16 +142,6 @@ def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
     posts = Post.objects.get_queryset()
     jobs = JobOpportunity.objects.order_by('posted')[:5]
-    all_alerts = []
-    recent_alerts = []
-    get_alerts = Alert.objects.filter(alert_confirmed=True)
-    get_recent_alerts = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')[:5]
-    for a in get_alerts:
-        dic = a.to_dict()
-        all_alerts.append(dic)
-    for a in get_recent_alerts:
-        dic = a.to_dict()
-        recent_alerts.append(dic)
     for job in jobs:
         try:
             if job.is_html:
@@ -163,11 +153,27 @@ def dashboard(request):
     context = {
         'title': '',
         'posts': posts,
-        'alerts': json.dumps(all_alerts),
-        'recent_alerts': json.dumps(recent_alerts),
+        'alerts': json.dumps(get_all_alerts()),
+        'recent_alerts': json.dumps(get_recent_alerts()),
     }
     context['jobs'] = jobs
     return HttpResponse(template.render(context, request))
+
+def get_all_alerts():
+    all_alerts = []
+    get_alerts = Alert.objects.filter(alert_confirmed=True)
+    for a in get_alerts:
+        dic = a.to_dict()
+        all_alerts.append(dic)
+    return all_alerts
+
+def get_recent_alerts():
+    recent_alerts = []
+    get_recent = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')[:5]
+    for a in get_recent:
+        dic = a.to_dict()
+        recent_alerts.append(dic)
+    return recent_alerts
 
 def alert(request):
     template = loader.get_template('hnfp/alert.html')
@@ -180,6 +186,7 @@ def alert(request):
     context = {
         'title': 'Alerts',
         'alerts': json.dumps(all_alerts),
+        'recent_alerts': json.dumps(get_recent_alerts()),
     }
     return HttpResponse(template.render(context, request))
 

@@ -784,8 +784,8 @@ div.mapgroup {
 }
 
 #map-panel h3 {
-  color: red;
-  font-size: 1.125em;
+  color: #d53f38;
+  font-size: 1.3125em;
   text-transform: capitalize;
 }
 
@@ -1167,31 +1167,32 @@ div.mapgroup {
   background: #d53f38;
   color: #fff;
   display: block;
-  font-size: .875em;
-  line-height: 16px;
+  font-size: 12px;
+  height: 14px;
+  line-height: 14px;
   margin-bottom: 1rem;
   position: relative;
   text-align: center;
-  width: 32px;
+  width: 26px;
   z-index: 1;
 }
 
   .hexagon:before,
   .hexagon:after {
-    border-left: 16px solid transparent;
-    border-right: 16px solid transparent;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
     content: '';
     position: absolute;
     left: 0;
     z-index: -1;
   }
   .hexagon:before {
-    border-bottom: 8px solid #d53f38;
-    top: -8px;
+    border-bottom: 7px solid #d53f38;
+    top: -7px;
   }
   .hexagon:after {
-    border-top: 8px solid #d53f38;
-    bottom: -8px;
+    border-top: 7px solid #d53f38;
+    bottom: -7px;
   }
 
 /*--------------------

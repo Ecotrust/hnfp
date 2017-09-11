@@ -36,6 +36,10 @@
         </div>
       </div>
     </section>
+
+    <section class="section alerts-wrap">
+      <div class="recent-alerts"></div>
+    </section>
   </main>
 {% endblock outer_content %}
 
@@ -50,6 +54,7 @@
 
     <script>
       var all_alerts = {{ alerts|safe }};
+      var recent_alerts = {{ recent_alerts|safe }};
     </script>
 
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>

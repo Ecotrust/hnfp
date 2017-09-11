@@ -1,9 +1,6 @@
 $(document).ready( function() {
   weather.getWeather();
   weather.getTides();
-  if (typeof recent_alerts !== 'undefined') {
-    alerts.recentAlerts(recent_alerts);
-  }
 });
 
 var weather = {
@@ -110,27 +107,3 @@ var weather = {
     });
   }
 };
-
-var alerts = {
-  recentAlerts: function(alerts) {
-    for (let alert of alerts) {
-      $('#map-panel').append(`<div class="row">
-        <div class="col s10 offset-s1">
-          <article id="alert_${alert.alert_id}">
-            <div class="hexagon">${alert.alert_id}</div>
-            <h3>${alert.alert_type}</h3>
-            <p><em>posted by ${alert.alert_username}<br />${alert.alert_date} ${alert.alert_time}</em></p>
-            <p>${alert.alert_comment}</p>
-          </article>
-        </div>
-      </div>`);
-    }
-  },
-  scrollToAlert: function(alert_id) {
-    var alert_div ='alert_' + alert_id;
-    alert_div = alert_div.toString();
-    var mapPanel = document.getElementById('map-panel');
-    var pos = $('#map-panel').find('#' + alert_div).position();
-    $('#map-panel').slideUp( 300 ).slideDown( 300 ).scrollTop(pos.top);
-  }
-}

@@ -321,9 +321,9 @@ function styleAlert(a_id) {
       }),
       stroke: new ol.style.Stroke({
         color: '#fff',
-        width: 2
+        width: 1
       }),
-      radius: 10,
+      radius: 12,
     }),
     text: new ol.style.Text({
       text: a_id.toString(),
