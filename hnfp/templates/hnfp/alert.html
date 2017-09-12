@@ -13,17 +13,20 @@
     <section class="container section">
       <div class="row">
         <div class="col s12">
-          <h5 class="flow-text">{{ title }}</h5>
+          <h1 class="flow-text">{{ title }}</h1>
         </div>
       </div>
     </section>
 
-    <section class="container map-container">
+    <section class="container alerts-wrap">
       <div id="map-wrapper">
-        <div id="map-panel">
+        <div id="new-alert-wrapper">
           <form id="alert-form" method="post" action="/alert/create/"></form>
         </div>
         <div id="map" class="map"></div>
+      </div>
+      <div id="map-panel">
+        <div class="recent-alerts"></div>
       </div>
     </section>
 
@@ -37,9 +40,6 @@
       </div>
     </section>
 
-    <section class="section alerts-wrap">
-      <div class="recent-alerts"></div>
-    </section>
   </main>
 {% endblock outer_content %}
 

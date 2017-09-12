@@ -31,15 +31,16 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  /* event.respondWith(
-    caches.match(event.request).then(function(response) {
+  event.respondWith(
+    self.registration.showNotification('fetch response')
+    /* caches.match(event.request).then(function(response) {
       return response || fetch(event.request);
-    })
-  ); */
+    }) */
+  );
 });
 
 self.addEventListener('sync', function(event) {
-  // self.registration.showNotification("Sync event fired!");
+  self.registration.showNotification("Sync event fired!");
 });
 
 self.addEventListener('push', function(event) {

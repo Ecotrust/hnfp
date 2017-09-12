@@ -53,7 +53,7 @@ var hoonahRoads = new ol.layer.Vector({
     let road = '',
         properties = feature.getProperties();
     if (resolution < 16) {
-      if (properties.RD_NAME_PR === null) {
+      if (properties.RD_NAME_PR === null || properties.RD_NAME_PR === 'other') {
         properties.RD_NAME_PR = '';
       }
       road = properties.RD_NAME_PR + '\n' + properties.RD_OWNER;
@@ -218,19 +218,32 @@ selectClick.on('select', function(e) {
   var feats = e.target.getFeatures();
   feats.forEach(function(f,i) {
     let aid = f.getProperties().alert_id;
-    console.log(aid);
     alerts.scrollToAlert(aid);
   });
 })
 
 var draw;
-function drawLocation() {
+function drawLocation(style) {
   locPoint.setGeometry(new ol.geom.Point(mapView.getCenter()));
-  locPoint.setStyle(locStyle);
+  if (typeof style === undefined) {
+    style = locStyle;
+  }
+  locPoint.setStyle(style);
   map.addInteraction(selectInteraction);
   map.addInteraction(modify);
 }
 
+var alertMap = {
+  findLocation: function() {
+    findLocation();
+    let style = styleAlert();
+    locPoint.setStyle(style);
+  },
+  drawLocation: function() {
+    let style = styleAlert();
+    drawLocation(style);
+  }
+}
 // geolocation tracker var
 var geolocation;
 function findLocation() {
@@ -269,7 +282,7 @@ function getLocationPoint() {
 
 // edit location marker
 var modify = new ol.interaction.Modify({
-  features: selectInteraction.getFeatures()
+  source: locSource
 });
 
 var locStyle = new ol.style.Style({
@@ -313,25 +326,36 @@ var topoURLCapabilities = fetch('https://services.arcgisonline.com/arcgis/rest/s
   });
 
 function styleAlert(a_id) {
+  let width = 1,
+      fillColor = '#d53f38';
+  if (typeof a_id === 'undefined') {
+    a_id = '';
+    fillColor = '#ffea30';
+    width = 2.5;
+  } else {
+    a_id = a_id.toString();
+  }
   return new ol.style.Style({
     image: new ol.style.RegularShape({
-      points: 6,
+      points: 3,
       fill: new ol.style.Fill({
-        color: '#d53f38'
+        color: fillColor
       }),
       stroke: new ol.style.Stroke({
-        color: '#fff',
-        width: 1
+        color: '#dfeceb',
+        width: width,
       }),
-      radius: 12,
+      radius: 19
     }),
     text: new ol.style.Text({
-      text: a_id.toString(),
+      font: '11px "function_bold"',
+      text: a_id,
       align: 'center',
       fill: new ol.style.Fill({
         color: '#fff'
-      }),
-    })
+      })
+    }),
+    zIndex: 9
   })
 }
 

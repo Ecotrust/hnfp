@@ -220,6 +220,15 @@ def alert_create(request):
         );
         new_a.save()
         all_alerts = [x.to_dict() for x in Alert.objects.all()]
+        # send email to admin
+        from django.core.mail import send_mail
+        send_mail(
+            'New Report - Hoonah Stewards',
+            'A new submission on https://hoonahstewards.net needs review. An admin needs to review this submission https://hoonahstewards.net/admin and act upon it.',
+            'hostmaster@hoonahstewards.net',
+            ['dpollard@ecotrust.org'],
+            fail_silently=False,
+        )
         return JsonResponse(all_alerts, safe=False)
 
 def observation(request):

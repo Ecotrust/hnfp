@@ -122,53 +122,12 @@ STATICFILES_DIRS = (
     ASSETS_DIR,
 )
 
-### Django compressor (mp-visualize/base.html)
-COMPRESS_ENABLED = True
-COMPRESS_URL = STATIC_URL
-COMPRESS_ROOT = STATIC_ROOT
-COMPRESS_OUTPUT_DIR = 'CACHE'
-COMPRESS_STORAGE = 'compressor.storage.CompressorFileStorage'
-COMPRESS_VERBOSE = False
-COMPRESS_PARSER = 'compressor.parser.AutoSelectParser'
-COMPRESS_DEBUG_TOGGLE = 'None'
-
-COMPRESS_JS_COMPRESSOR = 'compressor.js.JsCompressor'
-COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
-
-COMPRESS_CSS_COMPRESSOR = 'compressor.css.CssCompressor'
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter'
-]
-COMPRESS_CSS_HASHING_METHOD = 'mtime'
-COMPRESS_MTIME_DELAY = 10
-
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-    ('text/x-sass', 'django_libsass.SassCompiler'),
-    ('text/less', 'lessc {infile} {outfile}'),
-)
-COMPRESS_CACHEABLE_PRECOMPILERS = ()
-
-COMPRESS_CACHE_KEY_FUNCTION = 'compressor.cache.simple_cachekey'
-COMPRESS_CACHE_BACKEND = 'default'
-
-COMPRESS_OFFLINE = True
-COMPRESS_OFFLINE_CONTEXT = {}
-COMPRESS_OFFLINE_MANIFEST = 'manifest.json'
-COMPRESS_REBUILD_TIMEOUT = 60000
-COMPRESS_MINT_DELAY = 40
-
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
 ]
-
-KML_SIMPLIFY_TOLERANCE = 20 #meters
-KML_SIMPLIFY_TOLERANCE_DEGREES = 0.0002 # very roughly ~ 20 meters
-KML_EXTRUDER_HEIGHT = 100
-KML_ALTITUDEMODE_DEFAULT = 'absolute'
 
 ### Note: This MUST be set before importing project_settings, even though
 #       INSTALLED_APPS is the first thing project_settings sets.
@@ -373,11 +332,8 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-EMAIL_HOST = "smtp.mail.com"
-EMAIL_PORT = "587"
-EMAIL_HOST_USER = "dev@hoonahstewards.net"
-EMAIL_HOST_PASSWORD = "yourpassword"
-DEFAULT_FROM_EMAIL = "Dev <dev@hoonahstewards.net>"
+DEFAULT_FROM_EMAIL = "noreply@hoonahstewards.net"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 try:
     from marineplanner.local_settings import *
