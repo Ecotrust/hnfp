@@ -191,38 +191,45 @@ if (typeof user_observations !== 'undefined') {
       })
     }));
   }
-  let popupNode = document.getElementById('popup');
-  let popup = new ol.Overlay({
-    element: popupNode,
-    positioning: 'top-center',
-    offset: [0,6],
-    autoPan: true,
-    autoPanMargin: 40
+}
+
+var popupNode = document.getElementById('popup');
+var popup = new ol.Overlay({
+  element: popupNode,
+  positioning: 'top-center',
+  offset: [0,6],
+  autoPan: true,
+  autoPanMargin: 40
+});
+map.on('singleclick', function(event) {
+  let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
+    return feature;
+  }, {
+    hitTolerance: 2
   });
-  map.addOverlay(popup);
-  map.on('singleclick', function(event) {
-    let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
-      return feature;
-    }, {
-      hitTolerance: 2
-    });
-    if (feature) {
-      let coords = feature.getGeometry().getCoordinates();
-      let featuresProps = feature.getProperties();
-      let domElement = popup.getElement();
-      domElement.querySelector('.card-content').innerHTML = `
-        <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
-        <span class="center card-title">${featuresProps.observation_type}</span>
-        <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
-        <p>${featuresProps.comments}</p>
-      `;
-      domElement.querySelector('.card-action').innerHTML = `
-        <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
-        <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
-      `;
-      popup.setPosition(coords);
-    }
-  });
+  if (feature) {
+    map.addOverlay(popup);
+    addOverlayPopup(feature);
+  } else {
+    map.removeOverlay(popup);
+  }
+});
+
+function addOverlayPopup(feature) {
+    let coords = feature.getGeometry().getCoordinates();
+    let featuresProps = feature.getProperties();
+    let domElement = popup.getElement();
+    domElement.querySelector('.card-content').innerHTML = `
+      <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
+      <span class="center card-title">${featuresProps.observation_type}</span>
+      <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
+      <p>${featuresProps.comments}</p>
+    `;
+    domElement.querySelector('.card-action').innerHTML = `
+      <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
+      <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
+    `;
+    popup.setPosition(coords);
 }
 
 if (typeof all_alerts !== 'undefined') {
