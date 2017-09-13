@@ -189,6 +189,10 @@ blockquote {
   display: block;
 }
 
+.hide {
+  display: none;
+}
+
 .full {
   width: 100%;
 }
@@ -754,6 +758,27 @@ div.mapgroup {
   map
   --------------------*/
 
+#map-wrapper {
+  height: 320px;
+  position: relative;
+  max-height: 96vh;
+}
+
+#map {
+  height: 100%;
+}
+
+#map-panel .container {
+  // font-size: 1.3125em;
+  // padding: 2rem 0;
+}
+
+#map-panel h3 {
+  color: #d53f38;
+  font-size: 1.3125em;
+  text-transform: capitalize;
+}
+
 .dashboard .map-wrap {
   height: 400px;
   overflow: hidden;
@@ -777,22 +802,6 @@ div.mapgroup {
 .recent-alerts {
   overflow: hidden;
   width: 100%;
-}
-
-#map-panel {
-  background-color: #e4efee;
-  width: 100%;
-}
-
-#map-panel .container {
-  font-size: 1.3125em;
-  padding: 2rem 0;
-}
-
-#map-panel h3 {
-  color: #d53f38;
-  font-size: 1.3125em;
-  text-transform: capitalize;
 }
 
 .add-to-map-section {
@@ -880,7 +889,7 @@ div.mapgroup {
   z-index: 2;
 }
 
-#new-observation,
+// #new-observation,
 #new-alert-wrapper {
   background: rgba(255,255,255,0.94);
   box-shadow: 0 0 6px #666;
@@ -894,13 +903,13 @@ div.mapgroup {
   width: 90%;
 }
 
-  #new-observation.tall,
+  // #new-observation.tall,
   #new-alert-wrapper.tall {
     height: 90%;
     top: 5%;
   }
 
-  #new-observation.short,
+  // #new-observation.short,
   #new-alert-wrapper.short {
     height: 30%;
     top: 65%;
@@ -909,6 +918,40 @@ div.mapgroup {
 #new-observation .progress,
 #new-alert-wrapper .progress {
   margin: 0;
+}
+
+#new-observation .card {
+  background: #e4efee;
+  margin-top: 0;
+}
+
+#new-observation .card-action a {
+    color: #5d85b7;
+}
+
+#new-observation .card-action a:last-of-type {
+  margin-right: 0;
+}
+
+#new-observation .card-action i {
+  display: inline-block;
+  font-size: 1.25em;
+  margin: 0 8px;
+  vertical-align: text-bottom;
+}
+
+#new-observation .cancel,
+#new-observation .next {
+  display: inline-block;
+  margin: 0 -2px;
+  text-align: center;
+  text-transform: capitalize;
+  vertical-align: middle;
+  width: 50%;
+}
+
+#new-observation .cancel {
+  color: #4d4d4e;
 }
 
 #new-observation form, #new-observation input, #new-observation label, #new-observation textarea,
@@ -976,6 +1019,7 @@ div.mapgroup {
   line-height: 2.75rem;
 }
 
+
 .small-btn.btn {
   font-size: .8125em;
   line-height: 2.5rem;
@@ -1014,20 +1058,6 @@ div.mapgroup {
   z-index: 9;
 }
 
-.map-container,
-#map-wrapper {
-  height: 320px;
-  max-height: 96vh;
-}
-
-#map-wrapper {
-  position: relative;
-}
-
-#map {
-  height: 100%;
-}
-
 .observations .collapsible {
   margin-bottom: 0;
 }
@@ -1051,7 +1081,7 @@ div.mapgroup {
   }
 
 .add-btn i {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .observations .add-btn,
@@ -1618,10 +1648,8 @@ path {
     min-height: 100px;
   }
 
-  .observations .map-container,
   .observations #map-wrapper,
-  .alerts #map-wrapper,
-  .alerts .map-container {
+  .alerts #map-wrapper {
     height: 520px;
     max-height: 98vh;
   }

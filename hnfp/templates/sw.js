@@ -1,7 +1,13 @@
 var cacheName = 'hoonahs-stewards';
 var dataCacheName = 'hoonah-data';
 var urlsToCache = [
-  '/'
+  '/',
+  '/static/hnfp/css/materialize.css',
+  '/static/hnfp/css/style.css',
+  '/hnfp/',
+  '/myaccount/',
+  '/alert/',
+  '/dashboard/'
 ];
 
 self.addEventListener('install', function(event) {
@@ -30,14 +36,13 @@ self.addEventListener('activate', function(event) {
   return self.clients.claim();
 });
 
-self.addEventListener('fetch', function(event) {
+/* self.addEventListener('fetch', function(event) {
   event.respondWith(
-    self.registration.showNotification('fetch response')
-    /* caches.match(event.request).then(function(response) {
+    caches.match(event.request).then(function(response) {
       return response || fetch(event.request);
-    }) */
+    })
   );
-});
+}); */
 
 self.addEventListener('sync', function(event) {
   self.registration.showNotification("Sync event fired!");

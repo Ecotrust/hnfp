@@ -192,6 +192,7 @@ if (typeof all_alerts !== 'undefined') {
     newA.setStyle(style);
     newA.setProperties(all_alerts[i]);
   }
+  alertMap.selectAlert();
 }
 
 var locSource = new ol.source.Vector();
@@ -210,38 +211,38 @@ var selectInteraction = new ol.interaction.Select({
   style: selectStyle
 });
 
-var selectClick = new ol.interaction.Select({
-  condition: ol.events.condition.click
-});
-map.addInteraction(selectClick);
-selectClick.on('select', function(e) {
-  var feats = e.target.getFeatures();
-  feats.forEach(function(f,i) {
-    let aid = f.getProperties().alert_id;
-    alerts.scrollToAlert(aid);
-  });
-})
-
 var draw;
 function drawLocation(style) {
   locPoint.setGeometry(new ol.geom.Point(mapView.getCenter()));
-  if (typeof style === undefined) {
+  if (typeof style === 'undefined') {
     style = locStyle;
   }
   locPoint.setStyle(style);
-  map.addInteraction(selectInteraction);
   map.addInteraction(modify);
 }
 
 var alertMap = {
   findLocation: function() {
     findLocation();
-    let style = styleAlert();
+    let style = alertMap.styleAlert();
     locPoint.setStyle(style);
   },
   drawLocation: function() {
-    let style = styleAlert();
+    let style = alertMap.styleAlert();
     drawLocation(style);
+  },
+  selectAlert: function() {
+    let selectClick = new ol.interaction.Select({
+      condition: ol.events.condition.click
+    });
+    map.addInteraction(selectClick);
+    selectClick.on('select', function(e) {
+      let feats = e.target.getFeatures();
+      feats.forEach(function(f,i) {
+        let aid = f.getProperties().alert_id;
+        alerts.scrollToAlert(aid);
+      });
+    })
   }
 }
 // geolocation tracker var
@@ -282,32 +283,32 @@ function getLocationPoint() {
 
 // edit location marker
 var modify = new ol.interaction.Modify({
-  source: locSource
+  source: locSource,
+  style: selectStyle
 });
 
 var locStyle = new ol.style.Style({
   image: new ol.style.Circle({
-    radius: 8,
+    radius: 11,
     fill: new ol.style.Fill({
-      color: '#000000'
+      color: '#ffffff'
     }),
     stroke: new ol.style.Stroke({
-      color: '#000000',
-      width: 2
+      color: '#ffef00',
+      width: 9
     })
   })
 });
 
 var selectStyle = new ol.style.Style({
-  image: new ol.style.Circle({
+  fill: new ol.style.Circle({
     radius: 8,
     fill: new ol.style.Fill({
-      color: '#000000'
-    }),
-    stroke: new ol.style.Stroke({
-      color: '#ffffff',
-      width: 2
+      color: '#57a6a2'
     })
+  }),
+  fill: new ol.style.Fill({
+    color: '#57a6a2'
   })
 });
 

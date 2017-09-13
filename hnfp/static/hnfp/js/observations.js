@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $('.collapsible').collapsible();
-  $('#add-observation-btn').click(function() {
+  $('#add-observation-btn').click(function(event) {
     observations.initNew();
   });
 });
@@ -24,7 +24,6 @@ var observations = {
   stepTwo: function() {
     $('#steptwo').removeClass('visible');
     $('#stepthree').addClass('visible');
-    $newObservationWrapper.addClass('short');
     $('#loc-correct').click(function() {
       observations.setInputLoc();
       let hide = '#stepthree';
@@ -34,15 +33,11 @@ var observations = {
   showStepFour: function(step) {
     $(step).removeClass('visible');
     $('#stepfour').addClass('visible');
-    $newObservationWrapper.removeClass('short');
-    $newObservationWrapper.addClass('tall');
   },
   backStepThree: function() {
     var loc = getLocationPoint();
     $('#stepchangeloc').addClass('visible');
     $('#stepfour').removeClass('visible');
-    $newObservationWrapper.addClass('short');
-    $newObservationWrapper.removeClass('tall');
     $('#loc-change').click(function() {
       observations.setInputLoc();
       let hide = '#stepchangeloc';
@@ -58,7 +53,6 @@ var observations = {
   },
   close: function() {
     $newObservationWrapper.find('form').html('');
-    $newObservationWrapper.removeClass('visible tall');
   },
   showSpinner: function() {
     $('.preloader-wrapper').addClass('active');
@@ -113,6 +107,7 @@ var observations = {
       success: function(data) {
         addToMap(data);
         observations.close();
+        observations.showAddObservationBtn(true);
         $drawingForm.html('');
       },
       error: function (error) {
