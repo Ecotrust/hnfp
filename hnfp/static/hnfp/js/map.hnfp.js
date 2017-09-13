@@ -171,6 +171,19 @@ if (typeof user_observations !== 'undefined') {
     let newP = new ol.Feature();
     vectorSource.addFeature(newP);
     newP.setGeometry(new ol.geom.Point(coords));
+    newP.setProperties({
+      'id': user_observations[i].id,
+      'icon': catURL,
+      'category': user_observations[i].category,
+      'customcategory': user_observations[i].customcategory,
+      'comments': user_observations[i].comments,
+      'observation_date': user_observations[i].observation_date,
+      'observation_time': user_observations[i].observation_time,
+      'observation_location': user_observations[i].observation_location,
+      'observation_tally': user_observations[i].observation_tally,
+      'observation_type': user_observations[i].observation_type,
+      'observer_username': user_observations[i].observer_username,
+    });
     newP.setStyle(new ol.style.Style({
       image: new ol.style.Icon({
         src: catURL,
@@ -178,6 +191,38 @@ if (typeof user_observations !== 'undefined') {
       })
     }));
   }
+  let popupNode = document.getElementById('popup');
+  let popup = new ol.Overlay({
+    element: popupNode,
+    positioning: 'top-center',
+    offset: [0,6],
+    autoPan: true,
+    autoPanMargin: 40
+  });
+  map.addOverlay(popup);
+  map.on('singleclick', function(event) {
+    let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
+      return feature;
+    }, {
+      hitTolerance: 2
+    });
+    if (feature) {
+      let coords = feature.getGeometry().getCoordinates();
+      let featuresProps = feature.getProperties();
+      let domElement = popup.getElement();
+      domElement.querySelector('.card-content').innerHTML = `
+        <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
+        <span class="center card-title">${featuresProps.observation_type}</span>
+        <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
+        <p>${featuresProps.comments}</p>
+      `;
+      domElement.querySelector('.card-action').innerHTML = `
+        <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
+        <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
+      `;
+      popup.setPosition(coords);
+    }
+  });
 }
 
 if (typeof all_alerts !== 'undefined') {
@@ -376,6 +421,7 @@ function addToMap(data) {
   vectorSource.addFeature(point);
   let coords = ol.proj.fromLonLat(newDataCoords.coordinates),
       catURL = `/static/hnfp/img/icons/category/i_${cat}.png`;
+
   point.setGeometry(new ol.geom.Point(coords));
   point.setStyle(new ol.style.Style({
     image: new ol.style.Icon({

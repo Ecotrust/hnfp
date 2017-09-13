@@ -1146,6 +1146,28 @@ div.mapgroup {
     font-size: 1em;
   }
 
+.observations .card .small {
+  font-size: .875em;
+  font-family: 'function_bold';
+}
+
+.observations .card .card-title {
+  text-transform: capitalize;
+}
+
+.card p.card-tally {
+  display: block;
+  font-size: 1.125em;
+  font-family: 'function_bold', sans-serif;
+  margin: 0 0 .5rem;
+}
+
+.observations .icon-img {
+  display: inline-block;
+  margin: 0 4px;
+  vertical-align: text-bottom;
+  width: 24px;
+}
 
 .relative.height .center .absolute {
   left: 25%;
