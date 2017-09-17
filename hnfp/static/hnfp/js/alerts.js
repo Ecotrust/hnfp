@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 $newAlertsWrap = $('#new-alert-wrapper');
-$recentAlertsWrap = $('.recent-alerts')
+$recentAlertsWrap = $('.recent-alerts');
 $alertForm = $( '#alert-form' );
 
 var alerts = {
@@ -61,7 +61,6 @@ var alerts = {
   stepTwo: function() {
     $('#steptwo').removeClass('visible');
     $('#stepthree').addClass('visible');
-    $newAlertsWrap.addClass('short');
     $('#loc-correct').click(function() {
       alerts.setInputLoc();
       let hide = '#stepthree';
@@ -71,15 +70,11 @@ var alerts = {
   showStepFour: function(step) {
     $(step).removeClass('visible');
     $('#stepfour').addClass('visible');
-    $newAlertsWrap.removeClass('short');
-    $newAlertsWrap.addClass('tall');
   },
   backStepThree: function() {
     var loc = getLocationPoint();
     $('#stepchangeloc').addClass('visible');
     $('#stepfour').removeClass('visible');
-    $newAlertsWrap.addClass('short');
-    $newAlertsWrap.removeClass('tall');
     $('#loc-change').click(function() {
       alerts.setInputLoc();
       let hide = '#stepchangeloc';
@@ -95,7 +90,7 @@ var alerts = {
   },
   close: function() {
     $newAlertsWrap.find('form').html('');
-    $newAlertsWrap.removeClass('visible tall');
+    $newAlertsWrap.removeClass('visible');
   },
   showSpinner: function() {
     $('.preloader-wrapper').addClass('active');

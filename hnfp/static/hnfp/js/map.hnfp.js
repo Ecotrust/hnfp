@@ -232,21 +232,6 @@ function addOverlayPopup(feature) {
     popup.setPosition(coords);
 }
 
-if (typeof all_alerts !== 'undefined') {
-  for (var i = 0; i < all_alerts.length; i++) {
-    let geo = JSON.parse(all_alerts[i].alert_location),
-        coords = ol.proj.fromLonLat(geo.coordinates),
-        a_id = all_alerts[i]['alert_id'];
-        style = styleAlert(a_id);
-    let newA = new ol.Feature();
-    vectorSource.addFeature(newA);
-    newA.setGeometry(new ol.geom.Point(coords));
-    newA.setStyle(style);
-    newA.setProperties(all_alerts[i]);
-  }
-  alertMap.selectAlert();
-}
-
 var locSource = new ol.source.Vector();
 var locLayer = new ol.layer.Vector({
   source: locSource,
@@ -295,8 +280,57 @@ var alertMap = {
         alerts.scrollToAlert(aid);
       });
     })
+  },
+  styleAlert: function(a_id) {
+    let width = 1,
+        fillColor = '#d53f38';
+    if (typeof a_id === 'undefined') {
+      a_id = '';
+      fillColor = '#ffea30';
+      width = 2.5;
+    } else {
+      a_id = a_id.toString();
+    }
+    return new ol.style.Style({
+      image: new ol.style.RegularShape({
+        points: 3,
+        fill: new ol.style.Fill({
+          color: fillColor
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#dfeceb',
+          width: width,
+        }),
+        radius: 19
+      }),
+      text: new ol.style.Text({
+        font: '11px "function_bold"',
+        text: a_id,
+        align: 'center',
+        fill: new ol.style.Fill({
+          color: '#fff'
+        })
+      }),
+      zIndex: 9
+    })
   }
 }
+
+if (typeof all_alerts !== 'undefined') {
+  for (var i = 0; i < all_alerts.length; i++) {
+    let geo = JSON.parse(all_alerts[i].alert_location),
+        coords = ol.proj.fromLonLat(geo.coordinates),
+        a_id = all_alerts[i]['alert_id'];
+        style = alertMap.styleAlert(a_id);
+    let newA = new ol.Feature();
+    vectorSource.addFeature(newA);
+    newA.setGeometry(new ol.geom.Point(coords));
+    newA.setStyle(style);
+    newA.setProperties(all_alerts[i]);
+  }
+  alertMap.selectAlert();
+}
+
 // geolocation tracker var
 var geolocation;
 function findLocation() {
@@ -378,39 +412,6 @@ var topoURLCapabilities = fetch('https://services.arcgisonline.com/arcgis/rest/s
     topoLayer.setSource(new ol.source.WMTS((topoSource)))
   });
 
-function styleAlert(a_id) {
-  let width = 1,
-      fillColor = '#d53f38';
-  if (typeof a_id === 'undefined') {
-    a_id = '';
-    fillColor = '#ffea30';
-    width = 2.5;
-  } else {
-    a_id = a_id.toString();
-  }
-  return new ol.style.Style({
-    image: new ol.style.RegularShape({
-      points: 3,
-      fill: new ol.style.Fill({
-        color: fillColor
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#dfeceb',
-        width: width,
-      }),
-      radius: 19
-    }),
-    text: new ol.style.Text({
-      font: '11px "function_bold"',
-      text: a_id,
-      align: 'center',
-      fill: new ol.style.Fill({
-        color: '#fff'
-      })
-    }),
-    zIndex: 9
-  })
-}
 
 function removeInterations() {
   map.removeInteraction(modify);
@@ -444,7 +445,7 @@ function addAlertsToMap(data) {
       type = data[l].alert_type,
       point = new ol.Feature(),
       a_id = data[l]['alert_id'];;
-      style = styleAlert(a_id);
+      style = alertMap.styleAlert(a_id);
   vectorSource.addFeature(point);
   let coords = ol.proj.fromLonLat(newDataCoords.coordinates);
   point.setGeometry(new ol.geom.Point(coords));
