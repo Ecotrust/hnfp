@@ -36,10 +36,15 @@ var alerts = {
         $alert_div = $('#map-panel').find('#' + alert_div),
         pos = $alert_div.position();
     if (window.width > 992) {
-      $mapPanel.slideUp( 300 ).slideDown( 300 ).scrollTop(pos.top);
-    } else {
       $mapPanel.animate({
         scrollTop: pos.top
+      }, {
+        duration: "slow"
+      })
+    } else {
+      $mapPanel.animate({
+        scrollTop: pos.top,
+        opacity: 1
       }, {
         duration: "slow"
       })

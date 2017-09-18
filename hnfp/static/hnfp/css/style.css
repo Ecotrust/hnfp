@@ -768,11 +768,6 @@ div.mapgroup {
   height: 100%;
 }
 
-#map-panel .container {
-  // font-size: 1.3125em;
-  // padding: 2rem 0;
-}
-
 #map-panel h3 {
   color: #d53f38;
   font-size: 1.3125em;
@@ -1748,18 +1743,16 @@ path {
     border-left: 1.25em solid transparent;
   }
 
-  .dashboard #map {
+  .dashboard #map,
+  .alerts #map {
     height: 100%;
     margin-left: 35%;
     width: 65%;
   }
 
-  .alerts #map {
-    width: 100%;
-  }
-
   .dashboard #map-panel,
   .alerts #map-panel {
+    background-color: #e4efee;
     height: 100%;
     max-height: none;
     left: 0;

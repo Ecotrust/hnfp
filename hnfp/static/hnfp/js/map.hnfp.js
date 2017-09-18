@@ -216,20 +216,20 @@ map.on('singleclick', function(event) {
 });
 
 function addOverlayPopup(feature) {
-    let coords = feature.getGeometry().getCoordinates();
-    let featuresProps = feature.getProperties();
-    let domElement = popup.getElement();
-    domElement.querySelector('.card-content').innerHTML = `
-      <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
-      <span class="center card-title">${featuresProps.observation_type}</span>
-      <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
-      <p>${featuresProps.comments}</p>
-    `;
-    domElement.querySelector('.card-action').innerHTML = `
-      <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
-      <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
-    `;
-    popup.setPosition(coords);
+  let coords = feature.getGeometry().getCoordinates();
+  let featuresProps = feature.getProperties();
+  let domElement = popup.getElement();
+  domElement.querySelector('.card-content').innerHTML = `
+    <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
+    <span class="center card-title">${featuresProps.observation_type}</span>
+    <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
+    <p>${featuresProps.comments}</p>
+  `;
+  domElement.querySelector('.card-action').innerHTML = `
+    <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
+    <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
+  `;
+  popup.setPosition(coords);
 }
 
 var locSource = new ol.source.Vector();
