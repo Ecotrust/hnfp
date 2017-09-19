@@ -1,0 +1,89 @@
+{% extends "hnfp/index.html" %}
+{% load static %}
+
+{% block extra_css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.css'%}">
+  <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
+{% endblock extra_css %}
+
+{% block outer_content %}
+  <main class="land-use">
+    {% block controls %}
+      <section class="wrap controls">
+        <div class="row">
+          <div class="col s12 l3">
+            <h5>Visibility Themes</h5>
+            <div class="container left">
+              <select class="browser-default">
+
+              </select>
+            </div>
+          </div>
+          <div class="col s12 l3">
+            <h5>Map Language</h5>
+            <div class="container left">
+              <select class="browser-default">
+                <option selected value="en">English</option>
+              </select>
+            </div>
+          </div>
+          <div class="col s12 l3">
+            <h5>Land Management Projects</h5>
+            <div class="">
+
+            </div>
+          </div>
+          <div class="col s12 l3">
+            <h5>Stewards Input</h5>
+            <div class="">
+
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endblock controls %}
+
+    <section class="alerts-wrap">
+      <div id="map-wrapper">
+        <div id="map" class="map"></div>
+      </div>
+      <div id="new-alert-wrapper">
+        <form id="alert-form" method="post" action="/alert/create/"></form>
+      </div>
+      <div id="map-panel">
+        <div class="recent-alerts"></div>
+      </div>
+    </section>
+
+    <section class="section container add-to-map-section">
+      <div class="row">
+        <div class="relative height">
+          <div class="col s12">
+            <a id="new-alert-btn" class="btn btn-border-light-blue add-btn"><i class="material-icons">add_circle</i> Report an Alert</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock outer_content %}
+
+{% block extra_js %}
+  {{ block.super }}
+
+  {% block gmaps_api_call %}{% endblock %}
+  {% block custom_marco_ol3 %}{% endblock %}
+  {% block mp_js %}
+    <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
+    <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
+
+    <script>
+    //  var all_alerts = {{ alerts|safe }};
+    //  var recent_alerts = {{ recent_alerts|safe }};
+    </script>
+
+    <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>
+    <script src="{% static 'hnfp/js/landuse.js' %}"></script>
+  {% endblock mp_js %}
+{% endblock extra_js %}
