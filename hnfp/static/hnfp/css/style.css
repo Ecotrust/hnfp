@@ -505,7 +505,6 @@ nav .tabs .tab {
   z-index: -1;
 }
 
-
 /*--------------------
   dashboard
   --------------------*/
@@ -1555,6 +1554,52 @@ path {
   height: 16px;
   margin: 0 5px 0 20px;
   width: 16px;
+}
+
+
+/*--------------------
+  Land Use
+  --------------------*/
+
+.land-use .wrap {
+  padding: 2rem 5%;
+  position: relative;
+}
+
+.land-use .wrap .row {
+  margin-bottom: 0;
+}
+
+.land-use .controls {
+  margin-top: 3rem;
+}
+
+.land-use .controls:after {
+  background: #e4efee;
+  content: '';
+  height: 112%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: -12%;
+  transform: rotate(-.5deg);
+  transform-origin: 100%;
+  z-index: -1;
+}
+
+.land-use .collapsible li {
+  border-right: 4px solid #fff;
+}
+
+.land-use .collapsible-header {
+  background: transparent;
+  border: none;
+  font-size: .75em;
+  padding: .25rem;
+}
+
+.land-use .collapsible .col {
+  padding: 0;
 }
 
 /*--------------------

@@ -114,7 +114,7 @@ var hoonahLandOwners = new ol.layer.Vector({
 });
 
 // Map Object
-const map = new ol.Map({
+var map = new ol.Map({
   target: 'map',
   layers: [
     new ol.layer.Group({

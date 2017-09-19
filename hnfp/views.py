@@ -302,6 +302,14 @@ def job(request):
 def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
 
+### LAND USE MAP
+def landuse(request):
+    template = loader.get_template('hnfp/landuse/page.html')
+    context = {
+        'title': 'Land Use Map'
+    }
+    return HttpResponse(template.render(context, request))
+
 ### offline
 from django.views.decorators.cache import never_cache
 @never_cache
