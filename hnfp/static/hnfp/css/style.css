@@ -829,21 +829,85 @@ div.mapgroup {
   padding: 0;
 }
 
-#map div.olControlZoom .olButton {
+#map .ol-zoom {
   display: inline-block;
   background: transparent;
-  color: #000;
-  font-size: 1em;
   height: auto;
-  line-height: 2rem;
+  left: auto;
   margin: 0;
   padding: 0;
+  right: 0;
+  top: 0;
   text-align: center;
-  width: 2rem;
 }
 
-#map div.olControlZoom .olButton.olControlZoomOut {
-  font-size: 1.5em;
+#map .ol-zoom .ol-zoom-out,
+#map .ol-zoom .ol-zoom-in,
+#map .ol-full-screen,
+#map .layer-switcher,
+#map .ol-control button {
+  background: rgba(255,255,255,0.8);
+  border-radius: 0;
+  border: none;
+  color: #000;
+  left: auto;
+  margin: 0;
+  padding: 0;
+  right: 0;
+  text-align: center;
+}
+
+#map .ol-zoom .ol-zoom-out,
+#map .ol-zoom .ol-zoom-in {
+  display: inline-block;
+  font-family: 'function_bold', sans-serif;
+  font-size: 2.18375rem;
+  height: 2.5rem;
+  top: 0;
+  vertical-align: middle;
+  width: 2.5rem;
+}
+
+#map .ol-zoom .ol-zoom-out {
+  line-height: 2rem;
+  font-size: 1.75rem;
+}
+
+#map .ol-full-screen {
+  height: 2.5rem;
+  top: 2.5rem;
+  width: 2.5rem;
+}
+
+#map .ol-full-screen button {
+  background: transparent;
+  color: #000;
+  font-family: 'function_bold', sans-serif;
+  font-size: 1.3125rem;
+  height: 2.5rem;
+  text-align: center;
+  width: 2.5rem;
+}
+
+#map .layer-switcher {
+  top: 5rem;
+}
+
+#map .layer-switcher button {
+  background-color: transparent;
+  background-image: url('/static/hnfp/img/icons/layers.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 50%;
+  width: 2.5rem;
+}
+
+#map:fullscreen {
+  height: 100%;
+}
+
+.ol-rotate {
+  top: 3em;
 }
 
 .preloader-wrapper {
@@ -852,16 +916,6 @@ div.mapgroup {
 }
 .preloader-wrapper:not(.active) {
   height: 0;
-}
-
-.layer-switcher button,
-#map .layer-switcher button {
-  background-color: rgba(0,60,136,.5);
-  background-image: url('/static/hnfp/img/icons/layers_white.png');
-  background-size: 80%;
-  background-position: 50%;
-  height: 1.375em;
-  width: 1.375em;
 }
 
 /*--------------------
@@ -902,6 +956,7 @@ div.mapgroup {
 #new-observation .card-action a,
 #new-alert-wrapper .card-action a {
     color: #5d85b7;
+    cursor: pointer;
 }
 
 #new-observation .card-action a:last-of-type,
@@ -1587,19 +1642,34 @@ path {
   z-index: -1;
 }
 
-.land-use .collapsible li {
-  border-right: 4px solid #fff;
+.land-use .controls .row .col {
+  padding: 0 1% 0 3%;
 }
 
-.land-use .collapsible-header {
-  background: transparent;
+.land-use .controls p {
+  margin-bottom: .75rem;
+}
+
+.land-use .controls label {
+  color: #2b384a;
+}
+
+.land-use .controls input[type=checkbox] + label:after {
+  background: #5d85b7;
   border: none;
-  font-size: .75em;
-  padding: .25rem;
+  border-radius: 50%;
 }
 
-.land-use .collapsible .col {
-  padding: 0;
+.land-use .controls input[type=checkbox]:not(:checked) + label:after {
+  background: #fff;
+}
+
+.land-use #new-project-btn {
+  background: rgba(255,255,255,0.95);
+  position: absolute;
+  top: 0;
+  left: 25%;
+  z-index: 1;
 }
 
 /*--------------------
@@ -1695,34 +1765,19 @@ path {
   }
 
   .observations #map-wrapper,
-  .alerts #map-wrapper {
+  .alerts #map-wrapper,
+  .land-use #map-wrapper {
     height: 520px;
     max-height: 98vh;
   }
 
-  #map-panel {
+  #map-panel,
+  .alerts #map-panel {
+    height: 520px;
     max-height: none;
     position: absolute;
   }
 
-  #new-observation,
-  #new-alert-wrapper {
-    height: 60%;
-    left: 2%;
-    top: 35%;
-    width: 38%;
-  }
-
-  #new-observation.tall,
-  #new-alert-wrapper.tall {
-    height: 90%;
-    top: 5%;
-  }
-  #new-observation.short,
-  #new-alert-wrapper.short {
-    height: 35%;
-    top: 60%;
-  }
 }
 
 @media only screen and (min-width: 64em) {
@@ -1790,7 +1845,6 @@ path {
 
   .dashboard #map,
   .alerts #map {
-    height: 100%;
     margin-left: 35%;
     width: 65%;
   }
@@ -1798,12 +1852,38 @@ path {
   .dashboard #map-panel,
   .alerts #map-panel {
     background-color: #e4efee;
-    height: 100%;
-    max-height: none;
     left: 0;
     position: absolute;
     top: 0;
     width: 35%;
+  }
+
+  #new-alert-wrapper {
+    margin-left: 35%;
+    width: 65%;
+  }
+
+  #new-observation {
+    width: 100%;
+  }
+
+  /*
+    Land use
+  */
+
+  .land-use .controls {
+    min-height: 20vh;
+  }
+  .land-use #map-wrapper {
+    height: 75vh;
+  }
+
+  .land-use .controls .row {
+    display: flex;
+  }
+
+  .land-use .controls .row > .col:not(:last-of-type) {
+    border-right: 3px solid #fff;
   }
 }
 

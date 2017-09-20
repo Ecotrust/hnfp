@@ -30,39 +30,46 @@
           </div>
           <div class="col s12 l3">
             <h5>Land Management Projects</h5>
-            <div class="">
-
+            <div class="container left">
+              <p>
+                <input type="checkbox" id="checkbox_forest-projects" class="filled-in" />
+                <label for="checkbox_forest-projects">Forest Projects</label>
+              </p>
+              <p>
+                <input type="checkbox" id="checkbox_road-projects" class="filled-in" />
+                <label for="checkbox_road-projects">Road Projects</label>
+              </p>
+              <p>
+                <input type="checkbox" id="checkbox_stream-projects" class="filled-in" />
+                <label for="checkbox_stream-projects">Stream Projects</label>
+              </p>
             </div>
           </div>
           <div class="col s12 l3">
             <h5>Stewards Input</h5>
-            <div class="">
-
+            <div class="container left">
+              <p>
+                <input type="checkbox" id="checkbox_forest-projects" class="filled-in" />
+                <label for="checkbox_forest-projects">Alerts</label>
+              </p>
+              <p>
+                <input type="checkbox" id="checkbox_road-projects" class="filled-in" />
+                <label for="checkbox_road-projects">My Map</label>
+              </p>
+              <p>
+                <input type="checkbox" id="checkbox_stream-projects" class="filled-in" />
+                <label for="checkbox_stream-projects">Steward Survey Results</label>
+              </p>
             </div>
           </div>
         </div>
       </section>
     {% endblock controls %}
 
-    <section class="alerts-wrap">
+    <section class="landuse-map">
       <div id="map-wrapper">
         <div id="map" class="map"></div>
-      </div>
-      <div id="new-alert-wrapper">
-        <form id="alert-form" method="post" action="/alert/create/"></form>
-      </div>
-      <div id="map-panel">
-        <div class="recent-alerts"></div>
-      </div>
-    </section>
-
-    <section class="section container add-to-map-section">
-      <div class="row">
-        <div class="relative height">
-          <div class="col s12">
-            <a id="new-alert-btn" class="btn btn-border-light-blue add-btn"><i class="material-icons">add_circle</i> Report an Alert</a>
-          </div>
-        </div>
+        <a id="new-project-btn" class="btn btn-border-light-blue add-btn"><i class="material-icons">add_circle</i> Add Project</a>
       </div>
     </section>
 
@@ -79,11 +86,12 @@
     <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
 
     <script>
-    //  var all_alerts = {{ alerts|safe }};
-    //  var recent_alerts = {{ recent_alerts|safe }};
+      var all_alerts = {{ alerts|safe }};
     </script>
 
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>
+    <script src="{% static 'hnfp/js/map.landuse.js' %}"></script>
     <script src="{% static 'hnfp/js/landuse.js' %}"></script>
+    <script src="{% static 'hnfp/js/alerts.js' %}"></script>
   {% endblock mp_js %}
 {% endblock extra_js %}

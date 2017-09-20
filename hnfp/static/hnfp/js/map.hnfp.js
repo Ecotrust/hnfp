@@ -147,7 +147,9 @@ var map = new ol.Map({
   ]),
   interactions: ol.interaction.defaults({
     mouseWheelZoom: paramsObsMap.allowTouch()
-  })
+  }).extend([
+    new ol.interaction.DragRotateAndZoom()
+  ])
 });
 
 var layerSwitcher = new ol.control.LayerSwitcher({});
@@ -208,8 +210,10 @@ map.on('singleclick', function(event) {
     hitTolerance: 2
   });
   if (feature) {
-    map.addOverlay(popup);
-    addOverlayPopup(feature);
+    if (popupNode !== null) {
+      map.addOverlay(popup);
+      addOverlayPopup(feature);
+    }
   } else {
     map.removeOverlay(popup);
   }

@@ -33,21 +33,23 @@ var alerts = {
     var alert_div ='alert_' + alert_id;
     alert_div = alert_div.toString();
     let $mapPanel = $('#map-panel'),
-        $alert_div = $('#map-panel').find('#' + alert_div),
-        pos = $alert_div.position();
-    if (window.width > 992) {
-      $mapPanel.animate({
-        scrollTop: pos.top
-      }, {
-        duration: "slow"
-      })
-    } else {
-      $mapPanel.animate({
-        scrollTop: pos.top,
-        opacity: 1
-      }, {
-        duration: "slow"
-      })
+        $alert_div = $('#map-panel').find('#' + alert_div);
+    if ($alert_div.length > 0) {
+      let pos = $alert_div.position();
+      if (window.innerWidth > 1024) {
+        $mapPanel.animate({
+          scrollTop: pos.top
+        }, {
+          duration: "slow"
+        })
+      } else {
+        $mapPanel.animate({
+          scrollTop: pos.top,
+          opacity: 1
+        }, {
+          duration: "slow"
+        })
+      }
     }
   },
   startNew: function() {

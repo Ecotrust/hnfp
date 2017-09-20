@@ -305,8 +305,14 @@ def job_detail(request, job_id):
 ### LAND USE MAP
 def landuse(request):
     template = loader.get_template('hnfp/landuse/page.html')
+    all_alerts = []
+    get_alerts = Alert.objects.all()
+    for a in get_alerts:
+        dic = a.to_dict()
+        all_alerts.append(dic)
     context = {
-        'title': 'Land Use Map'
+        'title': 'Land Use Map',
+        'alerts': json.dumps(all_alerts),
     }
     return HttpResponse(template.render(context, request))
 
