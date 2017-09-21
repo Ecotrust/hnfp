@@ -49,16 +49,16 @@
             <h5>Stewards Input</h5>
             <div class="container left">
               <p>
-                <input type="checkbox" id="checkbox_forest-projects" class="filled-in" />
-                <label for="checkbox_forest-projects">Alerts</label>
+                <input type="checkbox" id="checkbox_alerts" class="filled-in" />
+                <label for="checkbox_alerts">Alerts</label>
               </p>
               <p>
-                <input type="checkbox" id="checkbox_road-projects" class="filled-in" />
-                <label for="checkbox_road-projects">My Map</label>
+                <input type="checkbox" id="checkbox_observations" class="filled-in" />
+                <label for="checkbox_observations">My Map</label>
               </p>
               <p>
-                <input type="checkbox" id="checkbox_stream-projects" class="filled-in" />
-                <label for="checkbox_stream-projects">Steward Survey Results</label>
+                <input type="checkbox" id="checkbox_survey" class="filled-in" />
+                <label for="checkbox_survey">Steward Survey Results</label>
               </p>
             </div>
           </div>
@@ -70,6 +70,10 @@
       <div id="map-wrapper">
         <div id="map" class="map"></div>
         <a id="new-project-btn" class="btn btn-border-light-blue add-btn"><i class="material-icons">add_circle</i> Add Project</a>
+        <div id="popup" class="card">
+          <div class="card-content waves-effect waves-block waves-light"></div>
+          <div class="card-action"></div>
+        </div>
       </div>
     </section>
 
@@ -87,11 +91,13 @@
 
     <script>
       var all_alerts = {{ alerts|safe }};
+      var user_observations = {{ user_observations|safe }};
     </script>
 
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>
     <script src="{% static 'hnfp/js/map.landuse.js' %}"></script>
     <script src="{% static 'hnfp/js/landuse.js' %}"></script>
     <script src="{% static 'hnfp/js/alerts.js' %}"></script>
+    <script src="{% static 'hnfp/js/observations.js' %}"></script>
   {% endblock mp_js %}
 {% endblock extra_js %}
