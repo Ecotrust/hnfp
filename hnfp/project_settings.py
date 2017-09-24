@@ -382,6 +382,9 @@ try:
 except Exception as e:
     pass
 
+# gis
+GEOMETRY_DB_SRID = 3857
+
 # This seems to help with some backward compatibility
 import django
 django.setup()

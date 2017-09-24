@@ -1,7 +1,7 @@
 # from django.db import model
 from django.conf import settings
 from django.contrib.gis.db import models
-from django.contrib.gis.geos import Point
+from django.contrib.gis.geos import Point, Polygon, MultiPolygon
 from django.contrib.auth.models import User, Group
 from drawing.models import AOI as drawing_AOI
 from features.registry import register
@@ -366,3 +366,114 @@ class Alert(models.Model):
 
 	def get_user_alerts(username):
 		return Alert.objects.filter(alert_username=username)
+
+# Land use projects
+class LandUseProject(models.Model):
+	PROJ_CATS = (
+		('forest', 'Forest'),
+		('road', 'Road'),
+		('stream', 'Stream'),
+	)
+	name = models.CharField(
+		max_length=300,
+		null=True,
+		blank=True,
+	)
+	category = models.CharField(
+		max_length=400,
+		choices=PROJ_CATS,
+		blank=True,
+		null=True,
+	)
+	summary = models.CharField(
+		max_length=20000,
+		default=None,
+		null=True,
+		blank=True,
+	)
+	description = models.CharField(
+		max_length=20000,
+		default=None,
+		null=True,
+		blank=True,
+	)
+	start_date = models.CharField(
+		max_length=200,
+		null=True,
+		blank=True
+	)
+	completion_date = models.CharField(
+		max_length=200,
+		null=True,
+		blank=True
+	)
+	actions = models.CharField(
+		max_length=20000,
+		null=True,
+		blank=True,
+	)
+	impact = models.CharField(
+		max_length=4000,
+		null=True,
+		blank=True,
+	)
+	dollar_costs = models.IntegerField(
+		null=True,
+		blank=True,
+	)
+	value = models.CharField(
+		max_length=4000,
+		null=True,
+		blank=True,
+	)
+	area = models.MultiPolygonField(
+		srid=settings.GEOMETRY_DB_SRID,
+		default=None,
+		null=True,
+		blank=True,
+	)
+	created = models.DateTimeField(
+		auto_now_add=True
+	)
+	updated = models.DateTimeField(
+		auto_now=True
+	)
+	published = models.BooleanField(
+		default=False
+	)
+	username = models.CharField(
+		max_length=400,
+		null=True,
+		blank=True,
+	)
+
+	def to_dict(self):
+		if self.area is not None:
+			multipoly = self.area.geojson
+		else:
+			multipoly = None
+		return {
+			'area': multipoly,
+			'name': self.name,
+			'category': self.category,
+			'summary': self.summary,
+			'description': self.description,
+			'username': self.username,
+			'start_date': self.start_date,
+			'completion_date': self.completion_date,
+			'actions': self.actions,
+			'impact': self.impact,
+			'dollar_costs': self.dollar_costs,
+			'value': self.value,
+			'published': self.published,
+			'id': self.id,
+		}
+
+	def __str__(self):
+		return "{}: `{}`".format(self.area, self.category)
+
+	class Meta:
+		verbose_name_plural = 'Land Use Projects'
+
+	def get_user_proj(username):
+		return LandUseProjects.objects.filter(username=username)

@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^manifest(.*.json)$', views.manifest, name='manifest'),
     url(r'^survey/', views.survey, name='survey'),
     url(r'^login/', views.login, name='login'),
-    url(r'^myaccount/', views.myaccount, name='myaccount'),
+    url(r'^myaccount/?', views.myaccount, name='myaccount'),
     url(r'^registering/', views.registering, name='registering'),
     url(r'^registered/', views.registered, name='registered'),
     url(r'^dashboard/', views.dashboard, name='dashboard'),
@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'^forum/$', ListView.as_view(model=Post, paginate_by=3), name='post-list'),
     url(r'^forum/(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', DateDetailView.as_view(date_field="publish", model=Post), name='post-detail'),
     url(r'^landuse/', views.landuse, name='landuse'),
+    url(r'^landuse/new/', views.new_project, name='new_project'),
+    url(r'^landuse/create/', views.project_create, name='project_create'),
     url(r'^', views.home, name='index'),
 ]

@@ -35,6 +35,8 @@ from hnfp.models import JobOpportunity
 import json
 #alert
 from hnfp.models import Alert
+#landuse
+from hnfp.models import LandUseProject
 
 ### VIEWS ###
 def index(request):
@@ -306,19 +308,59 @@ def job_detail(request, job_id):
 def landuse(request):
     template = loader.get_template('hnfp/landuse/page.html')
     # get all alerts
-    all_alerts = []
-    get_alerts = Alert.objects.all()
-    for a in get_alerts:
-        dic = a.to_dict()
-        all_alerts.append(dic)
+    all_alerts = [x.to_dict() for x in Alert.objects.all()]
     # get all observations
     all_observation = [x.to_dict() for x in Observation.objects.all()]
+    all_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
     context = {
         'title': 'Land Use Map',
         'alerts': json.dumps(all_alerts),
         'user_observations': json.dumps(all_observation),
+        'all_projects': json.dumps(all_projects),
     }
     return HttpResponse(template.render(context, request))
+
+def new_project(request):
+    template = loader.get_template('hnfp/landuse/new_project.html')
+    cats = LandUseProject.get_categories()
+    context = {
+        'proj_cats': cats,
+    }
+    return HttpResponse(template.render(context, request))
+
+def project_create(request):
+    if request.method == 'POST':
+        area_post = request.POST['area']
+        area_obj = area_post.split(',')
+        area = MultiPolygon([area_obj])
+        name = request.POST['name']
+        category = request.POST['category']
+        summary = request.POST['summary']
+        description = request.POST['description']
+        start_date = request.POST['start_date']
+        completion_date = request.POST['completion_date']
+        actions = request.POST['actions']
+        impact = request.POST['impact']
+        dollar_costs = request.POST['dollar_costs']
+        value = request.POST['value']
+
+        new_proj = LandUseProject(
+            area=area,
+            name=name,
+            category=category,
+            summary=summary,
+            description=description,
+            start_date=start_date,
+            completion_date=completion_date,
+            actions=actions,
+            impact=impact,
+            dollar_costs=dollar_costs,
+            value=value,
+            username=request.user.username
+        );
+        new_proj.save()
+        all_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
+        return JsonResponse(all_projects, safe=False)
 
 ### offline
 from django.views.decorators.cache import never_cache

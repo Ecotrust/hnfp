@@ -932,40 +932,55 @@ div.mapgroup {
 }
 
 #new-observation.visible,
-#new-alert-wrapper.visible {
+#new-alert-wrapper.visible,
+#new-project.visible {
   display: block;
   z-index: 2;
 }
 
+#new-project.visible {
+  bottom: 0;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 25%;
+}
+
 #new-observation .progress,
-#new-alert-wrapper .progress {
+#new-alert-wrapper .progress,
+#new-project .progress {
   margin: 0;
 }
 
 #new-observation .card,
-#new-alert-wrapper .card {
+#new-alert-wrapper .card,
+#new-project .card {
   background: #e4efee;
   margin-top: 0;
 }
 
 #new-observation .card-action,
-#new-alert-wrapper .card-action {
+#new-alert-wrapper .card-action,
+#new-project .card-action {
   padding: 16px;
 }
 
 #new-observation .card-action a,
-#new-alert-wrapper .card-action a {
+#new-alert-wrapper .card-action a,
+#new-project .card-action a {
     color: #5d85b7;
     cursor: pointer;
 }
 
 #new-observation .card-action a:last-of-type,
-#new-alert-wrapper .card-action a:last-of-type {
+#new-alert-wrapper .card-action a:last-of-type,
+#new-project .card-action a:last-of-type {
   margin-right: 0;
 }
 
 #new-observation .card-action i,
-#new-alert-wrapper .card-action i {
+#new-alert-wrapper .card-action i,
+#new-project .card-action i {
   display: inline-block;
   font-size: 1.25em;
   margin: 0 8px;
@@ -973,7 +988,8 @@ div.mapgroup {
 }
 
 #new-observation .cancel, #new-observation .next,
-#new-alert-wrapper .cancel, #new-alert-wrapper .next {
+#new-alert-wrapper .cancel, #new-alert-wrapper .next,
+#new-project .cancel, #new-project .next {
   display: inline-block;
   margin: 0 -2px;
   text-align: center;
@@ -983,24 +999,28 @@ div.mapgroup {
 }
 
 #new-observation .cancel,
-#new-alert-wrapper .cancel {
+#new-alert-wrapper .cancel,
+#new-project .cancel {
   color: #4d4d4e;
 }
 
 #new-observation form, #new-observation input, #new-observation label, #new-observation textarea,
-#new-alert-wrapper form, #new-alert-wrapper input, #new-alert-wrapper label, #new-alert-wrapper textarea {
+#new-alert-wrapper form, #new-alert-wrapper input, #new-alert-wrapper label, #new-alert-wrapper textarea,
+#new-project form, #new-project input,m #new-project label, #new-project textarea {
   color: #4d4d4e;
   margin: 0 0 1rem;
 }
 
 #new-observation textarea,
-#new-alert-wrapper textarea {
+#new-alert-wrapper textarea,
+#new-project textarea {
   height: 2rem;
   min-height: 2rem;
 }
 
 #new-observation #observation_location,
-#new-alert-wrapper #alert_location {
+#new-alert-wrapper #alert_location,
+#new-project #area {
   background: transparent;
   color: #777;
   font-family: 'function', sans-serif;
@@ -1011,7 +1031,8 @@ div.mapgroup {
 }
 
 #new-observation h2,
-#new-alert-wrapper h2 {
+#new-alert-wrapper h2,
+#new-project h2 {
   color: #2b384a;
   line-height: 1;
   margin: 0 0 2rem;
@@ -1020,7 +1041,8 @@ div.mapgroup {
 }
 
   #new-observation h2:after,
-  #new-alert-wrapper h2:after {
+  #new-alert-wrapper h2:after,
+  #new-project h2:after {
     bottom: -5px;
     border-bottom: 5px solid #2b384a;
     left: 40%;
@@ -1032,22 +1054,27 @@ div.mapgroup {
 #new-observation input:not(.file-path),
 #new-observation textarea,
 #new-alert-wrapper input:not(.file-path),
-#new-alert-wrapper textarea {
+#new-alert-wrapper textarea,
+#new-project input:not(.file-path),
+#new-project textarea {
   color: #4d4d4e;
 }
 
 #new-observation input.file-path,
-#new-alert-wrapper input.file-path {
+#new-alert-wrapper input.file-path,
+#new-project input.file-path {
   margin-bottom: 0;
 }
 
 #new-observation label,
-#new-alert-wrapper label {
+#new-alert-wrapper label,
+#new-project label {
   text-indent: 4px;
 }
 
 #new-observation .btn:not(.small-btn),
-#new-alert-wrapper .btn:not(.small-btn) {
+#new-alert-wrapper .btn:not(.small-btn),
+#new-project .btn:not(.small-btn) {
   font-size: 1.125em;
   line-height: 2.75rem;
 }
@@ -1074,14 +1101,16 @@ div.mapgroup {
   font-family: 'function_bold', sans-serif;
 }
 
-#new-observation select.browser-default {
+#new-observation select.browser-default,
+#new-project select.browser-default {
   background: transparent;
   color: #4d4d4e;
   margin: .75rem 0 .75rem;
   font-family: 'function', sans-serif;
 }
 
-#new-observation .select-icon {
+#new-observation .select-icon,
+#new-project .select-icon {
   display: block;
   opacity: .8;
   pointer-events: none;
@@ -1666,9 +1695,11 @@ path {
 
 .land-use #new-project-btn {
   background: rgba(255,255,255,0.95);
+  font-size: 1.125em;
+  line-height: 3rem;
   position: absolute;
-  top: 0;
-  left: 25%;
+  top: 10px;
+  left: 27%;
   z-index: 1;
 }
 

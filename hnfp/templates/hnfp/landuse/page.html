@@ -74,6 +74,9 @@
           <div class="card-content waves-effect waves-block waves-light"></div>
           <div class="card-action"></div>
         </div>
+        <div id="new-project">
+          <form id="project-form" method="post" action="/landuse/create/"></form>
+        </div>
       </div>
     </section>
 
@@ -92,6 +95,7 @@
     <script>
       var all_alerts = {{ alerts|safe }};
       var user_observations = {{ user_observations|safe }};
+      var all_projects = {{ all_projects|safe }};
     </script>
 
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>
@@ -99,5 +103,6 @@
     <script src="{% static 'hnfp/js/landuse.js' %}"></script>
     <script src="{% static 'hnfp/js/alerts.js' %}"></script>
     <script src="{% static 'hnfp/js/observations.js' %}"></script>
+    <script src="{% static 'hnfp/js/projects.js' %}"></script>
   {% endblock mp_js %}
 {% endblock extra_js %}

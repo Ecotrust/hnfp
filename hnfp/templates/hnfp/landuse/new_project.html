@@ -1,0 +1,110 @@
+{% load static %}
+<form action="/landuse/create/" method="POST">
+  <section>
+    <section id="stepone" class="observation-location visible card">
+      <div class="card-content">
+        <span class="center card-title">Add Entry</span>
+      </div>
+      <div class="card-action">
+        <a onclick="landuseProject.close()" class="cancel">Cancel</a>
+        <a onclick="landuseProject.startNew()" class="btn next btn-border-light-blue" id="start-project">Start</a>
+      </div>
+    </section>
+    {% csrf_token %}
+    <section id="steptwo" class="card">
+      <div class="card-content">
+        <span class="center card-title">Location</span>
+      </div>
+      <div class="card-action">
+        <a id="use-my-location"><i class="material-icons">my_location</i>Use Current</a>
+        <a id="choose-from-map"><i class="material-icons ">pin_drop</i>Choose From Map</a>
+      </div>
+    </section>
+    <section id="stepthree" class="card">
+      <div class="card-content">
+        <span class="center card-title">Move Marker to Adjust</span>
+      </div>
+      <div class="card-action">
+        <a onclick="landuseProject.close()" class="cancel">Cancel</a>
+        <a id="loc-correct" class="btn next btn-border-light-blue">Next</a>
+      </div>
+    </section>
+    <section id="stepchangeloc" class="card">
+      <div class="card-content">
+        <span class="center card-title">Move Marker Adjust Point</span>
+      </div>
+      <div class="card-action">
+        <a onclick="landuseProject.locOkay()" class="cancel">Cancel</a>
+        <a id="loc-change" class="btn next btn-border-light-blue">Set Location</a>
+      </div>
+    </section>
+    <section id="stepfour" class="card">
+      <div class="card-content">
+        <div class="row">
+          <div class="input-field col s5" id="input-field-location">
+            <input type="text" id="area" name="area" val="" />
+          </div>
+          <div class="input-field col s7">
+            <a onclick="landuseProject.backStepThree()" class="btn small-btn btn-border-light-blue">Change Location</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6 relative">
+            <select class="browser-default" name="category" required>
+              <option value="">Choose Category</option>
+              {% for cat in obs_cats %}
+                <option value="{{ cat }}" data-icon="{% static 'hnfp/img/icons/i_j{{cat}}.svg' %}" class="circle">{{ cat }}</option>
+              {% endfor %}
+            </select>
+            <i class="material-icons select-icon">arrow_drop_down</i>
+          </div>
+          <div class="col s6 relative">
+            <select class="browser-default" name="" required>
+              <option value="">Choose Type</option>
+              <option value="observation" class="circle">Observation</option>
+              <option value="gather" class="circle">Gather</option>
+              <option value="hunt" class="circle">Hunt</option>
+            </select>
+            <i class="material-icons select-icon">arrow_drop_down</i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <input type="number" id="observation_tally" name="observation_tally" />
+            <label for="observation_tally">Tally</label>
+          </div>
+          <div class="file-field input-field col s9">
+            <div class="btn small-btn btn-border-light-blue">
+              <span>Choose File</span>
+              <input type="file" id="observation_photo" name="observation_photo" >
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Image(s)">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="comments" name="comments" class="materialize-textarea"></textarea>
+            <label for="comments">Comments</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <input placeholder="Date" id="observation_date" name="observation_date" type="text" class="datepicker">
+          </div>
+          <div class="col s6">
+            <input placeholder="Time" id="observation_time" name="observation_time" type="text" class="timepicker">
+          </div>
+        </div>
+        <input type="hidden" id="uid_time" name="uid_time" />
+      </div>
+      <div class="card-action center">
+        <button type="submit" class="btn submit btn-border-light-blue" name="submit">Add to Map</button>
+      </div>
+      <div class="card-action center">
+        <a onclick="landuseProject.close()">Cancel</a>
+      </div>
+    </section>
+  </section>
+</form>
