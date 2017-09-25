@@ -374,6 +374,14 @@ class LandUseProject(models.Model):
 		('road', 'Road'),
 		('stream', 'Stream'),
 	)
+	IMPACT_CHANGE = (
+		('increase', 'Increase'),
+		('decrease', 'Decrease'),
+	)
+	IMPACTING = (
+		('deer', 'Deer'),
+		('berries', 'Berries'),
+	)
 	name = models.CharField(
 		max_length=300,
 		null=True,
@@ -475,5 +483,21 @@ class LandUseProject(models.Model):
 	class Meta:
 		verbose_name_plural = 'Land Use Projects'
 
+	def get_categories():
+		cats = LandUseProject.PROJ_CATS
+		cats_list = []
+		for cat in cats:
+			cats_list.append(cat[0])
+		return cats_list
+	def get_impacts():
+		impact_on = LandUseProjects.IMPACTING
+		impact_list = []
+		for imp in impact_on:
+			impact_list.append(imp[0])
+	def get_impact_change():
+		changes = LandUseProjects.IMPACT_CHANGE
+		impact_change_list = []
+		for change in changes:
+			impact_change_list.append(change[0])
 	def get_user_proj(username):
 		return LandUseProjects.objects.filter(username=username)

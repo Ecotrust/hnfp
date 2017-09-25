@@ -938,14 +938,6 @@ div.mapgroup {
   z-index: 2;
 }
 
-#new-project.visible {
-  bottom: 0;
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  width: 25%;
-}
-
 #new-observation .progress,
 #new-alert-wrapper .progress,
 #new-project .progress {
@@ -1006,7 +998,7 @@ div.mapgroup {
 
 #new-observation form, #new-observation input, #new-observation label, #new-observation textarea,
 #new-alert-wrapper form, #new-alert-wrapper input, #new-alert-wrapper label, #new-alert-wrapper textarea,
-#new-project form, #new-project input,m #new-project label, #new-project textarea {
+#new-project form, #new-project input, #new-project label, #new-project textarea {
   color: #4d4d4e;
   margin: 0 0 1rem;
 }
@@ -1701,6 +1693,49 @@ path {
   top: 10px;
   left: 27%;
   z-index: 1;
+}
+
+.start-project-btn {
+  display: block;
+  margin: 0 auto 2rem;
+  width: 80%;
+}
+
+#new-project.visible {
+  bottom: 0;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 25%;
+}
+
+#new-project .card {
+  background: #fff;
+}
+
+#new-project input, #new-project textarea {
+  background: #dfeceb;
+  padding-left: 5px;
+}
+
+#new-project input[type=number] {
+  width: 70%;
+}
+#new-project textarea {
+ height: 4rem;
+}
+
+#new-project select {
+  display: inline-block;
+  height: auto;
+  pointer-events: auto;
+  position: relative;
+  opacity: 1;
+  width: auto;
+}
+
+#new-project label {
+  font-family: 'function_bold', sans-serif;
 }
 
 /*--------------------

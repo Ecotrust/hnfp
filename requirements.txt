@@ -9,5 +9,3 @@ social_django
 django-recaptcha
 captcha
 django-comments-xtd
-wget http://download.osgeo.org/proj/proj-4.9.1.tar.gz
-wget http://download.osgeo.org/proj/proj-datumgrid-1.5.tar.gz

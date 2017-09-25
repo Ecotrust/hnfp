@@ -311,6 +311,7 @@ def landuse(request):
     all_alerts = [x.to_dict() for x in Alert.objects.all()]
     # get all observations
     all_observation = [x.to_dict() for x in Observation.objects.all()]
+    # get all projects for user and public
     all_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
     context = {
         'title': 'Land Use Map',
