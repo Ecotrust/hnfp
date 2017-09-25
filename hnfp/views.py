@@ -324,8 +324,12 @@ def landuse(request):
 def new_project(request):
     template = loader.get_template('hnfp/landuse/new_project.html')
     cats = LandUseProject.get_categories()
+    imps = LandUseProject.get_impacts()
+    chgs = LandUseProject.get_impact_change()
     context = {
         'proj_cats': cats,
+        'changes': chgs,
+        'impacts': imps,
     }
     return HttpResponse(template.render(context, request))
 

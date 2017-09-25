@@ -50,12 +50,28 @@
           <label for="action">Describe Action</label>
         </div>
         <div class="input-field">
-          <input id="action" name="action" type="number" placeholder="$" />
-          <label for="action">Estimated Dollar Cost</label>
+          <input id="dollar_costs" name="dollar_costs" type="number" placeholder="$" />
+          <label for="dollar_costs">Estimated Dollar Cost</label>
         </div>
         <div class="input-field">
-          <textarea id="impact"  name="impact" type="text"></textarea>
+          <input id="emdollars" name="emdollars" type="number" placeholder="Em$" />
+          <label for="emdollars">Estimated Emdollar Cost</label>
+        </div>
+        <div class="input-field">
+          <input id="impact"  name="impact" type="text" />
           <label for="">Projected Impact</label>
+          <select class="browser-default" name="observation_category" required>
+            <option value="none">Select</option>
+            {% for change in changes %}
+              <option value="{{ change }}">{{ change }}</option>
+            {% endfor %}
+          </select>
+          <select class="browser-default" name="observation_category" required>
+            <option value="none">Select</option>
+            {% for impact in impacts %}
+              <option value="{{ impact }}">{{ impact }}</option>
+            {% endfor %}
+          </select>
       </div>
       <div class="card-action">
         <a onclick="landuseProject.locOkay()" class="cancel">Cancel</a>
@@ -76,9 +92,7 @@
           <div class="col s6 relative">
             <select class="browser-default" name="category" required>
               <option value="">Choose Category</option>
-              {% for cat in proj_cats %}
-                <option value="{{ cat }}" class="circle">{{ cat }}</option>
-              {% endfor %}
+
             </select>
             <i class="material-icons select-icon">arrow_drop_down</i>
           </div>

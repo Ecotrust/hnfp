@@ -35,8 +35,8 @@ class PublicManager(models.Manager):
 
 class Post(models.Model):
 	STATUS_CHOICES = (
-		('draft', 'Draft'),
-		('published', 'Published'),
+		('Draft', 'draft'),
+		('Published', 'published'),
 	)
 	title = models.CharField(max_length=250)
 	slug = models.SlugField(max_length=250, unique_for_date='publish')
@@ -86,17 +86,17 @@ def validate_list(value):
 		raise ValidationError("The selected field requires an associated list of choices. Choices must contain more than one item.")
 
 class Question(models.Model):
-	TEXT = 'text'
-	RADIO = 'radio'
-	SELECT = 'select'
-	SELECT_MULTIPLE = 'select-multiple'
-	INTEGER = 'integer'
+	TEXT = 'Text'
+	RADIO = 'Radio'
+	SELECT = 'Select'
+	SELECT_MULTIPLE = 'Select Multiple'
+	INTEGER = 'Integer'
 
 	QUESTION_TYPES = (
 		(TEXT, 'text'),
 		(RADIO, 'radio'),
 		(SELECT, 'select'),
-		(SELECT_MULTIPLE, 'Select Multiple'),
+		(SELECT_MULTIPLE, 'select_multiple'),
 		(INTEGER, 'integer'),
 	)
 
@@ -189,17 +189,17 @@ class JobOpportunity(models.Model):
 # observations
 class Observation(models.Model):
 	OBSERVATION_CATS = (
-		('bear', 'Bear'),
-		('deer', 'Dear'),
-		('medicinal_herbs', 'Medicinal Herbs'),
-		('shrimp', 'Shrimp'),
-		('berries', 'Berries'),
-		('firewood', 'Firewood'),
-		('mushrooms', 'Mushrooms'),
-		('crab', 'Crab'),
-		('fish', 'Fish'),
-		('shellfish', 'Shellfish'),
-		('custom', 'Custom'),
+		('Bear', 'bear'),
+		('Deer', 'deer'),
+		('Medicinal Herbs', 'medicinal_herbs'),
+		('Shrimp', 'shrimp'),
+		('Berries', 'berries'),
+		('Firewood', 'firewood'),
+		('Mushrooms', 'mushrooms'),
+		('Crab', 'crab'),
+		('Fish', 'fish'),
+		('Shellfish', 'shellfish'),
+		('Custom', 'custom'),
 	)
 
 	category = models.CharField(
@@ -370,17 +370,34 @@ class Alert(models.Model):
 # Land use projects
 class LandUseProject(models.Model):
 	PROJ_CATS = (
-		('forest', 'Forest'),
-		('road', 'Road'),
-		('stream', 'Stream'),
+		('Forest', 'forest'),
+		('Road', 'road'),
+		('Stream', 'stream'),
 	)
-	IMPACT_CHANGE = (
-		('increase', 'Increase'),
-		('decrease', 'Decrease'),
+	ECOSYSTEM_IMPACTS = (
+		('Increase', 'increase'),
+		('Decrease', 'decrease'),
+		('No Change', 'no_change'),
 	)
-	IMPACTING = (
-		('deer', 'Deer'),
-		('berries', 'Berries'),
+	ECOSYSTEM_SERVICE = (
+		('Deer', 'deer'),
+		('Berries', 'berries'),
+		('Raw materials', 'materials'),
+		('Fresh water', 'water'),
+		('Medicinal herbs', 'medicinal'),
+		('Carbon sequestration', 'sequestration'),
+		('Soil erosion and fertility', 'soil'),
+		('Reduce damage caused by extreme events', 'protection'),
+		('Climate and air quality', 'climate'),
+		('Pollination', 'pollination'),
+		('Water Treatment', 'water_treatment'),
+		('Biological Control', 'biological_control'),
+		('Habitat for species', 'habitat'),
+		('Maintenance of genetic diversity', 'diversity'),
+		('Tourism', 'tourism'),
+		('Aesthetic appreciation and inspiration for culture', 'culture'),
+		('Spiritual experience and identity', 'spiritual'),
+		('Recreation', 'recreation')
 	)
 	name = models.CharField(
 		max_length=300,
@@ -420,8 +437,15 @@ class LandUseProject(models.Model):
 		null=True,
 		blank=True,
 	)
+	impact_change = models.CharField(
+		max_length=4000,
+		choices=ECOSYSTEM_IMPACTS,
+		null=True,
+		blank=True,
+	)
 	impact = models.CharField(
 		max_length=4000,
+		choices=ECOSYSTEM_SERVICE,
 		null=True,
 		blank=True,
 	)
@@ -429,7 +453,7 @@ class LandUseProject(models.Model):
 		null=True,
 		blank=True,
 	)
-	value = models.CharField(
+	emdollars = models.CharField(
 		max_length=4000,
 		null=True,
 		blank=True,
@@ -489,15 +513,20 @@ class LandUseProject(models.Model):
 		for cat in cats:
 			cats_list.append(cat[0])
 		return cats_list
+
 	def get_impacts():
-		impact_on = LandUseProjects.IMPACTING
-		impact_list = []
+		impact_on = LandUseProject.ECOSYSTEM_SERVICE
+		services_list = []
 		for imp in impact_on:
-			impact_list.append(imp[0])
+			services_list.append(imp[0])
+		return services_list
+
 	def get_impact_change():
-		changes = LandUseProjects.IMPACT_CHANGE
-		impact_change_list = []
+		changes = LandUseProject.ECOSYSTEM_IMPACTS
+		impacts_list = []
 		for change in changes:
-			impact_change_list.append(change[0])
+			impacts_list.append(change[0])
+		return impacts_list
+
 	def get_user_proj(username):
 		return LandUseProjects.objects.filter(username=username)
