@@ -36,7 +36,7 @@ import json
 #alert
 from hnfp.models import Alert
 #landuse
-from hnfp.models import LandUseProject
+from hnfp.models import LandUseProject, ProjectImpacts
 
 ### VIEWS ###
 def index(request):
@@ -346,8 +346,9 @@ def project_create(request):
         completion_date = request.POST['completion_date']
         actions = request.POST['actions']
         impact = request.POST['impact']
+        change = request.POST['change']
         dollar_costs = request.POST['dollar_costs']
-        value = request.POST['value']
+        emdollars = request.POST['emdollars']
 
         new_proj = LandUseProject(
             area=area,
@@ -359,8 +360,9 @@ def project_create(request):
             completion_date=completion_date,
             actions=actions,
             impact=impact,
+            impact_change=change,
             dollar_costs=dollar_costs,
-            value=value,
+            emdollars=emdollars,
             username=request.user.username
         );
         new_proj.save()

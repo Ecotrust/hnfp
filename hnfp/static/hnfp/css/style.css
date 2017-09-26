@@ -1691,7 +1691,7 @@ path {
   line-height: 3rem;
   position: absolute;
   top: 10px;
-  left: 27%;
+  left: 28%;
   z-index: 1;
 }
 
@@ -1706,7 +1706,7 @@ path {
   position: absolute;
   left: 10px;
   top: 10px;
-  width: 25%;
+  width: 26%;
 }
 
 #new-project .card {
@@ -1725,12 +1725,12 @@ path {
  height: 4rem;
 }
 
-#new-project select {
-  display: inline-block;
-  height: auto;
-  pointer-events: auto;
-  position: relative;
-  opacity: 1;
+#new-project .close {
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
   width: auto;
 }
 

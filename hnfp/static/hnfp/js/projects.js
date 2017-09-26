@@ -30,6 +30,11 @@ var landuseProject = {
     $('.card').removeClass('visible');
     $('#stepfour').addClass('visible');
   },
+  stepFive: function() {
+    $('.card').removeClass('visible');
+    $('#stepfive').addClass('visible');
+    // Draw area on map
+  },
   setInputLoc: function() {
     $('#observation_location').val(getLocationPoint());
   },
@@ -54,6 +59,7 @@ var landuseProject = {
         success: function(data) {
             $projectForm.html(data);
             landuseProject.stepOne();
+            $('select').material_select();
         },
         error: function (result) {
             //debugger;

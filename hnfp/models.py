@@ -367,6 +367,23 @@ class Alert(models.Model):
 	def get_user_alerts(username):
 		return Alert.objects.filter(alert_username=username)
 
+# Ecosystems services table
+class ProjectImpacts(models.Model):
+	LandUseProject = models.ForeignKey(
+        'LandUseProject',
+        on_delete=models.CASCADE,
+    )
+	change_type = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+	service = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+
 # Land use projects
 class LandUseProject(models.Model):
 	PROJ_CATS = (
