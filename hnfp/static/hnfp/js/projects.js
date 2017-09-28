@@ -34,6 +34,8 @@ var landuseProject = {
     $('.card').removeClass('visible');
     $('#stepfive').addClass('visible');
     // Draw area on map
+    drawProjectArea();
+    drawEnd();
   },
   setInputLoc: function() {
     $('#observation_location').val(getLocationPoint());
@@ -46,6 +48,14 @@ var landuseProject = {
   },
   hideSpinner: function() {
     $('.preloader-wrapper').removeClass('active');
+  },
+  addImpact: function() {
+    $('.add-impact').click(function() {
+      let $wrap = $('.impact-wrap'),
+          $impactSections = $('.impact-wrap section');
+      $('.impact-wrap section:first-of-type').clone().appendTo($wrap);
+      $('select').material_select();
+    });
   },
   initNew: function() {
     $newProjectWrap.toggleClass('visible');
@@ -60,6 +70,7 @@ var landuseProject = {
             $projectForm.html(data);
             landuseProject.stepOne();
             $('select').material_select();
+            landuseProject.addImpact();
         },
         error: function (result) {
             //debugger;
@@ -76,6 +87,11 @@ var landuseProject = {
       });
       $projectForm.submit(function(e) {
         e.preventDefault();
+        var areaArray = [];
+        projectSource.forEachFeature( function(feat) {
+          areaArray.push( feat.getGeometry().getCoordinates() );
+        });
+        $('#area').val(areaArray);
         landuseProject.create(e.target);
       })
     });
@@ -87,9 +103,8 @@ var landuseProject = {
       url: '/landuse/create/',
       data: $form,
       success: function(data) {
-        addToMap(data);
+        addProjectToMap(data);
         landuseProject.close();
-        landuseProject.showAddObservationBtn(true);
         $projectForm.html('');
       },
       error: function (error) {

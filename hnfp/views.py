@@ -27,7 +27,7 @@ from hnfp.models import Question, Survey, Category, PublicManager
 from hnfp.forms import ResponseForm
 # observation
 from hnfp.models import Observation
-from django.contrib.gis.geos import Point
+from django.contrib.gis.geos import Point, MultiPolygon, Polygon
 #forum
 from hnfp.models import Post
 #jobs
@@ -36,7 +36,7 @@ import json
 #alert
 from hnfp.models import Alert
 #landuse
-from hnfp.models import LandUseProject, ProjectImpacts
+from hnfp.models import LandUseProject, ProjectResourceImpact, ImpactType, Resource
 
 ### VIEWS ###
 def index(request):
@@ -311,60 +311,68 @@ def landuse(request):
     all_alerts = [x.to_dict() for x in Alert.objects.all()]
     # get all observations
     all_observation = [x.to_dict() for x in Observation.objects.all()]
-    # get all projects for user and public
-    all_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
+    # get all projects for user and public published
+    all_user_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
+    all_public_projects = [x.to_dict() for x in LandUseProject.objects.filter(published=True)]
     context = {
         'title': 'Land Use Map',
         'alerts': json.dumps(all_alerts),
         'user_observations': json.dumps(all_observation),
-        'all_projects': json.dumps(all_projects),
+        'all_projects': json.dumps(all_user_projects),
+        'all_public_projects': json.dumps(all_public_projects),
     }
     return HttpResponse(template.render(context, request))
 
 def new_project(request):
     template = loader.get_template('hnfp/landuse/new_project.html')
     cats = LandUseProject.get_categories()
-    imps = LandUseProject.get_impacts()
-    chgs = LandUseProject.get_impact_change()
+    resources = Resource.get_resources()
+    impactTypes = ImpactType.get_impact_types()
     context = {
         'proj_cats': cats,
-        'changes': chgs,
-        'impacts': imps,
+        'resources': resources,
+        'impactTypes': impactTypes,
     }
     return HttpResponse(template.render(context, request))
 
+def grouper(iterable, n, fillvalue=None):
+    import itertools
+    # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return itertools.zip_longest(*args, fillvalue=fillvalue)
+
 def project_create(request):
     if request.method == 'POST':
-        area_post = request.POST['area']
-        area_obj = area_post.split(',')
-        area = MultiPolygon([area_obj])
+        area = request.POST['area']
+        areaPoints = area.split(',')
+        areaP = grouper(areaPoints, 2, '')
+        print(tuple(areaP))
+        areaFeature = Polygon(tuple(areaP));
         name = request.POST['name']
         category = request.POST['category']
         summary = request.POST['summary']
-        description = request.POST['description']
         start_date = request.POST['start_date']
         completion_date = request.POST['completion_date']
-        actions = request.POST['actions']
-        impact = request.POST['impact']
-        change = request.POST['change']
+        action = request.POST['action']
         dollar_costs = request.POST['dollar_costs']
         emdollars = request.POST['emdollars']
 
+        #resource = request.POST['resource']
+        #impact_type = request.POST['impact_type']
+
         new_proj = LandUseProject(
-            area=area,
+            area=areaFeature,
             name=name,
             category=category,
             summary=summary,
-            description=description,
             start_date=start_date,
             completion_date=completion_date,
-            actions=actions,
-            impact=impact,
-            impact_change=change,
+            actions=action,
             dollar_costs=dollar_costs,
             emdollars=emdollars,
             username=request.user.username
-        );
+        )
+
         new_proj.save()
         all_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
         return JsonResponse(all_projects, safe=False)

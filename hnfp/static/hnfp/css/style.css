@@ -923,11 +923,11 @@ div.mapgroup {
   plus some alerts
   --------------------*/
 
-#stepone, #steptwo, #stepthree, #stepchangeloc, #stepfour {
+#stepone, #steptwo, #stepthree, #stepchangeloc, #stepfour, #stepfive {
   display: none;
 }
 
-#stepone.visible, #steptwo.visible, #stepthree.visible, #stepchangeloc.visible, #stepfour.visible {
+#stepone.visible, #steptwo.visible, #stepthree.visible, #stepchangeloc.visible, #stepfour.visible, #stepfive.visible {
   display: block;
 }
 

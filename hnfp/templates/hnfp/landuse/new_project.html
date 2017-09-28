@@ -14,11 +14,11 @@
       <div class="card-content">
         <span class="center card-title">New Project</span>
         <div class="input-field">
-          <input id="name" type="text" name="name" required>
+          <input id="name" type="text" name="name">
           <label for="name">Name your Project</label>
         </div>
         <div class="input-field">
-          <textarea id="summary" name="summary" class="materialize-textarea" required></textarea>
+          <textarea id="summary" name="summary" class="materialize-textarea"></textarea>
           <label for="summary">Short Description</label>
         </div>
       </div>
@@ -27,6 +27,7 @@
         <a onclick="landuseProject.stepThree()" class="btn next btn-border-light-blue">Next</a>
       </div>
     </section>
+
     <section id="stepthree" class="card">
       <div class="card-content">
         <span class="center card-title">Projected Dates of Completion</span>
@@ -44,6 +45,7 @@
         <a onclick="landuseProject.stepFour()" class="btn next btn-border-light-blue">Next</a>
       </div>
     </section>
+
     <section id="stepfour" class="card">
       <div class="card-content">
         <div class="input-field">
@@ -60,38 +62,43 @@
         </div>
         <div class="row">
           <p><strong>Projected Impact</strong></p>
-          <div class="input-field col s12 m4">
-            <select class="" name="change">
-              <option value="">Change</option>
-              {% for change in changes %}
-                <option value="{{ change }}">{{ change }}</option>
-              {% endfor %}
-            </select>
-          </div>
-          <div class="input-field col s12 l8">
-            <select class="" name="impact" multiple>
-              <option value="">Impact On</option>
-              {% for impact in impacts %}
-                <option value="{{ impact }}">{{ impact }}</option>
-              {% endfor %}
-            </select>
+          <div class="impact-wrap">
+            <section>
+              <div class="input-field col s12 m4">
+                <select id="impact_type" name="impact_type">
+                  <option value="" disabled selected>Impact Type</option>
+                  {% for impact in impactTypes %}
+                    <option value="{{ impact.name }}">{{ impact.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="input-field col s12 l8">
+                <select id="resource" name="resource" multiple>
+                  <option value="" disabled selected>Resource</option>
+                  {% for resource in resources %}
+                    <option value="{{ resource.name }}">{{ resource.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </section>
           </div>
         </div>
         <div class="input-field">
-          <a class="disabled btn btn-flat"><i class="material-icons">add_circle</i> Add Additional Impact</a>
+          <a class="btn btn-flat add-impact"><i class="material-icons">add_circle</i> Add Additional Impact</a>
         </div>
+        <input type="hidden" id="uid_time" name="uid_time" />
+        <input type="hidden" id="category" name="category" />
       </div>
-      <input type="hidden" id="uid_time" name="uid_time" />
-      <input type="hidden" id="category" name="category" />
       <div class="card-action">
         <a onclick="landuseProject.stepThree()" class="cancel">Back</a>
         <a onclick="landuseProject.stepFive()" class="btn next btn-border-light-blue">Next</a>
       </div>
     </section>
-    <section id="stepFive" class="card">
+
+    <section id="stepfive" class="card">
       <div class="card-content">
         <p><strong>Draw the proposed project area</strong>
-        <input type="hidden" id="area" name="area" val="" />
+        <input type="hidden" id="area" name="area" />
       </div>
       <div class="card-action">
         <a onclick="landuseProject.stepFour()" class="cancel">Back</a>

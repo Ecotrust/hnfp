@@ -368,21 +368,27 @@ class Alert(models.Model):
 		return Alert.objects.filter(alert_username=username)
 
 # Ecosystems services table
-class ProjectImpacts(models.Model):
-	LandUseProject = models.ForeignKey(
-        'LandUseProject',
-        on_delete=models.CASCADE,
-    )
-	change_type = models.CharField(
+class Resource(models.Model):
+	name = models.CharField(
 		max_length=4000,
-		blank=True,
-		null=True,
+		default='Resource Name',
 	)
-	service = models.CharField(
+	def get_resources():
+		return Resource.objects.all()
+
+# type of impact such as increase or decrease
+class ImpactType(models.Model):
+	name = models.CharField(
 		max_length=4000,
-		blank=True,
-		null=True,
+		default='Impact Type',
 	)
+	def get_impact_types():
+		return ImpactType.objects.all()
+
+class ProjectResourceImpact(models.Model):
+	# project =
+	resource = models.ForeignKey(Resource, default=1)
+	impactType = models.ForeignKey(ImpactType, default=1)
 
 # Land use projects
 class LandUseProject(models.Model):
@@ -454,19 +460,11 @@ class LandUseProject(models.Model):
 		null=True,
 		blank=True,
 	)
-	impact_change = models.CharField(
+
+	projectResourceImpact = models.ForeignKey('ProjectResourceImpact', default=1)
+
+	dollar_costs = models.CharField(
 		max_length=4000,
-		choices=ECOSYSTEM_IMPACTS,
-		null=True,
-		blank=True,
-	)
-	impact = models.CharField(
-		max_length=4000,
-		choices=ECOSYSTEM_SERVICE,
-		null=True,
-		blank=True,
-	)
-	dollar_costs = models.IntegerField(
 		null=True,
 		blank=True,
 	)
@@ -475,7 +473,7 @@ class LandUseProject(models.Model):
 		null=True,
 		blank=True,
 	)
-	area = models.MultiPolygonField(
+	area = models.PolygonField(
 		srid=settings.GEOMETRY_DB_SRID,
 		default=None,
 		null=True,
@@ -498,11 +496,11 @@ class LandUseProject(models.Model):
 
 	def to_dict(self):
 		if self.area is not None:
-			multipoly = self.area.geojson
+			polygon = self.area.geojson
 		else:
-			multipoly = None
+			polygon = None
 		return {
-			'area': multipoly,
+			'area': polygon,
 			'name': self.name,
 			'category': self.category,
 			'summary': self.summary,
@@ -511,9 +509,7 @@ class LandUseProject(models.Model):
 			'start_date': self.start_date,
 			'completion_date': self.completion_date,
 			'actions': self.actions,
-			'impact': self.impact,
 			'dollar_costs': self.dollar_costs,
-			'value': self.value,
 			'published': self.published,
 			'id': self.id,
 		}
@@ -530,20 +526,6 @@ class LandUseProject(models.Model):
 		for cat in cats:
 			cats_list.append(cat[0])
 		return cats_list
-
-	def get_impacts():
-		impact_on = LandUseProject.ECOSYSTEM_SERVICE
-		services_list = []
-		for imp in impact_on:
-			services_list.append(imp[0])
-		return services_list
-
-	def get_impact_change():
-		changes = LandUseProject.ECOSYSTEM_IMPACTS
-		impacts_list = []
-		for change in changes:
-			impacts_list.append(change[0])
-		return impacts_list
 
 	def get_user_proj(username):
 		return LandUseProjects.objects.filter(username=username)
