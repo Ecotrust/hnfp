@@ -457,7 +457,11 @@ nav .tabs .tab {
 
 .logo-row img.responsive-img {
   max-height: 120px;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
+  max-width: 150px;
+}
+
+.logo-row img.hoonah-logo {
   max-width: 200px;
 }
 
@@ -839,7 +843,7 @@ div.mapgroup {
   background: transparent;
   color: #000;
   font-family: 'function_bold', sans-serif;
-  font-size: 1.3125rem;
+  font-size: 1.5rem;
   height: 2.5rem;
   text-align: center;
   width: 2.5rem;
