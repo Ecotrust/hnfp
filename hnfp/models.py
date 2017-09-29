@@ -473,7 +473,6 @@ class LandUseProject(models.Model):
 		null=True,
 		blank=True,
 	)
-
 	area = models.PolygonField(
 		srid=settings.GEOMETRY_DB_SRID,
 		default=None,
