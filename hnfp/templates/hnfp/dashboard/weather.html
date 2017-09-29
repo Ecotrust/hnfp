@@ -8,64 +8,46 @@
     <h3 class="flow-text">Weather &amp; Marine Conditions</h3>
   </div>
 </div>
-
-<div class="section flow-text">
-  <section class="bg_green_light weather-wrap">
-    <ul class="collapsible" data-collapsible="expandable">
-      <li>
-        <div class="collapsible-header active">
-          <h4 class="center teal-text flow-text">Today's Forecast <i class="material-icons grey-text right">unfold_more</i></h4>
+  <div class="card bg_blue_light">
+    <div class="card-content">
+      <p class="center" id="forecast-summary"></p>
+    </div>
+    <div class="card-tabs">
+      <ul class="tabs tabs-fixed-width">
+        <li class="tab"><a href="#test4" class="teal-text">Current Conditions</a></li>
+        <li class="tab"><a href="#test5" class="teal-text">Marine Conditions</a></li>
+        <li class="tab"><a href="#test6" class="teal-text">Tide Report</a></li>
+      </ul>
+    </div>
+    <div class="card-content bg_blue_light">
+      <div id="test4">
+        <div id="forecast">
+          <table class="highlight responsive-table">
+            <tbody id="weatherforcast"></tbody>
+          </table>
         </div>
-        <div class="collapsible-body">
-          <div class="section">
-            <div class="center" id="forecast-summary"></div>
-          </div>
+      </div>
+      <div id="test5">
+        <div id="marine">
+          <table class="highlight responsive-table">
+            <tbody id="marineforecast"></tbody>
+          </table>
         </div>
-      </li>
-      <li>
-        <div class="collapsible-header active">
-          <h4 class="center teal-text flow-text">Current <i class="material-icons grey-text right">unfold_more</i></h4>
+      </div>
+      <div id="test6">
+        <div id="tides">
+          <table class="highlight">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>High/Low</th>
+                <th>Water Level (ft)</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody id="tideforecast"></tbody>
+          </table>
         </div>
-        <div class="collapsible-body">
-          <div id="forecast">
-            <table class="highlight responsive-table">
-              <tbody id="weatherforcast"></tbody>
-            </table>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="collapsible-header">
-          <h4 class="center teal-text flow-text">Marine Conditions <i class="material-icons grey-text right">unfold_more</i></h4>
-        </div>
-        <div class="collapsible-body">
-          <div id="marine">
-            <table class="highlight responsive-table">
-              <tbody id="marineforecast"></tbody>
-            </table>
-          </div>
-        </div>
-      </li>
-      <li>
-        <div class="collapsible-header">
-          <h4 class="center teal-text flow-text">Tide Report <i class="material-icons grey-text right">unfold_more</i></h4>
-        </div>
-        <div class="collapsible-body">
-          <div id="tides">
-            <table class="highlight responsive-table">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>High/Low</th>
-                  <th>Water Level (ft)</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody id="tideforecast"></tbody>
-            </table>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </section>
-</div>
+      </div>
+    </div>
+  </div>

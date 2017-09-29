@@ -587,10 +587,6 @@ nav .tabs .tab {
   width: 100%;
 }
 
-.weather-wrap {
-  overflow: hidden;
-}
-
 #tempchart {
   height: 200px;
   width: 80%;
@@ -599,69 +595,26 @@ nav .tabs .tab {
 #forecast,
 #marine,
 #tides {
-  border-bottom: 2px solid #fff;
   padding: 2rem 0;
   width: 100%;
-  font-size: .675em;
+  font-size: 1em;
+  text-transform: capitalize;
 }
 
 #forecast-summary {
-  border-bottom: 2px solid #fff;
-  padding-bottom: 2rem;
-}
-
-#tides {
-  text-align: center;
-}
-
-#tides {
-  border-bottom: none;
+  font-size: 1.25em;
 }
 
 #forecast,
-#marine {
+#marine,
+#tides {
   padding: 2rem;
 }
 
 #forecast td,
-#marine td {
-  padding: 5px 8px;
-}
-
-.dashboard .collapsible {
-  border: none;
-  box-shadow: none;
-}
-
-.dashboard .collapsible .margin-top {
-  margin-top: 3rem;
-}
-
-.dashboard .collapsible h4 {
-  font-size: 1.5em;
-  margin: 0 0 1rem;
-}
-
-.dashboard .collapsible-header,
-.dashboard .collapsible-body {
-  background: transparent;
-  border: none;
-}
-.dashboard .collapsible-header h4 {
-  flex: 1;
-}
-
-.dashboard .collapsible-header h4 i {
-  line-height: 2em;
-}
-
+#marine td,
 #tides td {
-  text-align: center;
-}
-
-#tides th {
-  font-size: .9375em;
-  text-align: right;
+  padding: 5px 8px;
 }
 
 .blog-roll h4 {
@@ -1799,12 +1752,6 @@ path {
 
   .home-page .home-cta {
     font-size: 2rem;
-  }
-
-  #tides th,
-  #tides td {
-    font-size: 1em;
-    text-align: center;
   }
 
   #new-observation .relative .material-icons {

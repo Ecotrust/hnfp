@@ -98,7 +98,7 @@ var weather = {
               v = parseFloat(el.v),
               type = el.type;
           let waterlevel = v.toFixed(2);
-          tideDOM.append('<tr><td>' + month + '.' + day + '</td><td>' + type + '</td><td>' + waterlevel + '</td><td>' + time + '</td></tr>').addClass('tide-block');
+          tideDOM.append('<tr><td>' + month + '.' + day + '</td><td>' + type + '</td><td>' + waterlevel + '</td><td>' + time + '</td></tr>');
         })
       },
       error: function(jqXHR, textStatus, errorThrown) {
