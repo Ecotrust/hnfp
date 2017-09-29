@@ -318,6 +318,40 @@ let watersheds = new ol.layer.Vector({
   visible: false
 });
 
+let salmonStreams = new ol.layer.Vector({
+  title: 'Salmon Streams',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/hoonah_salmon_streams.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: function(feature, resolution) {
+    let color = feature.getProperties().color;
+    let lowner = '';
+    if (resolution < 75) {
+      lowner = feature.getProperties();
+    }
+    return new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: '#ee2255',
+        width: 2
+      }),
+      text: new ol.style.Text({
+        text: lowner,
+        align: 'center',
+        fill: new ol.style.Fill({
+          color: '#000'
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#fff',
+          width: 3
+        })
+      })
+    })
+  },
+  opacity: .7,
+  visible: false
+});
+
 var projectGroup = new ol.layer.Group({
   title: 'Data',
   layers: [
@@ -328,7 +362,8 @@ var projectGroup = new ol.layer.Group({
     hoonahPlaceNamesEng,
     hoonahProjectBoundary,
     hoonahTowns,
-    watersheds
+    watersheds,
+    salmonStreams
   ]
 });
 // Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
