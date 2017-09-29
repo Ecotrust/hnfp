@@ -27,7 +27,7 @@ from hnfp.models import Question, Survey, Category, PublicManager
 from hnfp.forms import ResponseForm
 # observation
 from hnfp.models import Observation
-from django.contrib.gis.geos import Point, MultiPolygon, Polygon
+from django.contrib.gis.geos import Point, MultiPolygon, Polygon, GEOSGeometry
 #forum
 from hnfp.models import Post
 #jobs
@@ -335,19 +335,10 @@ def new_project(request):
     }
     return HttpResponse(template.render(context, request))
 
-def grouper(iterable, n, fillvalue=None):
-    import itertools
-    # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
-    args = [iter(iterable)] * n
-    return itertools.zip_longest(*args, fillvalue=fillvalue)
-
 def project_create(request):
     if request.method == 'POST':
         area = request.POST['area']
-        areaPoints = area.split(',')
-        areaP = grouper(areaPoints, 2, '')
-        print(tuple(areaP))
-        areaFeature = Polygon(tuple(areaP));
+        areaPoly = GEOSGeometry(area)
         name = request.POST['name']
         category = request.POST['category']
         summary = request.POST['summary']
@@ -361,7 +352,7 @@ def project_create(request):
         #impact_type = request.POST['impact_type']
 
         new_proj = LandUseProject(
-            area=areaFeature,
+            area=areaPoly,
             name=name,
             category=category,
             summary=summary,

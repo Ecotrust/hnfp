@@ -35,7 +35,6 @@ var landuseProject = {
     $('#stepfive').addClass('visible');
     // Draw area on map
     drawProjectArea();
-    drawEnd();
   },
   setInputLoc: function() {
     $('#observation_location').val(getLocationPoint());
@@ -59,6 +58,7 @@ var landuseProject = {
   },
   initNew: function() {
     $newProjectWrap.toggleClass('visible');
+    landuseMap.removePopup();
     // check if visible has been taken away or added
     if (!$newProjectWrap.hasClass('visible')) {
       $projectForm.html('');
@@ -87,11 +87,6 @@ var landuseProject = {
       });
       $projectForm.submit(function(e) {
         e.preventDefault();
-        var areaArray = [];
-        projectSource.forEachFeature( function(feat) {
-          areaArray.push( feat.getGeometry().getCoordinates() );
-        });
-        $('#area').val(areaArray);
         landuseProject.create(e.target);
       })
     });
@@ -111,5 +106,11 @@ var landuseProject = {
         $projectForm.prepend(error);
       }
     });
+  },
+  addProjArea: function(data) {
+    var beginSlice = data.indexOf('{"type":"Polygon"'),
+        endSlice = data.indexOf(',"properties"');
+        sliceIt = data.slice(beginSlice, endSlice);
+    $('#area').val(sliceIt);
   }
 };

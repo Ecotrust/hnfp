@@ -13,12 +13,7 @@
       <section class="wrap controls">
         <div class="row">
           <div class="col s12 l3">
-            <h5>Visibility Themes</h5>
-            <div class="container left">
-              <select class="browser-default">
-
-              </select>
-            </div>
+            <h5>Themes</h5>
           </div>
           <div class="col s12 l3">
             <h5>Map Language</h5>
@@ -62,6 +57,19 @@
               </p>
             </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header"><i class="material-icons">play_arrow</i> Layers</div>
+                <div class="collapsible-body">
+                  <div id="visible-themes"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
         </div>
       </section>
     {% endblock controls %}

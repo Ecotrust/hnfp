@@ -763,7 +763,8 @@ div.mapgroup {
   max-height: 96vh;
 }
 
-#map {
+#map,
+#project-map {
   height: 100%;
 }
 
@@ -821,7 +822,8 @@ div.mapgroup {
   width: 100%;
 }
 
-#map div.olControlZoom {
+#map div.olControlZoom,
+#project-map div.olControlZoom {
   background: rgba(255,255,255,0.8);
   bottom: auto;
   right: 0;
@@ -829,7 +831,8 @@ div.mapgroup {
   padding: 0;
 }
 
-#map .ol-zoom {
+#map .ol-zoom,
+#project-map .ol-zoom {
   display: inline-block;
   background: transparent;
   height: auto;
@@ -841,11 +844,11 @@ div.mapgroup {
   text-align: center;
 }
 
-#map .ol-zoom .ol-zoom-out,
-#map .ol-zoom .ol-zoom-in,
-#map .ol-full-screen,
-#map .layer-switcher,
-#map .ol-control button {
+#map .ol-zoom .ol-zoom-out, #project-map .ol-zoom .ol-zoom-out,
+#map .ol-zoom .ol-zoom-in, #project-map .ol-zoom .ol-zoom-in,
+#map .ol-full-screen, #project-map .ol-full-screen,
+#map .layer-switcher, #project-map .layer-switcher,
+#map .ol-control button, #project-map .ol-control button {
   background: rgba(255,255,255,0.8);
   border-radius: 0;
   border: none;
@@ -857,8 +860,8 @@ div.mapgroup {
   text-align: center;
 }
 
-#map .ol-zoom .ol-zoom-out,
-#map .ol-zoom .ol-zoom-in {
+#map .ol-zoom .ol-zoom-out, #project-map .ol-zoom .ol-zoom-out,
+#map .ol-zoom .ol-zoom-in, #project-map .ol-zoom .ol-zoom-in {
   display: inline-block;
   font-family: 'function_bold', sans-serif;
   font-size: 2.18375rem;
@@ -868,18 +871,18 @@ div.mapgroup {
   width: 2.5rem;
 }
 
-#map .ol-zoom .ol-zoom-out {
+#map .ol-zoom .ol-zoom-out, #project-map .ol-zoom .ol-zoom-out {
   line-height: 2rem;
   font-size: 1.75rem;
 }
 
-#map .ol-full-screen {
+#map .ol-full-screen, #project-map .ol-full-screen {
   height: 2.5rem;
   top: 2.5rem;
   width: 2.5rem;
 }
 
-#map .ol-full-screen button {
+#map .ol-full-screen button, #project-map .ol-full-screen button {
   background: transparent;
   color: #000;
   font-family: 'function_bold', sans-serif;
@@ -889,11 +892,11 @@ div.mapgroup {
   width: 2.5rem;
 }
 
-#map .layer-switcher {
+#map .layer-switcher, #project-map .layer-switcher {
   top: 5rem;
 }
 
-#map .layer-switcher button {
+#map .layer-switcher button, #project-map .layer-switcher button {
   background-color: transparent;
   background-image: url('/static/hnfp/img/icons/layers.png');
   background-repeat: no-repeat;
@@ -902,7 +905,7 @@ div.mapgroup {
   width: 2.5rem;
 }
 
-#map:fullscreen {
+#map:fullscreen, #project-map:fullscreen {
   height: 100%;
 }
 
@@ -1638,7 +1641,7 @@ path {
   --------------------*/
 
 .land-use .wrap {
-  padding: 2rem 5%;
+  padding: 2rem 5% 0;
   position: relative;
 }
 
@@ -1702,9 +1705,9 @@ path {
 }
 
 #new-project.visible {
-  bottom: 0;
-  position: absolute;
+  height: auto;
   left: 10px;
+  position: absolute;
   top: 10px;
   width: 26%;
 }
@@ -1736,6 +1739,34 @@ path {
 
 #new-project label {
   font-family: 'function_bold', sans-serif;
+}
+
+#visible-themes {
+  position: relative;
+  width: 100%;
+}
+
+#visible-themes .layer-switcher {
+  float: none;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+
+#visible-themes .layer-switcher button {
+  display: none;
+}
+
+#visible-themes .panel {
+  background: transparent;
+  border: none;
+  display: block;
+  float: none;
+  width: 100%;
+}
+
+.land-use .collapsible-header {
+  background: transparent;
 }
 
 /*--------------------

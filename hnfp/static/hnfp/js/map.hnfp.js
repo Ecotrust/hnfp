@@ -113,6 +113,14 @@ var hoonahLandOwners = new ol.layer.Vector({
   visible: false
 });
 
+var overlayGroup = new ol.layer.Group({
+    title: 'Overlays',
+    layers: [
+      hoonahLandOwners,
+      hoonahRoads
+    ]
+});
+
 // Map Object
 var map = new ol.Map({
   target: 'map',
@@ -125,13 +133,7 @@ var map = new ol.Map({
         topoLayer
       ]
     }),
-    new ol.layer.Group({
-      title: 'Overlays',
-      layers: [
-        hoonahLandOwners,
-        hoonahRoads
-      ]
-    })
+    overlayGroup
   ],
   view: mapView,
   controls: ol.control.defaults({
@@ -200,39 +202,63 @@ var popup = new ol.Overlay({
   element: popupNode,
   positioning: 'top-center',
   offset: [0,6],
-  autoPan: true,
+  autoPan: false,
   autoPanMargin: 40
 });
-map.on('singleclick', function(event) {
-  let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
-    return feature;
-  }, {
-    hitTolerance: 2
-  });
-  if (feature) {
-    if (popupNode !== null) {
-      map.addOverlay(popup);
-      addOverlayPopup(feature);
+
+// set popups to show on click
+var popupClick = 'click';
+function mapAddPopup() {
+  map.addEventListener(popupClick, function(event) {
+    let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
+      return feature;
+    }, {
+      hitTolerance: 2
+    });
+    if (feature) {
+      if (popupNode !== null) {
+        map.addOverlay(popup);
+        addOverlayPopup(feature);
+      }
+    } else {
+      map.removeOverlay(popup);
     }
-  } else {
-    map.removeOverlay(popup);
-  }
-});
+  })
+}
+mapAddPopup();
 
 function addOverlayPopup(feature) {
   let coords = feature.getGeometry().getCoordinates();
   let featuresProps = feature.getProperties();
   let domElement = popup.getElement();
-  domElement.querySelector('.card-content').innerHTML = `
-    <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
-    <span class="center card-title">${featuresProps.observation_type}</span>
-    <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
-    <p>${featuresProps.comments}</p>
-  `;
-  domElement.querySelector('.card-action').innerHTML = `
-    <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
-    <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
-  `;
+  if (typeof(featuresProps.observation_type) !== 'undefined') {
+    domElement.querySelector('.card-content').innerHTML = `
+      <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
+      <span class="center card-title">${featuresProps.observation_type}</span>
+      <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
+      <p>${featuresProps.comments}</p>
+    `;
+    domElement.querySelector('.card-action').innerHTML = `
+      <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
+      <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
+    `;
+  } else if (typeof(featuresProps.summary) !== 'undefined') {
+    coords = feature.getGeometry().getExtent();
+    domElement.querySelector('.card-content').innerHTML = `
+      <p class="center card-tally">${featuresProps.category}</p>
+      <span class="center card-title">${featuresProps.name}</span>
+      <p>${featuresProps.summary}</p>
+      <p><em>${featuresProps.start_date} - ${featuresProps.end_date}</em></p>
+    `;
+    domElement.querySelector('.card-action').innerHTML = `
+      <a href="/project/edit/${featuresProps.id}" class="disabled">Edit</a>
+      <a href="/project/delete/${featuresProps.id}" class="disabled">Delete</a>
+    `;
+  } else if (typeof(featuresProps.alert_type) !== 'undefined') {
+    domElement.querySelector('.card-content').innerHTML = `
+      <p class="center">${featuresProps}</p>
+    `;
+  }
   popup.setPosition(coords);
 }
 
