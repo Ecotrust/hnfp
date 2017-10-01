@@ -1,40 +1,60 @@
-var stamenWatercolor = new OpenLayers.Layer.XYZ( 'watercolor', [
-  'http://a.tile.stamen.com/watercolor/${z}/${x}/${y}.png',
-  'http://b.tile.stamen.com/watercolor/${z}/${x}/${y}.png',
-  'http://c.tile.stamen.com/watercolor/${z}/${x}/${y}.png',
-  'http://d.tile.stamen.com/watercolor/${z}/${x}/${y}.png'
-], {
-    attributions:'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL',
-    sphericalMercator: true,
-    wrapDateLine: true,
-    numZoomLevels: 18,
-    MAX_ZOOM_LEVEL: 17,
-});
+var initMap = function() {
+  console.log('now');
+  var watershedLayer = new ol.layer.Vector({
+    title: 'Watersheds',
+    source: new ol.source.Vector({
+      url: "/static/hnfp/js/data/watersheds.geojson",
+      format: new ol.format.GeoJSON()
+    }),
+    style: new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: '#ddd83d',
+        width: 1.6
+      }),
+      text: new ol.style.Text({
+        font: '8px function, serif',
+        text: 'hello',
+        fill: new ol.style.Fill({
+          color: '#666'
+        }),
+        stroke: new ol.style.Stroke({
+          color: '#fff',
+          width: 2
+        })
+      })
+    })
+  });
 
-var hereAerial = new OpenLayers.Layer.XYZ('Aerial', 'http://crossorigin.met/https://crossorigin.me/https://1.aerial.maps.api.here.com/maptile/2.1/maptile/newest/satellite.day/${z}/${x}/${y}/256/png8?surveyMap_id=p5jWgIultJxoVtXb03Xl&surveyMap_code=Cpj_I6Yx3J3yhVFE7aD12Q', {
-  isBaseLayer: true,
-  numZoomLevels: 20,
-  attribution: "Basemap by Here",
-  textColor: "white"
-});
+  var map = new ol.Map({
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      }),
+      watershedLayer
+    ],
+    target: 'map',
+    view: new ol.View({
+      center: [-135, 80],
+      zoom: 10
+    })
+  });
 
-var layer = new OpenLayers.Layer.Vector("watersheds", {
-  protocol: new OpenLayers.Protocol.HTTP({
-    url: "/js/data/watersheds.geojson",
-    format: new OpenLayers.Format.JSON()
-  })
-});
+  var layerSwitcher = new ol.control.LayerSwitcher({});
+  map.addControl(layerSwitcher);
 
-var surveyMap = {
-  init: function() {
-    new OpenLayers.Map('map', {
-      layers: [
-        stamenWatercolor,
-        hereAerial
-      ],
-      displayProjection: new OpenLayers.Projection("EPSG:4326"),
-      projection: "EPSG:3857",
-      zoomBox: new OpenLayers.Control.ZoomBox({})
+  var select = new ol.interaction.Select();
+  map.addInteraction(select);
+
+  var selectedFeatures = select.getFeatures();
+
+  selectedFeatures.on(['add', 'remove'], function() {
+    var names = selectedFeatures.getArray().map(function(feature) {
+      return feature.get('name');
     });
-  }
+    if (names.length > 0) {
+      infoBox.innerHTML = names.join(', ');
+    } else {
+      infoBox.innerHTML = 'No countries selected';
+    }
+  });
 };

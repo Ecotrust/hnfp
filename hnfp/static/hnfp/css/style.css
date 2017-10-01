@@ -163,13 +163,13 @@ h4 {
   font-size: 1.4375em;
 }
 h5 {
-  font-size: 1.3125em;
+  font-size: 1.25em;
 }
 h6 {
-  font-family: 'function', sans-serif;
+  font-family: 'function_bold', sans-serif;
   font-size: 1.125em;
   font-weight: normal;
-  margin: 0 0 .75em;
+  margin: 1rem 0;
 }
 
 strong {
@@ -456,12 +456,12 @@ nav .tabs .tab {
 }
 
 .logo-row img.responsive-img {
-  max-height: 120px;
+  max-height: 70px;
   margin-bottom: 1rem;
-  max-width: 150px;
+  max-width: 100px;
 }
 
-.logo-row img.hoonah-logo {
+.logo-row img.hoonah-logo.responsive-img {
   max-width: 200px;
 }
 
@@ -718,11 +718,29 @@ div.mapgroup {
   height: 320px;
   position: relative;
   max-height: 96vh;
+  width: 100%;
 }
 
 #map,
 #project-map {
   height: 100%;
+  width: 100%;
+}
+
+.survey-map #map-wrapper {
+  display: block;
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+.survey-map #map {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9999;
 }
 
 #map-panel h3 {
@@ -1317,7 +1335,7 @@ div.mapgroup {
   background-image: url('/static/hnfp/img/aurora.jpg');
   background-size: cover;
   background-attachment: local;
-  background-position: 50% 80%;
+  background-position: 50% 96%;
   bottom: -2%;
   left: -2%;
   right: -2%;
@@ -1336,7 +1354,8 @@ div.mapgroup {
 }
 
 .survey-wrap input:not(.browser-default) {
-  background: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.38);
+  color: #fafafa;
 }
 
 .survey-wrap *:focus {
@@ -1347,7 +1366,8 @@ div.mapgroup {
   color: #fff;
 }
 
-[type="radio"]:not(:checked) + label:before, [type="radio"]:not(:checked) + label:after {
+[type="radio"]:not(:checked) + label:before,
+[type="radio"]:not(:checked) + label:after {
   border: 2px solid #fff;
 }
 
@@ -1395,6 +1415,7 @@ div.mapgroup {
   opacity: 0;
   top: 12px;
   width: 18px;
+  z-index: 1;
 }
 
 .survey-wrap ul.stepper .step.done {
@@ -1444,9 +1465,14 @@ div.mapgroup {
   text-transform: none;
 }
 
+.step-actions .btn {
+  font-family: 'function_bold';
+  font-size: 1.3125em;
+}
+
 .step-actions .btn i {
-  font-size: 1.375em;
-  line-height: 1.8125;
+  font-size: 1.75em;
+  line-height: 1.5em;
 }
 
 .previous-step {
@@ -1459,12 +1485,27 @@ div.mapgroup {
 
 .survey-wrap input[type="checkbox"]:not(.filled-in) + label:after,
 [type="checkbox"].filled-in:not(:checked) + label:after {
+  background: #fff;
   border: 2px solid #fff;
 }
 
 .survey-wrap input[type="checkbox"] + label:before {
     border-bottom: 2px solid #fff;
     border-right: 2px solid #fff;
+}
+
+.survey-wrap .indent > .col {
+  margin-bottom: .75rem;
+}
+
+.indent span {
+  padding: 2px 6px 0;
+}
+
+.indent input[type=number] {
+
+  padding: 0 2px;
+  margin: 0 3px;
 }
 
 .survey-wrap .inline-label label {
@@ -1826,6 +1867,12 @@ path {
     position: absolute;
   }
 
+  .logo-row img.responsive-img {
+    max-height: 100px;
+    margin-bottom: 1rem;
+    max-width: 120px;
+  }
+
 }
 
 @media only screen and (min-width: 64em) {
@@ -1836,6 +1883,17 @@ path {
 
   main {
     font-size: 1em;
+  }
+
+  .login-form {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    max-width: 800px;
+  }
+
+  .step-content {
+    padding: 10px 0 40px 10px;
   }
 
   .dashboard .bg:after {
@@ -1877,6 +1935,7 @@ path {
 
   .step-actions {
     background: transparent !important;
+    margin: 1rem 0;
   }
 
   .weather-wrap.bg_green_light {

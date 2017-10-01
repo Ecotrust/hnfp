@@ -1,11 +1,12 @@
 {% extends "hnfp/index.html" %}
 {% load static %}
 
-{% block extra_head %}
+{% block extra_css %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'js/lib/openlayers/theme/default/style.css' %}">
   <link href="{% static 'hnfp/css/materialize_stepper.css' %}" rel="stylesheet">
-{% endblock extra_head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.css'%}">
+  <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
+{% endblock extra_css %}
 
 {% block outer_content %}
 <main>
@@ -57,7 +58,7 @@
 
       <form class="login-form" method="POST" action="/registered/" id="register-form">
         {% csrf_token %}
-        <ul class="stepper horizontal">
+        <ul class="stepper">
           <li class="step active">
             {% include './survey/survey_basic_info.html' %}
           </li>
@@ -70,16 +71,18 @@
           <li class="step">
             {% include './survey/survey_land_use_rank.html' %}
           </li>
-          <li class="step" data-event="surveyMap.init()">
+          <li class="step" data-event="initMap">
             <div class="step-title waves-effect">Regions &amp; Frequency</div>
             <div class="step-content">
               <h6>Which area(s) within the Hoonah Forest have you been to within the last year?</h6>
               <em>Select one region at a time and answer follow up questions</em>
               <br />
               <p>Coming Soon</p>
-              <div id="survey-map-wrapper">
-                <div id="survey-map"></div>
-              </div>
+              <section class="survey-map">
+                <div id="map-wrapper">
+                  <div id="map" class="map"></div>
+                </div>
+              </section>
               <div class="row">
                 {% include './survey/survey_actions.html' %}
               </div>
@@ -108,11 +111,17 @@
 </main>
 {% endblock outer_content %}
 
+
 {% block extra_js %}
   {{ block.super }}
-  <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
-  <script src="{% static 'hnfp/js/form_map.js' %}"></script>
-  <!-- form -->
-  <script src="{% static '/hnfp/js/materialize/materialize_stepper.js' %}"></script>
-  <script src="{% static '/hnfp/js/form.js' %}"></script>
+
+  {% block gmaps_api_call %}{% endblock %}
+  {% block custom_marco_ol3 %}{% endblock %}
+  {% block mp_js %}
+    <script src="{% static '/hnfp/js/materialize/materialize_stepper.js' %}"></script>
+    <script src="{% static '/hnfp/js/form.js' %}"></script>
+    <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
+    <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
+    <script src="{% static '/hnfp/js/form_map.js' %}"></script>
+  {% endblock mp_js %}
 {% endblock extra_js %}
