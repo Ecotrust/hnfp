@@ -940,7 +940,7 @@ div.mapgroup {
 #new-observation .card-action a,
 #new-alert-wrapper .card-action a,
 #new-project .card-action a,
-.survey-map .card-action a {
+.survey-map .card-action input {
     color: #5d85b7;
     cursor: pointer;
 }
@@ -960,6 +960,12 @@ div.mapgroup {
   font-size: 1.25em;
   margin: 0 8px;
   vertical-align: text-bottom;
+}
+
+.survey-map .card .card-content,
+.survey-map .card .card-content label,
+.survey-map .card .card-content input {
+  color: #2b384a;
 }
 
 #new-observation .cancel, #new-observation .next,
@@ -1439,6 +1445,7 @@ div.mapgroup {
 }
 
 .survey-wrap ul.stepper .step .step-title {
+  color: #d1d1d1;
   font-family: 'function_bold';
   font-size: 1.1875em;
   display: inline-block;

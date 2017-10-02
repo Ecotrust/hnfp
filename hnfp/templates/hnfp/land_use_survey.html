@@ -82,11 +82,17 @@
                 </div>
                 <div id="popup" class="card">
                   <div class="card-content waves-effect waves-block waves-light">
-                    <span class="card-title">In <span id="region-name"></span> how many times a year do you:</span>
-                    <input type="hidden" name="region" id="region" />
+                    <div class="region-wrap">
+                      <p>In <span id="region-name"></span> how many times a year do you:</p>
+                      <input type="hidden" id="region"  name="region" />
+                      <div class="input-field">
+                        <input type="number" id="regiontally" name="regiontally" />
+                        <label for="regiontally">tally</label>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card-action"></div>
                 </div>
+                <div class="region-totals"></div>
               </section>
               <div class="row">
                 {% include './survey/survey_actions.html' %}

@@ -46,6 +46,9 @@ var initMap = function() {
   var popupNode = document.getElementById('popup');
   var popup = new ol.Overlay({
     element: popupNode,
+    positioning: 'center',
+    offset: [0,0],
+    autoPan: true,
   });
 
   var select = new ol.interaction.Select();
@@ -58,23 +61,15 @@ var initMap = function() {
       return feature;
     });
     map.addOverlay(popup);
-    addOverlayPopup(feature);
-    $('#region-name').text(feature);
-    $('#region').val(feature);
+    addOverlayPopup(feature[0]);
   });
 
   function addOverlayPopup(feature) {
-    console.log(feature);
     let coords = feature.getGeometry().getExtent();
     let featuresProps = feature.getProperties();
     let domElement = popup.getElement();
-    domElement.querySelector('.card-content').innerHTML = `
-      <span class="center card-title">${featuresProps.NAME}</span>
-      <input type="number" id="regiontally" name="regiontally" />
-    `;
-    domElement.querySelector('.card-action').innerHTML = `
-
-    `;
+    survey.setRegionValue(featuresProps, domElement);
     popup.setPosition(coords);
+    survey.watchRegionTally();
   }
 };
