@@ -33,12 +33,14 @@ $(document).ready( function() {
 
   $('#submit-form').on( 'click', function(e) {
     e.preventDefault();
-    let form = document.getElementById('register-form');
-    let $form = $(form).serialize();
+    let surveyform = document.getElementById('register-form');
+    let surveyformData = new FormData( surveyform );
     $.ajax({
-      type: 'POST',
       url: '/save_survey/',
-      data: $form,
+      method: 'POST',
+      data: surveyformData,
+      contentType: false,
+      processData: false,
       success: function(data) {
         window.location.pathname = '/registered/';
       },
