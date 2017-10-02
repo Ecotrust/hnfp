@@ -23,8 +23,8 @@ $(document).ready( function() {
       success: function(data) {
         console.log('success');
       },
-      error: function() {
-        console.log(data);
+      error: function(error) {
+        console.log(error);
       }
     }).done( function(res) {
       // console.log(res);
@@ -35,7 +35,7 @@ $(document).ready( function() {
     e.preventDefault();
     let form = document.getElementById('register-form');
     let $form = $(form).serialize();
-    return $.ajax({
+    $.ajax({
       type: 'POST',
       url: '/save_survey/',
       data: $form,

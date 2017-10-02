@@ -97,7 +97,7 @@ def survey(request):
         survey = Survey.objects.order_by('id')[0]
     else:
         survey = 'not yet ready'
-        
+
     form = ResponseForm(survey=survey)
 
     context = {
@@ -109,8 +109,6 @@ def survey(request):
 
 def save_survey(request):
     if request.method == 'POST':
-        form = ResponseForm(request.POST, survey=survey)
-
         forest_use = request.POST['forest_use']
         rank_hunt = request.POST['rank_hunt']
         rank_gather_herbs = request.POST['rank_gather_herbs']
