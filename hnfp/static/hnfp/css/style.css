@@ -924,33 +924,38 @@ div.mapgroup {
 
 #new-observation .card,
 #new-alert-wrapper .card,
-#new-project .card {
+#new-project .card,
+.survey-map .card {
   background: #e4efee;
   margin-top: 0;
 }
 
 #new-observation .card-action,
 #new-alert-wrapper .card-action,
-#new-project .card-action {
+#new-project .card-action,
+.survey-map .card-action {
   padding: 16px;
 }
 
 #new-observation .card-action a,
 #new-alert-wrapper .card-action a,
-#new-project .card-action a {
+#new-project .card-action a,
+.survey-map .card-action a {
     color: #5d85b7;
     cursor: pointer;
 }
 
 #new-observation .card-action a:last-of-type,
 #new-alert-wrapper .card-action a:last-of-type,
-#new-project .card-action a:last-of-type {
+#new-project .card-action a:last-of-type,
+.survey-map .card-action a:last-of-type {
   margin-right: 0;
 }
 
 #new-observation .card-action i,
 #new-alert-wrapper .card-action i,
-#new-project .card-action i {
+#new-project .card-action i,
+.survey-map .card-action i {
   display: inline-block;
   font-size: 1.25em;
   margin: 0 8px;

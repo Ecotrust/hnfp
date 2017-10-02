@@ -71,16 +71,21 @@
           <li class="step">
             {% include './survey/survey_land_use_rank.html' %}
           </li>
-          <li class="step" data-event="initMap">
+          <li class="step">
             <div class="step-title waves-effect">Regions &amp; Frequency</div>
             <div class="step-content">
               <h6>Which area(s) within the Hoonah Forest have you been to within the last year?</h6>
               <em>Select one region at a time and answer follow up questions</em>
-              <br />
-              <p>Coming Soon</p>
               <section class="survey-map">
                 <div id="map-wrapper">
                   <div id="map" class="map"></div>
+                </div>
+                <div id="popup" class="card">
+                  <div class="card-content waves-effect waves-block waves-light">
+                    <span class="card-title">In <span id="region-name"></span> how many times a year do you:</span>
+                    <input type="hidden" name="region" id="region" />
+                  </div>
+                  <div class="card-action"></div>
                 </div>
               </section>
               <div class="row">

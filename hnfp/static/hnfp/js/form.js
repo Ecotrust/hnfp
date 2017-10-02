@@ -1,5 +1,11 @@
 $(document).ready( function() {
-  $('.stepper').activateStepper();
+  $('.stepper').activateStepper({
+    autoFocusInput: true,
+  });
+
+  $('.stepper').on('step5', function() {
+    initMap();
+  });
 });
 
 $('#btn-register').on( 'click', function() {
@@ -18,7 +24,7 @@ $('#btn-register').on( 'click', function() {
       console.log('return error, but account may have been created');
     }
   }).done( function(res) {
-    console.log(res);
+    // console.log(res);
   });
 });
 
