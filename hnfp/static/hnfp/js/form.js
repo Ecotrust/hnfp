@@ -37,17 +37,17 @@ $(document).ready( function() {
     let $form = $(form).serialize();
     return $.ajax({
       type: 'POST',
-      url : '/save_survey/',
-      data : $form,
+      url: '/save_survey/',
+      data: $form,
       success: function(data) {
         window.location.pathname = '/registered/';
       },
-      error: function() {
-        console.log(data);
+      error: function(error) {
+        console.log(error);
         window.location.pathname = '/registered/';
       }
     }).done( function(res) {
-      // console.log(res);
+      console.log(res);
     });
   });
 });
