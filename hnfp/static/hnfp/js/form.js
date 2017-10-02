@@ -1,7 +1,5 @@
+$('.stepper').activateStepper({});
 $(document).ready( function() {
-  $('.stepper').activateStepper({
-    autoFocusInput: true,
-  });
 
   let step5Check = 0;
   $('.stepper').on('step5', function() {
@@ -31,25 +29,21 @@ $(document).ready( function() {
     });
   });
 
-  $('#submit-form').on( 'click', function(e) {
-    e.preventDefault();
-    let surveyform = document.getElementById('register-form');
-    let surveyformData = new FormData( surveyform );
-    $.ajax({
+  $('#register-form').submit(function(event) {
+    event.preventDefault();
+    let $regform = $(event.target).serialize();
+    return $.ajax({
+      type: 'POST',
       url: '/save_survey/',
-      method: 'POST',
-      data: surveyformData,
-      contentType: false,
-      processData: false,
+      data: $regform,
       success: function(data) {
+        console.log(data);
         window.location.pathname = '/registered/';
       },
       error: function(error) {
         console.log(error);
         window.location.pathname = '/registered/';
       }
-    }).done( function(res) {
-      console.log(res);
     });
   });
 });

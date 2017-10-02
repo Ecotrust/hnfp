@@ -124,6 +124,12 @@ class SurveyResults(models.Model):
 		null=True,
 	)
 
+	class Meta:
+		verbose_name_plural = 'Survey Responses'
+
+	def __unicode__(self):
+		return (self.id)
+
 	def get_survey_results():
 		return SurveyResults.objects.all()
 

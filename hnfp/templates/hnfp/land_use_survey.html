@@ -39,8 +39,7 @@
   </section>
   <section class="section survey-wrap">
     <div class="container">
-      
-      <form class="login-form" method="POST" action="/registered/" id="register-form">
+      <form class="login-form" method="POST" action="/save_survey/" id="register-form">
         {% csrf_token %}
         <ul class="stepper">
           <li class="step active">
@@ -95,14 +94,14 @@
             <div class="step-content">
               <div class="row">
                 <div class="step-actions col s12 l6">
-                  <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit">Finish &amp; Submit</button>
+                  <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit" onclick="$('.stepper').submitStepper()">Finish &amp; Submit</button>
                 </div>
               </div>
             </div>
           </li>
         </ul>
-      </div>
-    </form>
+      </form>
+    </div>
   </section>
 </main>
 {% endblock outer_content %}

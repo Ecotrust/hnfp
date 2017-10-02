@@ -22,7 +22,7 @@ from accounts import views
 # from captcha.fields import ReCaptchaField
 
 # survey
-from hnfp.models import Question, Survey, Category, PublicManager, SurveyResults
+from hnfp.models import Question, Survey, Category, SurveyResults
 from hnfp.forms import ResponseForm
 # forum, jobs, alert, observation
 from hnfp.models import Post, JobOpportunity, Alert, Observation

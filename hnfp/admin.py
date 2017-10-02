@@ -3,7 +3,7 @@ from django.contrib.gis import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from features.registry import register
-from hnfp.models import Post, PublicManager, Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple, AOI, JobOpportunity, Observation, Alert, LandUseProject, Resource, ImpactType, ProjectResourceImpact
+from hnfp.models import Post, PublicManager, Question, Category, Survey, SurveyResults, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple, AOI, JobOpportunity, Observation, Alert, LandUseProject, Resource, ImpactType, ProjectResourceImpact
 
 # Blog posts for forum
 @admin.register(Post)
@@ -72,7 +72,7 @@ class LandUseProjectAdmin(admin.OSMGeoAdmin):
 # admin.site.register(Question, QuestionInline)
 # admin.site.register(Category, CategoryInline)
 admin.site.register(Survey, SurveyAdmin)
-admin.site.register(Response, ResponseAdmin)
+# admin.site.register(Response, ResponseAdmin)
 admin.site.register(JobOpportunity)
 admin.site.register(Observation, ObservationAdmin)
 admin.site.register(Alert, AlertAdmin)
@@ -80,3 +80,4 @@ admin.site.register(LandUseProject, LandUseProjectAdmin)
 admin.site.register(Resource)
 admin.site.register(ImpactType)
 admin.site.register(ProjectResourceImpact)
+admin.site.register(SurveyResults)
