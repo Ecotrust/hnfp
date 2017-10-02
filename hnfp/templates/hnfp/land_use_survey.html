@@ -39,23 +39,7 @@
   </section>
   <section class="section survey-wrap">
     <div class="container">
-
-      <!-- survey form needs to be finished
-      <form action="/survey/{{survey.id}}/" method="post">
-        {% csrf_token %}
-        <ul class="stepper horizontal">
-          <li class="step active">
-    			{% for field in response_form %}
-    				<div class="field-wrapper">
-    					{{ field.errors }}
-    					<label class="label-inline">{{ field.label }}</label>
-              {{ field }}
-    				</div>
-			    {% endfor %}
-          </li>
-			    </ul>
-      </form> -->
-
+      
       <form class="login-form" method="POST" action="/registered/" id="register-form">
         {% csrf_token %}
         <ul class="stepper">
@@ -83,11 +67,12 @@
                 <div id="popup" class="card">
                   <div class="card-content waves-effect waves-block waves-light">
                     <div class="region-wrap">
-                      <p>In <span id="region-name"></span> how many times a year do you:</p>
+                      <p class="card-title"><span id="region-name"></span></p>
+                      <p><strong>How many times did you visit this region:</strong></p>
                       <input type="hidden" id="region"  name="region" />
                       <div class="input-field">
                         <input type="number" id="regiontally" name="regiontally" />
-                        <label for="regiontally">tally</label>
+                        <label for="regiontally">Visits</label>
                       </div>
                     </div>
                   </div>

@@ -334,6 +334,19 @@ nav .tabs .tab {
   text-align: left;
 }
 
+#nav-mobile li:first-of-type a {
+  font-size: .75em;
+  height: auto;
+  overflow: hidden;
+  padding: 0 16px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#nav-mobile li:first-of-type > a > i {
+  margin-right: 16px;
+}
+
 /*--------------------
   home
   --------------------*/
@@ -730,7 +743,7 @@ div.mapgroup {
 .survey-map #map-wrapper {
   display: block;
   position: relative;
-  height: 400px;
+  height: 480px;
   width: 100%;
 }
 
@@ -796,6 +809,24 @@ div.mapgroup {
   top: 0;
   width: 100%;
 }
+
+.survey-map .card {
+  max-width: 280px;
+}
+
+.survey-map .card input {
+
+}
+
+.survey-map .card .card-content,
+.survey-map .card .card-content label,
+.survey-map .card .card-content input {
+  color: #2b384a;
+}
+
+/* =========
+  Map
+  ========== */
 
 #map div.olControlZoom,
 #project-map div.olControlZoom {
@@ -960,12 +991,6 @@ div.mapgroup {
   font-size: 1.25em;
   margin: 0 8px;
   vertical-align: text-bottom;
-}
-
-.survey-map .card .card-content,
-.survey-map .card .card-content label,
-.survey-map .card .card-content input {
-  color: #2b384a;
 }
 
 #new-observation .cancel, #new-observation .next,
@@ -1400,6 +1425,7 @@ div.mapgroup {
 
 .survey-wrap .inline {
   display: inline-block;
+  margin: 0 5px;
 }
 
 .step.active,

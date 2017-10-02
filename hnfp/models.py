@@ -59,6 +59,74 @@ class Post(models.Model):
 							   'slug': self.slug})
 
 # registration survey
+class SurveyResults(models.Model):
+	FORESTS_USE_CHOICES = (
+		('Hunt', 'hunt_deer'),
+		('Gather Herbs', 'gather_herbs'),
+		('Fish', 'fish'),
+		('Collect Berries', 'collect_berries'),
+		('Gather Mushrooms', 'gather_mushrooms'),
+		('Collect Firewood', 'collect_firewood'),
+	)
+	forest_use = models.CharField(
+		max_length=400,
+		choices=FORESTS_USE_CHOICES,
+		blank=True,
+		null=True
+	)
+
+	rank_hunt = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+	rank_gather_herbs = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+	rank_fish = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+	rank_collect_berries = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+	rank_gather_mushrooms = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+	rank_collect_firewood = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+
+	gender = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+
+	employment_forest_dependent = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+
+	occupation = models.CharField(
+		max_length=400,
+		blank=True,
+		null=True,
+	)
+
+	def get_survey_results():
+		return SurveyResults.objects.all()
+
 class Survey(models.Model):
 	name = models.CharField(max_length=400)
 	description = models.TextField()

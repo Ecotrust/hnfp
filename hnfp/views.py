@@ -22,7 +22,7 @@ from accounts import views
 # from captcha.fields import ReCaptchaField
 
 # survey
-from hnfp.models import Question, Survey, Category, PublicManager
+from hnfp.models import Question, Survey, Category, PublicManager, SurveyResults
 from hnfp.forms import ResponseForm
 # forum, jobs, alert, observation
 from hnfp.models import Post, JobOpportunity, Alert, Observation
@@ -57,6 +57,7 @@ def registering(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         password = request.POST['password']
+        phone = request.POST['phone']
         username = email
 
         if get_user_model().objects.filter(username=username).exists():
@@ -96,19 +97,46 @@ def survey(request):
         survey = Survey.objects.order_by('id')[0]
     else:
         survey = 'not yet ready'
+        
+    form = ResponseForm(survey=survey)
 
-    if request.method == 'POST':
-        form = ResponseForm(request.POST, survey=survey)
-        if form.is_valid():
-            response = form.save()
-    else:
-        form = ResponseForm(survey=survey)
     context = {
         'page': 'survey',
         'response_form': form,
         'survey': survey,
     }
     return HttpResponse(template.render(context, request))
+
+def save_survey(request):
+    if request.method == 'POST':
+        form = ResponseForm(request.POST, survey=survey)
+
+        forest_use = request.POST['forest_use']
+        rank_hunt = request.POST['rank_hunt']
+        rank_gather_herbs = request.POST['rank_gather_herbs']
+        rank_fish = request.POST['rank_fish']
+        rank_collect_berries = request.POST['rank_collect_berries']
+        rank_gather_mushrooms = request.POST['rank_gather_mushrooms']
+        rank_collect_firewood = request.POST['rank_collect_firewood']
+        gender = request.POST['gender']
+        employment_forest_dependent = request.POST['employment_forest_dependent']
+        occupation = request.POST['occupation']
+
+        newRespose = SurveyResults(
+            forest_use=forest_use,
+            rank_hunt=rank_hunt,
+            rank_gather_herbs=rank_gather_herbs,
+            rank_fish=rank_fish,
+            rank_collect_berries=rank_collect_berries,
+            rank_gather_mushrooms=rank_gather_mushrooms,
+            rank_collect_firewood=rank_collect_firewood,
+            gender=gender,
+            employment_forest_dependent=employment_forest_dependent,
+            occupation=occupation,
+        );
+        newRespose.save()
+
+        return JsonResponse(newRespose, safe=False)
 
 def registered(request):
     template = loader.get_template('hnfp/welcome_steward.html')

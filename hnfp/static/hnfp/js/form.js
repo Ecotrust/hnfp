@@ -24,7 +24,7 @@ $(document).ready( function() {
         console.log('success');
       },
       error: function() {
-        console.log('return error, but account may have been created');
+        console.log(data);
       }
     }).done( function(res) {
       // console.log(res);
@@ -33,7 +33,22 @@ $(document).ready( function() {
 
   $('#submit-form').on( 'click', function(e) {
     e.preventDefault();
-    window.location.pathname = '/registered/';
+    let form = document.getElementById('register-form');
+    let $form = $(form).serialize();
+    return $.ajax({
+      type: 'POST',
+      url : '/save_survey/',
+      data : $form,
+      success: function(data) {
+        window.location.pathname = '/registered/';
+      },
+      error: function() {
+        console.log(data);
+        window.location.pathname = '/registered/';
+      }
+    }).done( function(res) {
+      // console.log(res);
+    });
   });
 });
 
