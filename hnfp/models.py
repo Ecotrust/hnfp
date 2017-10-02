@@ -67,6 +67,7 @@ class SurveyResults(models.Model):
 		('Collect Berries', 'collect_berries'),
 		('Gather Mushrooms', 'gather_mushrooms'),
 		('Collect Firewood', 'collect_firewood'),
+		('Other/None', 'other'),
 	)
 	forest_use = models.CharField(
 		max_length=400,
@@ -121,8 +122,15 @@ class SurveyResults(models.Model):
 	occupation = models.CharField(
 		max_length=400,
 		blank=True,
-		null=True,
+		null=True
 	)
+
+	def get_forest_uses():
+		uses = SurveyResults.FORESTS_USE_CHOICES
+		uses_list = []
+		for use in uses:
+			uses_list.append(use[0])
+		return uses_list
 
 	class Meta:
 		verbose_name_plural = 'Survey Responses'

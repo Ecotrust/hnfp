@@ -31,20 +31,24 @@ $(document).ready( function() {
 
   $('#register-form').submit(function(event) {
     event.preventDefault();
-    let $regform = $(event.target).serialize();
-    return $.ajax({
+    $regform = $(event.target).serialize();
+    console.log($regform);
+    $.ajax({
       type: 'POST',
       url: '/save_survey/',
       data: $regform,
       success: function(data) {
-        console.log(data);
+        console.log('no');
         window.location.pathname = '/registered/';
       },
-      error: function(error) {
-        console.log(error);
+      error: function(error,err) {
+        console.log(err);
         window.location.pathname = '/registered/';
       }
-    });
+    })
+    .done(function(d) {
+      console.log(d);
+    })
   });
 });
 

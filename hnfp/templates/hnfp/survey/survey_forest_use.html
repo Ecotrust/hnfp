@@ -4,29 +4,14 @@
   <p><em>Select ALL that apply</em></p>
   <br />
   <div class="row indent">
-    <div class="col s6 l5">
-      <input type="checkbox" class="filled-in" id="hunt" name="forest_use" value="hunt_deer" />
-      <label for="hunt">Hunt Deer</label>
-    </div>
-    <div class="col s6 l5">
-      <input type="checkbox" class="filled-in" id="gather_herbs" name="forest_use" value="gather_herbs"/>
-      <label for="gather_herbs">Gather Medicinal Herbs</label>
-    </div>
-    <div class="col s6 l5">
-      <input type="checkbox" class="filled-in" id="fish" name="forest_use" value="fish" />
-      <label for="fish">Fish</label>
-    </div>
-    <div class="col s6 l5">
-      <input type="checkbox" class="filled-in" id="berries" name="forest_use" value="collect_berries" />
-      <label for="berries">Collect Berries</label>
-    </div>
-    <div class="col s6 l7">
-      <input type="checkbox" class="filled-in" id="mushrooms" name="forest_use" value="gather_mushrooms" />
-      <label for="mushrooms">Gather Mushrooms</label>
-    </div>
-    <div class="col s6 l7">
-      <input type="checkbox" class="filled-in" id="firewood" name="forest_use" value="collect_firewood"/>
-      <label for="firewood">Collect Firewood</label>
-    </div>
-  {% include './survey_actions.html' %}
+    {% for use in uses_list %}
+      <div class="col s6 l5">
+        <input type="checkbox" class="filled-in" id="{{ use }}" name="forest_use" value="{{ use }}" required/>
+        <label for="{{ use }}">{{ use }}</label>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="row indent">
+    {% include './survey_actions.html' %}
+  </div>
 </div>

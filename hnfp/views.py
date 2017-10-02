@@ -92,6 +92,7 @@ def registering(request):
 
 def survey(request):
     template = loader.get_template('hnfp/land_use_survey.html')
+    uses_list = SurveyResults.get_forest_uses()
 
     if Survey.objects.all():
         survey = Survey.objects.order_by('id')[0]
@@ -104,6 +105,7 @@ def survey(request):
         'page': 'survey',
         'response_form': form,
         'survey': survey,
+        'uses_list': uses_list,
     }
     return HttpResponse(template.render(context, request))
 
@@ -134,7 +136,7 @@ def save_survey(request):
         );
         newRespose.save()
 
-        return JsonResponse(newRespose, safe=False)
+        return HttpResponse(newRespose, content_type='application/x-javascript', status=200)
 
 def registered(request):
     template = loader.get_template('hnfp/welcome_steward.html')
