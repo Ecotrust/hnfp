@@ -7,8 +7,8 @@ from django.template import loader, RequestContext
 from django.db import models
 from django.contrib.auth.models import User
 # from django.core.urlresolvers import reverse
-from django.contrib.auth import get_user_model, authenticate, login
-
+from django.contrib.auth import get_user_model, authenticate
+from django.contrib.auth import login as auth_login
 # Accouts
 from accounts.actions import apply_user_permissions, send_password_reset_email, send_social_auth_provider_login_email, generate_username
 from accounts.models import EmailVerification, UserData, PasswordDictionary
@@ -50,8 +50,6 @@ def home(request):
     return HttpResponse(template.render(context, request))
 
 def registering(request):
-    User = get_user_model()
-
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -60,33 +58,33 @@ def registering(request):
         phone = request.POST['phone']
         username = email
 
-        if get_user_model().objects.filter(username=username).exists():
-            return render(request, 'accounts/registration_error.html')
+        new_user = User(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+        )
 
-        user, created = get_user_model().objects.get_or_create(username=username)
-        if not created:
-            return render(request, 'accounts/registration_error.html')
+        if not User.objects.filter(username=username).exists():
 
-        user.is_active = True
-        user.set_password(password)
-        user.email = email
-        user.save()
+            user, created = User.objects.get_or_create(username=username)
+            if not created:
+                return render(request, 'dashboard.html')
 
-        user.userdata.real_name = first_name + last_name
-        user.userdata.preferred_name = first_name + last_name
-        user.userdata.save()
-
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
+            user.is_active = True
+            user.set_password(password)
+            user.email = email
+            user.save()
             apply_user_permissions(user)
-            return HttpResponse(user, content_type="application/json")
-        else:
-            return render(request, 'accounts/login.html')
+
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    auth_login(request, user)
+                    return HttpResponse({}, content_type='application/x-javascript', status=200)
     else:
         template = loader.get_template('hnfp/land_use_survey.html')
         context = {
-            'page': 'survey fail',
+            'page': 'survey',
         }
         return HttpResponse(template.render(context, request))
 
