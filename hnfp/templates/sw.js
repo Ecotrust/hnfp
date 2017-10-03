@@ -36,20 +36,16 @@ self.addEventListener('activate', function(event) {
   return self.clients.claim();
 });
 
-self.addEventListener('fetch', function(event) {
+/* self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function(response) {
       return response || fetch(event.request);
     })
   );
-});
+}); */
 
-self.addEventListener('sync', function(event) {
-  self.registration.showNotification("Sync event fired!");
-});
-
-self.addEventListener('push', function(event) {
-  /* if (event.data.text() == 'new-alert') {
+/* self.addEventListener('push', function(event) {
+  if (event.data.text() == 'new-alert') {
     event.waitUntil(
       caches.open('alerts').then(function(cache) {
         return fetch('/alerts.json').then(function(response) {
@@ -62,12 +58,12 @@ self.addEventListener('push', function(event) {
         });
       })
     );
-  } */
-});
+  }
+}); */
 
-self.addEventListener('notificationclick', function(event) {
-  /* if (event.notification.tag == 'new-alert') {
+/* self.addEventListener('notificationclick', function(event) {
+  if (event.notification.tag == 'new-alert') {
     // Assume that all of the resources needed to render /alert/ have previously been cached, e.g. as part of the install handler.
     new WindowClient('/dashboard/');
-  } */
-});
+  }
+}); */
