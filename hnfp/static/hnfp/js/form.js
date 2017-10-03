@@ -32,7 +32,6 @@ $(document).ready( function() {
   $('#register-form').submit(function(event) {
     event.preventDefault();
     $regform = $(event.target).serialize();
-    console.log($regform);
     $.ajax({
       type: 'POST',
       url: '/save_survey/',
@@ -54,6 +53,9 @@ $(document).ready( function() {
 
 var survey = {
   regionTallyTotal: [],
+  setTallyTotal: function() {
+    $('#regional-totals').val(JSON.stringify(survey.regionTallyTotal));
+  },
   setRegionValue: function(regionProps, element) {
     $('#region-name').text(regionProps.NAME);
     $('#region').val(regionProps.NAME);
@@ -63,13 +65,23 @@ var survey = {
       let $region = $('#region').val(),
           $tally = $('#regiontally').val(),
           $totals = $('.region-totals');
-      if ($tally !== '') {
-        let $newRegion = {
-          'region': $region,
-          'total': $tally
+
+      for (let r of survey.regionTallyTotal) {
+        if (r['region'] == $region) {
+          r['total'] = $tally;
+          // set tally total
+          survey.setTallyTotal();
+          return;
         }
-        survey.regionTallyTotal.push($newRegion);
       }
+
+      let $newRegion = {
+        'region': $region,
+        'total': $tally
+      }
+      survey.regionTallyTotal.push($newRegion);
+      // set tally total
+      survey.setTallyTotal();
   },
   watchRegionTally: function() {
     $('#regiontally').blur(function() {

@@ -811,17 +811,49 @@ div.mapgroup {
 }
 
 .survey-map .card {
+  min-width: 240px;
   max-width: 280px;
 }
 
-.survey-map .card input {
+.survey-map .card .card-title {
+  font-size: 1.25em;
+}
 
+.survey-map .card input:not(.browser-default) {
+  background: #fff;
+  width: auto;
 }
 
 .survey-map .card .card-content,
 .survey-map .card .card-content label,
 .survey-map .card .card-content input {
   color: #2b384a;
+}
+
+.survey-wrap .layer-switcher.shown {
+  bottom: auto;
+}
+
+.survey-wrap .layer-switcher .panel {
+  border: none;
+  background: transparent;
+}
+
+.survey-wrap .layer-switcher.shown ul {
+  padding: 1.5rem;
+}
+
+.survey-wrap .layer-switcher input[type="checkbox"] + label {
+  color: #2b384a;
+}
+
+.survey-wrap .layer-switcher input[type="checkbox"]:not(:checked) + label:before {
+  border-color: #2b384a;
+}
+
+.survey-wrap .layer-switcher input[type="checkbox"]:checked + label:before {
+  border-bottom-color: #57a6a2;
+  border-right-color: #57a6a2;
 }
 
 /* =========
@@ -1907,6 +1939,11 @@ path {
     height: 520px;
     max-height: none;
     position: absolute;
+  }
+
+  .dashboard #map-panel {
+    height: 400px;
+    max-height: none;
   }
 
   .logo-row img.responsive-img {

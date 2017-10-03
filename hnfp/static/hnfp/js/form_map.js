@@ -46,7 +46,6 @@ var initMap = function() {
   var popupNode = document.getElementById('popup');
   var popup = new ol.Overlay({
     element: popupNode,
-    positioning: 'center',
     offset: [0,0],
     autoPan: true,
   });

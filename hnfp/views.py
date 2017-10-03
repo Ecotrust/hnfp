@@ -121,6 +121,7 @@ def save_survey(request):
         gender = request.POST['gender']
         employment_forest_dependent = request.POST['employment_forest_dependent']
         occupation = request.POST['occupation']
+        regiontally = request.POST['regional-totals']
 
         newRespose = SurveyResults(
             forest_use=forest_use,
@@ -133,6 +134,7 @@ def save_survey(request):
             gender=gender,
             employment_forest_dependent=employment_forest_dependent,
             occupation=occupation,
+            regiontally=regiontally,
         );
         newRespose.save()
 

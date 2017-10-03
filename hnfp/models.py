@@ -125,6 +125,12 @@ class SurveyResults(models.Model):
 		null=True
 	)
 
+	regiontally = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+
 	def get_forest_uses():
 		uses = SurveyResults.FORESTS_USE_CHOICES
 		uses_list = []
