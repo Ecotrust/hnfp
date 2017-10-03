@@ -549,7 +549,7 @@ class LandUseProject(models.Model):
 		blank=True,
 	)
 
-	projectResourceImpact = models.ForeignKey('ProjectResourceImpact', default=1)
+	# projectResourceImpact = models.ForeignKey('ProjectResourceImpact', default=1)
 
 	dollar_costs = models.CharField(
 		max_length=4000,
