@@ -6,8 +6,6 @@ var urlsToCache = [
   '/static/hnfp/css/style.css',
   '/static/hnfp/css/openlayers/ol.css',
   '/static/hnfp/css/openlayers/layerswitcher.css',
-  '/static/hnfp/img/touch/homescreen144.png',
-  '/static/hnfp/img/icons/i_berries.svg',
   '/static/bower_components/jquery/dist/jquery.js',
   '/static/hnfp/js/materialize/materialize.min.js',
   '/static/hnfp/js/alerts.js',

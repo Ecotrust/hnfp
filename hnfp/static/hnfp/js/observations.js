@@ -3,6 +3,7 @@ $(document).ready(function() {
   $('#add-observation-btn').click(function(event) {
     observations.initNew();
   });
+  observations.geolocateTracking();
 });
 
 $newObservationWrapper = $('#new-observation');
@@ -114,5 +115,8 @@ var observations = {
         $drawingForm.prepend(error);
       }
     });
+  },
+  geolocateTracking: function() {
+    trackLocation('track');
   }
 };

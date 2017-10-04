@@ -497,3 +497,52 @@ function hideLocation() {
 function showLocation() {
   locLayer.setVisible(true);
 }
+
+function trackLocation(trackId) {
+
+  let location = new ol.Geolocation({
+    projection: mapView.getProjection()
+  });
+
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  el(trackId).addEventListener('change', function() {
+    location.setTracking(this.checked);
+  });
+
+  location.on('error', function(error) {
+    var info = document.getElementById('info');
+    info.innerHTML = error.message;
+    info.style.display = '';
+  });
+
+  var positionFeature = new ol.Feature();
+  positionFeature.setStyle(new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 6,
+      fill: new ol.style.Fill({
+        color: '#3399CC'
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#fff',
+        width: 2
+      })
+    })
+  }));
+
+  location.on('change:position', function() {
+    var coordinates = location.getPosition();
+    positionFeature.setGeometry(coordinates ?
+      new ol.geom.Point(coordinates) : null);
+  });
+
+  new ol.layer.Vector({
+    map: map,
+    source: new ol.source.Vector({
+      features: positionFeature
+    })
+  });
+
+}

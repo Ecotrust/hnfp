@@ -55,15 +55,17 @@ function addProjectToMap(data) {
   vectorSource.addFeature(newPoly);
   newPoly.setGeometry(new ol.geom.Polygon(geo.coordinates));
   newPoly.setStyle(polygonStyle)
-  newPoly.setProperties({
-    'id': all_projects[i].id,
-    'area': all_projects[i].area,
-    'name': all_projects[i].name,
-    'category': all_projects[i].category,
-    'summary': all_projects[i].summary,
-    'start_date': all_projects[i].start_date,
-    'end_date': all_projects[i].end_date,
-  });
+  if (typeof(all_projects[i]) !== 'undefined') {
+    newPoly.setProperties({
+      'id': all_projects[i].id,
+      'area': all_projects[i].area,
+      'name': all_projects[i].name,
+      'category': all_projects[i].category,
+      'summary': all_projects[i].summary,
+      'start_date': all_projects[i].start_date,
+      'end_date': all_projects[i].end_date,
+    });
+  }
   console.log(newPoly);
 }
 
@@ -104,17 +106,12 @@ let harvestStandAge = new ol.layer.Vector({
     })
   }),
   style: function(feature, resolution) {
-    let color = feature.getProperties().color;
-    let lowner = '';
-    if (resolution < 75) {
-      lowner = feature.getProperties();
-    }
     return new ol.style.Style({
       fill: new ol.style.Fill({
         color: '#000'
       }),
       text: new ol.style.Text({
-        text: lowner,
+        text: '',
         align: 'center',
         fill: new ol.style.Fill({
           color: '#000'
@@ -159,17 +156,12 @@ let harvestTreatment = new ol.layer.Vector({
     format: new ol.format.GeoJSON()
   }),
   style: function(feature, resolution) {
-    let color = feature.getProperties().color;
-    let lowner = '';
-    if (resolution < 75) {
-      lowner = feature.getProperties();
-    }
     return new ol.style.Style({
       fill: new ol.style.Fill({
         color: '#aabbff'
       }),
       text: new ol.style.Text({
-        text: lowner,
+        text: 'none',
         align: 'center',
         fill: new ol.style.Fill({
           color: '#000'
@@ -236,17 +228,12 @@ let hoonahProjectBoundary = new ol.layer.Vector({
     format: new ol.format.GeoJSON()
   }),
   style: function(feature, resolution) {
-    let color = feature.getProperties().color;
-    let lowner = '';
-    if (resolution < 75) {
-      lowner = feature.getProperties();
-    }
     return new ol.style.Style({
       fill: new ol.style.Fill({
         color: '#00ffff'
       }),
       text: new ol.style.Text({
-        text: lowner,
+        text: 'bound',
         align: 'center',
         fill: new ol.style.Fill({
           color: '#000'
@@ -292,17 +279,12 @@ let watersheds = new ol.layer.Vector({
     format: new ol.format.GeoJSON()
   }),
   style: function(feature, resolution) {
-    let color = feature.getProperties().color;
-    let lowner = '';
-    if (resolution < 75) {
-      lowner = feature.getProperties();
-    }
     return new ol.style.Style({
       fill: new ol.style.Fill({
         color: '#aa00ff'
       }),
       text: new ol.style.Text({
-        text: lowner,
+        text: 'watershed',
         align: 'center',
         fill: new ol.style.Fill({
           color: '#000'
@@ -325,18 +307,17 @@ let salmonStreams = new ol.layer.Vector({
     format: new ol.format.GeoJSON()
   }),
   style: function(feature, resolution) {
-    let color = feature.getProperties().color;
-    let lowner = '';
-    if (resolution < 75) {
-      lowner = feature.getProperties();
+    let code = '';
+    if (resolution < 3) {
+      code = feature.getProperties().REACHCODE;
     }
     return new ol.style.Style({
       stroke: new ol.style.Stroke({
         color: '#ee2255',
-        width: 2
+        width: 3.5
       }),
       text: new ol.style.Text({
-        text: lowner,
+        text: code,
         align: 'center',
         fill: new ol.style.Fill({
           color: '#000'
