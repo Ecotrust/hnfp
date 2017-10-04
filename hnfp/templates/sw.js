@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.1';
+var CACHE_NAME = 'hoonahCache-v0.2';
 var urlsToCache = [
   '/manifest.json',
   '/sw.js',
