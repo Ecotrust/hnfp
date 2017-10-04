@@ -1,61 +1,65 @@
-var cacheName = 'hoonah';
-var dataCacheName = 'hoonahdata';
+var CACHE_NAME = 'hoonahCache-v0.1';
 var urlsToCache = [
   '/static/hnfp/css/materialize.css',
   '/static/hnfp/css/style.css',
-  '/static/hnfp/img/touch/',
-  '/static/hnfp/img/',
+  '/static/hnfp/img/touch/homescreen144.png',
+  '/static/hnfp/img/icons/i_berries.svg',
   '/static/hnfp/js/materialize/materialize.min.js',
-  '/static/hnfp/js/',
+  '/static/hnfp/js/alerts.js',
+  '/static/hnfp/js/app.hnfp.js',
+  '/static/hnfp/js/dashboard.js',
+  '/static/hnfp/js/map.hnfp.js',
+  '/static/hnfp/js/map.landuse.js',
+  '/static/hnfp/js/observations.js',
+  '/static/hnfp/js/offline.js',
+  '/static/hnfp/js/projects.js',
+  '/static/hnfp/js/data/hoonah_cabins.geojson',
+  '/static/hnfp/js/data/hoonah_landownership.geojson',
+  '/static/hnfp/js/data/hoonah_roads.geojson',
+  '/static/hnfp/js/materialize/materialize.min.js',
+  '/static/hnfp/js/openlayers/layerswitcher.js',
+  '/static/hnfp/js/openlayers/ol.js',
   '/login/',
   '/registered/',
   '/myaccount/',
   '/dashboard/',
   '/alert/',
   '/alert/new/',
-  '/alert/create/',
   '/observation/',
   '/observation/new/',
-  '/observation/create/',
   '/landuse/',
   '/landuse/new/',
-  '/landuse/create/',
-
 ];
 
 self.addEventListener('install', function(event) {
-  // Perform install steps
   event.waitUntil(
-    caches.open(cacheName)
+    caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
-  );
+  )
 });
 
 self.addEventListener('activate', function(event) {
-  console.log('[ServiceWorker] Activate');
   event.waitUntil(
-    caches.keys().then(function(keyList) {
-      return Promise.all(keyList.map(function(key) {
-        if (key !== cacheName && key !== dataCacheName) {
-          console.log('[ServiceWorker] Removing old cache', key);
-          return caches.delete(key);
-        }
-      }));
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(cacheNames.filter(function(cacheName) {
+        return true;
+      }).map(function(cacheName) {
+        return caches.delete(cacheName);
+      }))
     })
   );
-  return self.clients.claim();
 });
 
-/* self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function(event) {
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
     })
   );
-}); */
+});
 
 /* self.addEventListener('push', function(event) {
   if (event.data.text() == 'new-alert') {
