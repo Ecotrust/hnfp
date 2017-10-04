@@ -14,8 +14,8 @@ from accounts.actions import apply_user_permissions, send_password_reset_email, 
 from accounts.models import EmailVerification, UserData, PasswordDictionary
 from accounts.forms import SignUpForm, ForgotPasswordForm, ResetPasswordForm, SocialAccountConfirmForm, LogInForm, UserDetailForm, ChangePasswordForm
 from accounts import views
-# from accounts.signals import user_post_save
-# from nursery.view_helpers import decorate_view
+from accounts.signals import user_post_save
+from nursery.view_helpers import decorate_view
 
 # from accounts.widgets import BSLeftIconTextInput, BSLeftIconPasswordInput, BSLeftIconEmailInput
 # from django.core.exceptions import ValidationError
@@ -401,7 +401,7 @@ def sw(request, js):
     data = open(service_worker, 'rb')
     return HttpResponse(data, content_type='application/x-javascript', status=200)
 # app manifest
-def manifest(request,js):
+def manifest(request, js):
     from marineplanner.settings import BASE_DIR
     import os
     manifest_file = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'templates', 'manifest.json')
