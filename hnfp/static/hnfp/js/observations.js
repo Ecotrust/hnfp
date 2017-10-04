@@ -117,6 +117,6 @@ var observations = {
     });
   },
   geolocateTracking: function() {
-    trackLocation('track');
+    trackLocation();
   }
 };

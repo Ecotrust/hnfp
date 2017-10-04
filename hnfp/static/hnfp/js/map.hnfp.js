@@ -498,51 +498,46 @@ function showLocation() {
   locLayer.setVisible(true);
 }
 
-function trackLocation(trackId) {
+function trackLocation() {
 
-  let location = new ol.Geolocation({
-    projection: mapView.getProjection()
-  });
-
-  function el(id) {
-    return document.getElementById(id);
-  }
-
-  el(trackId).addEventListener('change', function() {
-    location.setTracking(this.checked);
-  });
-
-  location.on('error', function(error) {
-    var info = document.getElementById('info');
-    info.innerHTML = error.message;
-    info.style.display = '';
-  });
-
-  var positionFeature = new ol.Feature();
-  positionFeature.setStyle(new ol.style.Style({
+  let locationFeature = new ol.Feature();
+  locationFeature.setStyle(new ol.style.Style({
     image: new ol.style.Circle({
-      radius: 6,
+      radius: 8,
       fill: new ol.style.Fill({
-        color: '#3399CC'
+        color: '#b82f35'
       }),
       stroke: new ol.style.Stroke({
-        color: '#fff',
-        width: 2
+        color: '#ffaf35',
+        width: 4
       })
     })
   }));
 
-  location.on('change:position', function() {
-    var coordinates = location.getPosition();
-    positionFeature.setGeometry(coordinates ?
-      new ol.geom.Point(coordinates) : null);
+  locSource.addFeature(locationFeature);
+
+  let location = new ol.Geolocation({
+    projection: mapView.getProjection(),
+    tracking: true
   });
 
-  new ol.layer.Vector({
-    map: map,
-    source: new ol.source.Vector({
-      features: positionFeature
-    })
+  location.on('change', function(e) {
+    mapView.animate({
+      center: location.getPosition(),
+      zoom: 18,
+      duration: 4000
+    });
+    locationFeature.setGeometry(new ol.geom.Point(location.getPosition()));
   });
 
+  let trackCheckbox = document.getElementById('track');
+  trackCheckbox.addEventListener('change', function() {
+    location.setTracking(this.checked);
+  });
+
+  location.on('error', function(error) {
+    let info = document.getElementById('info');
+    info.innerHTML = error.message;
+    info.style.display = '';
+  });
 }
