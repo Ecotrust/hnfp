@@ -1,13 +1,26 @@
-var cacheName = 'hoonahs-stewards';
-var dataCacheName = 'hoonah-data';
+var cacheName = 'hoonah';
+var dataCacheName = 'hoonahdata';
 var urlsToCache = [
-  '/',
   '/static/hnfp/css/materialize.css',
   '/static/hnfp/css/style.css',
-  '/hnfp/',
+  '/static/hnfp/img/touch/',
+  '/static/hnfp/img/',
+  '/static/hnfp/js/materialize/materialize.min.js',
+  '/static/hnfp/js/',
+  '/login/',
+  '/registered/',
   '/myaccount/',
+  '/dashboard/',
   '/alert/',
-  '/dashboard/'
+  '/alert/new/',
+  '/alert/create/',
+  '/observation/',
+  '/observation/new/',
+  '/observation/create/',
+  '/landuse/',
+  '/landuse/new/',
+  '/landuse/create/',
+
 ];
 
 self.addEventListener('install', function(event) {
