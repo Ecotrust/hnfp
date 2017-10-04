@@ -508,7 +508,7 @@ function trackLocation() {
         color: '#b82f35'
       }),
       stroke: new ol.style.Stroke({
-        color: '#ffaf35',
+        color: '#ffa165',
         width: 4
       })
     })
