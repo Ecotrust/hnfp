@@ -85,7 +85,7 @@ var weather = {
 
     $.ajax({
       type: 'GET',
-      url:'https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&application=NOS.COOPS.TAC.WL&date=today&datum=MLLW&station=9452438&time_zone=lst_ldt&units=english&interval=hilo&format=json',
+      url:'https://tidesandcurrents.noaa.gov/api/datagetter?product=predictions&date=today&datum=MLLW&station=9452438&time_zone=lst_ldt&units=english&interval=hilo&format=json',
       dataType: 'json',
       success: function(data) {
         data.predictions.forEach(function(el, i, arr) {
