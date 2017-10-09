@@ -3,7 +3,14 @@ $(document).ready(function() {
   $('#add-observation-btn').click(function(event) {
     observations.initNew();
   });
-  observations.geolocateTracking();
+  let trackCheckbox = document.getElementById('track');
+  trackCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      observations.startTracking();
+    } else {
+      observations.stopTracking();
+    }
+  });
 });
 
 $newObservationWrapper = $('#new-observation');
@@ -116,7 +123,10 @@ var observations = {
       }
     });
   },
-  geolocateTracking: function() {
+  startTracking: function() {
     trackLocation();
+  },
+  stopTracking: function() {
+    stopTrackingLocation();
   }
 };

@@ -498,10 +498,15 @@ function showLocation() {
   locLayer.setVisible(true);
 }
 
+var TrackingGeolocation;
 function trackLocation() {
-
-  let locationFeature = new ol.Feature();
-  locationFeature.setStyle(new ol.style.Style({
+  let trackingSource = new ol.source.Vector();
+  let trackingLayer = new ol.layer.Vector({
+    source: trackingSource,
+    map: map
+  });
+  let trackingFeature = new ol.Feature();
+  trackingFeature.setStyle(new ol.style.Style({
     image: new ol.style.Circle({
       radius: 8,
       fill: new ol.style.Fill({
@@ -513,31 +518,29 @@ function trackLocation() {
       })
     })
   }));
+  trackingSource.addFeature(trackingFeature);
 
-  locSource.addFeature(locationFeature);
-
-  let location = new ol.Geolocation({
+  TrackingGeolocation = new ol.Geolocation({
     projection: mapView.getProjection(),
     tracking: true
   });
 
-  location.on('change', function(e) {
+  TrackingGeolocation.on('change', function(e) {
     mapView.animate({
-      center: location.getPosition(),
+      center: TrackingGeolocation.getPosition(),
       zoom: 18,
       duration: 4000
     });
-    locationFeature.setGeometry(new ol.geom.Point(location.getPosition()));
+    trackingFeature.setGeometry(new ol.geom.Point(TrackingGeolocation.getPosition()));
   });
 
-  let trackCheckbox = document.getElementById('track');
-  trackCheckbox.addEventListener('change', function() {
-    location.setTracking(this.checked);
-  });
-
-  location.on('error', function(error) {
+  TrackingGeolocation.on('error', function(error) {
     let info = document.getElementById('info');
     info.innerHTML = error.message;
     info.style.display = '';
   });
+}
+
+function stopTrackingLocation() {
+  TrackingGeolocation.setTracking(false);
 }
