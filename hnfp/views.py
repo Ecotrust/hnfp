@@ -10,27 +10,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth import login as auth_login
 # Accouts
-from accounts.actions import apply_user_permissions, send_password_reset_email, send_social_auth_provider_login_email, generate_username
-from accounts.models import EmailVerification, UserData, PasswordDictionary
-from accounts.forms import SignUpForm, ForgotPasswordForm, ResetPasswordForm, SocialAccountConfirmForm, LogInForm, UserDetailForm, ChangePasswordForm
+from accounts.actions import apply_user_permissions
+from accounts.forms import SignUpForm, LogInForm
 from accounts import views
-from accounts.signals import user_post_save
-from nursery.view_helpers import decorate_view
-
-# from accounts.widgets import BSLeftIconTextInput, BSLeftIconPasswordInput, BSLeftIconEmailInput
-# from django.core.exceptions import ValidationError
-# from captcha.fields import ReCaptchaField
-
-# survey
-from hnfp.models import Question, Survey, Category, SurveyResults
+# survey, forum, jobs, alerts, observation, landuse
+from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource
 from hnfp.forms import ResponseForm
-# forum, jobs, alert, observation
-from hnfp.models import Post, JobOpportunity, Alert, Observation
 # features and shapes
 from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
 import json
-#landuse
-from hnfp.models import LandUseProject, ProjectResourceImpact, ImpactType, Resource
 
 ### VIEWS ###
 def index(request):
@@ -281,7 +269,11 @@ def new_observation(request):
     return HttpResponse(template.render(context, request))
 
 def observation_detail(request, observation_id):
-    return HttpResponse("You're looking at observation %s.")
+    obs = get_object_or_404(Observation, pk=observation_id)
+    obs_cats = Observation.get_categories()
+    # ob = [x.to_dict() for x in Observation.objects.filter(id=observation_id)]
+    #return JsonResponse(obs, safe=False)
+    return render(request, 'hnfp/edit_observation.html', {'observation': obs, 'obs_cats': obs_cats})
 
 def observation_create(request):
     if request.method == 'POST':

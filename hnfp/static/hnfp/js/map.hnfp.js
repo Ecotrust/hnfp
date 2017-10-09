@@ -157,6 +157,20 @@ var map = new ol.Map({
 var layerSwitcher = new ol.control.LayerSwitcher({});
 map.addControl(layerSwitcher);
 
+// submission location point
+// locLayer declared before vectorlayer for z-index on map
+// ol zindexs in order of creation
+// declare before vectorLayer so new creations show above locPoint
+var locSource = new ol.source.Vector();
+var locLayer = new ol.layer.Vector({
+  source: locSource,
+  map: map
+});
+var locPoint = new ol.Feature();
+locPoint.setId(1);
+locSource.addFeature(locPoint);
+locPoint.setStyle(locStyle);
+
 // initial data
 var vectorSource = new ol.source.Vector();
 var vectorLayer = new ol.layer.Vector({
@@ -167,33 +181,7 @@ var vectorLayer = new ol.layer.Vector({
 // user_observations is set in observation.html & is contextual from a views obj
 if (typeof user_observations !== 'undefined') {
   for (var i = 0; i < user_observations.length; i++) {
-    // collect data needed
-    let geo = JSON.parse(user_observations[i].observation_location),
-        coords = ol.proj.fromLonLat(geo.coordinates),
-        catURL = `/static/hnfp/img/icons/category/i_${user_observations[i].category}.png`;
-    // create points with icons
-    let newP = new ol.Feature();
-    vectorSource.addFeature(newP);
-    newP.setGeometry(new ol.geom.Point(coords));
-    newP.setProperties({
-      'id': user_observations[i].id,
-      'icon': catURL,
-      'category': user_observations[i].category,
-      'customcategory': user_observations[i].customcategory,
-      'comments': user_observations[i].comments,
-      'observation_date': user_observations[i].observation_date,
-      'observation_time': user_observations[i].observation_time,
-      'observation_location': user_observations[i].observation_location,
-      'observation_tally': user_observations[i].observation_tally,
-      'observation_type': user_observations[i].observation_type,
-      'observer_username': user_observations[i].observer_username,
-    });
-    newP.setStyle(new ol.style.Style({
-      image: new ol.style.Icon({
-        src: catURL,
-        scale: 0.5,
-      })
-    }));
+    addObservationToMap(user_observations[i]);
   }
 }
 
@@ -261,22 +249,6 @@ function addOverlayPopup(feature) {
   }
   popup.setPosition(coords);
 }
-
-var locSource = new ol.source.Vector();
-var locLayer = new ol.layer.Vector({
-  source: locSource,
-  map: map
-});
-var locPoint = new ol.Feature();
-locPoint.setId(1);
-locSource.addFeature(locPoint);
-locPoint.setStyle(locStyle);
-
-// Interactions
-var selectInteraction = new ol.interaction.Select({
-  layers: [locLayer],
-  style: selectStyle
-});
 
 var draw;
 function drawLocation(style) {
@@ -399,33 +371,21 @@ function getLocationPoint() {
 
 // edit location marker
 var modify = new ol.interaction.Modify({
-  source: locSource,
-  style: selectStyle
+  source: locSource
 });
 
 var locStyle = new ol.style.Style({
   image: new ol.style.Circle({
-    radius: 11,
+    radius: 12,
     fill: new ol.style.Fill({
       color: '#ffffff'
     }),
     stroke: new ol.style.Stroke({
-      color: '#ffef00',
-      width: 9
-    })
-  })
-});
-
-var selectStyle = new ol.style.Style({
-  fill: new ol.style.Circle({
-    radius: 8,
-    fill: new ol.style.Fill({
-      color: '#57a6a2'
+      color: '#d53f38',
+      width: 5
     })
   }),
-  fill: new ol.style.Fill({
-    color: '#57a6a2'
-  })
+  zIndex: 0
 });
 
 var wmtsParser = new ol.format.WMTSCapabilities();
@@ -448,24 +408,33 @@ function removeInterations() {
 }
 
 // Created new data
-function addToMap(data) {
-  let l = data.length - 1,
-      newDataCoords = JSON.parse(data[l].observation_location),
-      cat = data[l].category,
-      // type = newData[l].observation_type,
-      // tally = newData[l].observation_tally,
+function addObservationToMap(feat) {
+  // collect data needed
+  let geo = JSON.parse(feat.observation_location),
+      coords = ol.proj.fromLonLat(geo.coordinates),
+      catURL = `/static/hnfp/img/icons/category/i_${feat.category}.png`,
       point = new ol.Feature();
-
+  // add new point to source and map
   vectorSource.addFeature(point);
-  let coords = ol.proj.fromLonLat(newDataCoords.coordinates),
-      catURL = `/static/hnfp/img/icons/category/i_${cat}.png`;
-
   point.setGeometry(new ol.geom.Point(coords));
+  point.setProperties({
+    'id': feat.id,
+    'icon': catURL,
+    'category': feat.category,
+    'customcategory': feat.customcategory,
+    'comments': feat.comments,
+    'observation_date': feat.observation_date,
+    'observation_time': feat.observation_time,
+    'observation_tally': feat.observation_tally,
+    'observation_type': feat.observation_type,
+    'observer_username': feat.observer_username,
+  });
   point.setStyle(new ol.style.Style({
     image: new ol.style.Icon({
       src: catURL,
       scale: 0.5
-    })
+    }),
+    zIndex: 2
   }));
 }
 
