@@ -41,6 +41,8 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def home(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/dashboard/')
     template = loader.get_template('hnfp/home.html')
     context = {
         'page': 'home',
@@ -151,6 +153,7 @@ def login(request):
     form = LogInForm()
     context = {
         'form': form,
+        'next': '/dashboard/',
         'title': 'Log in',
     }
     return HttpResponse(template.render(context, request))
