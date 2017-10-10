@@ -412,7 +412,8 @@ function addObservationToMap(feat) {
   // collect data needed
   let geo = JSON.parse(feat.observation_location),
       coords = ol.proj.fromLonLat(geo.coordinates),
-      catURL = `/static/hnfp/img/icons/category/i_${feat.category}.png`,
+      categoryLower = feat.category.toLowerCase(),
+      catURL = `/static/hnfp/img/icons/category/i_${categoryLower}.png`,
       point = new ol.Feature();
   // add new point to source and map
   vectorSource.addFeature(point);
