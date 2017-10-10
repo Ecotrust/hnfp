@@ -261,7 +261,7 @@ function drawLocation(style) {
 }
 
 var alertMap = {
-  findLocation: function() {
+  alertAtMyLocation: function() {
     findLocation();
     let style = alertMap.styleAlert();
     locPoint.setStyle(style);
@@ -318,6 +318,12 @@ var alertMap = {
   }
 }
 
+var observationMap = {
+  styleLocation: function() {
+    locPoint.setStyle(locStyle);
+  }
+}
+
 if (typeof all_alerts !== 'undefined') {
   for (var i = 0; i < all_alerts.length; i++) {
     let geo = JSON.parse(all_alerts[i].alert_location),
@@ -351,7 +357,6 @@ function findLocation() {
         duration: 4000
       });
       locPoint.setGeometry(new ol.geom.Point(geolocation.getPosition()));
-      locPoint.setStyle(locStyle);
       map.addInteraction(modify);
       geolocation.setTracking(false);
       changeCount++;

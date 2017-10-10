@@ -57,7 +57,7 @@ var alerts = {
     $('#steptwo').addClass('visible');
     showLocation();
     $('#use-my-location').click(function() {
-      alertMap.findLocation();
+      alertMap.alertAtMyLocation();
       alerts.stepTwo();
     });
     $('#choose-from-map').click(function() {

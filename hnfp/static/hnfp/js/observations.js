@@ -23,6 +23,7 @@ var observations = {
     $('#use-my-location').click(function() {
       findLocation();
       observations.stepTwo();
+      observationMap.styleLocation();
     });
     $('#choose-from-map').click(function() {
       drawLocation();
