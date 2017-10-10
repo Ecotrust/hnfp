@@ -20,6 +20,13 @@ from hnfp.forms import ResponseForm
 from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
 import json
 
+from django.views.generic.edit import UpdateView
+
+class ObservationUpdate(UpdateView):
+    model = Observation
+    fields = ['observation_type']
+    template_name_suffix = '_update'
+
 ### VIEWS ###
 def index(request):
     template = loader.get_template('hnfp/index.html')
@@ -269,11 +276,8 @@ def new_observation(request):
     return HttpResponse(template.render(context, request))
 
 def observation_detail(request, observation_id):
-    obs = get_object_or_404(Observation, pk=observation_id)
-    obs_cats = Observation.get_categories()
-    # ob = [x.to_dict() for x in Observation.objects.filter(id=observation_id)]
-    #return JsonResponse(obs, safe=False)
-    return render(request, 'hnfp/edit_observation.html', {'observation': obs, 'obs_cats': obs_cats})
+    ob = [x.to_dict() for x in Observation.objects.filter(id=observation_id)]
+    return JsonResponse(obs, safe=False)
 
 def observation_create(request):
     if request.method == 'POST':

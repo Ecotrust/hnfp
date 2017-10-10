@@ -387,6 +387,9 @@ class Observation(models.Model):
 	def get_user_observations(username):
 		return Observation.objects.filter(observer_username=username)
 
+	def get_absolute_url(self):
+		return reverse('obb-detail', kwargs={'pk': self.pk})
+
 # alerts
 class Alert(models.Model):
 	alert_date = models.CharField(

@@ -3,6 +3,7 @@ from django.views.generic import ListView, DateDetailView
 from . import views
 from hnfp.models import Post, AOI
 from features.views import form_resources
+from hnfp.views import ObservationUpdate
 
 urlpatterns = [
     url(r'^home/', views.home, name='home'),
@@ -20,7 +21,8 @@ urlpatterns = [
     url(r'^alert/new/', views.new_alert, name='new_alert'),
     url(r'^alert/create/', views.alert_create, name='alert_create'),
     url(r'^observation/$', views.observation, name='observation'),
-    url(r'^observation/(?P<observation_id>[0-9]+)/', views.observation_detail, name='observation_detail'),
+    url(r'^observation/(?P<pk>[0-9]+)/update/', ObservationUpdate.as_view(), name='observation_update'),
+    url(r'^observation/(?P<observation_id>[0-9]+)/$', views.observation_detail, name='observation_detail'),
     url(r'^observation/new/', views.new_observation, name='new_observation'),
     url(r'^observation/create/', views.observation_create, name='observation_create'),
     url(r'^job/$', views.job, name='job'),
