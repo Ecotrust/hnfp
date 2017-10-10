@@ -342,25 +342,25 @@ function findLocation() {
     tracking: true
   });
 
+  let changeCount = 0;
   geolocation.on('change', function(e) {
-    var coordinates = geolocation.getPosition();
-    mapView.animate({
-      center: coordinates,
-      zoom: 18,
-      duration: 4000
-    });
-    observations.hideSpinner();
-    locPoint.setGeometry(new ol.geom.Point(coordinates));
-    geolocation.setTracking(false);
-    map.addInteraction(modify);
+    if (changeCount < 1) {
+      mapView.animate({
+        center: geolocation.getPosition(),
+        zoom: 18,
+        duration: 4000
+      });
+      locPoint.setGeometry(new ol.geom.Point(geolocation.getPosition()));
+      locPoint.setStyle(locStyle);
+      map.addInteraction(modify);
+      geolocation.setTracking(false);
+      changeCount++;
+    }
   });
 
   geolocation.on('error', function(error) {
     geolocation.setTracking(false);
-    observations.hideSpinner();
-    Materialize.toast(`Location not found.
-      Privacy settings may be preventing location tracking.
-      Find location on the map or try again.`, 9000);
+    Materialize.toast(`${error.message}`, 9000);
   });
 }
 
@@ -376,12 +376,12 @@ var modify = new ol.interaction.Modify({
 
 var locStyle = new ol.style.Style({
   image: new ol.style.Circle({
-    radius: 12,
+    radius: 9,
     fill: new ol.style.Fill({
-      color: '#ffffff'
+      color: '#b82f35'
     }),
     stroke: new ol.style.Stroke({
-      color: '#d53f38',
+      color: '#ffffff',
       width: 5
     })
   }),
