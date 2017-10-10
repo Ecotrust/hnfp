@@ -24,7 +24,7 @@ from django.views.generic.edit import UpdateView
 
 class ObservationUpdate(UpdateView):
     model = Observation
-    fields = ['observation_type']
+    fields = ['category', 'customcategory', 'observation_type', 'observation_date', 'observation_time', 'observation_tally', 'observation_location', 'comments']
     template_name_suffix = '_update'
 
 ### VIEWS ###

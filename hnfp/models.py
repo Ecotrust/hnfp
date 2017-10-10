@@ -388,7 +388,7 @@ class Observation(models.Model):
 		return Observation.objects.filter(observer_username=username)
 
 	def get_absolute_url(self):
-		return reverse('obb-detail', kwargs={'pk': self.pk})
+		return reverse('obs-detail', kwargs={'pk': self.pk})
 
 # alerts
 class Alert(models.Model):
