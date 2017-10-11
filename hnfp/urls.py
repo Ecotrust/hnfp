@@ -6,12 +6,13 @@ from features.views import form_resources
 from hnfp.views import ObservationUpdate
 
 import django.contrib.gis.forms.widgets
+marco_openlayers_url = 'https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js'
 django.contrib.gis.forms.widgets.OpenLayersWidget.Media.js = (
-    'static/hnfp/js/openlayers/ol.js'
+    marco_openlayers_url
 )
 
 django.contrib.gis.forms.widgets.OSMWidget.Media.js = (
-    'static/hnfp/js/openlayers/ol.js'
+    marco_openlayers_url
 )
 
 urlpatterns = [
