@@ -5,7 +5,19 @@
 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
-<script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
+
+<script>
+var mapView = new ol.View({
+  center: ol.proj.fromLonLat([-135.44, 58.10]),
+  zoom: 10
+});
+
+var map = new ol.Map({
+  target: 'map'
+});
+
+</script>
+<script src="{% static 'gis/js/OLMapWidget.js' %}"></script>
 
 <form action="" method="post">
   {% csrf_token %}

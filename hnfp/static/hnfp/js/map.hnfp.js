@@ -327,7 +327,7 @@ var observationMap = {
 if (typeof all_alerts !== 'undefined') {
   for (var i = 0; i < all_alerts.length; i++) {
     let geo = JSON.parse(all_alerts[i].alert_location),
-        coords = ol.proj.fromLonLat(geo.coordinates),
+        coords = geo.coordinates,
         a_id = all_alerts[i]['alert_id'];
         style = alertMap.styleAlert(a_id);
     let newA = new ol.Feature();
@@ -371,7 +371,7 @@ function findLocation() {
 
 function getLocationPoint() {
   let loc = locPoint.getGeometry();
-  return ol.proj.toLonLat(loc.getCoordinates())
+  return loc.getCoordinates();
 }
 
 // edit location marker
@@ -415,9 +415,12 @@ function removeInterations() {
 // Created new data
 function addObservationToMap(feat) {
   // collect data needed
+  console.log(feat);
   let geo = JSON.parse(feat.observation_location),
-      coords = ol.proj.fromLonLat(geo.coordinates),
-      categoryLower = feat.category.toLowerCase(),
+      coords = geo.coordinates,
+      catSplit = feat.category.split(' '),
+      catStr = catSplit.join('_'),
+      categoryLower = catStr.toLowerCase(),
       catURL = `/static/hnfp/img/icons/category/i_${categoryLower}.png`,
       point = new ol.Feature();
   // add new point to source and map
@@ -452,7 +455,7 @@ function addAlertsToMap(data) {
       a_id = data[l]['alert_id'];;
       style = alertMap.styleAlert(a_id);
   vectorSource.addFeature(point);
-  let coords = ol.proj.fromLonLat(newDataCoords.coordinates);
+  let coords = newDataCoords.coordinates;
   point.setGeometry(new ol.geom.Point(coords));
   point.setStyle(style);
   point.setProperties(data[l]);

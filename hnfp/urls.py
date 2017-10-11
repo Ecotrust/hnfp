@@ -8,11 +8,14 @@ from hnfp.views import ObservationUpdate
 import django.contrib.gis.forms.widgets
 marco_openlayers_url = 'https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js'
 django.contrib.gis.forms.widgets.OpenLayersWidget.Media.js = (
-    marco_openlayers_url
+    marco_openlayers_url,
+    'gis/js/OLMapWidget.js',
 )
 
 django.contrib.gis.forms.widgets.OSMWidget.Media.js = (
-    marco_openlayers_url
+    marco_openlayers_url,
+    'http://www.openstreetmap.org/openlayers/OpenStreetMap.js',
+    'gis/js/OLMapWidget.js',
 )
 
 urlpatterns = [
