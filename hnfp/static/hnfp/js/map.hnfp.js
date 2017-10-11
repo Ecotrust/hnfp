@@ -227,8 +227,8 @@ function addOverlayPopup(feature) {
       <p>${featuresProps.comments}</p>
     `;
     domElement.querySelector('.card-action').innerHTML = `
-      <a href="/observation/edit/${featuresProps.id}" class="disabled">Edit</a>
-      <a href="/observation/delete/${featuresProps.id}" class="disabled">Delete</a>
+      <a href="/observation/${featuresProps.id}/update/" class="disabled">Edit</a>
+      <a href="/observation/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
   } else if (typeof(featuresProps.summary) !== 'undefined') {
     coords = feature.getGeometry().getExtent();
@@ -239,8 +239,8 @@ function addOverlayPopup(feature) {
       <p><em>${featuresProps.start_date} - ${featuresProps.end_date}</em></p>
     `;
     domElement.querySelector('.card-action').innerHTML = `
-      <a href="/project/edit/${featuresProps.id}" class="disabled">Edit</a>
-      <a href="/project/delete/${featuresProps.id}" class="disabled">Delete</a>
+      <a href="/project/${featuresProps.id}/update/" class="disabled">Edit</a>
+      <a href="/project/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
     domElement.querySelector('.card-content').innerHTML = `
@@ -415,7 +415,6 @@ function removeInterations() {
 // Created new data
 function addObservationToMap(feat) {
   // collect data needed
-  console.log(feat);
   let geo = JSON.parse(feat.observation_location),
       coords = geo.coordinates,
       catSplit = feat.category.split(' '),
@@ -426,6 +425,7 @@ function addObservationToMap(feat) {
   // add new point to source and map
   vectorSource.addFeature(point);
   point.setGeometry(new ol.geom.Point(coords));
+  console.log(feat);
   point.setProperties({
     'id': feat.id,
     'icon': catURL,

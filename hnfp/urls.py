@@ -3,7 +3,7 @@ from django.views.generic import ListView, DateDetailView
 from . import views
 from hnfp.models import Post, AOI
 from features.views import form_resources
-from hnfp.views import ObservationUpdate
+from hnfp.views import ObservationUpdate, ObservationDelete
 
 import django.contrib.gis.forms.widgets
 django.contrib.gis.forms.widgets.OpenLayersWidget.Media.js = (
@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^alert/create/', views.alert_create, name='alert_create'),
     url(r'^observation/$', views.observation, name='observation'),
     url(r'^observation/(?P<pk>[0-9]+)/update/', ObservationUpdate.as_view(), name='observation_update'),
+    url(r'^observation/(?P<pk>[0-9]+)/delete/', ObservationDelete.as_view(), name='observation_delete'),
     url(r'^observation/(?P<pk>[0-9]+)/detail/', views.observation_detail, name='observation_detail'),
     url(r'^observation/new/', views.new_observation, name='new_observation'),
     url(r'^observation/create/', views.observation_create, name='observation_create'),

@@ -5,8 +5,8 @@ from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.template import loader, RequestContext
 from django.db import models
-from django.forms import Textarea
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
 # from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth import login as auth_login
@@ -21,12 +21,7 @@ from hnfp.forms import ResponseForm
 from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
 import json
 
-from django.views.generic.edit import UpdateView
-
-class ObservationUpdate(UpdateView):
-    model = Observation
-    fields = ['category', 'customcategory', 'observation_type', 'observation_date', 'observation_time', 'observation_tally', 'observation_location', 'comments']
-    template_name_suffix = '_update'
+from django.views.generic.edit import UpdateView, DeleteView
 
 ### VIEWS ###
 def index(request):
@@ -305,6 +300,16 @@ def observation_create(request):
         new_obs.save()
         all_observation = [x.to_dict() for x in Observation.objects.filter(observer_username=request.user.username)]
         return JsonResponse(all_observation, safe=False)
+
+class ObservationUpdate(UpdateView):
+    model = Observation
+    fields = ['category', 'customcategory', 'observation_type', 'observation_date', 'observation_time', 'observation_tally', 'observation_location', 'comments']
+    template_name_suffix = '_update'
+
+class ObservationDelete(DeleteView):
+    model = Observation
+    success_url = reverse_lazy('observation')
+    template_name_suffix = '_confirm_delete'
 
 def job(request):
     template = loader.get_template('hnfp/job.html')

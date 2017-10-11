@@ -369,6 +369,7 @@ class Observation(models.Model):
 			'observer_username': self.observer_username,
 			'observation_location': point,
 			'comments': self.comments,
+			'id': self.id,
 		}
 
 	def __str__(self):
