@@ -1,22 +1,9 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/ol.css' %}" media="screen,projection"/>
-<link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
-
-<script>
-var mapView = new ol.View({
-  center: ol.proj.fromLonLat([-135.44, 58.10]),
-  zoom: 10
-});
-
-var map = new ol.Map({
-  target: 'map'
-});
-
-</script>
 <script src="{% static 'gis/js/OLMapWidget.js' %}"></script>
 
 <form action="" method="post">

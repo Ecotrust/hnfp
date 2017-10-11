@@ -6,16 +6,12 @@ from features.views import form_resources
 from hnfp.views import ObservationUpdate
 
 import django.contrib.gis.forms.widgets
-marco_openlayers_url = 'https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js'
 django.contrib.gis.forms.widgets.OpenLayersWidget.Media.js = (
-    marco_openlayers_url,
-    'gis/js/OLMapWidget.js',
+    'static/hnfp/js/openlayers/ol.js'
 )
 
 django.contrib.gis.forms.widgets.OSMWidget.Media.js = (
-    marco_openlayers_url,
-    'http://www.openstreetmap.org/openlayers/OpenStreetMap.js',
-    'gis/js/OLMapWidget.js',
+    'static/hnfp/js/openlayers/ol.js'
 )
 
 urlpatterns = [
@@ -35,7 +31,7 @@ urlpatterns = [
     url(r'^alert/create/', views.alert_create, name='alert_create'),
     url(r'^observation/$', views.observation, name='observation'),
     url(r'^observation/(?P<pk>[0-9]+)/update/', ObservationUpdate.as_view(), name='observation_update'),
-    url(r'^observation/(?P<observation_id>[0-9]+)/$', views.observation_detail, name='observation_detail'),
+    url(r'^observation/(?P<pk>[0-9]+)/detail/', views.observation_detail, name='observation_detail'),
     url(r'^observation/new/', views.new_observation, name='new_observation'),
     url(r'^observation/create/', views.observation_create, name='observation_create'),
     url(r'^job/$', views.job, name='job'),

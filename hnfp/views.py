@@ -5,6 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.template import loader, RequestContext
 from django.db import models
+from django.forms import Textarea
 from django.contrib.auth.models import User
 # from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model, authenticate
@@ -275,9 +276,9 @@ def new_observation(request):
     }
     return HttpResponse(template.render(context, request))
 
-def observation_detail(request, observation_id):
-    ob = [x.to_dict() for x in Observation.objects.filter(id=observation_id)]
-    return JsonResponse(obs, safe=False)
+def observation_detail(request, pk):
+    ob = [x.to_dict() for x in Observation.objects.filter(id=pk)]
+    return JsonResponse(ob, safe=False)
 
 def observation_create(request):
     if request.method == 'POST':
