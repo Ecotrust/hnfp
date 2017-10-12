@@ -41,7 +41,7 @@ var footpathLayer = new ol.layer.Image({
       crossOrigin: 'anonymous'
   }),
   visible: false
-})
+});
 
 var hoonahRoads = new ol.layer.Vector({
   title: 'Roads',

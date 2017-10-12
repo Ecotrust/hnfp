@@ -80,51 +80,69 @@ if (typeof all_projects !== 'undefined') {
 
 var polygonStyle = new ol.style.Style({
   fill: new ol.style.Fill({
-    color: 'rgba(255, 255, 255, 0.2)'
+    color: 'rgba(255, 255, 255, 0.1)'
   }),
   stroke: new ol.style.Stroke({
     color: '#ffcc33',
-    width: 2
-  }),
-  image: new ol.style.Circle({
-    radius: 7,
-    fill: new ol.style.Fill({
-      color: '#ffcc33'
-    })
+    width: 3
   })
-})
+});
 
-
-// Layers
-let harvestStandAge = new ol.layer.Vector({
-  title: 'Forest Age',
-  source: new ol.source.Vector({
-    url: '/static/hnfp/js/data/hoonah_harvest_stand_age.geojson',
-    format: new ol.format.GeoJSON({
-      defaultDataProjection: 'EPSG:3857',
-    })
-  }),
-  style: function(feature, resolution) {
+function stylePolygon(fillColor) {
+  return function(feature, resolution) {
+    let strokeWidth = 1;
+    if (resolution < 4) {
+      strokeWidth = 3;
+    } else if (resolution < 15) {
+      strokeWidth = 2;
+    } else if (resolution < 25) {
+      strokeWidth = 1.5;
+    }
     return new ol.style.Style({
       fill: new ol.style.Fill({
-        color: '#000'
+        color: fillColor
       }),
-      text: new ol.style.Text({
-        text: '',
-        align: 'center',
-        fill: new ol.style.Fill({
-          color: '#000'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 3
-        })
+      stroke: new ol.style.Stroke({
+        color: fillColor / 1.5,
+        width: strokeWidth
+      })
+    });
+  };
+}
+
+function styleLine(lineColor) {
+  return function(feature, resolution) {
+    let strokeWidth = 1.5;
+    if (resolution < 4) {
+      strokeWidth = 4;
+    } else if (resolution < 15) {
+      strokeWidth = 3;
+    } else if (resolution < 25) {
+      strokeWidth = 2;
+    }
+    return new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: lineColor,
+        width: strokeWidth
+      })
+    });
+  };
+}
+
+function stylePoint(pointColor) {
+  return new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 8,
+      fill: new ol.style.Fill({
+        color: pointColor
+      }),
+      stroke: new ol.style.Stroke({
+        color: '#ffffff',
+        width: 2
       })
     })
-  },
-  opacity: .8,
-  visible: false
-});
+  });
+}
 
 let hoonahCabins = new ol.layer.Vector({
   title: 'Cabins',
@@ -132,19 +150,21 @@ let hoonahCabins = new ol.layer.Vector({
     url: '/static/hnfp/js/data/hoonah_cabins.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 11,
-      fill: new ol.style.Fill({
-        color: '#ffffff'
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#ffef00',
-        width: 9
-      })
+  style: stylePoint('#decbe4'),
+  opacity: .95,
+  visible: false
+});
+
+let areaHarvested = new ol.layer.Vector({
+  title: 'Area Harvested',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/hoonah_harvest_stand_age.geojson',
+    format: new ol.format.GeoJSON({
+      defaultDataProjection: 'EPSG:3857',
     })
   }),
-  opacity: .7,
+  style: stylePolygon('#fe9929'),
+  opacity: .6,
   visible: false
 });
 
@@ -154,69 +174,30 @@ let harvestTreatment = new ol.layer.Vector({
     url: '/static/hnfp/js/data/hoonah_harvest_treatment.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: function(feature, resolution) {
-    return new ol.style.Style({
-      fill: new ol.style.Fill({
-        color: '#aabbff'
-      }),
-      text: new ol.style.Text({
-        text: 'none',
-        align: 'center',
-        fill: new ol.style.Fill({
-          color: '#000'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 3
-        })
-      })
-    })
-  },
-  opacity: .75,
+  style: stylePolygon('#ec7014'),
+  opacity: .6,
   visible: false
 });
 
 let hoonahLogTransfer = new ol.layer.Vector({
-  title: 'Log Transfer',
+  title: 'Log Transfer Facilities',
   source: new ol.source.Vector({
     url: '/static/hnfp/js/data/hoonah_log_transfer_fac.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 6,
-      fill: new ol.style.Fill({
-        color: '#ffffff'
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#ffef00',
-        width: 9
-      })
-    })
-  }),
-  opacity: .7,
+  style: stylePoint('#993404'),
+  opacity: .95,
   visible: false
 });
 
 let hoonahPlaceNamesEng = new ol.layer.Vector({
-  title: 'Place Names [English]',
+  title: 'Points of Interest',
   source: new ol.source.Vector({
     url: '/static/hnfp/js/data/hoonah_place_names_eng.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 6,
-      fill: new ol.style.Fill({
-        color: '#ffffff'
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#ffef00',
-        width: 9
-      })
-    })
-  }),
-  opacity: .7,
+  style: stylePoint('#fddaec'),
+  opacity: .95,
   visible: false
 });
 
@@ -226,25 +207,8 @@ let hoonahProjectBoundary = new ol.layer.Vector({
     url: '/static/hnfp/js/data/hoonah_project_boundary.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: function(feature, resolution) {
-    return new ol.style.Style({
-      fill: new ol.style.Fill({
-        color: '#00ffff'
-      }),
-      text: new ol.style.Text({
-        text: 'bound',
-        align: 'center',
-        fill: new ol.style.Fill({
-          color: '#000'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 3
-        })
-      })
-    })
-  },
-  opacity: .75,
+  style: stylePolygon('#f2f2f2'),
+  opacity: .5,
   visible: false
 });
 
@@ -254,19 +218,8 @@ let hoonahTowns = new ol.layer.Vector({
     url: '/static/hnfp/js/data/hoonah_towns.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 6,
-      fill: new ol.style.Fill({
-        color: '#ffffff'
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#ffef00',
-        width: 9
-      })
-    })
-  }),
-  opacity: .7,
+  style: stylePoint('#dd3497'),
+  opacity: .95,
   visible: false
 });
 
@@ -277,25 +230,19 @@ let watersheds = new ol.layer.Vector({
     url: '/static/hnfp/js/data/watersheds.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: function(feature, resolution) {
-    return new ol.style.Style({
-      fill: new ol.style.Fill({
-        color: '#aa00ff'
-      }),
-      text: new ol.style.Text({
-        text: 'watershed',
-        align: 'center',
-        fill: new ol.style.Fill({
-          color: '#000'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 3
-        })
-      })
-    })
-  },
-  opacity: .7,
+  style: stylePolygon('#6baed6'),
+  opacity: .6,
+  visible: false
+});
+
+let hoonahStreams = new ol.layer.Vector({
+  title: 'Streams',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/hoonah_streams_30.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: styleLine('#c6dbef'),
+  opacity: .85,
   visible: false
 });
 
@@ -305,37 +252,17 @@ let salmonStreams = new ol.layer.Vector({
     url: '/static/hnfp/js/data/hoonah_salmon_streams.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: function(feature, resolution) {
-    let code = '';
-    if (resolution < 3) {
-      code = feature.getProperties().REACHCODE;
-    }
-    return new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: '#ee2255',
-        width: 3.5
-      }),
-      text: new ol.style.Text({
-        text: code,
-        align: 'center',
-        fill: new ol.style.Fill({
-          color: '#000'
-        }),
-        stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 3
-        })
-      })
-    })
-  },
-  opacity: .7,
+  style: styleLine('#08519c'),
+  opacity: .85,
   visible: false
 });
 
 var projectGroup = new ol.layer.Group({
   title: 'Data',
   layers: [
-    harvestStandAge,
+    hoonahStreams,
+    salmonStreams,
+    areaHarvested,
     hoonahCabins,
     harvestTreatment,
     hoonahLogTransfer,
@@ -343,7 +270,6 @@ var projectGroup = new ol.layer.Group({
     hoonahProjectBoundary,
     hoonahTowns,
     watersheds,
-    salmonStreams
   ]
 });
 // Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
