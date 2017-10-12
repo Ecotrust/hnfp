@@ -50,13 +50,10 @@ var hoonahRoads = new ol.layer.Vector({
     format: new ol.format.GeoJSON()
   }),
   style: function(feature, resolution) {
-    let road = '',
-        properties = feature.getProperties();
+    let road = '';
+    let properties = feature.getProperties();
     if (resolution < 16) {
-      if (properties.RD_NAME_PR === null || properties.RD_NAME_PR === 'other') {
-        properties.RD_NAME_PR = '';
-      }
-      road = properties.RD_NAME_PR + '\n' + properties.RD_OWNER;
+      road = properties.RD_STATUS !== null ? properties.RD_STATUS : '';
     }
     return new ol.style.Style({
       stroke: new ol.style.Stroke({
@@ -64,19 +61,19 @@ var hoonahRoads = new ol.layer.Vector({
         width: 1.6
       }),
       text: new ol.style.Text({
-        font: '8px function, serif',
+        font: '11px monospace',
         text: road,
         fill: new ol.style.Fill({
-          color: '#666'
+          color: '#000000'
         }),
         stroke: new ol.style.Stroke({
-          color: '#fff',
-          width: 2
+          color: '#ffffff',
+          width: 1.75
         })
       })
     })
   },
-  opacity: .9,
+  opacity: .95,
   visible: false
 });
 
