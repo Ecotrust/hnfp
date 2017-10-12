@@ -395,6 +395,20 @@ def project_create(request):
         all_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
         return JsonResponse(all_projects, safe=False)
 
+def landuse_detail(request, pk):
+    lup = [x.to_dict() for x in LandUseProject.objects.filter(id=pk)]
+    return JsonResponse(lup, safe=False)
+
+class LanduseUpdate(UpdateView):
+    model = LandUseProject
+    fields = ['name', 'category', 'summary', 'start_date', 'completion_date', 'actions', 'dollar_costs', 'emdollars', 'area']
+    template_name_suffix = '_update'
+
+class LanduseDelete(DeleteView):
+    model = LandUseProject
+    success_url = reverse_lazy('landuse')
+    template_name_suffix = '_confirm_delete'
+
 ### offline
 from django.views.decorators.cache import never_cache
 @never_cache

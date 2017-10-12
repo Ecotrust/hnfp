@@ -66,7 +66,6 @@ function addProjectToMap(data) {
       'end_date': all_projects[i].end_date,
     });
   }
-  console.log(newPoly);
 }
 
 

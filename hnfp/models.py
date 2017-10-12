@@ -621,3 +621,6 @@ class LandUseProject(models.Model):
 
 	def get_user_proj(username):
 		return LandUseProjects.objects.filter(username=username)
+
+	def get_absolute_url(self):
+		return reverse('landuse_detail', kwargs={'pk': self.pk})

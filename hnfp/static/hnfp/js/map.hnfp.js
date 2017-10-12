@@ -239,8 +239,8 @@ function addOverlayPopup(feature) {
       <p><em>${featuresProps.start_date} - ${featuresProps.end_date}</em></p>
     `;
     domElement.querySelector('.card-action').innerHTML = `
-      <a href="/project/${featuresProps.id}/update/" class="disabled">Edit</a>
-      <a href="/project/${featuresProps.id}/delete/" class="disabled">Delete</a>
+      <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
+      <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
     domElement.querySelector('.card-content').innerHTML = `

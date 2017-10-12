@@ -4,13 +4,15 @@ $(document).ready(function() {
     observations.initNew();
   });
   let trackCheckbox = document.getElementById('track');
-  trackCheckbox.addEventListener('change', function() {
-    if (this.checked) {
-      observations.startTracking();
-    } else {
-      observations.stopTracking();
-    }
-  });
+  if (trackCheckbox !== null) {
+    trackCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        observations.startTracking();
+      } else {
+        observations.stopTracking();
+      }
+    });
+  }
 });
 
 $newObservationWrapper = $('#new-observation');
