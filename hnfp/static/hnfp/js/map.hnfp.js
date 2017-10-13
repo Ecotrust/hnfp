@@ -422,7 +422,6 @@ function addObservationToMap(feat) {
   // add new point to source and map
   vectorSource.addFeature(point);
   point.setGeometry(new ol.geom.Point(coords));
-  console.log(feat);
   point.setProperties({
     'id': feat.id,
     'icon': catURL,
