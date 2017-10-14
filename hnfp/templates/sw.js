@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.4';
+var CACHE_NAME = 'hoonahCache-v0.5';
 var urlsToCache = [
   '/static/hnfp/css/materialize.css',
   '/static/hnfp/css/style.css',
@@ -15,14 +15,9 @@ var urlsToCache = [
   '/static/hnfp/js/dashboard.js',
   '/static/hnfp/js/observations.js',
   '/static/hnfp/js/projects.js',
-  '/static/hnfp/js/data/hoonah_cabins.geojson',
-  '/static/hnfp/js/data/hoonah_landownership.geojson',
-  '/static/hnfp/js/data/hoonah_roads.geojson',
   '/dashboard/',
   '/alert/',
   '/observation/',
-  '/observation/new/',
-  '/observation/create/',
   '/landuse/',
 ];
 
