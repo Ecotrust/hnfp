@@ -13,7 +13,15 @@
       <section class="wrap controls">
         <div class="row">
           <div class="col s12 l3">
-            <h5>Themes</h5>
+            <h5>Visible Layers</h5>
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header"><i class="material-icons">play_arrow</i> Layers</div>
+                <div class="collapsible-body">
+                  <div id="visible-themes"></div>
+                </div>
+              </li>
+            </ul>
           </div>
           <div class="col s12 l3">
             <h5>Map Language</h5>
@@ -27,15 +35,15 @@
             <h5>Land Management Projects</h5>
             <div class="container left">
               <p>
-                <input type="checkbox" id="checkbox_forest-projects" class="filled-in" />
+                <input type="radio" id="checkbox_forest-projects" class="bg-teal" checked />
                 <label for="checkbox_forest-projects">Forest Projects</label>
               </p>
               <p>
-                <input type="checkbox" id="checkbox_road-projects" class="filled-in" />
+                <input type="radio" id="checkbox_road-projects" class="bg-red" checked />
                 <label for="checkbox_road-projects">Road Projects</label>
               </p>
               <p>
-                <input type="checkbox" id="checkbox_stream-projects" class="filled-in" />
+                <input type="radio" id="checkbox_stream-projects" class="bg-blue" checked />
                 <label for="checkbox_stream-projects">Stream Projects</label>
               </p>
             </div>
@@ -57,19 +65,6 @@
               </p>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col s12">
-            <ul class="collapsible" data-collapsible="accordion">
-              <li>
-                <div class="collapsible-header"><i class="material-icons">play_arrow</i> Layers</div>
-                <div class="collapsible-body">
-                  <div id="visible-themes"></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
         </div>
       </section>
     {% endblock controls %}

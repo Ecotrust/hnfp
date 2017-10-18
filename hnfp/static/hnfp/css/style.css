@@ -76,6 +76,9 @@
 .red {
   color: #d53f38;
 }
+.bg-red {
+  background: #d53f38;
+}
 
 .teal {
   color: #57a6a2;
@@ -1723,6 +1726,7 @@ path {
 
 .land-use .controls {
   margin-top: 3rem;
+  padding-bottom: 2rem;
 }
 
 .land-use .controls:after {
@@ -1758,6 +1762,21 @@ path {
 
 .land-use .controls input[type=checkbox]:not(:checked) + label:after {
   background: #fff;
+}
+
+.bg-red:checked + label:after {
+  border: #d53f38;
+  background: #d53f38;
+}
+.bg-blue:checked + label:after {
+  background: #2b384a;
+  border: #2b384a;
+}
+
+.bg-red:checked + label:after,
+.bg-teal:checked + label:after,
+.bg-blue:checked + label:after {
+  opacity: .75;
 }
 
 .land-use #new-project-btn {
@@ -2061,7 +2080,7 @@ path {
     min-height: 20vh;
   }
   .land-use #map-wrapper {
-    height: 75vh;
+    height: 70vh;
   }
 
   .land-use .controls .row {

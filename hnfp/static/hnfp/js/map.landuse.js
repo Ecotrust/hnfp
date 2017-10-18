@@ -16,7 +16,7 @@ var snapPolygon,
     projectVector = new ol.layer.Vector({
       source: projectSource,
       map: map,
-      style: polygonStyle
+      style: stylePolygon('rgba(87, 166, 162, 0.4)')
     }),
     drawPolygon = new ol.interaction.Draw({
       source: projectSource,
@@ -54,8 +54,16 @@ function addProjectToMap(data) {
   let newPoly = new ol.Feature();
   vectorSource.addFeature(newPoly);
   newPoly.setGeometry(new ol.geom.Polygon(geo.coordinates));
-  newPoly.setStyle(polygonStyle)
   if (typeof(all_projects[i]) !== 'undefined') {
+    if (all_projects[i].category === 'Forest') {
+      newPoly.setStyle(stylePolygon('rgba(87, 166, 162, 0.35)'));
+    } else if (all_projects[i].category === 'Road') {
+      newPoly.setStyle(stylePolygon('rgba(213, 63, 56, 0.35)'));
+    } else if (all_projects[i].category === 'Stream') {
+      newPoly.setStyle(stylePolygon('rgba(43, 56, 74, 0.35)'));
+    } else {
+      newPoly.setStyle(stylePolygon('rgba(140, 140, 140, 0.35)'));
+    }
     newPoly.setProperties({
       'id': all_projects[i].id,
       'area': all_projects[i].area,
@@ -78,32 +86,22 @@ if (typeof all_projects !== 'undefined') {
   }
 }
 
-var polygonStyle = new ol.style.Style({
-  fill: new ol.style.Fill({
-    color: 'rgba(255, 255, 255, 0.1)'
-  }),
-  stroke: new ol.style.Stroke({
-    color: '#ffcc33',
-    width: 3
-  })
-});
-
 function stylePolygon(fillColor) {
   return function(feature, resolution) {
-    let strokeWidth = 1;
+    let strokeWidth = .5;
     if (resolution < 4) {
       strokeWidth = 3;
     } else if (resolution < 15) {
       strokeWidth = 2;
     } else if (resolution < 25) {
-      strokeWidth = 1.5;
+      strokeWidth = 1;
     }
     return new ol.style.Style({
       fill: new ol.style.Fill({
         color: fillColor
       }),
       stroke: new ol.style.Stroke({
-        color: fillColor / 1.5,
+        color: fillColor / 1.25,
         width: strokeWidth
       })
     });
