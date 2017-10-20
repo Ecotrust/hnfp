@@ -16,7 +16,7 @@ from accounts.forms import SignUpForm, LogInForm
 from accounts import views
 # survey, forum, jobs, alerts, observation, landuse
 from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource
-from hnfp.forms import ResponseForm
+from hnfp.forms import ResponseForm, HoonahLogInForm
 # features and shapes
 from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
 import json
@@ -141,7 +141,7 @@ def registered(request):
 
 def login(request):
     template = loader.get_template('hnfp/login.html')
-    form = LogInForm()
+    form = HoonahLogInForm()
     context = {
         'form': form,
         'next': '/dashboard/',

@@ -881,7 +881,7 @@ div.mapgroup {
 #map .ol-full-screen, #project-map .ol-full-screen,
 #map .layer-switcher, #project-map .layer-switcher,
 #map .ol-control button, #project-map .ol-control button {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.9);
   border-radius: 0;
   border: none;
   color: #000;
@@ -890,6 +890,19 @@ div.mapgroup {
   padding: 0;
   right: 0;
   text-align: center;
+}
+
+#map .layer-switcher, #project-map .layer-switcher {
+  text-align: left;
+}
+
+#map .layer-switcher .panel, #project-map .layer-switcher .panel {
+  border: none;
+  background: transparent;
+}
+
+#map .layer-switcher .panel label, #project-map .layer-switcher .panel label {
+  color: #3a3a3a;
 }
 
 #map .ol-zoom .ol-zoom-out, #project-map .ol-zoom .ol-zoom-out,
