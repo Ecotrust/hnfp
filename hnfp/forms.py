@@ -6,15 +6,22 @@ from django.utils.safestring import mark_safe
 import uuid
 
 class HoonahLogInForm(DivForm):
+    ## Hoonah login form is almost a direct copy and paste from accounts->forms.py LogInForm
+    ## The difference is here username is replaced by email reglardless of settings
+    ## The database has two fields for each user (one for username and one for email)
+    ## Currently both fields are populated with user email address
     from marineplanner.settings import LOG_IN_WITH_EMAIL
     if LOG_IN_WITH_EMAIL:
         email = forms.CharField(min_length=4, max_length=100,
-                               widget=l_icon('i', 'email'))
+                               widget=l_icon('material-icons-email', 'email'))
     else:
+        ## username is currently set to email during registration
+        ## this will allow future change to a username other than email
+        ## if usernames are needed see accounts->forms.py
         email = forms.CharField(min_length=4, max_length=100,
-                               widget=l_icon('fa fa-envelope-o', 'email'))
+                               widget=l_icon('material-icons-email', 'email'))
         password = forms.CharField(min_length=6, max_length=100,
-                               widget=l_icon_pw('fa fa-unlock-alt', 'password'))
+                               widget=l_icon_pw('material-icons-password', 'password'))
 
 class ResponseForm(models.ModelForm):
     class Meta:
