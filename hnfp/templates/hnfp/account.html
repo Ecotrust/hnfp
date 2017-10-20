@@ -7,27 +7,35 @@
   <section class="container section">
     <div class="row">
       <div class="col s12">
-        <h1>Hello, {{ user.first_name }}  {{ user.last_name }}</h1>
-        <p><!-- user description --> </p>
-
-        <h3>Profile Information</h3>
-        <p>Name: {{ user.get_full_name }}</p>
-        <p>Preferred Name: {{ user.get_short_name }}</p>
-        <p>email: {{ user.email|default:"<i style='color:red'>No Email Address</i>" }}</p>
-        <p>
-        <a class="btn btn-success" href="{% url 'account:edit' %}">Edit my info</a>
-        {% if can_change_password %}
-        <a class="btn btn-success" href="{% url 'account:change_password' %}">Change my password</a>
-        {% endif %}
-        </p>
-        <p>
+        <div class="col s12 m7">
+          <h2 class="header">{{ title }}</h2>
+          <div class="card horizontal">
+            <div class="card-image">
+              <img src="{% static 'hnfp/img/icons/i_profile.svg' %}" style="width: 60px; height: auto;">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p class="card-title">{{ user.first_name }} {{ user.last_name }}</p>
+                <p><strong>username</strong><br />{{ user.username }}</p>
+                <p><strong>email</strong><br />{{ user.email }}</p>
+              </div>
+              <div class="card-action">
+                <a class="" href="{% url 'account:edit' %}">Edit Info</a>
+                <a href="{% url 'account:change_password' %}">Change Password</a>
+              </div>
+            </div>
+          </div>
+        </div>
         {% if user.is_superuser %}
+          <div class="col s12 m7">
             <a class="btn btn-success" href="{{ admin_url }}">Go to the Django admin page</a>
+          </div>
         {% endif %}
         {% if user.is_staff %}
+          <div class="col s12 m7 margin-bottom">
             <a class="btn btn-success" href="/admin">Go to the CMS admin page</a>
+          </div>
         {% endif %}
-        </p>
 
         <!-- no need to verify anymore
         {% if not user.userdata.email_verified %}
@@ -41,10 +49,9 @@
         {% endif %}
         -->
 
-    </div>
-    <div class="col-md-3">
-        <a class="btn btn-success" href="{% url 'account:logout' %}">Log out</a><br />
-    </div>
+        <div class="col s12 m7">
+          <a class="btn btn-flat" href="{% url 'account:logout' %}">Log out</a><br />
+        </div>
       </div>
     </div>
   </section>

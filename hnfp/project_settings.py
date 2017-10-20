@@ -240,12 +240,12 @@ except ImportError:
 # registration
 REGISTRATION_FORM_FIELDS = {
     'first_and_last': True,
-    'preferred_name': True,
+    'preferred_name': False,
     'username': True,
     'email': True,
     'password': True,
     'confirm_password': True,
-    'captcha': True,
+    'captcha': False,
 }
 
 LOG_IN_WITH_EMAIL = False

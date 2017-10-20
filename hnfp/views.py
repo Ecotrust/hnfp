@@ -152,7 +152,7 @@ def login(request):
 def myaccount(request):
     template = loader.get_template('hnfp/account.html')
     context = {
-        'title': 'Profile',
+        'title': 'Hoonah Steward Profile',
     }
     return HttpResponse(template.render(context, request))
 
