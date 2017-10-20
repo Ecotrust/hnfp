@@ -1,17 +1,8 @@
 {% load static %}
 <form action="/observation/create/" method="POST">
   <section>
-    <section id="stepone" class="observation-location visible card">
-      <div class="card-content">
-        <span class="center card-title">Add Entry</span>
-      </div>
-      <div class="card-action">
-        <a onclick="observations.close()" class="cancel">Cancel</a>
-        <a onclick="observations.startNew()" class="btn next btn-border-light-blue" id="start-observation">Start</a>
-      </div>
-    </section>
     {% csrf_token %}
-    <section id="steptwo" class="card">
+    <section id="steptwo" class="card visible">
       <div class="card-content">
         <span class="center card-title">Location</span>
       </div>
@@ -100,10 +91,8 @@
         <input type="hidden" id="uid_time" name="uid_time" />
       </div>
       <div class="card-action center">
-        <button type="submit" class="btn submit btn-border-light-blue" name="submit">Add to Map</button>
-      </div>
-      <div class="card-action center">
         <a onclick="observations.close()">Cancel</a>
+        <button type="submit" class="btn submit btn-border-light-blue" name="submit">Add to Map</button>
       </div>
     </section>
   </section>

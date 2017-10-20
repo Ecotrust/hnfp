@@ -1,17 +1,8 @@
 {% load static %}
 <form action="/alert/create/" method="POST">
   <section>
-    <section id="stepone" class="alert-location visible card">
-      <div class="card-content">
-        <span class="center card-title">Add entry</span>
-      </div>
-      <div class="card-action">
-        <a onclick="alerts.close()" class="cancel">Cancel</a>
-        <a onclick="alerts.startNew()" class="btn next btn-border-light-blue" id="start-alert">Start</a>
-      </div>
-    </section>
     {% csrf_token %}
-    <section id="steptwo" class="card">
+    <section id="steptwo" class="card visible">
       <div class="card-content">
         <span class="center card-title">Alert Location</span>
       </div>
@@ -91,9 +82,8 @@
       </div>
       <div class="card-action">
         <input type="hidden" id="uid_time" name="uid_time" />
-        <div class="input-field center">
-          <button type="submit" class="btn" name="submit">Add to Map</button>
-        </div>
+        <a onclick="alerts.close()" class="cancel">Cancel</a>
+        <button type="submit" class="btn" name="submit">Add to Map</button>
       </div>
     </section>
   </section>

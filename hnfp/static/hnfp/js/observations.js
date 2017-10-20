@@ -19,19 +19,6 @@ $newObservationWrapper = $('#new-observation');
 $drawingForm = $( '#drawing-form' );
 
 var observations = {
-  startNew: function() {
-    $('#stepone').removeClass('visible');
-    $('#steptwo').addClass('visible');
-    $('#use-my-location').click(function() {
-      findLocation();
-      observations.stepTwo();
-      observationMap.styleLocation();
-    });
-    $('#choose-from-map').click(function() {
-      drawLocation();
-      observations.stepTwo();
-    })
-  },
   stepTwo: function() {
     $('#steptwo').removeClass('visible');
     $('#stepthree').addClass('visible');
@@ -106,6 +93,16 @@ var observations = {
       $drawingForm.submit(function(e) {
         e.preventDefault();
         observations.create(e.target);
+      });
+      $('#steptwo').addClass('visible');
+      $('#use-my-location').click(function() {
+        findLocation();
+        observations.stepTwo();
+        observationMap.styleLocation();
+      });
+      $('#choose-from-map').click(function() {
+        drawLocation();
+        observations.stepTwo();
       })
     });
   },
