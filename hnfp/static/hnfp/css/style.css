@@ -25,15 +25,12 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
-
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
   text-rendering: optimizeLegibility;
-
   /* Support for Firefox. */
   -moz-osx-font-smoothing: grayscale;
-
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
@@ -55,19 +52,17 @@
   src: local('function'),
        local('function_regular'),
        url('/static/hnfp/fonts/function/function_bold.woff2') format('woff2'),
-       url('/static/hnfp/fonts/function/function_bold.woff') format('woff');git
+       url('/static/hnfp/fonts/function/function_bold.woff') format('woff');
 }
 
-/*--------------------
-  materialize overrides
-  --------------------*/
+/*----- materialize overrides ------*/
 .clockpicker-canvas {
   overflow: hidden !important;
 }
 
-/*--------------------
+/*------------------------------------
   colors
-  --------------------*/
+  ---------------------------------- */
 
 .black {
   color: #000;
@@ -76,53 +71,52 @@
 .red {
   color: #d53f38;
 }
-.bg-red {
-  background: #d53f38;
-}
+  .bg-red {
+    background: #d53f38;
+  }
 
 .teal {
   color: #57a6a2;
 }
-.bg-teal {
-  background: #57a6a2;
-}
+  .bg-teal {
+    background: #57a6a2;
+  }
 
 .green_light {
   color: #e4efee;
 }
-
-.bg_green_light {
+  .bg_green_light {
     background: #e4efee;
-}
+  }
 
 .blue_grey {
   color: #5d85b7;
 }
-.bg_blue_grey {
-  background:#5d85b7;
-}
+  .bg_blue_grey {
+    background:#5d85b7;
+  }
 
 .blue_dark {
   color: #2b384a;
 }
-.bg_blue_dark {
-  background: #2b384a;
-}
+  .bg_blue_dark {
+    background: #2b384a;
+  }
 
 .blue_light {
   color: #dfeceb;
 }
-.bg_blue_light {
-  background: #dfeceb;
-}
+  .bg_blue_light {
+    background: #dfeceb;
+  }
 
 .magenta {
   color: #9e005d;
 }
 
-/*--------------------
+/*----------------------------------
   global
-  --------------------*/
+  --------------------------------- */
 
 body {
   background-color: #ffffff;
@@ -146,13 +140,13 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
   font-family: 'function_bold', sans-serif;
   font-weight: normal;
   line-height: 1.375;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.5em;
 }
-
 h1 {
   font-size: 2.5em;
 }
@@ -169,15 +163,12 @@ h5 {
   font-size: 1.25em;
 }
 h6 {
-  font-family: 'function_bold', sans-serif;
   font-size: 1.125em;
-  font-weight: normal;
-  margin: 1rem 0;
+  margin: 1em 0;
 }
 
 strong {
   font-family: 'function_bold', sans-serif;
-  font-weight: normal;
 }
 
 p {
@@ -1362,6 +1353,10 @@ div.mapgroup {
     top: -2px;
     z-index: -2;
   }
+
+.alerts-wrap .card-content {
+  padding: 1rem;
+}
 
 /*--------------------
   Forum

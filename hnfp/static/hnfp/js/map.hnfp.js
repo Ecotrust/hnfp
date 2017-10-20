@@ -194,7 +194,7 @@ var popup = new ol.Overlay({
 
 // set popups to show on click
 var popupClick = 'click';
-function mapAddPopup() {
+(function mapAddPopup() {
   map.addEventListener(popupClick, function(event) {
     let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
       return feature;
@@ -210,8 +210,7 @@ function mapAddPopup() {
       map.removeOverlay(popup);
     }
   })
-}
-mapAddPopup();
+})();
 
 function addOverlayPopup(feature) {
   let coords = feature.getGeometry().getCoordinates();
@@ -242,8 +241,16 @@ function addOverlayPopup(feature) {
     `;
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
     domElement.querySelector('.card-content').innerHTML = `
-      <p class="center">${featuresProps}</p>
+      <p class="center"><strong>${featuresProps.alert_type}</strong></p>
+      <p class="center">${featuresProps.alert_date}</p>
+      <p class="center">${featuresProps.alert_time}</p>
+      <p><span>${featuresProps.alert_comment}</span></p>
     `;
+    /* domElement.querySelector('.card-action').innerHTML = `
+      <!-- TODO make edit and delete available only to user who created alert and admin -->
+      <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
+      <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
+    `; */
   }
   popup.setPosition(coords);
 }
