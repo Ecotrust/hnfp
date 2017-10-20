@@ -717,6 +717,29 @@ div.mapgroup {
   max-width: 48rem;
 }
 
+div.mapgroup .col-md-1,
+div.mapgroup h3 {
+  display: none;
+}
+
+.accounts-form-wrap {
+  border: none !important;
+  margin: 0 auto !important;
+}
+
+.accounts-form-wrap h2,
+.accounts-form-wrap hr {
+  display: none;
+}
+
+.accounts-form-wrap .login-form > div {
+  width: 100%;
+}
+
+.accounts-form-wrap .login-form .left-inner-addon input {
+  padding-left: 0;
+}
+
 /*--------------------
   map
   --------------------*/
