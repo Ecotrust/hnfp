@@ -75,6 +75,11 @@ class SurveyResults(models.Model):
 		blank=True,
 		null=True
 	)
+	forest_use_other = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
 
 	rank_hunt = models.CharField(
 		max_length=400,
@@ -103,6 +108,11 @@ class SurveyResults(models.Model):
 	)
 	rank_collect_firewood = models.CharField(
 		max_length=400,
+		blank=True,
+		null=True,
+	)
+	rank_other = models.CharField(
+		max_length=4000,
 		blank=True,
 		null=True,
 	)

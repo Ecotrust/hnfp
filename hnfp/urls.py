@@ -21,7 +21,6 @@ urlpatterns = [
     url(r'^survey/$', views.survey, name='survey'),
     url(r'^save_survey/$', views.save_survey, name='save_survey'),
     url(r'^login/', views.login, name='login'),
-    url(r'^account/$', views.myaccount, name='myaccount'),
     url(r'^myaccount/?', views.myaccount, name='myaccount'),
     url(r'^registering/', views.registering, name='registering'),
     url(r'^registered/', views.registered, name='registered'),
