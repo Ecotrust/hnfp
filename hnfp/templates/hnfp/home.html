@@ -84,7 +84,7 @@
       <div class="col s10 offset-s1 l9 offset-l3 flow-text">
         <blockquote class="margin-bottom">Find more information about land management activities currently underway or planned for the near future. Here you can read details about the management plans and provide feedback.</blockquote>
         <div class="margin-bottom">
-          <a href="{% url 'survey' %}" class="disabled waves-effect home-cta waves-light btn-large btn-border-light-blue">Launch Map <i class="material-icons right">navigate_next</i></a>
+          <a href="{% url 'landuse' %}" class="waves-effect home-cta waves-light btn-large btn-border-light-blue">Launch Map <i class="material-icons right">navigate_next</i></a>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
       <div class="card">
           <div class="card-image">
             <img src="{% static 'hnfp/img/ianaj-solistice.jpg' %}">
-            <a href="" class="disabled btn-floating btn-large halfway-fab waves-effect waves-light"><i class="material-icons right">launch</i></a>
+            <a href="{% url 'landuse' %}" class="btn-floating btn-large halfway-fab waves-effect waves-light"><i class="material-icons right">launch</i></a>
           </div>
           <div class="card-content flow-text">
             <span class="card-title"><h2 class="teal-text">Our shared land management plan</h2></span>
