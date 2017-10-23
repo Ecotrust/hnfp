@@ -73,11 +73,11 @@
       <img src="{% static 'hnfp/img/ianaj-stream.jpg' %}">
     </div>
   </div>
-  <section class="section white">
+  <section class="section white hide-on-small-only">
     <div class="section-top-bg">
       <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img">
     </div>
-    <div class="row container hide-on-small-only">
+    <div class="row container">
       <div class="col s12 l9 flow-text">
         <h2 class="teal-text">Our shared land management plan</h2>
       </div>
@@ -89,31 +89,30 @@
       </div>
     </div>
   </section>
-  <section class="section white">
-    <div class="row container hide-on-med-and-up">
+  <section class="section white hide-on-med-and-up">
+    <div class="row container">
       <div class="card">
-          <div class="card-image">
-            <img src="{% static 'hnfp/img/ianaj-solistice.jpg' %}">
-            <a href="{% url 'landuse' %}" class="btn-floating btn-large halfway-fab waves-effect waves-light"><i class="material-icons right">launch</i></a>
-          </div>
           <div class="card-content flow-text">
-            <span class="card-title"><h2 class="teal-text">Our shared land management plan</h2></span>
+            <span class="card-title"><h5 class="teal-text">Our shared land management plan</h5></span>
             <p>Find more information about land management activities currently underway or planned for the near future. Here you can read details about the management plans and provide feedback.</p>
+          </div>
+          <div class="card-action">
+            <a href="{% url 'landuse' %}" class="waves-effect waves-light btn btn-large btn-border-light-blue">Launch Map <i class="material-icons right">launch</i></a>
           </div>
       </div>
     </div>
   </section>
-  <section class="section bg_green_light padding-top">
+  <section class="section padding-top">
     <div class="row container home-mid">
       <div class="col s12 flow-text">
         <h2 class="teal-text">Our Partnership</h2>
       </div>
     </div>
-    <div class="home-mid container white padding-top">
+    <div class="home-mid container white">
       {% include 'hnfp/blocks/logos.html' %}
     </div>
   </section>
-  <section class="section bg_green_light padding-top section-prefooter relative">
+  <section class="section padding-top section-prefooter relative">
     <div class="section-bottom-bg">
       <img src="{% static 'hnfp/img/mountain_ridge_blue.svg' %}" class="section-top-bg-img">
     </div>
