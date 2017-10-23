@@ -740,6 +740,10 @@ div.mapgroup h3 {
   padding-left: 0;
 }
 
+.card .card-image img.profile-img {
+  width: 40px;
+}
+
 /*--------------------
   map
   --------------------*/
@@ -1167,6 +1171,10 @@ div.mapgroup h3 {
   background: #dfebea;
   color: #4d4d4e;
   font-family: 'function_bold', sans-serif;
+}
+
+#new-observation .select-wrapper .select-dropdown {
+  border-bottom: 1px solid #9e9e9e;
 }
 
 #new-observation select.browser-default,

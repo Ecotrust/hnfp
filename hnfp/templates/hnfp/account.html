@@ -3,15 +3,15 @@
 
 {% block outer_content %}
 
-<main class="account">
+<main class="account bg_blue_light padding-top">
   <section class="container section">
     <div class="row">
       <div class="col s12">
-        <div class="col s12 m7">
+        <div class="col s12 m8 l6 offset-m2 offset-l3">
           <h2 class="header">{{ title }}</h2>
           <div class="card horizontal">
             <div class="card-image">
-              <img src="{% static 'hnfp/img/icons/i_profile.svg' %}" style="width: 60px; height: auto;">
+              <img src="{% static 'hnfp/img/icons/i_profile.svg' %}" class="profile-img">
             </div>
             <div class="card-stacked">
               <div class="card-content">
@@ -20,19 +20,24 @@
                 <p><strong>email</strong><br />{{ user.email }}</p>
               </div>
               <div class="card-action">
-                <a class="" href="{% url 'account:edit' %}">Edit Info</a>
-                <a href="{% url 'account:change_password' %}">Change Password</a>
+                <a class="" href="{% url 'account:edit' %}">Edit Account</a>
+              </div>
+              <div class="card-action">
+                <a href="{% url 'account:change_password' %}">New Password</a>
+              </div>
+              <div class="card-action">
+                <a href="{% url 'account:logout' %}">Log out</a><br />
               </div>
             </div>
           </div>
         </div>
         {% if user.is_superuser %}
-          <div class="col s12 m7">
+          <div class="col s12 l6">
             <a class="btn btn-success" href="{{ admin_url }}">Go to the Django admin page</a>
           </div>
         {% endif %}
         {% if user.is_staff %}
-          <div class="col s12 m7 margin-bottom">
+          <div class="col s12 l6">
             <a class="btn btn-success" href="/admin">Go to the CMS admin page</a>
           </div>
         {% endif %}
@@ -49,8 +54,8 @@
         {% endif %}
         -->
 
-        <div class="col s12 m7">
-          <a class="btn btn-flat" href="{% url 'account:logout' %}">Log out</a><br />
+        <div class="col s12 m8 l6 offset-m2 offset-l3">
+
         </div>
       </div>
     </div>

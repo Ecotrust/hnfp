@@ -139,7 +139,7 @@ def registered(request):
     }
     return HttpResponse(template.render(context, request))
 
-def login(request, return_template='hnfp/login.html'):
+def login(request):
     template = loader.get_template('hnfp/login.html')
     form = HoonahLogInForm()
     context = {
@@ -150,6 +150,8 @@ def login(request, return_template='hnfp/login.html'):
     return HttpResponse(template.render(context, request))
 
 def myaccount(request):
+    if request.user.is_anonymous(): # not logged in
+        return login(request)
     template = loader.get_template('hnfp/account.html')
     context = {
         'title': 'Hoonah Steward Profile',

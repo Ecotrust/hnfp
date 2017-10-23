@@ -31,6 +31,7 @@ var observations = {
   showStepFour: function(step) {
     $(step).removeClass('visible');
     $('#stepfour').addClass('visible');
+    $('select').material_select();
   },
   backStepThree: function() {
     var loc = getLocationPoint();
