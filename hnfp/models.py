@@ -344,6 +344,11 @@ class Observation(models.Model):
 		blank=True,
 	)
 
+	observation_photo = models.FileField(
+		upload_to='observations/%Y/%m/%d',
+		max_length=4000,
+	)
+
 	observer_username = models.CharField(
 		max_length=800,
 		null=True,

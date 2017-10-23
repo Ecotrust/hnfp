@@ -57,6 +57,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.media',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -121,6 +122,9 @@ STATICFILES_DIRS = (
     STYLES_DIR,
     ASSETS_DIR,
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 ### Django compressor (mp-visualize/base.html)
 COMPRESS_ENABLED = True

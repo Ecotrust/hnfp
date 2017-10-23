@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.conf.urls import url, include
 from django.views.generic import ListView, DateDetailView
+from django.conf.urls.static import static
 from . import views
 from hnfp.models import Post, AOI
 from features.views import form_resources
@@ -47,3 +49,6 @@ urlpatterns = [
     url(r'^landuse/(?P<pk>[0-9]+)/detail/', views.landuse_detail, name='landuse_detail'),
     url(r'^', views.home, name='index'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

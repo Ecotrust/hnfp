@@ -288,6 +288,7 @@ def observation_create(request):
         comments = request.POST['comments']
         observation_time = request.POST['observation_time']
         observation_date = request.POST['observation_date']
+        observation_photo = request.FILES['observation_photo']
 
         new_obs = Observation(
             observation_location=observation_location,
@@ -297,7 +298,8 @@ def observation_create(request):
             observation_time=observation_time,
             observation_tally=observation_tally,
             comments=comments,
-            observer_username=request.user.username
+            observation_photo=observation_photo,
+            observer_username=request.user.username,
         );
         new_obs.save()
         all_observation = [x.to_dict() for x in Observation.objects.filter(observer_username=request.user.username)]
