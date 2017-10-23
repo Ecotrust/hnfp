@@ -139,7 +139,7 @@ def registered(request):
     }
     return HttpResponse(template.render(context, request))
 
-def login(request):
+def login(request, return_template='hnfp/login.html'):
     template = loader.get_template('hnfp/login.html')
     form = HoonahLogInForm()
     context = {
