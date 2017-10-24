@@ -331,15 +331,7 @@ var observationMap = {
 
 if (typeof all_alerts !== 'undefined') {
   for (var i = 0; i < all_alerts.length; i++) {
-    let geo = JSON.parse(all_alerts[i].alert_location),
-        coords = geo.coordinates,
-        a_id = all_alerts[i]['alert_id'];
-        style = alertMap.styleAlert(a_id);
-    let newA = new ol.Feature();
-    vectorSource.addFeature(newA);
-    newA.setGeometry(new ol.geom.Point(coords));
-    newA.setStyle(style);
-    newA.setProperties(all_alerts[i]);
+    addAlertsToMap(all_alerts[i]);
   }
   alertMap.selectAlert();
 }
@@ -347,12 +339,10 @@ if (typeof all_alerts !== 'undefined') {
 // geolocation tracker var
 var geolocation;
 function findLocation() {
-
   geolocation = new ol.Geolocation({
     projection: mapView.getProjection(),
     tracking: true
   });
-
   let changeCount = 0;
   geolocation.on('change', function(e) {
     if (changeCount < 1) {
@@ -367,7 +357,6 @@ function findLocation() {
       changeCount++;
     }
   });
-
   geolocation.on('error', function(error) {
     geolocation.setTracking(false);
     Materialize.toast(`${error.message}`, 9000);
@@ -451,25 +440,22 @@ function addObservationToMap(feat) {
   }));
 }
 
-function addAlertsToMap(data) {
-  let l = data.length - 1,
-      newDataCoords = JSON.parse(data[l].alert_location),
-      type = data[l].alert_type,
+function addAlertsToMap(feat) {
+  let geo = JSON.parse(feat.alert_location),
+      coords = geo.coordinates,
+      a_id = feat['alert_id'];
       point = new ol.Feature(),
-      a_id = data[l]['alert_id'];;
-      style = alertMap.styleAlert(a_id);
+      style = alertMap.styleAlert(a_id),
   vectorSource.addFeature(point);
-  let coords = newDataCoords.coordinates;
   point.setGeometry(new ol.geom.Point(coords));
   point.setStyle(style);
-  point.setProperties(data[l]);
-  var selectClick = new ol.interaction.Select({
-    condition: ol.events.condition.click
+  point.setProperties({
+    'id': a_id,
+    'alert_type': feat.alert_type,
+    'alert_date': feat.alert_date,
+    'alert_time': feat.alert_time,
+    'alert_comment': feat.alert_comment,
   });
-  map.addInteraction(selectClick);
-  selectClick.on('select', function(e) {
-    console.log(e.target.getFeatures());
-  })
 }
 
 function hideLocation() {

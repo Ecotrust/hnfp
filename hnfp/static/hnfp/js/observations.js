@@ -114,8 +114,8 @@ var observations = {
       url: '/observation/create/',
       data: $form,
       success: function(data) {
-        let newdata = data.length - 1;
-        addObservationToMap(data[newdata]);
+        let newData = data.length - 1;
+        addObservationToMap(data[newData]);
         observations.close();
         $drawingForm.html('');
       },

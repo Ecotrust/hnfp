@@ -137,8 +137,21 @@ var alerts = {
       $('#choose-from-map').click(function() {
         alertMap.drawLocation();
         alerts.stepTwo();
-      })
+      });
+      $('#alert_photo').change(function(e) {
+        alerts.photo(e.target.files[0]);
+      });
     });
+  },
+  photo: function(p) {
+    let photoForm;
+    if (typeof(p) !== 'undefined') {
+      photoForm = new FormData();
+      if (p.size < 1048576) {
+        photoForm.append('alert_photo', p, p.name);
+      }
+    }
+    return photoForm;
   },
   create: function(form) {
     $form = $(form).serialize();
@@ -147,7 +160,8 @@ var alerts = {
       url: '/alert/create/',
       data: $form,
       success: function(data) {
-        addAlertsToMap(data);
+        let newData = data.length - 1;
+        addAlertsToMap(data[newData]);
         hideLocation();
         alerts.close();
         $alertForm.html('');

@@ -450,6 +450,11 @@ class Alert(models.Model):
 		default=False
 	)
 
+	alert_img = models.FileField(
+		upload_to='alert_imgs/%Y/%m/%d',
+		max_length=2000,
+	)
+
 	def to_dict(self):
 		if self.alert_location is not None:
 			point = self.alert_location.geojson
@@ -462,6 +467,7 @@ class Alert(models.Model):
 			'alert_username': self.alert_username,
 			'alert_location': point,
 			'alert_comment': self.alert_comment,
+			'alert_photo': self.alert_photo,
 			'alert_id': self.id,
 		}
 
@@ -473,6 +479,9 @@ class Alert(models.Model):
 
 	def get_user_alerts(username):
 		return Alert.objects.filter(alert_username=username)
+
+	def get_absolute_url(self):
+		return reverse('alert_detail', kwargs={'pk': self.pk})
 
 # Ecosystems services table
 class Resource(models.Model):

@@ -181,15 +181,15 @@ def dashboard(request):
 
 def get_all_alerts():
     all_alerts = []
-    get_alerts = Alert.objects.filter(alert_confirmed=True)
-    for a in get_alerts:
-        dic = a.to_dict()
+    get_obs = Alert.objects.filter(alert_confirmed=True)
+    for x in get_obs:
+        dic = x.to_dict()
         all_alerts.append(dic)
-    return all_alerts
+    return all_alerts;
 
 def get_recent_alerts():
     recent_alerts = []
-    get_recent = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')[:5]
+    get_recent = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')
     for a in get_recent:
         dic = a.to_dict()
         recent_alerts.append(dic)
@@ -197,15 +197,10 @@ def get_recent_alerts():
 
 def alert(request):
     template = loader.get_template('hnfp/alert.html')
-    all_alerts = []
-    get_alerts = Alert.objects.all()
-    for a in get_alerts:
-        if a.alert_confirmed == True:
-            dic = a.to_dict()
-            all_alerts.append(dic)
+    recent_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')]
     context = {
         'title': 'Alerts',
-        'alerts': json.dumps(all_alerts),
+        'all_alerts': json.dumps(get_all_alerts()),
         'recent_alerts': json.dumps(get_recent_alerts()),
     }
     return HttpResponse(template.render(context, request))
@@ -229,6 +224,7 @@ def alert_create(request):
         alert_comment = request.POST['alert_comment']
         alert_time = request.POST['alert_time']
         alert_date = request.POST['alert_date']
+        alert_img = request.FILES['alert_photo']
 
         new_a = Alert(
             alert_location=alert_location,
@@ -236,6 +232,7 @@ def alert_create(request):
             alert_comment=alert_comment,
             alert_time=alert_time,
             alert_date=alert_date,
+            alert_img=alert_photo,
             alert_username=request.user.username
         );
         new_a.save()
