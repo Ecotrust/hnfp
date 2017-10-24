@@ -161,6 +161,8 @@ def myaccount(request):
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
     posts = Post.objects.get_queryset()
+    all_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True)]
+    recent_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')]
     jobs = JobOpportunity.objects.order_by('posted')[:5]
     for job in jobs:
         try:
@@ -173,35 +175,22 @@ def dashboard(request):
     context = {
         'title': '',
         'posts': posts,
-        'alerts': json.dumps(get_all_alerts()),
-        'recent_alerts': json.dumps(get_recent_alerts()),
+        'alerts': json.dumps(all_alerts),
+        'recent_alerts': json.dumps(recent_alerts),
     }
     context['jobs'] = jobs
     return HttpResponse(template.render(context, request))
 
-def get_all_alerts():
-    all_alerts = []
-    get_obs = Alert.objects.filter(alert_confirmed=True)
-    for x in get_obs:
-        dic = x.to_dict()
-        all_alerts.append(dic)
-    return all_alerts;
-
-def get_recent_alerts():
-    recent_alerts = []
-    get_recent = Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')
-    for a in get_recent:
-        dic = a.to_dict()
-        recent_alerts.append(dic)
-    return recent_alerts
-
 def alert(request):
     template = loader.get_template('hnfp/alert.html')
+    user_alerts = [x.to_dict() for x in Alert.objects.filter(alert_username=request.user.username)]
+    all_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True)]
     recent_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')]
     context = {
         'title': 'Alerts',
-        'all_alerts': json.dumps(get_all_alerts()),
-        'recent_alerts': json.dumps(get_recent_alerts()),
+        'user_alerts': json.dumps(user_alerts),
+        'all_alerts': json.dumps(all_alerts),
+        'recent_alerts': json.dumps(recent_alerts),
     }
     return HttpResponse(template.render(context, request))
 
@@ -224,7 +213,7 @@ def alert_create(request):
         alert_comment = request.POST['alert_comment']
         alert_time = request.POST['alert_time']
         alert_date = request.POST['alert_date']
-        alert_img = request.FILES['alert_photo']
+        alert_photo = request.FILES['alert_photo']
 
         new_a = Alert(
             alert_location=alert_location,
@@ -232,7 +221,7 @@ def alert_create(request):
             alert_comment=alert_comment,
             alert_time=alert_time,
             alert_date=alert_date,
-            alert_img=alert_photo,
+            alert_photo=alert_photo,
             alert_username=request.user.username
         );
         new_a.save()

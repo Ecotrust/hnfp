@@ -22,6 +22,7 @@ var alerts = {
           <article id="alert_${alert.alert_id}">
             <div class="triangle">${alert.alert_id}</div>
             <h3>${alert.alert_type}</h3>
+            <p><img src="${alert.alert_photo}" /></p>
             <p><em>posted by ${alert.alert_username}<br />${alert.alert_date} ${alert.alert_time}</em></p>
             <p>${alert.alert_comment}</p>
           </article>
@@ -138,9 +139,9 @@ var alerts = {
         alertMap.drawLocation();
         alerts.stepTwo();
       });
-      $('#alert_photo').change(function(e) {
+      /* $('#alert_photo').change(function(e) {
         alerts.photo(e.target.files[0]);
-      });
+      }); */
     });
   },
   photo: function(p) {

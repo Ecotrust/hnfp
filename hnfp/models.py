@@ -344,7 +344,7 @@ class Observation(models.Model):
 		blank=True,
 	)
 
-	observation_photo = models.FileField(
+	observation_photo = models.ImageField(
 		upload_to='observations/%Y/%m/%d',
 		max_length=4000,
 	)
@@ -383,6 +383,7 @@ class Observation(models.Model):
 			'number_of_observers': self.number_of_observers,
 			'observer_username': self.observer_username,
 			'observation_location': point,
+			'observation_photo': self.observation_photo.url,
 			'comments': self.comments,
 			'id': self.id,
 		}
@@ -450,7 +451,7 @@ class Alert(models.Model):
 		default=False
 	)
 
-	alert_img = models.FileField(
+	alert_photo = models.ImageField(
 		upload_to='alert_imgs/%Y/%m/%d',
 		max_length=2000,
 	)
@@ -467,7 +468,7 @@ class Alert(models.Model):
 			'alert_username': self.alert_username,
 			'alert_location': point,
 			'alert_comment': self.alert_comment,
-			'alert_photo': self.alert_photo,
+			'alert_photo': self.alert_photo.url,
 			'alert_id': self.id,
 		}
 

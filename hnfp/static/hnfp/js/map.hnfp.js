@@ -227,6 +227,19 @@ function addOverlayPopup(feature) {
       <a href="/observation/${featuresProps.id}/update/" class="disabled">Edit</a>
       <a href="/observation/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
+  } else if (typeof(featuresProps.alert_type) !== 'undefined') {
+    domElement.querySelector('.card-content').innerHTML = `
+      <div class="card-image"><img src="${featuresProps.alert_photo}" /></div>
+      <p class="center"><strong>${featuresProps.alert_type}</strong></p>
+      <p class="center">${featuresProps.alert_date}</p>
+      <p class="center">${featuresProps.alert_time}</p>
+      <p><span>${featuresProps.alert_comment}</span></p>
+    `;
+    /* domElement.querySelector('.card-action').innerHTML = `
+      <!-- TODO make edit and delete available only to user who created alert and admin -->
+      <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
+      <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
+    `; */
   } else if (typeof(featuresProps.summary) !== 'undefined') {
     coords = feature.getGeometry().getExtent();
     domElement.querySelector('.card-content').innerHTML = `
@@ -239,18 +252,6 @@ function addOverlayPopup(feature) {
       <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
       <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
-  } else if (typeof(featuresProps.alert_type) !== 'undefined') {
-    domElement.querySelector('.card-content').innerHTML = `
-      <p class="center"><strong>${featuresProps.alert_type}</strong></p>
-      <p class="center">${featuresProps.alert_date}</p>
-      <p class="center">${featuresProps.alert_time}</p>
-      <p><span>${featuresProps.alert_comment}</span></p>
-    `;
-    /* domElement.querySelector('.card-action').innerHTML = `
-      <!-- TODO make edit and delete available only to user who created alert and admin -->
-      <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
-      <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
-    `; */
   }
   popup.setPosition(coords);
 }
@@ -332,6 +333,13 @@ var observationMap = {
 if (typeof all_alerts !== 'undefined') {
   for (var i = 0; i < all_alerts.length; i++) {
     addAlertsToMap(all_alerts[i]);
+  }
+  alertMap.selectAlert();
+}
+
+if (typeof user_alerts !== 'umdefined') {
+  for (var i = 0; i < user_alerts.length; i++) {
+    addAlertsToMap(user_alerts[i]);
   }
   alertMap.selectAlert();
 }

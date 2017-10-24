@@ -3,7 +3,7 @@
 
 {% block extra_css %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.css'%}">
+  <link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.css'%}"/>
   <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
 {% endblock extra_css %}
 
@@ -56,6 +56,7 @@
     <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
 
     <script>
+      var user_alerts = {{ user_alerts|safe }};
       var all_alerts = {{ all_alerts|safe }};
       var recent_alerts = {{ recent_alerts|safe }};
     </script>
