@@ -293,7 +293,7 @@ def observation_create(request):
 
 class ObservationUpdate(UpdateView):
     model = Observation
-    fields = ['category', 'customcategory', 'observation_type', 'observation_date', 'observation_time', 'observation_tally', 'observation_location', 'comments']
+    fields = ['category', 'customcategory', 'observation_type', 'observation_date', 'observation_time', 'observation_tally', 'observation_location', 'comments', 'observation_photo']
     template_name_suffix = '_update'
 
 class ObservationDelete(DeleteView):

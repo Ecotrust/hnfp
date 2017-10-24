@@ -452,7 +452,7 @@ class Alert(models.Model):
 	)
 
 	alert_photo = models.ImageField(
-		upload_to='alert_imgs/%Y/%m/%d',
+		upload_to='alerts/%Y/%m/%d',
 		max_length=2000,
 	)
 

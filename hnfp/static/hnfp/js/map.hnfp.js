@@ -222,6 +222,7 @@ function addOverlayPopup(feature) {
       <span class="center card-title">${featuresProps.observation_type}</span>
       <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
       <p>${featuresProps.comments}</p>
+      <p><img src="${featuresProps.observation_photo}" /></p>
     `;
     domElement.querySelector('.card-action').innerHTML = `
       <a href="/observation/${featuresProps.id}/update/" class="disabled">Edit</a>
@@ -229,7 +230,7 @@ function addOverlayPopup(feature) {
     `;
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
     domElement.querySelector('.card-content').innerHTML = `
-      <div class="card-image"><img src="${featuresProps.alert_photo}" /></div>
+      <p><img src="${featuresProps.alert_photo}" /></p>
       <p class="center"><strong>${featuresProps.alert_type}</strong></p>
       <p class="center">${featuresProps.alert_date}</p>
       <p class="center">${featuresProps.alert_time}</p>
@@ -337,8 +338,8 @@ if (typeof all_alerts !== 'undefined') {
   alertMap.selectAlert();
 }
 
-if (typeof user_alerts !== 'umdefined') {
-  for (var i = 0; i < user_alerts.length; i++) {
+if (typeof all_alerts !== 'undefined') {
+  for (var i = 0; i < all_alerts.length; i++) {
     addAlertsToMap(user_alerts[i]);
   }
   alertMap.selectAlert();
@@ -438,6 +439,7 @@ function addObservationToMap(feat) {
     'observation_tally': feat.observation_tally,
     'observation_type': feat.observation_type,
     'observer_username': feat.observer_username,
+    'observation_photo': feat.observation_photo,
   });
   point.setStyle(new ol.style.Style({
     image: new ol.style.Icon({
