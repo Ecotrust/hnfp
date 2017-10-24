@@ -346,7 +346,9 @@ class Observation(models.Model):
 
 	observation_photo = models.ImageField(
 		upload_to='observations/%Y/%m/%d',
-		max_length=4000,
+		max_length=2000,
+		null=True,
+		blank=True,
 	)
 
 	observer_username = models.CharField(
@@ -454,6 +456,8 @@ class Alert(models.Model):
 	alert_photo = models.ImageField(
 		upload_to='alerts/%Y/%m/%d',
 		max_length=2000,
+		null=True,
+		blank=True,
 	)
 
 	def to_dict(self):
