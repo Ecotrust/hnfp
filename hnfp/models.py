@@ -385,7 +385,7 @@ class Observation(models.Model):
 			'number_of_observers': self.number_of_observers,
 			'observer_username': self.observer_username,
 			'observation_location': point,
-			'observation_photo': self.observation_photo.url,
+			'observation_photo': self.observation_photo.path,
 			'comments': self.comments,
 			'id': self.id,
 		}
@@ -472,7 +472,7 @@ class Alert(models.Model):
 			'alert_username': self.alert_username,
 			'alert_location': point,
 			'alert_comment': self.alert_comment,
-			'alert_photo': self.alert_photo.url,
+			'alert_photo': self.alert_photo.path,
 			'alert_id': self.id,
 		}
 
