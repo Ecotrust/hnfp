@@ -376,7 +376,7 @@ class Observation(models.Model):
 		else:
 			point = None
 		if self.observation_photo:
-			photo = self.observation_photo.path
+			photo = self.observation_photo.url
 		else:
 			photo = ''
 		return {
@@ -470,7 +470,7 @@ class Alert(models.Model):
 		else:
 			point = None
 		if self.alert_photo is not None:
-			photo = self.alert_photo.path
+			photo = self.alert_photo.url
 		else:
 			photo = ''
 		return {
