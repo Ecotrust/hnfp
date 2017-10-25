@@ -469,10 +469,12 @@ class Alert(models.Model):
 			point = self.alert_location.geojson
 		else:
 			point = None
-		if self.alert_photo is not None:
+
+		if self.alert_photo:
 			photo = self.alert_photo.url
 		else:
 			photo = ''
+			
 		return {
 			'alert_date': self.alert_date,
 			'alert_time': self.alert_time,

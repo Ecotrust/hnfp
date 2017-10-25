@@ -16,7 +16,7 @@ from accounts.forms import SignUpForm, LogInForm
 from accounts import views
 # survey, forum, jobs, alerts, observation, landuse
 from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource
-from hnfp.forms import ResponseForm, HoonahLogInForm
+from hnfp.forms import ResponseForm, HoonahLogInForm, AlertForm
 # features and shapes
 from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
 import json
@@ -206,6 +206,12 @@ def alert_detail(request, alert_id):
 
 def alert_create(request):
     if request.method == 'POST':
+        form = AlertForm(request.POST, request.FILES)
+        if form.is_valid():
+            alert_photo = request.FILES['alert_photo']
+        else:
+            alert_photo = ''
+
         loc = request.POST['alert_location']
         lp = loc.split(',')
         alert_location = Point([float(lp[0]),float(lp[1])])
@@ -213,7 +219,6 @@ def alert_create(request):
         alert_comment = request.POST['alert_comment']
         alert_time = request.POST['alert_time']
         alert_date = request.POST['alert_date']
-        alert_photo = request.FILES
 
         new_a = Alert(
             alert_location=alert_location,

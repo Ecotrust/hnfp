@@ -295,8 +295,8 @@ var alertMap = {
         fillColor = '#d53f38';
     if (typeof a_id === 'undefined') {
       a_id = '';
-      fillColor = '#ffea30';
-      width = 2.5;
+      fillColor = '#f72122';
+      width = 0;
     } else {
       a_id = a_id.toString();
     }

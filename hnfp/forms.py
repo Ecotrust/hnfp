@@ -1,9 +1,12 @@
 from django import forms
 from django.forms import models
 from accounts.forms import DivForm, l_icon, l_icon_pw
-from hnfp.models import Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple
+from hnfp.models import Question, Category, Survey, Response, AnswerText, AnswerRadio, AnswerSelect, AnswerInteger, AnswerSelectMultiple, Alert
 from django.utils.safestring import mark_safe
 import uuid
+
+class AlertForm(forms.Form):
+    file = forms.ImageField()
 
 class HoonahLogInForm(DivForm):
     ## Hoonah login form is almost a direct copy and paste from accounts->forms.py LogInForm
