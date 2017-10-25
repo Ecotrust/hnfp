@@ -213,7 +213,7 @@ def alert_create(request):
         alert_comment = request.POST['alert_comment']
         alert_time = request.POST['alert_time']
         alert_date = request.POST['alert_date']
-        alert_photo = request.FILES['alert_photo']
+        alert_photo = request.FILES
 
         new_a = Alert(
             alert_location=alert_location,
@@ -274,7 +274,7 @@ def observation_create(request):
         comments = request.POST['comments']
         observation_time = request.POST['observation_time']
         observation_date = request.POST['observation_date']
-        observation_photo = request.FILES['observation_photo']
+        observation_photo = request.FILES
 
         new_obs = Observation(
             observation_location=observation_location,

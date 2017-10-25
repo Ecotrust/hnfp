@@ -230,11 +230,11 @@ function addOverlayPopup(feature) {
     `;
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
     domElement.querySelector('.card-content').innerHTML = `
-      <p><img src="${featuresProps.alert_photo}" /></p>
       <p class="center"><strong>${featuresProps.alert_type}</strong></p>
       <p class="center">${featuresProps.alert_date}</p>
       <p class="center">${featuresProps.alert_time}</p>
       <p><span>${featuresProps.alert_comment}</span></p>
+      <p><img src="${featuresProps.alert_photo}" /></p>
     `;
     /* domElement.querySelector('.card-action').innerHTML = `
       <!-- TODO make edit and delete available only to user who created alert and admin -->

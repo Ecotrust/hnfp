@@ -1,5 +1,5 @@
 {% load static %}
-<form action="/observation/create/" method="POST">
+<form action="/observation/create/" method="POST" enctype="multipart/form-data">
   <section>
     {% csrf_token %}
     <section id="steptwo" class="card visible">
@@ -67,7 +67,7 @@
           <div class="file-field input-field col s9">
             <div class="btn small-btn btn-border-light-blue">
               <span>Choose File</span>
-              <input type="file" id="observation_photo" name="observation_photo" >
+              <input type="file" id="observation_photo" name="observation_photo" accept="image/*" />
             </div>
             <div class="file-path-wrapper">
               <input class="file-path validate" type="text" placeholder="Image(s)">

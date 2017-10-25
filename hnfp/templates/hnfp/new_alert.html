@@ -1,5 +1,5 @@
 {% load static %}
-<form action="/alert/create/" method="POST">
+<form action="/alert/create/" method="POST" enctype="multipart/form-data">
   <section>
     {% csrf_token %}
     <section id="steptwo" class="card visible">
