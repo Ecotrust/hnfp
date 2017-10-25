@@ -375,6 +375,10 @@ class Observation(models.Model):
 			point = self.observation_location.geojson
 		else:
 			point = None
+		if self.observation_photo is not None:
+			photo = self.observation_photo.path
+		else:
+			photo = ''
 		return {
 			'category': self.category,
 			'customcategory': self.customcategory,
@@ -385,7 +389,7 @@ class Observation(models.Model):
 			'number_of_observers': self.number_of_observers,
 			'observer_username': self.observer_username,
 			'observation_location': point,
-			'observation_photo': self.observation_photo.path,
+			'observation_photo': photo,
 			'comments': self.comments,
 			'id': self.id,
 		}
@@ -465,6 +469,10 @@ class Alert(models.Model):
 			point = self.alert_location.geojson
 		else:
 			point = None
+		if self.alert_photo is not None:
+			photo = self.alert_photo.path
+		else:
+			photo = ''
 		return {
 			'alert_date': self.alert_date,
 			'alert_time': self.alert_time,
@@ -472,7 +480,7 @@ class Alert(models.Model):
 			'alert_username': self.alert_username,
 			'alert_location': point,
 			'alert_comment': self.alert_comment,
-			'alert_photo': self.alert_photo.path,
+			'alert_photo': photo,
 			'alert_id': self.id,
 		}
 
