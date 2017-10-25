@@ -375,7 +375,7 @@ class Observation(models.Model):
 			point = self.observation_location.geojson
 		else:
 			point = None
-		if self.observation_photo is not None:
+		if self.observation_photo:
 			photo = self.observation_photo.path
 		else:
 			photo = ''
