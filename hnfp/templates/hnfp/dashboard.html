@@ -67,6 +67,7 @@
     <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
 
     <script>
+      var user_alerts = {{ user_alerts|safe }};
       var all_alerts = {{ alerts|safe }};
       var recent_alerts = {{ recent_alerts|safe }}
     </script>
