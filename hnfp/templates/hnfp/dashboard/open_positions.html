@@ -15,8 +15,8 @@
     <div class="container">
       {% for job in jobs %}
         <article class="job-post">
-          <h5 class="center border-bottom"><a href="/job/{{ job.id }}" >{{ job.title }}</a></h5>
-          <p class="center">{{ job.job_post|truncatechars_html:66 | safe }}</p>
+          <h5 class="border-bottom"><a href="/job/{{ job.id }}" >{{ job.title }}</a></h5>
+          {{ job.job_post|truncatechars_html:40 | safe }}
         </article>
       {% endfor %}
     </div>

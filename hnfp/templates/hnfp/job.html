@@ -2,10 +2,18 @@
 {% load static %}
 
 {% block outer_content %}
-  {% for job in jobs %}
-    <article class="job-post">
-      <h5 class="center border-bottom"><a href="/job/{{ job.id }}" >{{ job.title }}</a></h5>
-      {{ job.job_post | safe }}
-    </article>
-  {% endfor %}
+  <main class="jobs">
+    <section class="container">
+      {% for job in jobs %}
+        <div class="row">
+          <article class="job-post col s12 l8 offset-l2">
+              <h5 class="center border-bottom"><a href="/job/{{ job.id }}" >{{ job.title }}</a></h5>
+              <div class="job-body">
+                {{ job.job_post | safe }}
+              </div>
+          </article>
+        </div>
+      {% endfor %}
+    </section>
+  </main>
 {% endblock outer_content %}

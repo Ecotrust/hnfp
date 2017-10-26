@@ -177,8 +177,8 @@ def dashboard(request):
         'posts': posts,
         'alerts': json.dumps(all_alerts),
         'recent_alerts': json.dumps(recent_alerts),
+        'jobs': jobs,
     }
-    context['jobs'] = jobs
     return HttpResponse(template.render(context, request))
 
 def alert(request):
