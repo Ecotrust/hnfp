@@ -161,6 +161,7 @@ def myaccount(request):
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
     posts = Post.objects.get_queryset()
+    user_alerts = [x.to_dict() for x in Alert.objects.filter(alert_username=request.user.username)]
     all_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True)]
     recent_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')]
     jobs = JobOpportunity.objects.order_by('posted')[:5]
@@ -175,6 +176,7 @@ def dashboard(request):
     context = {
         'title': '',
         'posts': posts,
+        'user_alerts': json.dumps(user_alerts),
         'alerts': json.dumps(all_alerts),
         'recent_alerts': json.dumps(recent_alerts),
         'jobs': jobs,
