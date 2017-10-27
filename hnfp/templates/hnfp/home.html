@@ -5,18 +5,17 @@
 <main class="home-page">
   <div class="parallax-container">
     <div class="parallax">
-      <img src="{% static 'hnfp/img/bg_eagle.jpg' %}">
+      <img src="{% static 'hnfp/img/bg_eagle.jpg' %}" alt="bald eagle" />
     </div>
     <section class="row hero">
       <div class="col s10 m8 offset-s1 offset-m2">
         <h1>{{ tagline }}</h1>
-        <!-- <a href="{% url 'survey' %}" class="waves-effect waves-light btn-large hide-on-large-only">{{ cta }} <i class="material-icons right">launch</i></a> -->
       </div>
     </section>
   </div>
   <section class="section white">
     <div class="section-top-bg">
-      <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img">
+      <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img" alt="mountain ridge" />
     </div>
     <div class="row container center margin-bottom">
       <a href="{% url 'survey' %}" class="waves-effect home-cta waves-light btn-large btn-border-light-blue">{{ cta }} <i class="material-icons right">navigate_next</i></a>
@@ -44,25 +43,25 @@
     <div class="row cta-round">
       <div class="col s6 l3 offset-l3 center">
         <a href="" class="cta-fixed-width hoverable">
-          <i><img src="{% static 'hnfp/img/icons/i_clipboard.svg' %}" /></i>
+          <i><img src="{% static 'hnfp/img/icons/i_clipboard.svg' %}" alt="clipboard" /></i>
           <p><strong>Take the survey that will help inform future land use decisions</strong></p>
         </a>
       </div>
       <div class="col s6 l3 center">
         <a href="" class="cta-fixed-width hoverable">
-          <i><img src="{% static 'hnfp/img/icons/i_profile.svg' %}" /></i>
+          <i><img src="{% static 'hnfp/img/icons/i_profile.svg' %}" alt="profile" /></i>
           <p><strong>Get notified when job opportunities related to land management arise</strong></p>
         </a>
       </div>
       <div class="col s6 l3 offset-l3 center">
         <a href="" class="cta-fixed-width hoverable">
-          <i><img src="{% static 'hnfp/img/icons/i_binoculars.svg' %}" /></i>
+          <i><img src="{% static 'hnfp/img/icons/i_binoculars.svg' %}" alt="binoculars" /></i>
           <p><strong>Keep track of your hunting/gathering locations, quanities, and dates</strong></p>
         </a>
       </div>
       <div class="col s6 l3 center">
         <a href="" class="cta-fixed-width hoverable">
-          <i><img src="{% static 'hnfp/img/icons/i_alert_red.svg' %}" /></i>
+          <i><img src="{% static 'hnfp/img/icons/i_alert_red.svg' %}" alt="alert" /></i>
           <p><strong>Notify/report alerts like road conditions so their repair can be prioritized</strong></p>
         </a>
       </div>
@@ -70,12 +69,12 @@
   </section>
   <div class="parallax-container">
     <div class="parallax">
-      <img src="{% static 'hnfp/img/ianaj-stream.jpg' %}">
+      <img data-src="{% static 'hnfp/img/ianaj-stream.jpg' %}" alt="stream" class="lazy-image" />
     </div>
   </div>
   <section class="section white hide-on-small-only">
     <div class="section-top-bg">
-      <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img">
+      <img data-src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" alt="mountain ridge" class="section-top-bg-img lazy-image">
     </div>
     <div class="row container">
       <div class="col s12 l9 flow-text">
@@ -114,7 +113,7 @@
   </section>
   <section class="section padding-top section-prefooter relative">
     <div class="section-bottom-bg">
-      <img src="{% static 'hnfp/img/mountain_ridge_blue.svg' %}" class="section-top-bg-img">
+      <img data-src="{% static 'hnfp/img/mountain_ridge_blue.svg' %}" alt="mountain-ridge" class="section-top-bg-img lazy-image">
     </div>
   </section>
   <section class="section bg_blue_dark section-footer">
