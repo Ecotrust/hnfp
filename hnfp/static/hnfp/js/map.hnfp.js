@@ -374,7 +374,11 @@ function findLocation() {
   });
   geolocation.on('error', function(error) {
     geolocation.setTracking(false);
-    Materialize.toast(`${error.message}`, 9000);
+    Materialize.toast(`${error.message}`, 5000);
+    var locationNextBtn = document.getElementById('loc-correct');
+    let warning = document.createElement('div');
+    warning.innerHTML = '<div class="right col s12"><p><strong>Location permission denied. To allow location change permission settings for your browser.</strong></p></div>';
+    locationNextBtn.parentNode.prepend(warning);
   });
 }
 
