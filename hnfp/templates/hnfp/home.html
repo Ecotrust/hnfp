@@ -5,7 +5,7 @@
 <main class="home-page">
   <div class="parallax-container">
     <div class="parallax">
-      <img src="{% static 'hnfp/img/bg_eagle.jpg' %}" alt="bald eagle" />
+      <img data-src="{% static 'hnfp/img/bg_eagle.jpg' %}" alt="bald eagle" />
     </div>
     <section class="row hero">
       <div class="col s10 m8 offset-s1 offset-m2">
@@ -15,7 +15,7 @@
   </div>
   <section class="section white">
     <div class="section-top-bg">
-      <img src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img" alt="mountain ridge" />
+      <img data-src="{% static 'hnfp/img/mountain_ridge_white.svg' %}" class="section-top-bg-img" alt="mountain ridge" />
     </div>
     <div class="row container center margin-bottom">
       <a href="{% url 'survey' %}" class="waves-effect home-cta waves-light btn-large btn-border-light-blue">{{ cta }} <i class="material-icons right">navigate_next</i></a>
