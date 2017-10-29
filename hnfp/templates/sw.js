@@ -1,18 +1,15 @@
-var CACHE_NAME = 'hoonahCache-v0.6';
+var CACHE_NAME = 'hoonahCache-v0.7';
 var urlsToCacheFirst = [
+  // CSS
   '/static/hnfp/css/materialize.css',
   '/static/hnfp/css/style.css',
   '/static/hnfp/css/openlayers/ol.css',
   '/static/hnfp/css/openlayers/layerswitcher.css',
-
-  '/static/fonts/function/function.woff',
-  '/static/fonts/function/function_bold.woff',
-
+  // JS
   '/static/hnfp/js/jquery-3.2.1.min.js',
   '/static/hnfp/js/materialize/materialize.min.js',
   '/static/hnfp/js/openlayers/ol.js',
   '/static/hnfp/js/openlayers/layerswitcher.js',
-  '/static/hnfp/js/app.hnfp.js',
   '/static/hnfp/js/map.hnfp.js',
   '/static/hnfp/js/map.landuse.js',
   '/static/hnfp/js/alerts.js',
@@ -21,8 +18,11 @@ var urlsToCacheFirst = [
   '/static/hnfp/js/projects.js',
 ];
 var urlsToCacheSecond = [
+  // Fonts
+  '/static/fonts/function/function.woff',
+  '/static/fonts/function/function_bold.woff',
   '/static/fonts/material/MaterialIcons-Regular.woff',
-
+  // Images
   '/static/img/logo.svg',
   '/static/img/logo.png',
   '/static/img/icons/i_news.svg',
@@ -43,6 +43,8 @@ var urlsToCacheSecond = [
   '/static/img/icons/category/i_mushrooms.svg',
   '/static/img/icons/category/i_shellfish.svg',
   '/static/img/icons/category/i_shrimp.svg',
+  // JavaScript
+  '/static/hnfp/js/app.hnfp.js',
 ];
 
 self.addEventListener('install', function(event) {
