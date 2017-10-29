@@ -1,44 +1,73 @@
-var CACHE_NAME = 'hoonahCache-v0.5';
-var urlsToCache = [
+var CACHE_NAME = 'hoonahCache-v0.6';
+var urlsToCacheFirst = [
   '/static/hnfp/css/materialize.css',
   '/static/hnfp/css/style.css',
   '/static/hnfp/css/openlayers/ol.css',
-  '/static/bower_components/jquery/dist/jquery.js',
+  '/static/hnfp/css/openlayers/layerswitcher.css',
+
+  '/static/fonts/function/function.woff',
+  '/static/fonts/function/function_bold.woff',
+
+  '/static/hnfp/js/jquery-3.2.1.min.js',
   '/static/hnfp/js/materialize/materialize.min.js',
   '/static/hnfp/js/openlayers/ol.js',
   '/static/hnfp/js/openlayers/layerswitcher.js',
-  '/static/hnfp/js/offline.js',
   '/static/hnfp/js/app.hnfp.js',
   '/static/hnfp/js/map.hnfp.js',
   '/static/hnfp/js/map.landuse.js',
   '/static/hnfp/js/alerts.js',
-  '/static/hnfp/js/dashboard.js',
   '/static/hnfp/js/observations.js',
+  '/static/hnfp/js/dashboard.js',
   '/static/hnfp/js/projects.js',
-  '/dashboard/',
-  '/alert/',
-  '/observation/',
-  '/landuse/',
+];
+var urlsToCacheSecond = [
+  '/static/fonts/material/MaterialIcons-Regular.woff',
+
+  '/static/img/logo.svg',
+  '/static/img/logo.png',
+  '/static/img/icons/i_news.svg',
+  '/static/img/icons/i_pencil.svg',
+  '/static/img/icons/i_profile.svg',
+  '/static/img/icons/i_rain.svg',
+  '/static/img/icons/i_search.svg',
+  '/static/img/icons/i_user.svg',
+  '/static/img/icons/layers.png',
+  '/static/img/icons/category/i_bear.svg',
+  '/static/img/icons/category/i_berries.svg',
+  '/static/img/icons/category/i_crab.svg',
+  '/static/img/icons/category/i_custom.svg',
+  '/static/img/icons/category/i_deer.svg',
+  '/static/img/icons/category/firewood.svg',
+  '/static/img/icons/category/i_fish.svg',
+  '/static/img/icons/category/i_medicinal_herbs.svg',
+  '/static/img/icons/category/i_mushrooms.svg',
+  '/static/img/icons/category/i_shellfish.svg',
+  '/static/img/icons/category/i_shrimp.svg',
 ];
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
+    caches.open('mysite-static-v3').then(function(cache) {
+
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      cache.addAll(urlsToCacheFirst);
+      return cache.addAll(urlsToCacheSecond);
+    })
   )
 });
 
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
-      return Promise.all(cacheNames.filter(function(cacheName) {
-        return true;
-      }).map(function(cacheName) {
-        return caches.delete(cacheName);
-      }))
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          if (expectedCaches.indexOf(cacheName) == -1) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
     })
   );
 });

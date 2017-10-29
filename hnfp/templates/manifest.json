@@ -1,6 +1,6 @@
 {
-  "name": "Hoonah Stewards part of the Hoonah Native Forest Partnership",
-  "short_name": "HNFP",
+  "name": "Hoonah Stewards",
+  "short_name": "Stewards",
   "scope": "https://www.hoonahstewards.net/",
   "start_url": "https://www.hoonahstewards.net/dashboard/",
   "display": "standalone",
