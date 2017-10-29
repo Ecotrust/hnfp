@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.7';
+var CACHE_NAME = 'hoonahCache-v0.8';
 var urlsToCacheFirst = [
   // CSS
   '/static/hnfp/css/materialize.css',
@@ -19,43 +19,39 @@ var urlsToCacheFirst = [
 ];
 var urlsToCacheSecond = [
   // Fonts
-  '/static/fonts/function/function.woff',
-  '/static/fonts/function/function_bold.woff',
-  '/static/fonts/material/MaterialIcons-Regular.woff',
+  '/static/hnfp/fonts/function/function.woff',
+  '/static/hnfp/fonts/function/function_bold.woff',
+  '/static/hnfp/fonts/material/MaterialIcons-Regular.woff',
   // Images
-  '/static/img/logo.svg',
-  '/static/img/logo.png',
-  '/static/img/icons/i_news.svg',
-  '/static/img/icons/i_pencil.svg',
-  '/static/img/icons/i_profile.svg',
-  '/static/img/icons/i_rain.svg',
-  '/static/img/icons/i_search.svg',
-  '/static/img/icons/i_user.svg',
-  '/static/img/icons/layers.png',
-  '/static/img/icons/category/i_bear.svg',
-  '/static/img/icons/category/i_berries.svg',
-  '/static/img/icons/category/i_crab.svg',
-  '/static/img/icons/category/i_custom.svg',
-  '/static/img/icons/category/i_deer.svg',
-  '/static/img/icons/category/firewood.svg',
-  '/static/img/icons/category/i_fish.svg',
-  '/static/img/icons/category/i_medicinal_herbs.svg',
-  '/static/img/icons/category/i_mushrooms.svg',
-  '/static/img/icons/category/i_shellfish.svg',
-  '/static/img/icons/category/i_shrimp.svg',
+  '/static/hnfp/img/logo.svg',
+  '/static/hnfp/img/logo.png',
+  '/static/hnfp/img/icons/i_news.svg',
+  '/static/hnfp/img/icons/i_pencil.svg',
+  '/static/hnfp/img/icons/i_profile.svg',
+  '/static/hnfp/img/icons/i_rain.svg',
+  '/static/hnfp/img/icons/i_search.svg',
+  '/static/hnfp/img/icons/i_user.svg',
+  '/static/hnfp/img/icons/layers.png',
+  '/static/hnfp/img/icons/category/i_bear.png',
+  '/static/hnfp/img/icons/category/i_berries.png',
+  '/static/hnfp/img/icons/category/i_crab.png',
+  '/static/hnfp/img/icons/category/i_custom.png',
+  '/static/hnfp/img/icons/category/i_deer.png',
+  '/static/hnfp/img/icons/category/i_firewood.png',
+  '/static/hnfp/img/icons/category/i_fish.png',
+  '/static/hnfp/img/icons/category/i_medicinal_herbs.png',
+  '/static/hnfp/img/icons/category/i_mushrooms.png',
+  '/static/hnfp/img/icons/category/i_shellfish.png',
+  '/static/hnfp/img/icons/category/i_shrimp.png',
   // JavaScript
   '/static/hnfp/js/app.hnfp.js',
 ];
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
-    caches.open('mysite-static-v3').then(function(cache) {
-
-self.addEventListener('install', function(event) {
-  event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      cache.addAll(urlsToCacheFirst);
-      return cache.addAll(urlsToCacheSecond);
+      cache.addAll(urlsToCacheSecond);
+      return cache.addAll(urlsToCacheFirst);
     })
   )
 });
@@ -64,10 +60,11 @@ self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (expectedCaches.indexOf(cacheName) == -1) {
-            return caches.delete(cacheName);
-          }
+        cacheNames.filter(function(cacheName) {
+          // Return true if you want to remove this cache,
+          // but remember that caches are shared across the whole origin
+        }).map(function(cacheName) {
+          return caches.delete(cacheName);
         })
       );
     })
@@ -76,8 +73,13 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
   event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request);
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
     })
   );
 });
