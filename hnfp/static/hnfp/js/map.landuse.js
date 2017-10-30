@@ -13,7 +13,8 @@ var landuseMap = {
 var snapPolygon,
     polygonModify,
     projectSource = new ol.source.Vector(),
-    projectVector = new ol.layer.Vector({
+    projectLayer = new ol.layer.Vector({
+      title: 'Projects',
       source: projectSource,
       map: map,
       style: stylePolygon('rgba(87, 166, 162, 0.4)')
@@ -28,13 +29,6 @@ function drawProjectArea() {
   polygonModify = new ol.interaction.Modify({source: projectSource});
   addProjectInteractions();
 };
-
-projectSource.on('addfeature', function() {
-  let format = new ol.format["GeoJSON"]();
-  let formated = format.writeFeatures( projectSource.getFeatures() );
-  landuseProject.addProjArea(formated);
-  removeProjectInteractions();
-});
 
 function addProjectInteractions() {
   map.addInteraction(drawPolygon);
@@ -52,7 +46,7 @@ function removeProjectInteractions() {
 function addProjectToMap(data) {
   let geo = JSON.parse(data['area']);
   let newPoly = new ol.Feature();
-  vectorSource.addFeature(newPoly);
+  projectSource.addFeature(newPoly);
   newPoly.setGeometry(new ol.geom.Polygon(geo.coordinates));
   if (typeof(all_projects[i]) !== 'undefined') {
     if (all_projects[i].category === 'Forest') {
@@ -268,12 +262,23 @@ var projectGroup = new ol.layer.Group({
     hoonahProjectBoundary,
     hoonahTowns,
     watersheds,
+    projectLayer,
   ]
 });
+
+var stewardInputGroup = new ol.layer.Group({
+  title: 'Stewards Input',
+  layers: [
+    vectorLayer,
+    observationLayer,
+  ]
+})
 // Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
 // been added to the map. The layer will appear in the list the next time
 // the LayerSwitcher is shown or LayerSwitcher#renderPanel is called.
-map.getLayers().push(projectGroup);
+map.getLayers().push(projectGroup)
+
+map.getLayers().push(stewardInputGroup);
 
 var switcher = new ol.control.LayerSwitcher({
   target: $("#visible-themes").get(0),

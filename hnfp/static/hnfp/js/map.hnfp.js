@@ -169,10 +169,19 @@ locPoint.setId(1);
 locSource.addFeature(locPoint);
 locPoint.setStyle(locStyle);
 
-// initial data
+// source and layer for alerts
 var vectorSource = new ol.source.Vector();
 var vectorLayer = new ol.layer.Vector({
+  title: 'Alerts',
   source: vectorSource,
+  map: map
+});
+
+// source and layer for observations
+var observationSource = new ol.source.Vector();
+var observationLayer = new ol.layer.Vector({
+  title: 'Observations',
+  source: observationSource,
   map: map
 });
 
@@ -435,7 +444,7 @@ function addObservationToMap(feat) {
       catURL = `/static/hnfp/img/icons/category/i_${categoryLower}.png`,
       point = new ol.Feature();
   // add new point to source and map
-  vectorSource.addFeature(point);
+  observationSource.addFeature(point);
   point.setGeometry(new ol.geom.Point(coords));
   point.setProperties({
     'id': feat.id,
