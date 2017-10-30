@@ -27,6 +27,12 @@ class AOI(drawing_AOI):
 		form_template = 'hnfp/aoi/form.html'
 		show_template = 'aoi/show.html'
 
+class ShareObservationWithManager(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    share = models.BooleanField(
+		default=False,
+	)
+
 # blog posts for forum
 class PublicManager(models.Manager):
 	def get_queryset(self):
@@ -474,7 +480,7 @@ class Alert(models.Model):
 			photo = self.alert_photo.url
 		else:
 			photo = ''
-			
+
 		return {
 			'alert_date': self.alert_date,
 			'alert_time': self.alert_time,

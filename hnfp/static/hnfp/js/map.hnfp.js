@@ -242,11 +242,10 @@ function addOverlayPopup(feature) {
       <p><span>${featuresProps.alert_comment}</span></p>
       <p><img src="${featuresProps.alert_photo}" /></p>
     `;
-    /* domElement.querySelector('.card-action').innerHTML = `
-      <!-- TODO make edit and delete available only to user who created alert and admin -->
-      <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
-      <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
-    `; */
+    domElement.querySelector('.card-action').innerHTML = `
+      <a href="/alert/${featuresProps.id}/update/" class="disabled">Edit</a>
+      <a href="/alert/${featuresProps.id}/delete/" class="disabled">Delete</a>
+    `;
   } else if (typeof(featuresProps.summary) !== 'undefined') {
     coords = feature.getGeometry().getExtent();
     domElement.querySelector('.card-content').innerHTML = `

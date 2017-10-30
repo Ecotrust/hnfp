@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from . import views
 from hnfp.models import Post, AOI
 from features.views import form_resources
-from hnfp.views import ObservationUpdate, ObservationDelete, LanduseUpdate, LanduseDelete
+from hnfp.views import ObservationUpdate, ObservationDelete, LanduseUpdate, LanduseDelete, AlertDelete, AlertUpdate
 
 import django.contrib.gis.forms.widgets
 django.contrib.gis.forms.widgets.OpenLayersWidget.Media.js = (
@@ -22,13 +22,15 @@ urlpatterns = [
     url(r'^manifest(.*.json)$', views.manifest, name='manifest'),
     url(r'^survey/$', views.survey, name='survey'),
     url(r'^save_survey/$', views.save_survey, name='save_survey'),
-    url(r'^login/', views.login, name='login'),
+    url(r'^login/?', views.login, name='login'),
     url(r'^myaccount/?', views.myaccount, name='myaccount'),
     url(r'^registering/', views.registering, name='registering'),
     url(r'^registered/', views.registered, name='registered'),
     url(r'^dashboard/', views.dashboard, name='dashboard'),
     url(r'^alert/$', views.alert, name='alert'),
-    url(r'^alert/(?P<alert_id>[0-9]+)/', views.alert_detail, name='alert_detail'),
+    url(r'^alert/(?P<pk>[0-9]+)/update/', AlertUpdate.as_view(), name='alert_update'),
+    url(r'^alert/(?P<pk>[0-9]+)/delete/', AlertDelete.as_view(), name='alert_delete'),
+    url(r'^alert/(?P<pk>[0-9]+)/detail/', views.alert_detail, name='alert_detail'),
     url(r'^alert/new/', views.new_alert, name='new_alert'),
     url(r'^alert/create/', views.alert_create, name='alert_create'),
     url(r'^observation/$', views.observation, name='observation'),

@@ -15,7 +15,7 @@ from accounts.actions import apply_user_permissions
 from accounts.forms import SignUpForm, LogInForm
 from accounts import views
 # survey, forum, jobs, alerts, observation, landuse
-from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource
+from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource, ShareObservationWithManager
 from hnfp.forms import ResponseForm, HoonahLogInForm, AlertForm
 # features and shapes
 from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
@@ -203,17 +203,16 @@ def new_alert(request):
     }
     return HttpResponse(template.render(context, request))
 
-def alert_detail(request, alert_id):
-    return HttpResponse("You're looking at alert %s." % alert_id)
+def alert_detail(request, pk):
+    alert = [x.to_dict() for x in Alert.objects.filter(id=pk)]
+    return HttpResponse("You're looking at alert %s." % pk)
+
+def observation_detail(request, pk):
+    ob = [x.to_dict() for x in Observation.objects.filter(id=pk)]
+    return JsonResponse(ob, safe=False)
 
 def alert_create(request):
     if request.method == 'POST':
-        form = AlertForm(request.POST, request.FILES)
-        if form.is_valid():
-            alert_photo = request.FILES['alert_photo']
-        else:
-            alert_photo = ''
-
         loc = request.POST['alert_location']
         lp = loc.split(',')
         alert_location = Point([float(lp[0]),float(lp[1])])
@@ -221,6 +220,9 @@ def alert_create(request):
         alert_comment = request.POST['alert_comment']
         alert_time = request.POST['alert_time']
         alert_date = request.POST['alert_date']
+        for file in request.FILES.getlist('file'):
+            print(file)
+            alert_photo = file
 
         new_a = Alert(
             alert_location=alert_location,
@@ -244,6 +246,16 @@ def alert_create(request):
         )
         return JsonResponse(all_alerts, safe=False)
 
+class AlertUpdate(UpdateView):
+    model = Alert
+    fields = ['alert_type', 'alert_comment', 'alert_time', 'alert_date', 'alert_photo', 'alert_location']
+    template_name_suffix = '_update'
+
+class AlertDelete(DeleteView):
+    model = Alert
+    success_url = reverse_lazy('alert')
+    template_name_suffix = '_confirm_delete'
+
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
     all_observation = []
@@ -251,10 +263,12 @@ def observation(request):
     for x in get_obs:
         dic = x.to_dict()
         all_observation.append(dic)
+    share = ShareObservationWithManager.objects.filter(user=request.user.username)
     context = {
         'title': 'My Hunt, Gather, Observe Map',
         'year': '2017',
         'user_observations': json.dumps(all_observation),
+        'share': share,
     }
     return HttpResponse(template.render(context, request))
 
@@ -281,7 +295,9 @@ def observation_create(request):
         comments = request.POST['comments']
         observation_time = request.POST['observation_time']
         observation_date = request.POST['observation_date']
-        observation_photo = request.FILES
+        print (request.FILES)
+        for file in request.FILES['observation_photo']:
+            observation_photo = file
 
         new_obs = Observation(
             observation_location=observation_location,

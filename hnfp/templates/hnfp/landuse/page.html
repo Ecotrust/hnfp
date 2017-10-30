@@ -75,7 +75,9 @@
         <a id="new-project-btn" class="btn btn-border-light-blue add-btn"><i class="material-icons">add_circle</i> Add Project</a>
         <div id="popup" class="card">
           <div class="card-content waves-effect waves-block waves-light"></div>
-          <div class="card-action"></div>
+          {% if user.is_staff %}
+            <div class="card-action"></div>
+          {% endif %}
         </div>
         <div id="new-project">
           <form id="project-form" method="post" action="/landuse/create/"></form>

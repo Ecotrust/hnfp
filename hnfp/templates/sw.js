@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.8';
+var CACHE_NAME = 'hoonahCache-v0.9';
 var urlsToCacheFirst = [
   // CSS
   '/static/hnfp/css/materialize.css',
@@ -60,11 +60,10 @@ self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
-        cacheNames.filter(function(cacheName) {
-          // Return true if you want to remove this cache,
-          // but remember that caches are shared across the whole origin
-        }).map(function(cacheName) {
-          return caches.delete(cacheName);
+        cacheNames.map(function(cacheName) {
+          if(cacheName != CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
         })
       );
     })
@@ -72,6 +71,12 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
+  var requestURL = new URL(event.request.url);
+  if (requestURL.origin == location.origin) {
+    if (/^\/admin\//.test(requestURL.pathname)) {
+      return;
+    }
+  }
   event.respondWith(
     caches.open(CACHE_NAME).then(function(cache) {
       return cache.match(event.request).then(function (response) {
