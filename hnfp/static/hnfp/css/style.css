@@ -1586,6 +1586,10 @@ div.mapgroup h3 {
   margin-left: 26px;
 }
 
+.step-content {
+  height: 100%;
+}
+
 .step-actions .btn,
 .previous-step {
   height: auto;

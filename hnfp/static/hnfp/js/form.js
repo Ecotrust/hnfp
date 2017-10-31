@@ -1,5 +1,6 @@
-$('.stepper').activateStepper({});
 $(document).ready( function() {
+
+  $('.stepper').activateStepper({});
 
   let step5Check = 0;
   $('.stepper').on('step5', function() {

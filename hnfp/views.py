@@ -431,7 +431,7 @@ def sw(request, js):
     import os
     service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'templates', 'sw.js')
     data = open(service_worker, 'rb')
-    return HttpResponse(data, content_type='application/x-javascript', status=200)
+    return HttpResponse(data, content_type='application/javascript', status=200)
 # app manifest
 def manifest(request, js):
     from marineplanner.settings import BASE_DIR
