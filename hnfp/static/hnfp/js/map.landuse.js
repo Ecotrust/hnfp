@@ -304,24 +304,28 @@ var projectsGroup = new ol.layer.Group({
   layers: [
     projectLayer
   ]
-})
+});
 
-// Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
-// been added to the map. The layer will appear in the list the next time
-// the LayerSwitcher is shown or LayerSwitcher#renderPanel is called.
-map.getLayers().push(stewardInputGroup);
-map.getLayers().push(featuresGroup);
-map.getLayers().push(timberGroup);
+// add layers to need to be in switcher menu
+// add layers to switcher
+// then add the layers that dont need to be in switcher menu
 map.getLayers().push(hydroGroup);
-map.getLayers().push(projectsGroup);
+map.getLayers().push(timberGroup);
+map.getLayers().push(featuresGroup);
 
 var switcher = new ol.control.LayerSwitcher({
   target: $("#visible-themes").get(0),
 	show_progress: true,
-	extent: true,
+	extent: false,
 	trash: true,
 	oninfo: function (l) {
     alert(l.get("title"));
   }
 });
 map.addControl(switcher);
+
+// Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
+// been added to the map. The layer will appear in the list the next time
+// the LayerSwitcher is shown or LayerSwitcher#renderPanel is called.
+map.getLayers().push(stewardInputGroup);
+map.getLayers().push(projectsGroup);

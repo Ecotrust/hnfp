@@ -1771,7 +1771,7 @@ path {
   --------------------*/
 
 .land-use .wrap {
-  padding: 2rem 5% 0;
+  padding: 1rem 1.5% 0;
   position: relative;
 }
 
@@ -1781,7 +1781,7 @@ path {
 
 .land-use .controls {
   margin-top: 3rem;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .land-use .controls:after {
@@ -1799,6 +1799,10 @@ path {
 
 .land-use .controls .row .col {
   padding: 0 1% 0 3%;
+}
+
+.land-use .controls h5 {
+  margin-bottom: 1rem;
 }
 
 .land-use .controls p {
@@ -1893,10 +1897,35 @@ path {
 }
 
 #visible-themes .layer-switcher {
-  float: none;
+  background: transparent;
+  padding: 0;
   position: relative;
+  right: auto;
   top: 0;
   width: 100%;
+}
+
+#visible-themes .layer-switcher ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+#visible-themes .layer-switcher li.group,
+#visible-themes .layer-switcher .panel > ul > li.layer {
+  display: inline-block;
+  margin: 0 2.5% 0 0;
+  width: 22.5%;
+}
+
+#visible-themes .layer-switcher .panel > ul > li.layer {
+  float: left;
+  width: 100%;
+}
+
+#visible-themes .layer-switcher li.group > label {
+  display: block;
+  font-size: 1.125em;
+  margin-bottom: .5rem;
 }
 
 #visible-themes .layer-switcher button {

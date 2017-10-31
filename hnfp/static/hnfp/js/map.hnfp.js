@@ -52,13 +52,21 @@ var hoonahRoads = new ol.layer.Vector({
   style: function(feature, resolution) {
     let road = '';
     let properties = feature.getProperties();
+    let width = 1.5;
+    if (resolution < 35) {
+      width = 2;
+    }
     if (resolution < 16) {
       road = properties.RD_STATUS !== null ? properties.RD_STATUS : '';
+      width = 2.5;
+    }
+    if (resolution < 10) {
+      width: 3;
     }
     return new ol.style.Style({
       stroke: new ol.style.Stroke({
-        color: '#ddd83d',
-        width: 1.6
+        color: '#dfc27d',
+        width: width
       }),
       text: new ol.style.Text({
         font: '11px monospace',
@@ -78,7 +86,7 @@ var hoonahRoads = new ol.layer.Vector({
 });
 
 var hoonahLandOwners = new ol.layer.Vector({
-  title: 'Land Owner',
+  title: 'Land Ownership',
   source: new ol.source.Vector({
     url: '/static/hnfp/js/data/hoonah_landownership.geojson',
     format: new ol.format.GeoJSON()
@@ -110,14 +118,6 @@ var hoonahLandOwners = new ol.layer.Vector({
   visible: false
 });
 
-var overlayGroup = new ol.layer.Group({
-    title: 'Overlays',
-    layers: [
-      hoonahLandOwners,
-      hoonahRoads
-    ]
-});
-
 // Map Object
 var map = new ol.Map({
   target: 'map',
@@ -130,7 +130,8 @@ var map = new ol.Map({
         topoLayer
       ]
     }),
-    overlayGroup
+    hoonahRoads,
+    hoonahLandOwners,
   ],
   view: mapView,
   controls: ol.control.defaults({

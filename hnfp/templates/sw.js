@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.9';
+var CACHE_NAME = 'hoonahCache-v0.10';
 var urlsToCacheFirst = [
   // CSS
   '/static/hnfp/css/materialize.css',
