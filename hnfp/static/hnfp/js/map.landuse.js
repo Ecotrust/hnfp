@@ -1,12 +1,26 @@
 $(document).ready(function() {
   var scaleLineControl = new ol.control.ScaleLine();
   map.addControl(scaleLineControl);
+  landuseMap.hideAlerts();
+  landuseMap.hideObservations();
 });
 
 var allFeatures = [];
 var landuseMap = {
   removePopup: function() {
     map.removeEventListener('click')
+  },
+  showAlerts: function() {
+    vectorLayer.setVisible(true);
+  },
+  hideAlerts: function() {
+    vectorLayer.setVisible(false);
+  },
+  showObservations: function() {
+    observationLayer.setVisible(true);
+  },
+  hideObservations: function() {
+    observationLayer.setVisible(false);
   }
 }
 
@@ -249,20 +263,31 @@ let salmonStreams = new ol.layer.Vector({
   visible: false
 });
 
-var projectGroup = new ol.layer.Group({
-  title: 'Data',
+var timberGroup = new ol.layer.Group({
+  title: 'Logging',
   layers: [
-    hoonahStreams,
-    salmonStreams,
     areaHarvested,
-    hoonahCabins,
     harvestTreatment,
     hoonahLogTransfer,
+  ]
+});
+
+var hydroGroup = new ol.layer.Group({
+  title: 'Hydrography',
+  layers: [
+    watersheds,
+    hoonahStreams,
+    salmonStreams,
+  ]
+})
+
+var featuresGroup = new ol.layer.Group({
+  title: 'Features',
+  layers: [
+    hoonahTowns,
+    hoonahCabins,
     hoonahPlaceNamesEng,
     hoonahProjectBoundary,
-    hoonahTowns,
-    watersheds,
-    projectLayer,
   ]
 });
 
@@ -272,13 +297,23 @@ var stewardInputGroup = new ol.layer.Group({
     vectorLayer,
     observationLayer,
   ]
+});
+
+var projectsGroup = new ol.layer.Group({
+  title: 'Land Use Projects',
+  layers: [
+    projectLayer
+  ]
 })
+
 // Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
 // been added to the map. The layer will appear in the list the next time
 // the LayerSwitcher is shown or LayerSwitcher#renderPanel is called.
-map.getLayers().push(projectGroup)
-
 map.getLayers().push(stewardInputGroup);
+map.getLayers().push(featuresGroup);
+map.getLayers().push(timberGroup);
+map.getLayers().push(hydroGroup);
+map.getLayers().push(projectsGroup);
 
 var switcher = new ol.control.LayerSwitcher({
   target: $("#visible-themes").get(0),

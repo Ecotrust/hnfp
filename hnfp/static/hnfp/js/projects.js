@@ -2,6 +2,20 @@ $(document).ready(function() {
   $('#new-project-btn').click(function(event) {
     landuseProject.initNew();
   });
+  $('#checkbox_alerts').change(function(event) {
+    if (event.target.checked === true) {
+      landuseMap.showAlerts();
+    } else {
+      landuseMap.hideAlerts();
+    }
+  });
+  $('#checkbox_observations').change(function(event) {
+    if (event.target.checked === true) {
+      landuseMap.showObservations();
+    } else {
+      landuseMap.hideObservations();
+    }
+  })
 });
 
 $newProjectWrap = $('#new-project');
