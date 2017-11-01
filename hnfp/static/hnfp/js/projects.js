@@ -86,6 +86,8 @@ var landuseProject = {
             landuseProject.stepOne();
             $('select').material_select();
             landuseProject.addImpact();
+            visibleProjectLayer(true);
+            removeNewProjectSourceFeatures();
         },
         error: function (result) {
             //debugger;
@@ -117,6 +119,7 @@ var landuseProject = {
       success: function(data) {
         let newData = data.length - 1;
         addProjectToMap(data[newData]);
+        visibleProjectLayer(false);
         landuseProject.close();
         $projectForm.html('');
       },

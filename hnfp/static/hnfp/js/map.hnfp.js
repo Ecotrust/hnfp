@@ -214,7 +214,7 @@ function allowDragPan(allow) {
 
 // set popups to show on click
 var popupClick = 'click';
-(function mapAddPopup() {
+function mapAddPopup() {
   map.addEventListener(popupClick, function(event) {
     let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
       return feature;
@@ -231,7 +231,8 @@ var popupClick = 'click';
     }
     allowDragPan();
   })
-})();
+}
+mapAddPopup();
 
 /**
  * @param {object} feature - Openlayers feature
@@ -255,6 +256,7 @@ function addOverlayPopup(feature) {
       <a href="/observation/${featuresProps.id}/update/" class="disabled">Edit</a>
       <a href="/observation/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
+    popup.setPosition(coords);
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
     domElement.querySelector('.card-content').innerHTML = `
       <p class="center"><strong>${featuresProps.alert_type}</strong></p>
@@ -267,13 +269,14 @@ function addOverlayPopup(feature) {
       <a href="/alert/${featuresProps.id}/update/" class="disabled">Edit</a>
       <a href="/alert/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
+    popup.setPosition(coords);
   } else if (typeof(featuresProps.category) !== 'undefined') {
-    coords = feature.getGeometry().getExtent();
+    let polyCoords = feature.getGeometry().getExtent();
     domElement.querySelector('.card-content').innerHTML = `
       <p class="center card-tally">${featuresProps.category}</p>
       <span class="center card-title">${featuresProps.name}</span>
       <p>${featuresProps.summary}</p>
-      <p><em>${featuresProps.start_date} - ${featuresProps.end_date}</em></p>
+      <p><em>${featuresProps.start_date} - ${featuresProps.completion_date}</em></p>
     `;
     let adminUser = domElement.querySelector('.card-action');
     if (adminUser) {
@@ -282,8 +285,8 @@ function addOverlayPopup(feature) {
         <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
       `;
     }
+    popup.setPosition(polyCoords);
   }
-  popup.setPosition(coords);
 }
 
 var draw;

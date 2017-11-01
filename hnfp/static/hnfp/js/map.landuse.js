@@ -44,6 +44,21 @@ var newProjectSource = new ol.source.Vector(),
       type: 'Polygon'
     });
 
+function visibleProjectLayer(bool) {
+  if (bool != 'undefined') {
+    newProjectLayer.setVisible(bool);
+  } else {
+    newProjectLayer.setVisible(true);
+  }
+}
+
+function removeNewProjectSourceFeatures() {
+  let features = newProjectSource.getFeatures();
+  for (var i = 0; i < features.length; i++) {
+    newProjectSource.removeFeature(features[i]);
+  }
+}
+
 function drawProjectArea() {
   snapPolygon = new ol.interaction.Snap({source: newProjectSource});
   polygonModify = new ol.interaction.Modify({source: newProjectSource});
@@ -80,26 +95,27 @@ function addProjectToMap(data) {
   let newPoly = new ol.Feature();
   projectSource.addFeature(newPoly);
   newPoly.setGeometry(new ol.geom.Polygon(geo.coordinates));
-  if (typeof(all_projects[i]) !== 'undefined') {
-    if (all_projects[i].category === 'forest') {
+  if (typeof(data.category) !== 'undefined') {
+    if (data.category === 'forest') {
       newPoly.setStyle(stylePolygon('rgba(87, 166, 162, 0.35)'));
-    } else if (all_projects[i].category === 'road') {
+    } else if (data.category === 'road') {
       newPoly.setStyle(stylePolygon('rgba(213, 63, 56, 0.35)'));
-    } else if (all_projects[i].category === 'stream') {
+    } else if (data.category === 'stream') {
       newPoly.setStyle(stylePolygon('rgba(43, 56, 74, 0.35)'));
     } else {
       newPoly.setStyle(stylePolygon('rgba(140, 140, 140, 0.35)'));
     }
     newPoly.setProperties({
-      'id': all_projects[i].id,
-      'area': all_projects[i].area,
-      'name': all_projects[i].name,
-      'category': all_projects[i].category,
-      'summary': all_projects[i].summary,
-      'start_date': all_projects[i].start_date,
-      'end_date': all_projects[i].end_date,
+      'id': data.id,
+      'area': data.area,
+      'name': data.name,
+      'category': data.category,
+      'summary': data.summary,
+      'start_date': data.start_date,
+      'completion_date': data.completion_date,
     });
   }
+  mapAddPopup();
 }
 
 
@@ -107,6 +123,8 @@ if (typeof all_projects !== 'undefined') {
   for (var i = 0; i < all_projects.length; i++) {
     addProjectToMap(all_projects[i]);
   }
+}
+if (typeof all_public_projects !== 'undefined') {
   for (var i = 0; i < all_public_projects.length; i++) {
     addProjectToMap(all_public_projects[i]);
   }
