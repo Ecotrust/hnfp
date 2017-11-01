@@ -81,11 +81,11 @@ function addProjectToMap(data) {
   projectSource.addFeature(newPoly);
   newPoly.setGeometry(new ol.geom.Polygon(geo.coordinates));
   if (typeof(all_projects[i]) !== 'undefined') {
-    if (all_projects[i].category === 'Forest') {
+    if (all_projects[i].category === 'forest') {
       newPoly.setStyle(stylePolygon('rgba(87, 166, 162, 0.35)'));
-    } else if (all_projects[i].category === 'Road') {
+    } else if (all_projects[i].category === 'road') {
       newPoly.setStyle(stylePolygon('rgba(213, 63, 56, 0.35)'));
-    } else if (all_projects[i].category === 'Stream') {
+    } else if (all_projects[i].category === 'stream') {
       newPoly.setStyle(stylePolygon('rgba(43, 56, 74, 0.35)'));
     } else {
       newPoly.setStyle(stylePolygon('rgba(140, 140, 140, 0.35)'));

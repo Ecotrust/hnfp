@@ -529,11 +529,6 @@ class ProjectResourceImpact(models.Model):
 
 # Land use projects
 class LandUseProject(models.Model):
-	PROJ_CATS = (
-		('Forest', 'forest'),
-		('Road', 'road'),
-		('Stream', 'stream'),
-	)
 	ECOSYSTEM_IMPACTS = (
 		('Increase', 'increase'),
 		('Decrease', 'decrease'),
@@ -566,7 +561,6 @@ class LandUseProject(models.Model):
 	)
 	category = models.CharField(
 		max_length=400,
-		choices=PROJ_CATS,
 		blank=True,
 		null=True,
 	)

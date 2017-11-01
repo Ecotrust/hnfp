@@ -365,11 +365,9 @@ def landuse(request):
 
 def new_project(request):
     template = loader.get_template('hnfp/landuse/new_project.html')
-    cats = LandUseProject.get_categories()
     resources = Resource.get_resources()
     impactTypes = ImpactType.get_impact_types()
     context = {
-        'proj_cats': cats,
         'resources': resources,
         'impactTypes': impactTypes,
     }
