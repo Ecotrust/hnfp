@@ -249,6 +249,7 @@ def alert_create(request):
 class AlertUpdate(UpdateView):
     model = Alert
     fields = ['alert_type', 'alert_comment', 'alert_time', 'alert_date', 'alert_photo', 'alert_location']
+    success_url = reverse_lazy('alert')
     template_name_suffix = '_update'
 
 class AlertDelete(DeleteView):
@@ -317,6 +318,7 @@ def observation_create(request):
 class ObservationUpdate(UpdateView):
     model = Observation
     fields = ['category', 'customcategory', 'observation_type', 'observation_date', 'observation_time', 'observation_tally', 'observation_location', 'comments', 'observation_photo']
+    success_url = reverse_lazy('observation')
     template_name_suffix = '_update'
 
 class ObservationDelete(DeleteView):
@@ -413,6 +415,7 @@ def landuse_detail(request, pk):
 class LanduseUpdate(UpdateView):
     model = LandUseProject
     fields = ['name', 'category', 'summary', 'start_date', 'completion_date', 'actions', 'dollar_costs', 'emdollars', 'area']
+    success_url = reverse_lazy('landuse')
     template_name_suffix = '_update'
 
 class LanduseDelete(DeleteView):

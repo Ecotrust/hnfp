@@ -267,7 +267,7 @@ function addOverlayPopup(feature) {
       <a href="/alert/${featuresProps.id}/update/" class="disabled">Edit</a>
       <a href="/alert/${featuresProps.id}/delete/" class="disabled">Delete</a>
     `;
-  } else if (typeof(featuresProps.summary) !== 'undefined') {
+  } else if (typeof(featuresProps.category) !== 'undefined') {
     coords = feature.getGeometry().getExtent();
     domElement.querySelector('.card-content').innerHTML = `
       <p class="center card-tally">${featuresProps.category}</p>
@@ -275,10 +275,13 @@ function addOverlayPopup(feature) {
       <p>${featuresProps.summary}</p>
       <p><em>${featuresProps.start_date} - ${featuresProps.end_date}</em></p>
     `;
-    domElement.querySelector('.card-action').innerHTML = `
-      <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
-      <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
-    `;
+    let adminUser = domElement.querySelector('.card-action');
+    if (adminUser) {
+      domElement.querySelector('.card-action').innerHTML = `
+        <a href="/landuse/${featuresProps.id}/update/" class="disabled">Edit</a>
+        <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
+      `;
+    }
   }
   popup.setPosition(coords);
 }

@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.10';
+var CACHE_NAME = 'hoonahCache-v0.11';
 var urlsToCacheFirst = [
   // CSS
   '/static/hnfp/css/materialize.css',
@@ -74,19 +74,22 @@ self.addEventListener('fetch', function(event) {
   var requestURL = new URL(event.request.url);
   if (requestURL.origin == location.origin) {
     if (/^\/admin\//.test(requestURL.pathname)) {
-      return;
+      fetch(event.request);
     }
-  }
-  event.respondWith(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.match(event.request).then(function (response) {
-        return response || fetch(event.request).then(function(response) {
-          cache.put(event.request, response.clone());
-          return response;
+    if (/^\/landuse\//.test(requestURL.pathname)) {
+      fetch(event.request);
+    }
+    event.respondWith(
+      caches.open(CACHE_NAME).then(function(cache) {
+        return cache.match(event.request).then(function (response) {
+          return response || fetch(event.request).then(function(response) {
+            cache.put(event.request, response.clone());
+            return response;
+          });
         });
-      });
-    })
-  );
+      })
+    );
+  }
 });
 
 /* self.addEventListener('push', function(event) {
