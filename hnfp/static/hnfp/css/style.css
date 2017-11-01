@@ -530,7 +530,7 @@ nav .tabs .tab {
   --------------------*/
 
 .dashboard .bg {
-  height: 6vh;
+  height: 5vh;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -543,10 +543,13 @@ nav .tabs .tab {
 }
 
 .dashboard .bg:before {
-  background-image: url('/static/hnfp/img/bg_mountain.jpg');
+  background-color: #dfeceb;
+  /* no need for background image right now
+    background-image: url('/static/hnfp/img/bg_mountain.jpg');
   background-size: cover;
   background-attachment: local;
   background-position: 50%;
+  */
   bottom: -2%;
   left: -2%;
   right: -2%;
@@ -558,9 +561,9 @@ nav .tabs .tab {
   background-image: url('/static/hnfp/img/mountain_ridge_white.svg');
   background-size: cover;
   bottom: 0%;
-  height: 60%;
-  left: -10%;
-  min-width: 150%;
+  height: 110%;
+  left: -2%;
+  min-width: 110%;
   z-index: -1;
 }
 
@@ -1991,14 +1994,10 @@ path {
     margin-bottom: 4rem;
   }
 
-  .dashboard .bg {
-    height: 30vh;
-  }
-
-  .dashboard .bg:after {
+  /* .dashboard .bg:after {
     bottom: -10%;
     height: 25%;
-  }
+  } */
 
   #logo-container.brand-logo {
     left: 50%;
@@ -2081,10 +2080,10 @@ path {
     padding: 10px 0 40px 10px;
   }
 
-  .dashboard .bg:after {
+  /* .dashboard .bg:after {
     bottom: 0%;
     height: 30%;
-  }
+  } */
 
   .parallax-container {
     height: 490px;
