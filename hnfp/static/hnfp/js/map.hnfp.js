@@ -148,7 +148,7 @@ var map = new ol.Map({
   interactions: ol.interaction.defaults({
     mouseWheelZoom: paramsObsMap.allowTouch(),
     dragZoom: paramsObsMap.allowTouch(),
-    dragPan: false,
+    dragPan: paramsObsMap.allowTouch(),
   }).extend([
     new ol.interaction.DragRotateAndZoom()
   ])
@@ -199,9 +199,18 @@ var popup = new ol.Overlay({
   element: popupNode,
   positioning: 'top-center',
   offset: [0,6],
-  autoPan: false,
-  autoPanMargin: 40
+  autoPan: true,
+  autoPanMargin: 4
 });
+
+var drag = new ol.interaction.DragPan();
+function allowDragPan(allow) {
+  if (allow !== false) {
+    map.addInteraction(drag);
+  } else {
+    map.removeInteraction(drag);
+  }
+}
 
 // set popups to show on click
 var popupClick = 'click';
@@ -220,6 +229,7 @@ var popupClick = 'click';
     } else {
       map.removeOverlay(popup);
     }
+    allowDragPan();
   })
 })();
 

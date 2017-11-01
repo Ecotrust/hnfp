@@ -8,46 +8,45 @@
     <h3 class="flow-text">Weather &amp; Marine Conditions</h3>
   </div>
 </div>
-  <div class="card bg_blue_light">
-    <div class="card-content">
-      <p class="center" id="forecast-summary"></p>
-    </div>
-    <div class="card-tabs">
-      <ul class="tabs tabs-fixed-width">
-        <li class="tab"><a href="#test4" class="teal-text">Current</a></li>
-        <li class="tab"><a href="#test5" class="teal-text">Marine</a></li>
-        <li class="tab"><a href="#test6" class="teal-text">Tides</a></li>
-      </ul>
-    </div>
-    <div class="card-content bg_green_light">
-      <div id="test4">
-        <div id="forecast">
-          <table class="highlight">
-            <tbody id="weatherforcast"></tbody>
-          </table>
-        </div>
+<div class="card bg_blue_light">
+  <div class="card-tabs">
+    <ul class="tabs">
+      <li class="tab"><a href="#forecast-summary" class="teal-text active">Forecast</a></li>
+      <li class="tab"><a href="#current-forecast" class="teal-text">Currently</a></li>
+      <li class="tab"><a href="#marine-forecast" class="teal-text">Marine</a></li>
+      <li class="tab"><a href="#tides-forecast" class="teal-text">Tides</a></li>
+    </ul>
+  </div>
+  <div class="card-content bg_green_light">
+    <p class="center" id="forecast-summary"></p>
+    <div id="current-forecast">
+      <div id="forecast">
+        <table class="highlight">
+          <tbody id="weatherforcast"></tbody>
+        </table>
       </div>
-      <div id="test5">
-        <div id="marine">
-          <table class="highlight">
-            <tbody id="marineforecast"></tbody>
-          </table>
-        </div>
+    </div>
+    <div id="marine-forecast">
+      <div id="marine">
+        <table class="highlight">
+          <tbody id="marineforecast"></tbody>
+        </table>
       </div>
-      <div id="test6">
-        <div id="tides">
-          <table class="highlight">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>High/Low</th>
-                <th>Water Level (ft)</th>
-                <th>Time</th>
-              </tr>
-            </thead>
-            <tbody id="tideforecast"></tbody>
-          </table>
-        </div>
+    </div>
+    <div id="tides-forecast">
+      <div id="tides">
+        <table class="highlight">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>High/Low</th>
+              <th>Water Level (ft)</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="tideforecast"></tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>

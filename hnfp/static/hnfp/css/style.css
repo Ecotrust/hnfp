@@ -625,12 +625,6 @@ nav .tabs .tab {
   font-size: 1.25em;
 }
 
-#forecast,
-#marine,
-#tides {
-  padding: 2rem;
-}
-
 #forecast td,
 #marine td,
 #tides td {
@@ -800,11 +794,11 @@ div.mapgroup h3 {
 }
 
 .dashboard .map-wrap {
-  height: 400px;
+  height: 300px;
+  margin: 0 auto;
   overflow: hidden;
-  padding: 0;
   position: relative;
-  width: 100%;
+  width: 94%;
 }
 
 .dashboard #map {
@@ -1983,6 +1977,11 @@ path {
   #new-observation .relative .material-icons {
     display: none;
   }
+
+  .dashboard .map-wrap {
+    height: 400px;
+    width: 100%;
+  }
 }
 
 @media (min-width: 54em) {
@@ -2134,6 +2133,12 @@ path {
 
   .dashboard .col.right {
     border-left: 1.25em solid transparent;
+  }
+
+  #forecast,
+  #marine,
+  #tides {
+    padding: 2rem;
   }
 
   .dashboard #map,
