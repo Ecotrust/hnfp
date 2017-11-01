@@ -49,6 +49,7 @@ var landuseProject = {
     $('#stepfive').addClass('visible');
     // Draw area on map
     drawProjectArea();
+    drawEndListener();
   },
   setInputLoc: function() {
     $('#observation_location').val(getLocationPoint());
@@ -101,6 +102,8 @@ var landuseProject = {
       });
       $projectForm.submit(function(e) {
         e.preventDefault();
+        convertProjToWKT();
+        removeProjectInteractions();
         landuseProject.create(e.target);
       })
     });
@@ -112,7 +115,8 @@ var landuseProject = {
       url: '/landuse/create/',
       data: $form,
       success: function(data) {
-        addProjectToMap(data);
+        let newData = data.length - 1;
+        addProjectToMap(data[newData]);
         landuseProject.close();
         $projectForm.html('');
       },
@@ -126,5 +130,8 @@ var landuseProject = {
         endSlice = data.indexOf(',"properties"');
         sliceIt = data.slice(beginSlice, endSlice);
     $('#area').val(sliceIt);
+  },
+  addAreaToForm: function(projArea) {
+    $('#area').val(projArea);
   }
 };

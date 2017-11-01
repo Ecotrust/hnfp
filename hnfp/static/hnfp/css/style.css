@@ -530,7 +530,7 @@ nav .tabs .tab {
   --------------------*/
 
 .dashboard .bg {
-  height: 5vh;
+  height: 4rem;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -1955,8 +1955,16 @@ path {
     font-size: 1.125em;
   }
 
+  .section-top-bg {
+      height: 90px;
+      top: -90px;
+  }
+
   .section-top-bg-img {
-    width: 140%;
+    left: -2%;
+    height: auto;
+    min-height: none;
+    width: 112%;
   }
 
   .hero {

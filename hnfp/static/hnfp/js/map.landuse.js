@@ -32,15 +32,21 @@ var snapPolygon,
       source: projectSource,
       map: map,
       style: stylePolygon('rgba(87, 166, 162, 0.4)')
+    });
+
+var newProjectSource = new ol.source.Vector(),
+    newProjectLayer = new ol.layer.Vector({
+      source: newProjectSource,
+      map: map
     }),
     drawPolygon = new ol.interaction.Draw({
-      source: projectSource,
+      source: newProjectSource,
       type: 'Polygon'
     });
 
 function drawProjectArea() {
-  snapPolygon = new ol.interaction.Snap({source: projectSource});
-  polygonModify = new ol.interaction.Modify({source: projectSource});
+  snapPolygon = new ol.interaction.Snap({source: newProjectSource});
+  polygonModify = new ol.interaction.Modify({source: newProjectSource});
   addProjectInteractions();
 };
 
@@ -54,7 +60,19 @@ function removeProjectInteractions() {
   map.removeInteraction(drawPolygon);
   map.removeInteraction(snapPolygon);
   map.removeInteraction(polygonModify);
-  mapAddPopup();
+}
+
+function drawEndListener() {
+  drawPolygon.on('drawend', function() {
+    map.removeInteraction(drawPolygon);
+  });
+}
+
+function convertProjToWKT() {
+  let format = new ol.format.WKT(),
+      newFeat = newProjectSource.getFeatures()[0],
+      wktFeat = format.writeFeature(newFeat);
+  landuseProject.addAreaToForm(wktFeat);
 }
 
 function addProjectToMap(data) {
