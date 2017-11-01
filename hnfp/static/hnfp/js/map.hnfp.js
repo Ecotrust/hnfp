@@ -147,7 +147,8 @@ var map = new ol.Map({
   ]),
   interactions: ol.interaction.defaults({
     mouseWheelZoom: paramsObsMap.allowTouch(),
-    dragZoom: paramsObsMap.allowTouch()
+    dragZoom: paramsObsMap.allowTouch(),
+    dragPan: false,
   }).extend([
     new ol.interaction.DragRotateAndZoom()
   ])
