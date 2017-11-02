@@ -71,6 +71,19 @@ var landuseProject = {
       $('select').material_select();
     });
   },
+  setMinCompletionDate: function(min) {
+    let completionMin = new Date(min),
+        y = completionMin.getFullYear(),
+        m = completionMin.getMonth(),
+        d = completionMin.getDate();
+    $('#completion_date').pickadate({
+      selectMonths: true,
+      selectYears: 100,
+      selectMonths: true,
+      min: new Date(parseInt(y),parseInt(m),parseInt(d)),
+      closeOnSelect: true,
+    });
+  },
   initNew: function() {
     $newProjectWrap.toggleClass('visible');
     landuseMap.removePopup();
@@ -93,14 +106,19 @@ var landuseProject = {
             //debugger;
         }
     }).done(function() {
-      $('.project_date').pickadate({
+      $('#start_date').pickadate({
         selectMonths: true,
         selectYears: 100,
-        min: new Date(2000,1,1),
+        min: new Date(),
         today: 'Today',
         clear: 'Clear',
         close: 'Close',
-        closeOnSelect: true // Close upon selecting a date,
+        closeOnSelect: true, // Close upon selecting a date
+        onSet: function(val) {
+          if (val.select) {
+            landuseProject.setMinCompletionDate(val.select);
+          }
+        },
       });
       $projectForm.submit(function(e) {
         e.preventDefault();
