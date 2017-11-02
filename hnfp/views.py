@@ -259,12 +259,8 @@ class AlertDelete(DeleteView):
 
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
-    all_observation = []
-    get_obs = Observation.get_user_observations(request.user.username)
-    for x in get_obs:
-        dic = x.to_dict()
-        all_observation.append(dic)
-    share = ShareObservationWithManager.objects.filter(user=request.user.username)
+    all_observation = [x.to_dict() for x in Observation.objects.filter(observer_username=request.user.username)]
+    share = ShareObservationWithManager.objects.filter(user=request.user.pk)
     context = {
         'title': 'My Hunt, Gather, Observe Map',
         'year': '2017',
