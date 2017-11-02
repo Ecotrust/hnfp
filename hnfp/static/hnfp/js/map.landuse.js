@@ -154,12 +154,14 @@ function stylePolygon(fillColor) {
 
 function styleLine(lineColor) {
   return function(feature, resolution) {
-    let strokeWidth = 1.5;
-    if (resolution < 4) {
+    let strokeWidth = 1;
+    if (resolution < 1) {
+      strokeWidth = 5;
+    } else if (resolution < 8) {
       strokeWidth = 4;
-    } else if (resolution < 15) {
+    } else if (resolution < 16) {
       strokeWidth = 3;
-    } else if (resolution < 25) {
+    } else if (resolution < 28) {
       strokeWidth = 2;
     }
     return new ol.style.Style({

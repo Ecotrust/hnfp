@@ -481,55 +481,24 @@ nav .tabs .tab {
   max-width: 200px;
 }
 
-.hero-bg {
-  height: 200px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-  position: relative;
-  width: 100%;
+.observations .hero-bg:before {
+  background-color: rgba(93, 133, 183, 0.3);
 }
 
-.hero-bg:before,
-.hero-bg:after {
-  content: '';
-  position: absolute;
+.alerts .hero-bg:before {
+  background-color: rgba(213, 63, 56, 0.3);
 }
 
-.hero-bg:before {
-  background-image: url('/static/hnfp/img/bg_mountain.jpg');
-  background-size: cover;
-  background-attachment: local;
-  background-position: 50%;
-  bottom: -2%;
-  left: -2%;
-  right: -2%;
-  top: -2%;
-  z-index: -1;
-}
-
-  .observations .hero-bg:before {
-    background-image: url('/static/hnfp/img/bg_berries.png');
-  }
-
-  .alerts .hero-bg:before {
-    background-image: url('/static/hnfp/img/ianaj-osprey.jpg');
-  }
-
-.hero-bg:after {
-  background-image: url('/static/hnfp/img/mountain_ridge_white.svg');
-  background-size: cover;
-  bottom: -10px;
-  height: 60px;
-  left: -10%;
-  min-width: 120%;
-  z-index: -1;
+.forum .hero-bg:before {
+  background-color: #dfeceb;
 }
 
 /*--------------------
   dashboard
   --------------------*/
 
-.dashboard .bg {
+.dashboard .bg,
+.hero-bg {
   height: 4rem;
   overflow: hidden;
   position: relative;
@@ -537,12 +506,15 @@ nav .tabs .tab {
 }
 
 .dashboard .bg:before,
-.dashboard .bg:after {
+.dashboard .bg:after,
+.hero-bg:before,
+.hero-bg:after {
   content: '';
   position: absolute;
 }
 
-.dashboard .bg:before {
+.dashboard .bg:before,
+.hero-bg:before {
   background-color: #dfeceb;
   /* no need for background image right now
     background-image: url('/static/hnfp/img/bg_mountain.jpg');
@@ -557,7 +529,8 @@ nav .tabs .tab {
   z-index: -1;
 }
 
-.dashboard .bg:after {
+.dashboard .bg:after,
+.hero-bg:after {
   background-image: url('/static/hnfp/img/mountain_ridge_white.svg');
   background-size: cover;
   bottom: 0%;
@@ -952,7 +925,7 @@ div.mapgroup h3 {
   font-size: 2.18375rem;
   height: 2.5rem;
   top: 0;
-  vertical-align: middle;
+  vertical-align: top;
   width: 2.5rem;
 }
 
@@ -1997,10 +1970,10 @@ path {
 
 @media (min-width: 54em) {
 
-  .hero-bg {
+  /* .hero-bg {
     height: 300px;
     margin-bottom: 4rem;
-  }
+  } */
 
   /* .dashboard .bg:after {
     bottom: -10%;

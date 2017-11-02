@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.11';
+var CACHE_NAME = 'hoonahCache-v0.12';
 var urlsToCacheFirst = [
   // CSS
   '/static/hnfp/css/materialize.css',
@@ -75,9 +75,11 @@ self.addEventListener('fetch', function(event) {
   if (requestURL.origin == location.origin) {
     if (/^\/admin\//.test(requestURL.pathname)) {
       fetch(event.request);
+      return;
     }
     if (/^\/landuse\//.test(requestURL.pathname)) {
       fetch(event.request);
+      return;
     }
     event.respondWith(
       caches.open(CACHE_NAME).then(function(cache) {
