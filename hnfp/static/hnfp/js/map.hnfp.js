@@ -118,20 +118,34 @@ var hoonahLandOwners = new ol.layer.Vector({
   visible: false
 });
 
-// Map Object
+/**
+ * map groups
+ */
+var basemapGroup = new ol.layer.Group({
+  title: 'Basemaps',
+  layers: [
+    hereMap,
+    osm,
+    topoLayer
+  ]
+});
+
+var infrastructureGroup = new ol.layer.Group({
+  title: 'Infrastructure',
+  layers: [
+    hoonahRoads,
+    hoonahLandOwners,
+  ]
+});
+
+/**
+ * map object
+ */
 var map = new ol.Map({
   target: 'map',
   layers: [
-    new ol.layer.Group({
-      title: 'Basemaps',
-      layers: [
-        hereMap,
-        osm,
-        topoLayer
-      ]
-    }),
-    hoonahRoads,
-    hoonahLandOwners,
+    basemapGroup,
+    infrastructureGroup
   ],
   view: mapView,
   controls: ol.control.defaults({
