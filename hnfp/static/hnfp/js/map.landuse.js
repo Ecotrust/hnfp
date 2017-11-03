@@ -41,7 +41,7 @@ var newProjectSource = new ol.source.Vector(),
     }),
     drawPolygon = new ol.interaction.Draw({
       source: newProjectSource,
-      type: 'Polygon'
+      type: 'MultiPolygon'
     });
 
 function visibleProjectLayer(bool) {
@@ -94,7 +94,7 @@ function addProjectToMap(data) {
   let geo = JSON.parse(data['area']);
   let newPoly = new ol.Feature();
   projectSource.addFeature(newPoly);
-  newPoly.setGeometry(new ol.geom.Polygon(geo.coordinates));
+  newPoly.setGeometry(new ol.geom.MultiPolygon(geo.coordinates));
   if (typeof(data.category) !== 'undefined') {
     if (data.category === 'forest') {
       newPoly.setStyle(stylePolygon('rgba(87, 166, 162, 0.35)'));

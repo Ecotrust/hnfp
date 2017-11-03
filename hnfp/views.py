@@ -18,7 +18,7 @@ from accounts import views
 from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource, ShareObservationWithManager
 from hnfp.forms import ResponseForm, HoonahLogInForm, AlertForm
 # features and shapes
-from django.contrib.gis.geos import Point, Polygon, GEOSGeometry
+from django.contrib.gis.geos import Point, Polygon, MultiPolygon, GEOSGeometry
 import json
 
 from django.views.generic.edit import UpdateView, DeleteView

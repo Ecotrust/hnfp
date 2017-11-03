@@ -604,7 +604,7 @@ class LandUseProject(models.Model):
 		null=True,
 		blank=True,
 	)
-	area = models.PolygonField(
+	area = models.MultiPolygonField(
 		srid=settings.GEOMETRY_DB_SRID,
 		default=None,
 		null=True,

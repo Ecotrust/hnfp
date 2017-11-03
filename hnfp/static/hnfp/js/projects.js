@@ -147,7 +147,7 @@ var landuseProject = {
     });
   },
   addProjArea: function(data) {
-    var beginSlice = data.indexOf('{"type":"Polygon"'),
+    var beginSlice = data.indexOf('{"type":"MultiPolygon"'),
         endSlice = data.indexOf(',"properties"');
         sliceIt = data.slice(beginSlice, endSlice);
     $('#area').val(sliceIt);
