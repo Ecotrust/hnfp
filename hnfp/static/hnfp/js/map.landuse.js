@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 var allFeatures = [];
 var landuseMap = {
-  layerOpacity: 0.85,
+  layerOpacity: 0.75,
   removePopup: function() {
     map.removeEventListener('click')
   },
@@ -31,7 +31,7 @@ var landuseMap = {
         format: new ol.format.GeoJSON(),
       }),
       style: styling,
-      opacity: .85,
+      opacity: landuseMap.layerOpacity,
       visible: false
     })
   },
@@ -56,6 +56,124 @@ var landuseMap = {
             width: strokeWidth
           })
         })
+      }
+    )
+  },
+  hoonahOpenPriority: function() {
+    return landuseMap.newLayerGeoJSON(
+      'Road Opening Priority',
+      '/static/hnfp/js/data/hoonah_open_priority.geojson',
+      function(feature, resolution) {
+        let strokeWidth = setStroke(resolution),
+            rank = feature.get('CommunityP'),
+            lineColor = '#ffffff';
+        if (rank == 1) {
+          lineColor = 'rgb(245,174,93)';
+        } else if (rank == 2) {
+          lineColor = 'rgb(235,101,223)';
+        } else if (rank == 3) {
+          lineColor = 'rgb(102,145,76)';
+        } else if (rank == 4) {
+          lineColor = 'rgb(91,83,237)';
+        } else if (rank == 5) {
+          lineColor = 'rgb(242,94,117)';
+        }
+        return new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: lineColor,
+            width: strokeWidth
+          })
+        })
+      }
+    )
+  },
+  hoonahMinDeer: function() {
+    return landuseMap.newLayerGeoJSON(
+      'Minimum Deer Per Meter',
+      '/static/hnfp/js/data/hoonah_min_deer.geojson',
+      function(feature, resolution) {
+        let rank = feature.get('gridcode'),
+            fill = '#ffffff';
+        if (rank <= 4) {
+          fill = 'rgb(40,146,199)';
+        } else if (rank == 5) {
+          fill = 'rgb(160,194,155)';
+        } else if (rank == 6) {
+          fill = 'rgb(250,250,100)';
+        } else if (rank == 7) {
+          fill = 'rgb(250,141,52)';
+        } else if (rank >= 8) {
+          fill = 'rgb(232,16,20)';
+        }
+        return new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: fill,
+          })
+        })
+      }
+    )
+  },
+  hoonahRoadCrossings: function() {
+    return landuseMap.newLayerGeoJSON(
+      'Road Crossings',
+      '/static/hnfp/js/data/hoonah_road_crossing.geojson',
+      function(feature, resolution) {
+        let strokeWidth = setStroke(resolution),
+            symbol = feature.get('Primary__1'),
+            fill = '#ffffff';
+        if (symbol == 'Bridge') {
+          fill = 'rgb(164,168,108)';
+        } else if (symbol == 'Culvert') {
+          fill = 'rgb(102,85,230)';
+        } else if (symbol == 'Waterbar') {
+          fill = 'rgb(85,95,128)';
+        } else if (symbol == 'Erosion/Landslide/Water On Road') {
+          fill = 'rgb(92,242,87)';
+        } else if (symbol == 'Non-engineered') {
+          fill = 'rgb(245,91,111)';
+        }
+        return new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 3,
+            fill: new ol.style.Fill({
+              color: fill
+            }),
+            stroke: new ol.style.Stroke({
+              color: fill,
+              width: strokeWidth
+            })
+          })
+        });
+      }
+    )
+  },
+  hoonahRoadOpportunities: function() {
+    return landuseMap.newLayerGeoJSON(
+      'Road Opportunities',
+      '/static/hnfp/js/data/hoonah_road_opportunity.geojson',
+      function(feature, resolution) {
+        let strokeWidth = setStroke(resolution),
+            symbol = feature.get('Priority'),
+            fill = '#000000';
+        if (symbol == 'L') {
+          fill = 'rgb(255,200,0)';
+        } else if (symbol == 'M') {
+          fill = 'rgb(0,0,255)';
+        } else if (symbol == 'H') {
+          fill = 'rgb(255,0,81)';
+        }
+        return new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 10,
+            fill: new ol.style.Fill({
+              color: fill
+            }),
+            stroke: new ol.style.Stroke({
+              color: fill,
+              width: strokeWidth
+            })
+          })
+        });
       }
     )
   },
@@ -525,6 +643,7 @@ var timberGroup = new ol.layer.Group({
   layers: [
     areaHarvested,
     harvestTreatment,
+    landuseMap.hoonahMinDeer()
   ]
 });
 
@@ -542,14 +661,8 @@ var communityGroup = new ol.layer.Group({
   title: 'Community Use & Priorities',
   layers: [
     landuseMap.hoonahRoadBrushingPriorities(),
+    landuseMap.hoonahOpenPriority(),
     landuseMap.hoonahCommunityUse(),
-    /* Road Brushing Priority,
-    Road Opening Priority,
-    Road use - berries;
-    Road use - deer;
-    Road use - fishing;
-    Road use - medicinal;
-    Minimum deer per meter */
   ]
 })
 
@@ -583,7 +696,8 @@ var projectsGroup = new ol.layer.Group({
  */
 infrastructureGroup.getLayers().push(hoonahCabins);
 infrastructureGroup.getLayers().push(hoonahLogTransfer);
-
+infrastructureGroup.getLayers().push(landuseMap.hoonahRoadCrossings());
+infrastructureGroup.getLayers().push(landuseMap.hoonahRoadOpportunities());
 /**
  * add layers to need to be in switcher menu
  * then add layers to switcher
