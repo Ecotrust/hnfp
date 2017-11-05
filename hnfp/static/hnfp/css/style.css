@@ -894,7 +894,7 @@ div.mapgroup h3 {
 #map .ol-full-screen, #project-map .ol-full-screen,
 #map .layer-switcher, #project-map .layer-switcher,
 #map .ol-control button, #project-map .ol-control button {
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   border-radius: 0;
   border: none;
   color: #000;
@@ -906,10 +906,18 @@ div.mapgroup h3 {
 }
 
 #map .layer-switcher, #project-map .layer-switcher {
+  border-radius: 0;
+  border: none;
+  color: #000;
+  left: auto;
+  margin: 0;
+  padding: 0;
+  right: 0;
   text-align: left;
 }
 
-#map .layer-switcher .panel, #project-map .layer-switcher .panel {
+#map .layer-switcher .panel,
+#project-map .layer-switcher .panel {
   border: none;
   background: transparent;
 }
@@ -941,7 +949,7 @@ div.mapgroup h3 {
 }
 
 #map .ol-full-screen button, #project-map .ol-full-screen button {
-  background: transparent;
+  background: rgba(255,255,255,0.95);
   color: #000;
   font-family: 'function_bold', sans-serif;
   font-size: 1.5rem;
@@ -961,6 +969,33 @@ div.mapgroup h3 {
   background-size: 60%;
   background-position: 50%;
   width: 2.5rem;
+}
+
+#map .layer-switcher.shown {
+  bottom: auto;
+}
+
+#map .layer-switcher.shown.stick {
+  bottom: 0;
+}
+
+#map .layer-switcher.stick button {
+  background-image: url('/static/hnfp/img/icons/i_close.svg');
+  background-size: 45%;
+}
+
+#map .layer-switcher.shown button {
+  display: block !important;
+}
+
+#map .layer-switcher .panel {
+  display: none !important;
+}
+
+#map .layer-switcher.stick .panel {
+  display: inline-block !important;
+  position: relative;
+  overflow: scroll;
 }
 
 #map:fullscreen, #project-map:fullscreen {
@@ -1745,7 +1780,7 @@ path {
   --------------------*/
 
 .land-use .wrap {
-  padding: 1rem 1.5% 0;
+  padding: .5rem 1.5% 0;
   position: relative;
 }
 
@@ -1754,7 +1789,7 @@ path {
 }
 
 .land-use .controls {
-  margin-top: 3rem;
+  margin-top: 1rem;
   padding-bottom: 1rem;
 }
 
@@ -1776,11 +1811,12 @@ path {
 }
 
 .land-use .controls h5 {
-  margin-bottom: 1rem;
+  font-size: 1.06125em;
+  margin-bottom: .5rem;
 }
 
 .land-use .controls p {
-  margin-bottom: .75rem;
+  margin-bottom: .5rem;
 }
 
 .land-use .controls label {
@@ -1795,6 +1831,9 @@ path {
 
 .land-use .controls input[type=checkbox]:not(:checked) + label:after {
   background: #fff;
+  height: 18px;
+  top: 2px;
+  width: 18px;
 }
 
 .bg-red:checked + label:after {
@@ -1916,6 +1955,10 @@ path {
 
 .land-use .collapsible-header {
   background: transparent;
+}
+
+.layer-switcher li.group {
+  padding-top: 2px;
 }
 
 /*--------------------
@@ -2149,11 +2192,9 @@ path {
     Land use
   */
 
-  .land-use .controls {
-    min-height: 20vh;
-  }
   .land-use #map-wrapper {
     height: 70vh;
+    max-height: none;
   }
 
   .land-use .controls .row {

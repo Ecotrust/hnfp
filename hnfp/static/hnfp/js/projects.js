@@ -15,7 +15,18 @@ $(document).ready(function() {
     } else {
       landuseMap.hideObservations();
     }
-  })
+  });
+  $('.layer-switcher button').on('click', function(e) {
+    if (e.target.classList.contains('showing')) {
+      e.target.classList.remove('showing');
+      $('.layer-switcher').removeClass('stick');
+      $('.layer-switcher').removeClass('shown');
+    } else {
+      e.target.classList.add('showing');
+      $('.layer-switcher').addClass('stick');
+      layerSwitcher.panel.onmouseout = null;
+    }
+  });
 });
 
 $newProjectWrap = $('#new-project');

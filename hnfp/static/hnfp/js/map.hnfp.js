@@ -134,9 +134,15 @@ var infrastructureGroup = new ol.layer.Group({
   title: 'Infrastructure',
   layers: [
     hoonahRoads,
-    hoonahLandOwners,
   ]
 });
+
+var baseLayers = new ol.layer.Group({
+  title: 'Base Layers',
+  layers: [
+    hoonahLandOwners
+  ]
+})
 
 /**
  * map object
@@ -145,6 +151,7 @@ var map = new ol.Map({
   target: 'map',
   layers: [
     basemapGroup,
+    baseLayers,
     infrastructureGroup
   ],
   view: mapView,

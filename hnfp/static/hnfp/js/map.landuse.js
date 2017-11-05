@@ -147,24 +147,24 @@ var landuseMap = {
       }
     )
   },
-  hoonahRoadOpportunities: function() {
+  hoonahRoadOpps: function() {
     return landuseMap.newLayerGeoJSON(
       'Road Opportunities',
       '/static/hnfp/js/data/hoonah_road_opportunity.geojson',
       function(feature, resolution) {
         let strokeWidth = setStroke(resolution),
             symbol = feature.get('Priority'),
-            fill = '#000000';
-        if (symbol == 'L') {
+            fill = '#ffffff';
+        if (symbol == 'H') {
           fill = 'rgb(255,200,0)';
         } else if (symbol == 'M') {
           fill = 'rgb(0,0,255)';
-        } else if (symbol == 'H') {
+        } else if (symbol == 'L') {
           fill = 'rgb(255,0,81)';
         }
         return new ol.style.Style({
           image: new ol.style.Circle({
-            radius: 10,
+            radius: 3,
             fill: new ol.style.Fill({
               color: fill
             }),
@@ -174,6 +174,58 @@ var landuseMap = {
             })
           })
         });
+      }
+    )
+  },
+  hoonahBridgeOpps: function() {
+    return landuseMap.newLayerGeoJSON(
+      'Bridge Opportunities',
+      '/static/hnfp/js/data/hoonah_bridge_opportunity.geojson',
+      function(feature, resolution) {
+        let strokeWidth = setStroke(resolution),
+            symbol = feature.get('Bridge_Typ'),
+            fill = '#ffffff';
+        if (symbol == 'Log') {
+          fill = 'rgb(128,168,47)';
+        } else if (symbol == 'Permanent') {
+          fill = 'rgb(112,42,173)';
+        }
+        return new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 3,
+            fill: new ol.style.Fill({
+              color: fill
+            }),
+            stroke: new ol.style.Stroke({
+              color: fill,
+              width: strokeWidth
+            })
+          })
+        });
+      }
+    )
+  },
+  streamCondition: function() {
+    return landuseMap.newLayerGeoJSON(
+      'Stream Condition',
+      '/static/hnfp/js/data/hoonah_stream_condition.geojson',
+      function(feature, resolution) {
+        let strokeWidth = setStroke(resolution),
+            symbol = feature.get('PFC_1'),
+            lineColor = '#000';
+        if (symbol == 'FARdownward') {
+          lineColor = 'rgb(163,157,42)';
+        } else if (symbol == 'NA') {
+          lineColor = 'rgb(49,134,158)';
+        } else if (symbol == 'PFC') {
+          lineColor = 'rgb(173,38,142)';
+        }
+        return new ol.style.Style({
+          stroke: new ol.style.Stroke({
+            color: lineColor,
+            width: strokeWidth
+          })
+        })
       }
     )
   },
@@ -301,6 +353,37 @@ var landuseMap = {
       opacity: landuseMap.layerOpacity,
       visible: false
     })
+  },
+  harvestTreatment: function() {
+    return new ol.layer.Vector({
+      title: 'Harvest Treatment',
+      source: new ol.source.Vector({
+        url: '/static/hnfp/js/data/hoonah_harvest_treatment.geojson',
+        format: new ol.format.GeoJSON()
+      }),
+      style: function(feature, resolution) {
+        let feat = feature.get('PCT_YR'),
+            fill = '#000000';
+        if (feat == 0) {
+          fill = 'rgb(255,0,0)';
+        } else if (feat >= 1 && feat <= 2001) {
+          fill = 'rgb(255,200,0)';
+        } else if (feat >= 2002 && feat <= 2006) {
+          fill = 'rgb(182,255,143)';
+        } else if (feat >= 2007 && feat <= 2011) {
+          fill = 'rgb(51,194,255)';
+        } else if (feat >= 2012 && feat <= 2015) {
+          fill = 'rgb(0,0,255)';
+        }
+        return new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: fill
+          })
+        })
+      },
+      opacity: .6,
+      visible: false
+    });
   },
   /**
     * map layers with feature based styles
@@ -536,17 +619,6 @@ var areaHarvested = new ol.layer.Vector({
   visible: false
 });
 
-var harvestTreatment = new ol.layer.Vector({
-  title: 'Harvest Treatment',
-  source: new ol.source.Vector({
-    url: '/static/hnfp/js/data/hoonah_harvest_treatment.geojson',
-    format: new ol.format.GeoJSON()
-  }),
-  style: stylePolygon('#ec7014'),
-  opacity: .6,
-  visible: false
-});
-
 var hoonahLogTransfer = new ol.layer.Vector({
   title: 'Log Transfer Facilities',
   source: new ol.source.Vector({
@@ -616,10 +688,10 @@ var hoonahStreams = new ol.layer.Vector({
 var salmonStreams = new ol.layer.Vector({
   title: 'Probable Anadromous fish',
   source: new ol.source.Vector({
-    url: '/static/hnfp/js/data/hoonah_salmon_streams.geojson',
+    url: '/static/hnfp/js/data/hoonah_anad_fish.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: styleLine('#08519c'),
+  style: styleLine('rgb(255,167,127)'),
   opacity: .85,
   visible: false
 });
@@ -642,7 +714,7 @@ var timberGroup = new ol.layer.Group({
   title: 'Resources',
   layers: [
     areaHarvested,
-    harvestTreatment,
+    landuseMap.harvestTreatment(),
     landuseMap.hoonahMinDeer()
   ]
 });
@@ -653,6 +725,7 @@ var hydroGroup = new ol.layer.Group({
     salmonStreams,
     residentFish,
     hoonahStreams,
+    landuseMap.streamCondition(),
     watersheds,
   ]
 });
@@ -660,21 +733,11 @@ var hydroGroup = new ol.layer.Group({
 var communityGroup = new ol.layer.Group({
   title: 'Community Use & Priorities',
   layers: [
+    landuseMap.hoonahCommunityUse(),
     landuseMap.hoonahRoadBrushingPriorities(),
     landuseMap.hoonahOpenPriority(),
-    landuseMap.hoonahCommunityUse(),
   ]
 })
-
-var featuresGroup = new ol.layer.Group({
-  title: 'Base layers',
-  layers: [
-    hoonahTowns,
-    hoonahCabins,
-    hoonahPlaceNamesEng,
-    hoonahProjectBoundary,
-  ]
-});
 
 var stewardInputGroup = new ol.layer.Group({
   title: 'Stewards Input',
@@ -685,7 +748,7 @@ var stewardInputGroup = new ol.layer.Group({
 });
 
 var projectsGroup = new ol.layer.Group({
-  title: 'Land Use Projects',
+  title: 'Other Projects',
   layers: [
     projectLayer,
   ]
@@ -696,8 +759,14 @@ var projectsGroup = new ol.layer.Group({
  */
 infrastructureGroup.getLayers().push(hoonahCabins);
 infrastructureGroup.getLayers().push(hoonahLogTransfer);
+infrastructureGroup.getLayers().push(landuseMap.hoonahRoadOpps());
+infrastructureGroup.getLayers().push(landuseMap.hoonahBridgeOpps());
 infrastructureGroup.getLayers().push(landuseMap.hoonahRoadCrossings());
-infrastructureGroup.getLayers().push(landuseMap.hoonahRoadOpportunities());
+
+
+baseLayers.getLayers().push(hoonahTowns);
+baseLayers.getLayers().push(hoonahPlaceNamesEng);
+baseLayers.getLayers().push(hoonahProjectBoundary);
 /**
  * add layers to need to be in switcher menu
  * then add layers to switcher
@@ -706,9 +775,8 @@ infrastructureGroup.getLayers().push(landuseMap.hoonahRoadOpportunities());
 map.getLayers().push(communityGroup);
 map.getLayers().push(hydroGroup);
 map.getLayers().push(timberGroup);
-map.getLayers().push(featuresGroup);
 
-var switcher = new ol.control.LayerSwitcher({
+/* var switcher = new ol.control.LayerSwitcher({
   target: $("#visible-themes").get(0),
 	show_progress: true,
 	extent: false,
@@ -716,8 +784,8 @@ var switcher = new ol.control.LayerSwitcher({
 	oninfo: function (l) {
     alert(l.get("title"));
   }
-});
-map.addControl(switcher);
+}); */
+// map.addControl(switcher);
 
 // Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
 // been added to the map. The layer will appear in the list the next time
