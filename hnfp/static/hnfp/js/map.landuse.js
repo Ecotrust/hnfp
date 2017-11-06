@@ -35,6 +35,14 @@ var landuseMap = {
       visible: false
     })
   },
+  returnStyle: function(lineColor, strokeWidth) {
+    return new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: lineColor,
+        width: strokeWidth
+      })
+    })
+  },
   hoonahRoadBrushingPriorities: function() {
     return landuseMap.newLayerGeoJSON(
       'Road Brushing',
@@ -245,14 +253,6 @@ var landuseMap = {
       url: '/static/hnfp/js/data/hoonah_community_use.geojson',
       format: new ol.format.GeoJSON(),
     });
-  },
-  returnStyle: function(lineColor, strokeWidth) {
-    return new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: lineColor,
-        width: strokeWidth
-      })
-    })
   },
   hoonahComUseBerries: function() {
     return new ol.layer.Vector({
