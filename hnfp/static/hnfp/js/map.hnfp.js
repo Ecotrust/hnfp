@@ -10,6 +10,13 @@ var paramsObsMap = {
     } else {
       return true;
     }
+  },
+  allowOnDashboard: function() {
+    if ($('.dashboard').length > 0) {
+      allowDragPan(false);
+    } else {
+      allowDragPan(true);
+    }
   }
 }
 
@@ -169,7 +176,6 @@ var map = new ol.Map({
   interactions: ol.interaction.defaults({
     mouseWheelZoom: paramsObsMap.allowTouch(),
     dragZoom: paramsObsMap.allowTouch(),
-    dragPan: paramsObsMap.allowTouch(),
   }).extend([
     new ol.interaction.DragRotateAndZoom()
   ])
@@ -185,7 +191,8 @@ map.addControl(layerSwitcher);
 var locSource = new ol.source.Vector();
 var locLayer = new ol.layer.Vector({
   source: locSource,
-  map: map
+  map: map,
+  zIndex: 9
 });
 var locPoint = new ol.Feature();
 locPoint.setId(1);
@@ -233,6 +240,11 @@ function allowDragPan(allow) {
   }
 }
 
+/**
+ * allow DragPan or not
+ */
+ paramsObsMap.allowOnDashboard();
+
 // set popups to show on click
 var popupClick = 'click';
 function mapAddPopup() {
@@ -250,7 +262,6 @@ function mapAddPopup() {
     } else {
       map.removeOverlay(popup);
     }
-    allowDragPan();
   })
 }
 mapAddPopup();
@@ -318,6 +329,7 @@ function drawLocation(style) {
   }
   locPoint.setStyle(style);
   map.addInteraction(modify);
+  allowDragPan(false);
 }
 
 var alertMap = {
@@ -415,6 +427,7 @@ function findLocation() {
       });
       locPoint.setGeometry(new ol.geom.Point(geolocation.getPosition()));
       map.addInteraction(modify);
+      allowDragPan(false);
       geolocation.setTracking(false);
       changeCount++;
     }
@@ -470,6 +483,7 @@ var topoURLCapabilities = fetch('https://services.arcgisonline.com/arcgis/rest/s
 
 function removeInterations() {
   map.removeInteraction(modify);
+  allowDragPan();
 }
 
 // Created new data

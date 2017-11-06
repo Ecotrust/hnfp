@@ -975,7 +975,8 @@ div.mapgroup h3 {
   bottom: auto;
 }
 
-#map .layer-switcher.shown.stick {
+#map .layer-switcher.shown.stick,
+#map .layer-switcher.stick {
   bottom: 0;
 }
 

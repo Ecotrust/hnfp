@@ -462,12 +462,14 @@ function addProjectInteractions() {
   map.addInteraction(drawPolygon);
   map.addInteraction(snapPolygon);
   map.addInteraction(polygonModify);
+  allowDragPan(false);
 }
 
 function removeProjectInteractions() {
   map.removeInteraction(drawPolygon);
   map.removeInteraction(snapPolygon);
   map.removeInteraction(polygonModify);
+  allowDragPan();
 }
 
 function drawEndListener() {

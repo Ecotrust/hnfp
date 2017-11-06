@@ -1,6 +1,17 @@
 $(document).ready( function() {
   $('.parallax').parallax();
   $('.button-collapse').sideNav();
+  $('.layer-switcher button').click(function(e) {
+    if (e.target.classList.contains('showing')) {
+      e.target.classList.remove('showing');
+      $('.layer-switcher').removeClass('stick');
+      $('.layer-switcher').removeClass('shown');
+    } else {
+      e.target.classList.add('showing');
+      $('.layer-switcher').addClass('stick');
+      layerSwitcher.panel.onmouseout = null;
+    }
+  });
 });
 
 /*
