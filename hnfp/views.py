@@ -144,7 +144,6 @@ def login(request):
     form = HoonahLogInForm()
     context = {
         'form': form,
-        'next': '/dashboard/',
         'title': 'Log in',
     }
     return HttpResponse(template.render(context, request))

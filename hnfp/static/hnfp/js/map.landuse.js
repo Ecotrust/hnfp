@@ -262,7 +262,7 @@ var landuseMap = {
         let strokeWidth = setStroke(resolution),
             feat = feature.get('berries'),
             lineColor = '#000000';
-        if (feat == 0) {
+        if (feat < 1) {
           lineColor = 'rgb(0,0,255)';
         } else if (feat >= 1 && feat <= 7) {
           lineColor = 'rgb(51,194,255)';
@@ -277,7 +277,7 @@ var landuseMap = {
       },
       opacity: landuseMap.layerOpacity,
       visible: false
-    })
+    });
   },
   hoonahComUseDeer: function() {
     return new ol.layer.Vector({
