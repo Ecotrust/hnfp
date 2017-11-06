@@ -292,8 +292,8 @@ def observation_create(request):
         comments = request.POST['comments']
         observation_time = request.POST['observation_time']
         observation_date = request.POST['observation_date']
-        print (request.FILES)
-        for file in request.FILES['observation_photo']:
+        observation_photo = None
+        for file in request.FILES.getlist('file'):
             observation_photo = file
 
         new_obs = Observation(
