@@ -75,10 +75,7 @@ self.addEventListener('fetch', function(event) {
     fetch(event.request).catch(function() {
       return caches.match(event.request);
     })
-  ).then(function() {
-    addToCache(event.request);
-    return console.log('done');
-  })
+  )
 });
 
 function addToCache(request) {
