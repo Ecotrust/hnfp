@@ -219,6 +219,7 @@ def alert_create(request):
         alert_comment = request.POST['alert_comment']
         alert_time = request.POST['alert_time']
         alert_date = request.POST['alert_date']
+        alert_photo = None
         for file in request.FILES.getlist('file'):
             print(file)
             alert_photo = file
