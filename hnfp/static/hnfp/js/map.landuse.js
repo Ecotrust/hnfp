@@ -1,6 +1,10 @@
 $(document).ready(function() {
   var scaleLineControl = new ol.control.ScaleLine();
   map.addControl(scaleLineControl);
+  var landuseFullScreen = new ol.control.FullScreen({
+    source: 'land-use'
+  })
+  map.addControl(landuseFullScreen);
   landuseMap.hideAlerts();
   landuseMap.hideObservations();
 });

@@ -1779,7 +1779,6 @@ path {
 /*--------------------
   Land Use
   --------------------*/
-
 .land-use .wrap {
   padding: .5rem 1.5% 0;
   position: relative;
@@ -1790,21 +1789,9 @@ path {
 }
 
 .land-use .controls {
-  margin-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.land-use .controls:after {
   background: #e4efee;
-  content: '';
-  height: 112%;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: -12%;
-  transform: rotate(-.5deg);
-  transform-origin: 100%;
-  z-index: -1;
+  margin-top: .25rem;
+  padding: 1rem 0;
 }
 
 .land-use .controls .row .col {
