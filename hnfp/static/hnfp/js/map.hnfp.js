@@ -64,11 +64,13 @@ var hoonahRoads = new ol.layer.Vector({
       width = 2;
     }
     if (resolution < 16) {
-      road = properties.RD_STATUS !== null ? properties.RD_STATUS : '';
+      if (properties.RD_STATUS !== null || properties.RD_STATUS !== 'Future') {
+        road = properties.RD_STATUS;
+      }
       width = 2.5;
     }
     if (resolution < 10) {
-      width: 3;
+      width = 3;
     }
     return new ol.style.Style({
       stroke: new ol.style.Stroke({
@@ -578,9 +580,7 @@ function trackLocation() {
 
   TrackingGeolocation.on('change', function(e) {
     mapView.animate({
-      center: TrackingGeolocation.getPosition(),
-      zoom: 18,
-      duration: 4000
+      center: TrackingGeolocation.getPosition()
     });
     trackingFeature.setGeometry(new ol.geom.Point(TrackingGeolocation.getPosition()));
   });

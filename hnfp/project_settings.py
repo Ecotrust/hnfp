@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '*.hoonahstewards.net', 'hoonahstewards.net', '52.35.10.181', '172.31.2.211', 'www.hoonahstewards.net']
 
+# Site id for comments xtd
+SITE_ID = 1
 
 # Application definition
 
@@ -173,7 +175,6 @@ KML_SIMPLIFY_TOLERANCE_DEGREES = 0.0002 # very roughly ~ 20 meters
 KML_EXTRUDER_HEIGHT = 100
 KML_ALTITUDEMODE_DEFAULT = 'absolute'
 
-
 ### Note: This MUST be set before importing project_settings, even though
 #       INSTALLED_APPS is the first thing project_settings sets.
 #       Because... django? ¯\_(?)_/¯
@@ -199,6 +200,8 @@ INSTALLED_APPS = [
     'core',
     'compressor',
     'import_export',
+    'django_comments_xtd',
+    'django_comments',
     ### END ADD APPS ###
 
     ### BEGIN INSERTED INSTALLED APPS ###
@@ -213,8 +216,6 @@ INSTALLED_APPS = [
     # 'scenarios',
     # 'analysistools',
     'rpc4django',
-    'django_comments_xtd',
-    'django_comments',
     'ckeditor',
     ### END INSERTED INSTALLED APPS ###
 
@@ -356,7 +357,9 @@ RECAPTCHA_PRIVATE_KEY = '6Lc30ScUAAAAAFq-pBBz161BKPMrRPvDajNuJu3G'
 
 COMMENTS_APP = 'django_comments_xtd'
 COMMENTS_XTD_MAX_THREAD_LEVEL = 2
-COMMENTS_XTD_CONFIRM_EMAIL = True
+COMMENTS_XTD_CONFIRM_EMAIL = False
+COMMENTS_XTD_SALT = '&HK$OYRVG0h5gt073h6gH4p25GS2g5AQ25hTm256yGt134tMP5TgCX'
+
 
 CKEDITOR_CONFIGS = {
     'default': {

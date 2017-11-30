@@ -74,7 +74,16 @@
     <div class="row section">
       <div class="col s10 m8 l6 offset-s1 offset-m2 offset-l3">
         <div class="video-container">
-          <iframe src="https://player.vimeo.com/video/241097435" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          <iframe src="" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          <script async>
+            /**
+             * load iframe async
+             */
+             setTimeout(function() {
+               var f = document.querySelectorAll('iframe')[0];
+               f.src = 'https://player.vimeo.com/video/241097435';
+             }, 4000);
+          </script>
         </div>
       </div>
     </div>

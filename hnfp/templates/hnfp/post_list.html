@@ -1,5 +1,5 @@
 {% extends "hnfp/index.html" %}
-
+{% load comments comments_xtd %}
 
 {% block outer_content %}
 <main class="forum">
@@ -13,6 +13,12 @@
           </h4>
           <p class="date"><em>{{ object.publish }}</em></p>
           <p>{{ post.body|linebreaks }}</p>
+          {% get_comment_count for object as comment_count %}
+          <div class="text-center" style="padding-top:20px">
+
+            &nbsp;&sdot;&nbsp;
+            {{ comment_count }} comments have been posted.
+          </div>
         </article>
       {% endfor %}
     </div>

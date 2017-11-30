@@ -1,5 +1,5 @@
 {% extends "hnfp/index.html" %}
-
+{% load comments comments_xtd %}
 
 {% block outer_content %}
   <main class="forum">
@@ -8,17 +8,45 @@
       <div class="row">
         <div class="col s12 l8 offset-l2">
           <article>
-            <h1 class="page-header text-center">{{ object.title }}</h1>
-            <p class="small text-center">{{ object.publish|date:"l, j F Y" }}</p>
-            <p>{{ post.body|linebreaks }}</p>
+            <h1 class="page-header">{{ object.title }}</h1>
+            <p><em>{{ object.publish|date:"l, j F Y" }}</em></p>
+            <div class="post-body">{{ post.body|linebreaks }}</div>
           </article>
+          <a href="/forum/" class="waves-effect waves-dark btn btn-border-light-blue"><i class="material-icons right">navigate_before</i> Back to forum</a>
         </div>
       </div>
     </section>
     <section class="section container">
       <div class="row">
-        <a href="/forum/" class="waves-effect waves-dark btn btn-border-light-blue"><i class="material-icons right">navigate_before</i> Back to forum</a>
+        <div class="col s12 l8 offset-l2">
+          {% get_comment_count for object as comment_count %}
+          {% if comment_count %}
+            <div class="col s12 l10 offset-l1">
+              <div class="comments">
+                <div id="comment-list">
+                  {% render_comment_list for object %}
+                </div>
+              </div>
+              {% if object.allow_comments %}
+                <div class="comment">
+                  <div class="well">
+                    {% render_comment_form for object %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
       </div>
     </section>
+    {% if comment_count %}
+      <section class="section container">
+        <div class="row">
+          <div class="col s12 l8 offset-l2">
+            <a href="/forum/" class="waves-effect waves-dark btn btn-border-light-blue"><i class="material-icons right">navigate_before</i> Back to forum</a>
+          </div>
+        </div>
+      </section>
+    {% endif %}
   </main>
 {% endblock %}

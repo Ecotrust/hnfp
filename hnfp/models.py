@@ -650,6 +650,11 @@ class LandUseProject(models.Model):
 
 	class Meta:
 		verbose_name_plural = 'Land Use Projects'
+		permissions = (
+            ("can_view", "Can see project"),
+            ("can_edit", "Can edit project"),
+            ("can_delete", "Can delete project"),
+        )
 
 	def get_categories():
 		cats = LandUseProject.PROJ_CATS
