@@ -30,9 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '*.hoonahstewards.net', 'hoonahstewards.net', '52.35.10.181', '172.31.2.211', 'www.hoonahstewards.net']
 
-# Site id for comments xtd
-SITE_ID = 1
-
 # Application definition
 
 MIDDLEWARE = [

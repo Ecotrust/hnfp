@@ -5,7 +5,7 @@ from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.template import loader, RequestContext
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.urls import reverse_lazy
 # from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model, authenticate
@@ -17,6 +17,7 @@ from accounts import views
 # survey, forum, jobs, alerts, observation, landuse
 from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource, ShareObservationWithManager
 from hnfp.forms import ResponseForm, HoonahLogInForm, AlertForm
+import hnfp
 # features and shapes
 from django.contrib.gis.geos import Point, Polygon, MultiPolygon, GEOSGeometry
 import json
@@ -351,12 +352,14 @@ def landuse(request):
     all_observation = [x.to_dict() for x in Observation.objects.all()]
     # get all projects for user and public published
     all_user_projects = [x.to_dict() for x in LandUseProject.objects.filter(username=request.user.username)]
+    all_shared_projects = [x.to_dict() for x in LandUseProject.objects.filter(share_with_land_managers=True)]
     all_public_projects = [x.to_dict() for x in LandUseProject.objects.filter(published=True)]
     context = {
         'title': 'Land Use Map',
         'alerts': json.dumps(all_alerts),
         'user_observations': json.dumps(all_observation),
         'all_projects': json.dumps(all_user_projects),
+        'all_shared_projects': json.dumps(all_shared_projects),
         'all_public_projects': json.dumps(all_public_projects),
     }
     return HttpResponse(template.render(context, request))

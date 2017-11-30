@@ -619,6 +619,9 @@ class LandUseProject(models.Model):
 	published = models.BooleanField(
 		default=False
 	)
+	share_with_land_managers = models.BooleanField(
+		default=False
+	)
 	username = models.CharField(
 		max_length=400,
 		null=True,
@@ -642,6 +645,7 @@ class LandUseProject(models.Model):
 			'actions': self.actions,
 			'dollar_costs': self.dollar_costs,
 			'published': self.published,
+			'share_with_land_managers': self.share_with_land_managers,
 			'id': self.id,
 		}
 
@@ -650,11 +654,6 @@ class LandUseProject(models.Model):
 
 	class Meta:
 		verbose_name_plural = 'Land Use Projects'
-		permissions = (
-            ("can_view", "Can see project"),
-            ("can_edit", "Can edit project"),
-            ("can_delete", "Can delete project"),
-        )
 
 	def get_categories():
 		cats = LandUseProject.PROJ_CATS

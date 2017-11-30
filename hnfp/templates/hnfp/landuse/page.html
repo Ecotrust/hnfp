@@ -69,7 +69,7 @@
         <a id="new-project-btn" class="btn btn-border-light-blue add-btn"><i class="material-icons">add_circle</i> Add Project</a>
         <div id="popup" class="card">
           <div class="card-content"></div>
-          {% if user.is_staff %}
+          {% if perms.hnfp.change_landuseprojects %}
             <div class="card-action"></div>
           {% endif %}
         </div>
@@ -96,6 +96,12 @@
       var user_observations = {{ user_observations|safe }};
       var all_projects = {{ all_projects|safe }};
       var all_public_projects = {{ all_public_projects|safe }};
+      var share_with_land_managers = '{{ perms.hnfp.change_landuseprojects }}';
+      if (share_with_land_managers != 'False') {
+        var all_shared_projects = {{ all_shared_projects|safe }};
+      } else {
+        var all_shared_projects = 'undefined';
+      }
     </script>
 
     <script src="{% static 'hnfp/js/map.hnfp.js' %}"></script>

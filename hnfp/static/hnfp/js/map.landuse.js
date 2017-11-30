@@ -519,6 +519,11 @@ if (typeof all_projects !== 'undefined') {
     addProjectToMap(all_projects[i]);
   }
 }
+if (all_shared_projects !== 'undefined') {
+  for (var i = 0; i < all_shared_projects.length; i++) {
+    addProjectToMap(all_shared_projects[i]);
+  }
+}
 if (typeof all_public_projects !== 'undefined') {
   for (var i = 0; i < all_public_projects.length; i++) {
     addProjectToMap(all_public_projects[i]);

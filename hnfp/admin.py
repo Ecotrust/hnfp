@@ -66,7 +66,7 @@ class AlertAdmin(admin.OSMGeoAdmin):
 	readonly_fields = ('alert_created', 'alert_updated')
 
 class LandUseProjectAdmin(admin.OSMGeoAdmin):
-	list_display = ('name', 'category', 'start_date', 'completion_date', 'published')
+	list_display = ('name', 'category', 'start_date', 'completion_date', 'published', 'username', 'share_with_land_managers')
 	readonly_fields = ('created', 'updated')
 
 # admin.site.register(Question, QuestionInline)
