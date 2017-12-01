@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 var allFeatures = [];
 var landuseMap = {
-  layerOpacity: 0.75,
+  layerOpacity: 0.7,
   removePopup: function() {
     map.removeEventListener('click')
   },
@@ -558,20 +558,25 @@ function stylePolygon(fillColor) {
 
 function styleLine(lineColor) {
   return function(feature, resolution) {
-    let strokeWidth = 1;
+    let strokeWidth = 1.75;
     if (resolution < 1) {
-      strokeWidth = 5;
+      strokeWidth = 6;
     } else if (resolution < 8) {
-      strokeWidth = 4;
+      strokeWidth = 5;
     } else if (resolution < 16) {
-      strokeWidth = 3;
+      strokeWidth = 3.5;
     } else if (resolution < 28) {
-      strokeWidth = 2;
+      strokeWidth = 2.75;
+    } else if (resolution < 40) {
+      strokeWidth = 2.25;
     }
     return new ol.style.Style({
       stroke: new ol.style.Stroke({
         color: lineColor,
         width: strokeWidth
+      }),
+      fill: new ol.style.Fill({
+        color: 'rgba(255,255,255,0.4)'
       })
     });
   };
@@ -691,8 +696,8 @@ var hoonahStreams = new ol.layer.Vector({
     url: '/static/hnfp/js/data/hoonah_streams_30.geojson',
     format: new ol.format.GeoJSON()
   }),
-  style: styleLine('#c6dbef'),
-  opacity: .85,
+  style: styleLine('#96cfe1'),
+  opacity: .9,
   visible: false
 });
 
@@ -719,7 +724,8 @@ var residentFish = new ol.layer.Vector({
 });
 
 /**
- * groups for map layer switcher
+ * GROUPS
+ * for map layer switcher
  */
 var timberGroup = new ol.layer.Group({
   title: 'Resources',

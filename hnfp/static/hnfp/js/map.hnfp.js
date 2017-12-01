@@ -60,35 +60,42 @@ var hoonahRoads = new ol.layer.Vector({
     let road = '';
     let properties = feature.getProperties();
     let width = 1.5;
-    if (resolution < 35) {
-      width = 2;
+    if (properties.RD_STATUS === 'Closed') {
+      var road_color = '#df726d';
+    } else {
+      var road_color = '#d4b961';
     }
-    if (resolution < 16) {
-      if (properties.RD_STATUS !== null || properties.RD_STATUS !== 'Future') {
-        road = properties.RD_STATUS;
+    if (properties.RD_STATUS !== 'Future') {
+      if (resolution < 35) {
+        width = 2;
       }
-      width = 2.5;
-    }
-    if (resolution < 10) {
-      width = 3;
-    }
-    return new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: '#dfc27d',
-        width: width
-      }),
-      text: new ol.style.Text({
-        font: '11px monospace',
-        text: road,
-        fill: new ol.style.Fill({
-          color: '#000000'
-        }),
+      if (resolution < 10) {
+        width = 3;
+      }
+      if (resolution < 6) {
+        // if (properties.RD_STATUS !== null) {
+        //   road = properties.RD_STATUS;
+        // }
+        width = 3.5;
+      }
+      return new ol.style.Style({
         stroke: new ol.style.Stroke({
-          color: '#ffffff',
-          width: 1.75
-        })
+          color: road_color,
+          width: width
+        }),
+        // text: new ol.style.Text({
+        //   font: '10px monospace',
+        //   text: road,
+        //   fill: new ol.style.Fill({
+        //     color: '#000000'
+        //   }),
+        //   stroke: new ol.style.Stroke({
+        //     color: '#ffffff',
+        //     width: 1.25
+        //   })
+        // })
       })
-    })
+    }
   },
   opacity: .95,
   visible: false
@@ -254,7 +261,7 @@ function mapAddPopup() {
     let feature = map.forEachFeatureAtPixel(event.pixel, function(feature) {
       return feature;
     }, {
-      hitTolerance: 2
+      hitTolerance: 1
     });
     if (feature) {
       if (popupNode !== null) {
@@ -319,6 +326,16 @@ function addOverlayPopup(feature) {
         <a href="/landuse/${featuresProps.id}/delete/" class="disabled">Delete</a>
       `;
     }
+    popup.setPosition(polyCoords);
+  } else {
+    let polyCoords = feature.getGeometry().getExtent();
+    let props = '';
+    for (var [key, value] of Object.entries(featuresProps)) {
+      if (key != 'geometry') {
+        props = props + key + ': ' + value + ';' + '\r\n';
+      }
+    }
+    domElement.querySelector('.card-content').innerHTML = props;
     popup.setPosition(polyCoords);
   }
 }
