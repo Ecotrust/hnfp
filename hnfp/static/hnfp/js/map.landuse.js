@@ -534,6 +534,14 @@ if (typeof all_public_projects !== 'undefined') {
   }
 }
 
+// function styleLegend(feature, color) {
+//   console.log(feature.getProperties());
+//   console.log(color);
+//   $('visible-themes').html(`
+//
+//   `)
+// }
+
 function stylePolygon(fillColor) {
   return function(feature, resolution) {
     let strokeWidth = .5;
@@ -570,6 +578,7 @@ function styleLine(lineColor) {
     } else if (resolution < 40) {
       strokeWidth = 2.25;
     }
+    styleLegend(feature, lineColor);
     return new ol.style.Style({
       stroke: new ol.style.Stroke({
         color: lineColor,
@@ -793,19 +802,39 @@ map.getLayers().push(communityGroup);
 map.getLayers().push(hydroGroup);
 map.getLayers().push(timberGroup);
 
-/* var switcher = new ol.control.LayerSwitcher({
-  target: $("#visible-themes").get(0),
-	show_progress: true,
-	extent: false,
-	trash: true,
-	oninfo: function (l) {
-    alert(l.get("title"));
-  }
-}); */
-// map.addControl(switcher);
-
 // Add a layer to a pre-exiting ol.layer.Group after the LayerSwitcher has
 // been added to the map. The layer will appear in the list the next time
 // the LayerSwitcher is shown or LayerSwitcher#renderPanel is called.
 map.getLayers().push(stewardInputGroup);
 map.getLayers().push(projectsGroup);
+
+/**
+ * map legend
+ * aka map key
+ */
+// function getColor(layer) {
+//   var layerSource = layer.getSource();
+//   if (layerSource instanceof ol.source.Vector) {
+//     layerSource.forEachFeature(function(feature) {
+//       styleLegend(feature);
+//     });
+//   }
+// }
+//
+// map.getLayers().forEach(function(layer) {
+//   if (layer instanceof ol.layer.Group) {
+//     layer.getLayers().forEach(function(sublayer) {
+//       if (sublayer.getVisible()) {
+//         var sublayerTitle = sublayer.get('title');
+//         addToLegend(sublayer, sublayerTitle);
+//       }
+//     });
+//   } else if (layer instanceof ol.layer.Vector) {
+//     getColor(sublayer);
+//   }
+// });
+//
+// function addToLegend(layer, title) {
+//   $("#visible-themes").append(title);
+//   console.log(layer.get('stroke'));
+// }

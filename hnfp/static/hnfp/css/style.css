@@ -1897,6 +1897,40 @@ path {
   width: 100%;
 }
 
+#visible-themes ul {}
+
+#visible-themes li {
+  float: left;
+  font-size: .8125em;
+  font-weight: bold;
+  line-height: 1em;
+  margin-right: 10px;
+}
+
+#visible-themes li ul,
+#visible-themes li ul li {
+  font-size: .9375em;
+  font-weight: normal;
+  float: none;
+  line-height: 1em;
+  margin-bottom: 4px;
+}
+
+#visible-themes li ul {
+  border-top: 1px dashed #000;
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+#visible-themes span {
+  display: inline-block;
+  height: 3px;
+  margin: -1px 3px 0 0;
+  width: 10px;
+  vertical-align: middle;
+}
+
+/*
 #visible-themes .layer-switcher {
   background: transparent;
   padding: 0;
@@ -1911,11 +1945,22 @@ path {
   padding-left: 0;
 }
 
-#visible-themes .layer-switcher li.group,
-#visible-themes .layer-switcher .panel > ul > li.layer {
+#visible-themes .layer-switcher li.group label {
+  display: none;
+}
+
+#visible-themes .layer-switcher li.group {
+  float: left;
+}
+
+#visible-themes .layer-switcher input[type=checkbox],
+#visible-themes .layer-switcher input[type=checkbox] ~ * {
+  display: none;
+}
+
+#visible-themes .layer-switcher input[type=checkbox]:checked,
+#visible-themes .layer-switcher input[type=checkbox]:checked ~ * {
   display: inline-block;
-  margin: 0 2.5% 0 0;
-  width: 22.5%;
 }
 
 #visible-themes .layer-switcher .panel > ul > li.layer {
@@ -1924,9 +1969,7 @@ path {
 }
 
 #visible-themes .layer-switcher li.group > label {
-  display: block;
-  font-size: 1.125em;
-  margin-bottom: .5rem;
+  display: none;
 }
 
 #visible-themes .layer-switcher button {
@@ -1940,6 +1983,7 @@ path {
   float: none;
   width: 100%;
 }
+*/
 
 .land-use .collapsible-header {
   background: transparent;
