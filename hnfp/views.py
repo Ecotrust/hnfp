@@ -423,15 +423,24 @@ class LanduseDelete(DeleteView):
     template_name_suffix = '_confirm_delete'
 
 ### offline
-from django.views.decorators.cache import never_cache
-@never_cache
 # service worker
-def sw(request, js):
+def sw(request):
+    filename = '/static/sw.js'
     from marineplanner.settings import BASE_DIR
     import os
-    service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'templates', 'sw.js')
-    data = open(service_worker, 'rb')
-    return HttpResponse(data, content_type='application/javascript', status=200)
+    service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'static', 'sw.js')
+    jsfile = open(service_worker, 'rb')
+    response = HttpResponse(content=jsfile)
+    response['Content-Type'] = 'text/javascript'
+    response['Content-Disposition'] = 'attachment; filename="%s"'%(service_worker)
+    return response
+
+    # from marineplanner.settings import BASE_DIR
+    # import os
+    # service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'templates', 'sw.js')
+    # data = open(service_worker, 'rb')
+    # return HttpResponse(data, content_type='application/javascript', status=200)
+
 # app manifest
 def manifest(request, js):
     from marineplanner.settings import BASE_DIR

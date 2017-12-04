@@ -1,4 +1,4 @@
-var CACHE_NAME = 'hoonahCache-v0.2.9';
+var CACHE_NAME = 'hoonahCache-v1.0.0';
 var urlsToCacheFirst = [
   // CSS
   '/static/hnfp/css/materialize.css',
@@ -6,6 +6,7 @@ var urlsToCacheFirst = [
   '/static/hnfp/css/openlayers/ol.css',
   '/static/hnfp/css/openlayers/layerswitcher.css',
   // JS
+  '/static/hnfp/js/offline.js',
   '/static/hnfp/js/jquery-3.2.1.min.js',
   '/static/hnfp/js/materialize/materialize.min.js',
   '/static/hnfp/js/openlayers/ol.js',
