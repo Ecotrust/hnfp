@@ -124,6 +124,14 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+### Caches
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': '/env/bin/django_cache',
+    }
+}
+
 ### Django compressor (mp-visualize/base.html)
 COMPRESS_ENABLED = True
 COMPRESS_URL = STATIC_URL
