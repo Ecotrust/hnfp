@@ -425,15 +425,11 @@ class LanduseDelete(DeleteView):
 ### offline
 # service worker
 def sw(request):
-    filename = '/static/sw.js'
     from marineplanner.settings import BASE_DIR
     import os
     service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'static', 'sw.js')
     jsfile = open(service_worker, 'rb')
-    response = HttpResponse(content=jsfile)
-    response['Content-Type'] = 'text/javascript'
-    response['Content-Disposition'] = 'attachment; filename="%s"'%(service_worker)
-    return response
+    return HttpResponse(jsfile, content_type='application/javascript', status=200)
 
     # from marineplanner.settings import BASE_DIR
     # import os
