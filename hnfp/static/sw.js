@@ -1,5 +1,17 @@
-var CACHE_NAME = 'hoonahCache-v1.1.0';
+var CACHE_NAME = 'hoonahCache-v1.2.4';
 var urlsToCacheFirst = [
+  // Templates
+  '/dashboard/',
+  '/login/',
+  '/myaccount/',
+  '/alert/',
+  '/alert/new/',
+  '/observation/',
+  '/observation/new/',
+  '/job/',
+  '/forum/',
+  '/landuse/',
+  '/landuse/new/',
   // CSS
   '/static/hnfp/css/materialize.css',
   '/static/hnfp/css/style.css',
@@ -17,6 +29,7 @@ var urlsToCacheFirst = [
   '/static/hnfp/js/observations.js',
   '/static/hnfp/js/dashboard.js',
   '/static/hnfp/js/projects.js',
+  '/static/hnfp/js/app.hnfp.js',
 ];
 var urlsToCacheSecond = [
   // Fonts
@@ -44,8 +57,6 @@ var urlsToCacheSecond = [
   '/static/hnfp/img/icons/category/i_mushrooms.png',
   '/static/hnfp/img/icons/category/i_shellfish.png',
   '/static/hnfp/img/icons/category/i_shrimp.png',
-  // JavaScript
-  '/static/hnfp/js/app.hnfp.js',
 ];
 
 self.addEventListener('install', function(event) {
