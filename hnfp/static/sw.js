@@ -1,17 +1,25 @@
-var CACHE_NAME = 'hoonahCache-v1.2.4';
+var CACHE_NAME = 'hoonahCache-v1.3.1';
 var urlsToCacheFirst = [
   // Templates
   '/dashboard/',
   '/login/',
   '/myaccount/',
+  '/account/',
   '/alert/',
   '/alert/new/',
+  '/alert/(?P<pk>[0-9]+)/update/',
+  '/alert/(?P<pk>[0-9]+)/delete/',
+  '/alert/(?P<pk>[0-9]+)/detail/',
   '/observation/',
   '/observation/new/',
+  '/observation/(?P<pk>[0-9]+)/update/',
+  '/observation/(?P<pk>[0-9]+)/delete/',
+  '/observation/(?P<pk>[0-9]+)/detail/',
   '/job/',
   '/forum/',
   '/landuse/',
   '/landuse/new/',
+  '/home/',
   // CSS
   '/static/hnfp/css/materialize.css',
   '/static/hnfp/css/style.css',
