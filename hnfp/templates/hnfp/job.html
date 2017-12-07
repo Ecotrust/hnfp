@@ -11,6 +11,9 @@
               <div class="job-body">
                 {{ job.job_post | safe }}
               </div>
+              <section class="margin-bottom">
+                  <a href="{{ job.jop_post_doc }}" class="btn btn-border-light-blue" download>Job Posting Download</a>
+              </section>
           </article>
         </div>
       {% endfor %}
