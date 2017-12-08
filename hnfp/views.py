@@ -141,13 +141,19 @@ def registered(request):
     return HttpResponse(template.render(context, request))
 
 def login(request):
-    template = loader.get_template('hnfp/login.html')
-    form = HoonahLogInForm()
+    template_string = 'hnfp/login.html'
+    template = loader.get_template(template_string)
     context = {
-        'form': form,
-        'title': 'Log in',
+    #        'form': form,
+            'title': 'Log in',
     }
-    return HttpResponse(template.render(context, request))
+
+    from accounts.views import login_page
+    return login_page(request, template_string, context)
+#    template = loader.get_template('hnfp/login.html')
+#    form = HoonahLogInForm()
+#
+#    return HttpResponse(template.render(context, request))
 
 def myaccount(request):
     if request.user.is_anonymous(): # not logged in
