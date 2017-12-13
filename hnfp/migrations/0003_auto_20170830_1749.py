@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
         ('hnfp', '0002_auto_20170830_1639'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='alert',
-            name='alert_confirmed',
-            field=models.BooleanField(default=False),
-        )
-    ]
+#    operations = [
+ #       migrations.AddField(
+  #          model_name='alert',
+   #         name='alert_confirmed',
+    #        field=models.BooleanField(default=False),
+     #   )
+   # ]

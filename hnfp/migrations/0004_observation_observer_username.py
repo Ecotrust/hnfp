@@ -11,10 +11,10 @@ class Migration(migrations.Migration):
         ('hnfp', '0003_auto_20170830_1749'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='observation',
-            name='observer_username',
-            field=models.CharField(blank=True, max_length=800, null=True),
-        ),
-    ]
+#    operations = [
+ #       migrations.AddField(
+  #          model_name='observation',
+   #         name='observer_username',
+    #        field=models.CharField(blank=True, max_length=800, null=True),
+     #   ),
+  #  ]
