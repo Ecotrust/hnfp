@@ -56,7 +56,7 @@
 
 ## Hoonah Stewards
 
-A place where community members and land managers can collaborate
+Our goal is to create a place for communication, collaboration, and interaction between landowners/managers and the community of Hoonah about land and watershed management
 
 ---
 
@@ -66,7 +66,8 @@ A place where community members and land managers can collaborate
 
 - "Progressive" Web App     |
 - Offline Second            |
-- Materialize               |
+- A Database                |
+- OL4                       |
 - Django                    |
 - Others                    
 
