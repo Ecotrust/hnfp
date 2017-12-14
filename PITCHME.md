@@ -19,7 +19,13 @@
 
 @title[Problem]  
 
-### Is there a problem?
+## Is there a problem?
+
+---
+
+@title[issue]
+
+## The thing is
 
 - Community directly depend on traditional lands            |
 - Traditional lands are not owned or manage by community    |
@@ -51,6 +57,18 @@
 ## Hoonah Stewards
 
 A place where community members and land managers can collaborate
+
+---
+
+@title[stack]
+
+## Stack
+
+- "Progressive" Web App     |
+- Offline Second            |
+- Materialize               |
+- Django                    |
+- Others                    
 
 [hoonahstewards.net](https://www.hoonahstewards.net)
 
