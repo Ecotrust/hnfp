@@ -7,7 +7,7 @@
 
 @title[Why]
 
-# What is Hoonah?
+## What is Hoonah?
 
 - Rural village in SE Alaska                    |
 - Tlingit                                       |
@@ -29,8 +29,6 @@
 
 ## Land Managers and Owners
 
-***
-
 - United States Forest Service (USFS)   |
 - Sealaska Corporation                  |
 - Huna Totem Corporation                |
@@ -41,9 +39,9 @@
 
 ## Success Criteria
 
-- Ecological
-- Economical
-- Equitable
+- Ecological    |
+- Economical    |
+- Equitable     |
 
 ---
 
