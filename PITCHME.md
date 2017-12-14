@@ -1,16 +1,12 @@
+---?image=https://raw.githubusercontent.com/Ecotrust/hnfp/master/hnfp/static/hnfp/img/bg_eagle.jpg
 @title[Introduction]
 
 ## Hoonah
 ## Stewards
 
-![Image-Absolute](https://raw.githubusercontent.com/Ecotrust/hnfp/master/hnfp/static/hnfp/img/presentation/hoonah.jpg)
-
----?image=https://raw.githubusercontent.com/Ecotrust/hnfp/master/hnfp/static/hnfp/img/bg_eagle.jpg
-@title[Why]
-
-test
-
 ---
+
+@title[Why]
 
 ## What is Hoonah?
 
@@ -27,6 +23,8 @@ test
 
 - Community directly depend on traditional lands            |
 - Traditional lands are not owned or manage by community    |
+
+![Image-Absolute](https://raw.githubusercontent.com/Ecotrust/hnfp/master/hnfp/static/hnfp/img/presentation/hoonah.jpg)
 
 ---
 
