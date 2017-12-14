@@ -1,38 +1,27 @@
 @title[Introduction]
 
-# Hoonah<span class="green">Stewards</span>
+## Hoonah
+## Stewards
 
-<br>
-<br>
-
----?video=https://photos.app.goo.gl/vtbb1FnFRVDnHL1g1
+---?photo=https://lh3.googleusercontent.com/5xZxLIXzFTfPbiXrk2pnNvjliEawecy4525NXoW8djExMvGn23fRpZPQX0WRWsIIQZq-RxLmK90Pt0vVd5iz7LIEytq8W8j3ELui06D1kSnkFDoo0PlPZkJiikUnFnH4-U58Kgpld7bMqlqYx-LJPwR5PnyPYaDkHHRtxIBL7M7aPZ-RVe10MZvAv1gcF81ykCirYoQunzcWfWAQRPXowEfewcBDlbNWqy0rdBNGMNYH2VuRiwdL6ESjVAz09dVn4_BNkMg0IfnjPI_HW3-GZFbHZ1_1ubvZ6lwo7eywWbV8xngM-3bF8nHVaK6I_RbBM1RzvR1oghs9dXDxCx8w89Y-WTzExb51In6Ad-pUFnrvcjAVOPJLK85cdDYCbrhBOIGlGAimYFHpWjfOpdS4s-BQ7yRA3fynVAvaHw7CfVBLTwnMZyTM_1dAq6ou3pAigDdpU6C5wPdwYiQwF6mNmxCbq3iwlvD0oWmtHtBAgcsKuvTzZK4RIJXzwBpmXbKP3_wDBnY1MHuWCCkDdVzt7sG8qccOFcpM0qdGnG75LgdMUWmmInouJX_yOFlO_mXV29EA1BpWao71zW3z2f_mlFdBtP5CXEp7itgVRPoeJQNbiqV-YEZo_56vuJ9f6MvNgRPxb2FNF7TBy0d_b0Q2_I8zfLmAFhh8KQw=w2664-h612-no
 
 ---
 
-@title[PITCHME.md]
+@title[Why]
 
-#### GitPitch turns <span class="gold">PITCHME.md</span> into
-#### interactive,
-#### online and offline slideshows.
+## Why...?
+#### Improve connection between the Hoonah community members and land managers/owners
 <br>
-<span class="aside">Just like this one...</span>
+## Who are these land managers/owners?
+
+- USFS
+- Hoonah Indian Association
+- Sealaska Corporation
+- Huna Totem Corporation
 
 ---
 
-### Salmon Restoration
-<br>
-[Photo Sphere](https://photos.app.goo.gl/1ZTT5y6qJzhmYIO52)
-
----?code=assets/md/hello.md&title=Step 1. PITCHME.md
-
-<br>
-#### Create slideshow content using GitHub Flavored Markdown in your favorite editor.
-
-<span class="aside">It's as easy as README.md with simple slide-delimeters (---)</span>
-
----
-
-@title[Step 2. Git-Commit]
+@title[Step 2. ]
 
 ### <span class="gold">STEP 2. GIT-COMMIT</span>
 <br>
