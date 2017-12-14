@@ -15,16 +15,14 @@
 - Highest density bear population in the world  |
 - Community depends upon subsistence living     |
 
----
+---?image=https://raw.githubusercontent.com/Ecotrust/hnfp/master/hnfp/static/hnfp/img/presentation/hoonah.jpg
 
 @title[Problem]  
 
-## Problem
+### Is there a problem?
 
 - Community directly depend on traditional lands            |
 - Traditional lands are not owned or manage by community    |
-
-![Image-Absolute](https://raw.githubusercontent.com/Ecotrust/hnfp/master/hnfp/static/hnfp/img/presentation/hoonah.jpg)
 
 ---
 
