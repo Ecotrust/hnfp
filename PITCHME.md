@@ -14,7 +14,7 @@
 - Highest density bear population in the world  |
 - Community depends upon subsistence living     |
 
-___
+---
 
 @title[Problem]  
 
@@ -23,7 +23,7 @@ ___
 - Community directly depend on traditional lands
 - Traditional lands are not owned or manage by community
 
-___
+---
 
 @title[Owners]
 
