@@ -7,7 +7,7 @@
 
 @title[Why]
 
-## What is Hoonah?
+# What is Hoonah?
 
 - Rural village in SE Alaska                    |
 - Tlingit                                       |
@@ -20,8 +20,8 @@
 
 ## Problem
 
-- Community directly depend on traditional lands
-- Traditional lands are not owned or manage by community
+- Community directly depend on traditional lands            |
+- Traditional lands are not owned or manage by community    |
 
 ---
 
@@ -29,9 +29,11 @@
 
 ## Land Managers and Owners
 
-- United States Forest Service (USFS)
-- Sealaska Corporation
-- Huna Totem Corporation
+***
+
+- United States Forest Service (USFS)   |
+- Sealaska Corporation                  |
+- Huna Totem Corporation                |
 
 ---
 
