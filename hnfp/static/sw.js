@@ -1,108 +1,83 @@
-var CACHE_NAME = 'hoonahCache-v1.3.1';
-var urlsToCacheFirst = [
-  // Templates
-  '/dashboard/',
-  '/login/',
-  '/myaccount/',
-  '/account/',
-  '/alert/',
-  '/alert/new/',
-  '/alert/(?P<pk>[0-9]+)/update/',
-  '/alert/(?P<pk>[0-9]+)/delete/',
-  '/alert/(?P<pk>[0-9]+)/detail/',
-  '/observation/',
-  '/observation/new/',
-  '/observation/(?P<pk>[0-9]+)/update/',
-  '/observation/(?P<pk>[0-9]+)/delete/',
-  '/observation/(?P<pk>[0-9]+)/detail/',
-  '/job/',
-  '/forum/',
-  '/landuse/',
-  '/landuse/new/',
-  '/home/',
-  // CSS
-  '/static/hnfp/css/materialize.css',
-  '/static/hnfp/css/style.css',
-  '/static/hnfp/css/openlayers/ol.css',
-  '/static/hnfp/css/openlayers/layerswitcher.css',
-  // JS
-  '/static/hnfp/js/offline.js',
-  '/static/hnfp/js/jquery-3.2.1.min.js',
-  '/static/hnfp/js/materialize/materialize.min.js',
-  '/static/hnfp/js/openlayers/ol.js',
-  '/static/hnfp/js/openlayers/layerswitcher.js',
-  '/static/hnfp/js/map.hnfp.js',
-  '/static/hnfp/js/map.landuse.js',
-  '/static/hnfp/js/alerts.js',
-  '/static/hnfp/js/observations.js',
-  '/static/hnfp/js/dashboard.js',
-  '/static/hnfp/js/projects.js',
-  '/static/hnfp/js/app.hnfp.js',
-];
-var urlsToCacheSecond = [
-  // Fonts
-  '/static/hnfp/fonts/function/function.woff',
-  '/static/hnfp/fonts/function/function_bold.woff',
-  '/static/hnfp/fonts/material/MaterialIcons-Regular.woff',
-  // Images
-  '/static/hnfp/img/logo.svg',
-  '/static/hnfp/img/logo.png',
-  '/static/hnfp/img/icons/i_news.svg',
-  '/static/hnfp/img/icons/i_pencil.svg',
-  '/static/hnfp/img/icons/i_profile.svg',
-  '/static/hnfp/img/icons/i_rain.svg',
-  '/static/hnfp/img/icons/i_search.svg',
-  '/static/hnfp/img/icons/i_user.svg',
-  '/static/hnfp/img/icons/layers.png',
-  '/static/hnfp/img/icons/category/i_bear.png',
-  '/static/hnfp/img/icons/category/i_berries.png',
-  '/static/hnfp/img/icons/category/i_crab.png',
-  '/static/hnfp/img/icons/category/i_custom.png',
-  '/static/hnfp/img/icons/category/i_deer.png',
-  '/static/hnfp/img/icons/category/i_firewood.png',
-  '/static/hnfp/img/icons/category/i_fish.png',
-  '/static/hnfp/img/icons/category/i_medicinal_herbs.png',
-  '/static/hnfp/img/icons/category/i_mushrooms.png',
-  '/static/hnfp/img/icons/category/i_shellfish.png',
-  '/static/hnfp/img/icons/category/i_shrimp.png',
-];
+// var CACHE_NAME = 'hoonahCache-v2.0.3';
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.3/workbox-sw.js');
+const queue = workbox.backgroundSync.Queue('hoonahQueue');
 
-self.addEventListener('install', function(event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      cache.addAll(urlsToCacheSecond);
-      return cache.addAll(urlsToCacheFirst);
-    })
-  )
-});
+if (workbox) {
+  console.log('did it');
 
-self.addEventListener('activate', function(event) {
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if(cacheName != CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+  workbox.routing.registerRoute(
+    new RegExp('/static/(.*)'),
+    workbox.strategies.staleWhileRevalidate(),
   );
-});
+
+  workbox.routing.registerRoute(
+    new RegExp('/'),
+    workbox.strategies.staleWhileRevalidate({
+      plugins: [
+        new workbox.backgroundSync.Plugin('hoonahQueue')
+      ],
+    }),
+  );
+
+} else {
+  console.log(`Boo! Workbox didn't load 😬`);
+}
+
+// var urlsToCacheFirst = [
+//   // Templates
+//
+// ];
+//
+// self.addEventListener('install', function(event) {
+//   event.waitUntil(
+//     caches.open(CACHE_NAME).then(function(cache) {
+//       return cache.addAll(urlsToCacheFirst);
+//     })
+//   )
+// });
+
+// self.addEventListener('activate', function(event) {
+//   event.waitUntil(
+//     caches.keys().then(function(cacheNames) {
+//       return Promise.all(
+//         cacheNames.map(function(cacheName) {
+//           if(cacheName != CACHE_NAME) {
+//             return caches.delete(cacheName);
+//           }
+//         })
+//       );
+//     })
+//   );
+// });
 
 self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request);
-    })
-  )
+  if (event.request.method === 'POST') {
+    try {
+      await fetch(event.request);
+    } catch (err) {
+      queue.addRequest(request);
+    }
+  } else {
+    event.respondWith(
+      caches.match(event.request).then(function(response) {
+        return response || fetch(event.request);
+      }).catch(function() {
+      // fetch(event.request).catch(function() {
+        return caches.match(event.request);
+      })
+    )
+  }
 });
 
-function addToCache(request) {
-  caches.open(CACHE_NAME).then(function(cache) {
-    cache.add(request);
-  })
-}
+self.addEventListener('message', function(event) {
+    console.log(event);
+  });
+
+// function addToCache(request) {
+//   caches.open(CACHE_NAME).then(function(cache) {
+//     cache.add(request);
+//   })
+// }
 
 /* self.addEventListener('push', function(event) {
   if (event.data.text() == 'new-alert') {

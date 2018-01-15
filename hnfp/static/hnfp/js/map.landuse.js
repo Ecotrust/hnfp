@@ -506,6 +506,7 @@ function addProjectToMap(data) {
     }
     newPoly.setProperties({
       'id': data.id,
+      'username': data.username,
       'area': data.area,
       'name': data.name,
       'category': data.category,

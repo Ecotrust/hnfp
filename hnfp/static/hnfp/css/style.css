@@ -1322,6 +1322,18 @@ div.mapgroup h3 {
   margin: 0 0 .5rem;
 }
 
+.card p.proj-dates {
+    font-size: .875em;
+    margin-bottom: .75rem;
+}
+
+.card p.proj-dates strong {
+    color: #999;
+    font-size: 1.5em;
+    line-height: 2;
+    margin: 0 4px;
+}
+
 .observations .icon-img {
   display: inline-block;
   margin: 0 4px;
