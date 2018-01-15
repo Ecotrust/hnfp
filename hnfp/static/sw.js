@@ -53,7 +53,7 @@ if (workbox) {
 self.addEventListener('fetch', function(event) {
   if (event.request.method === 'POST') {
     try {
-      await fetch(event.request);
+      fetch(event.request);
     } catch (err) {
       queue.addRequest(request);
     }
