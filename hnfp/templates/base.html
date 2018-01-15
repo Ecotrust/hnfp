@@ -37,7 +37,9 @@
     {% endblock %}
   </footer>
 
-  <script src="{% static '/hnfp/js/jquery-3.2.1.min.js' %}"></script>
+  {% block base_js %}
+    <script src="{% static '/hnfp/js/jquery-3.2.1.min.js' %}"></script>
+  {% endblock base_js %}
 
   {% block extra_js %}
     {% include 'hnfp/blocks/extra_js.html' %}

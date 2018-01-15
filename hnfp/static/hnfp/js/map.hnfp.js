@@ -314,10 +314,10 @@ function addOverlayPopup(feature) {
   } else if (typeof(featuresProps.category) !== 'undefined') {
     let polyCoords = feature.getGeometry().getExtent();
     domElement.querySelector('.card-content').innerHTML = `
-      <p class="center card-tally">${featuresProps.category}</p>
       <span class="center card-title">${featuresProps.name}</span>
-      <p>${featuresProps.summary}</p>
-      <p><em>${featuresProps.start_date} - ${featuresProps.completion_date}</em></p>
+      <blockquote>${featuresProps.summary}</blockquote>
+      <p class="proj-dates">${featuresProps.start_date} <strong>|</strong> ${featuresProps.completion_date}</em></p>
+      <p><em>${featuresProps.username}</em></p>
     `;
     let adminUser = domElement.querySelector('.card-action');
     if (adminUser) {
