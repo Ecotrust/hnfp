@@ -1,6 +1,12 @@
 // var CACHE_NAME = 'hoonahCache-v2.0.5';
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.5/workbox-sw.js');
 const queue = new workbox.backgroundSync.Queue('hoonahQueue');
+const createHandler = ({url, event, params}) => {
+  return fetch(event.request)
+  .catch((response) => {
+    queue.addRequest(event.request)
+  })
+};
 
 if (workbox) {
   console.log('workbox good to go');
@@ -20,55 +26,25 @@ if (workbox) {
     workbox.strategies.staleWhileRevalidate(),
   );
 
+  workbox.routing.registerRoute(
+    new RegExp('https://storage.googleapis.com.*'),
+    workbox.strategies.cacheFirst(),
+  );
+
+  workbox.routing.registerRoute(
+    new RegExp('.*create.*'),
+    createHandler,
+    'POST'
+  );
+
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-// var urlsToCacheFirst = [
-//   // Templates
-//
-// ];
-//
-// self.addEventListener('install', function(event) {
-//   event.waitUntil(
-//     caches.open(CACHE_NAME).then(function(cache) {
-//       return cache.addAll(urlsToCacheFirst);
-//     })
-//   )
-// });
-
-// self.addEventListener('activate', function(event) {
-//   event.waitUntil(
-//     caches.keys().then(function(cacheNames) {
-//       return Promise.all(
-//         cacheNames.map(function(cacheName) {
-//           if(cacheName != CACHE_NAME) {
-//             return caches.delete(cacheName);
-//           }
-//         })
-//       );
-//     })
-//   );
-// });
 
 self.addEventListener('fetch', function(event) {
   // Parse the URL:
   var requestURL = new URL(event.request.url);
-  // Routing for local URLs
-  if (requestURL.origin == location.origin) {
-    if (event.request.method == 'POST') {
-      if (navigator.onLine) {
-        event.respondWith(
-          fetch(event.request)
-        );
-      } else {
-        event.respondWith(
-          queue.addRequest(request)
-        );
-      }
-      return;
-    }
-  }
   if (requestURL.path === 'navbar') {
     event.respondWith(
       Promise.all([
