@@ -32,7 +32,7 @@ if (workbox) {
   );
 
   workbox.routing.registerRoute(
-    new RegExp('.*create.*'),
+    '/observation/create/',
     createHandler,
     'POST'
   );
@@ -1535,7 +1535,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "static/hnfp/js/observations.js",
-    "revision": "51c24d45b71fff712907fe0a5aa9d6e4"
+    "revision": "7ac1ccccb05f4523a3acec1c25e5c792"
   },
   {
     "url": "static/hnfp/js/offline.js",
