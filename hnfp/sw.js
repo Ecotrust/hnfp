@@ -1,6 +1,12 @@
 // var CACHE_NAME = 'hoonahCache-v2.0.5';
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.5/workbox-sw.js');
 const queue = new workbox.backgroundSync.Queue('hoonahQueue');
+const createHandler = ({url, event, params}) => {
+  return fetch(event.request)
+  .catch((response) => {
+    queue.addRequest(event.request)
+  })
+};
 
 if (workbox) {
   console.log('workbox good to go');
@@ -27,14 +33,7 @@ if (workbox) {
 
   workbox.routing.registerRoute(
     '/observation/create/',
-    function() {
-      var createReq = new Request('/observation/create/', {
-        method: 'POST',
-        body: $form,
-      });
-      queue.addRequest(createReq);
-      return new Response(`added to queue`);
-    },
+    createHandler,
     'POST'
   );
 
