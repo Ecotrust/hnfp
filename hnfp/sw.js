@@ -73,7 +73,7 @@ if (workbox) {
 //       return caches.match(event.request);
 //     })
 //   )
-});
+// });
 
 // function addToCache(request) {
 //   caches.open(CACHE_NAME).then(function(cache) {
