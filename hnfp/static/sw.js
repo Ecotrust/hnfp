@@ -1,12 +1,6 @@
 // var CACHE_NAME = 'hoonahCache-v2.0.5';
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.5/workbox-sw.js');
 const queue = new workbox.backgroundSync.Queue('hoonahQueue');
-const createHandler = ({url, event, params}) => {
-  return fetch(event.request)
-  .catch((response) => {
-    queue.addRequest(event.request)
-  })
-};
 
 if (workbox) {
   console.log('workbox good to go');
@@ -33,7 +27,14 @@ if (workbox) {
 
   workbox.routing.registerRoute(
     '/observation/create/',
-    createHandler,
+    function() {
+      var createReq = new Request('/observation/create/', {
+        method: 'POST',
+        body: $form,
+      });
+      queue.addRequest(createReq);
+      return new Response(`added to queue`);
+    },
     'POST'
   );
 
@@ -42,37 +43,37 @@ if (workbox) {
 }
 
 
-self.addEventListener('fetch', function(event) {
-  // Parse the URL:
-  var requestURL = new URL(event.request.url);
-  if (requestURL.path === 'navbar') {
-    event.respondWith(
-      Promise.all([
-        caches.match('/navbar.html').then(function(response) {
-          return response.text();
-        }),
-        caches.match(requestURL.path + '.json').then(function(response) {
-          return response.json();
-        })
-      ]).then(function(responses) {
-        var template = responses[0];
-        var data = responses[1];
-
-        return new Response(renderTemplate(template, data), {
-          headers: {
-            'Content-Type': 'text/html'
-          }
-        });
-      })
-    )
-  }
-
-  event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request);
-    })
-  )
-});
+// self.addEventListener('fetch', function(event) {
+//   // Parse the URL:
+//   var requestURL = new URL(event.request.url);
+//   if (requestURL.path === 'navbar') {
+//     event.respondWith(
+//       Promise.all([
+//         caches.match('/navbar.html').then(function(response) {
+//           return response.text();
+//         }),
+//         caches.match(requestURL.path + '.json').then(function(response) {
+//           return response.json();
+//         })
+//       ]).then(function(responses) {
+//         var template = responses[0];
+//         var data = responses[1];
+//
+//         return new Response(renderTemplate(template, data), {
+//           headers: {
+//             'Content-Type': 'text/html'
+//           }
+//         });
+//       })
+//     )
+//   }
+//
+//   event.respondWith(
+//     fetch(event.request).catch(function() {
+//       return caches.match(event.request);
+//     })
+//   )
+// });
 
 // function addToCache(request) {
 //   caches.open(CACHE_NAME).then(function(cache) {
@@ -1535,7 +1536,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "static/hnfp/js/observations.js",
-    "revision": "7ac1ccccb05f4523a3acec1c25e5c792"
+    "revision": "9a1cadb8ca7bea4915bcd8f121162fee"
   },
   {
     "url": "static/hnfp/js/offline.js",
