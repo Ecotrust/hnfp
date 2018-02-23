@@ -1942,6 +1942,16 @@ path {
   vertical-align: middle;
 }
 
+#visible-themes .polygon span {
+    height: 10px;
+    vertical-align: baseline;
+}
+
+#visible-themes .point span {
+    border-radius: 50%;
+    height: 10px;
+}
+
 /*
 #visible-themes .layer-switcher {
   background: transparent;
