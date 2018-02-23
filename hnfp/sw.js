@@ -9,8 +9,19 @@ const createHandler = ({url, event, params}) => {
   })
 };
 
+const staleRevalidate = workboxSW.strategies.staleWhileRevalidate({
+  cacheName: 'staleRevalidate',
+  cacheExpiration: {
+    maxEntries: 200
+  }
+});
+
 if (workbox) {
   console.log('workbox good to go');
+
+  workboxSW.router.registerRoute('*', args => {
+    return staleRevalidate.handle(args);
+  });
 
   workbox.routing.registerRoute(
     new RegExp('/static/(.*)'),
