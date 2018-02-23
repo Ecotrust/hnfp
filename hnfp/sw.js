@@ -1,11 +1,10 @@
-// var CACHE_NAME = 'hoonahCache-v2.0.5';
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.5/workbox-sw.js');
+// var CACHE_NAME = 'hoonahCache-v2.1';
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-beta.0/workbox-sw.js');
 const queue = new workbox.backgroundSync.Queue('hoonahQueue');
 const createHandler = ({url, event, params}) => {
   return fetch(event.request)
   .catch((response) => {
     var clone = event.request.clone();
-    console.log(clone);
     queue.addRequest(clone)
   })
 };
@@ -14,19 +13,29 @@ if (workbox) {
   console.log('workbox good to go');
 
   workbox.routing.registerRoute(
-    new RegExp('/'),
-    workbox.strategies.networkFirst(),
-  );
-
-  workbox.routing.registerRoute(
     new RegExp('/static/(.*)'),
     workbox.strategies.staleWhileRevalidate(),
   );
 
   workbox.routing.registerRoute(
-    new RegExp('.*'),
-    workbox.strategies.staleWhileRevalidate(),
-  );
+      /\.(?:js|css|html)$/,
+      workbox.strategies.staleWhileRevalidate({
+        cacheName: 'static-resources',
+      }),
+    );
+
+    workbox.routing.registerRoute(
+      /\.(?:png|jpg|jpeg|svg)$/,
+      workbox.strategies.cacheFirst({
+        cacheName: 'images',
+        plugins: [
+          new workbox.expiration.Plugin({
+            maxEntries: 60,
+            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+          }),
+        ],
+      }),
+    );
 
   workbox.routing.registerRoute(
     new RegExp('https://storage.googleapis.com.*'),
