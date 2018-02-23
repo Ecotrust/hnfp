@@ -13,17 +13,12 @@ if (workbox) {
   console.log('workbox good to go');
 
   workbox.routing.registerRoute(
-    new RegExp('/'),
-    workbox.strategies.networkFirst(),
-  );
-
-  workbox.routing.registerRoute(
     new RegExp('/static/(.*)'),
     workbox.strategies.staleWhileRevalidate(),
   );
 
   workbox.routing.registerRoute(
-      /\.(?:js|css)$/,
+      /\.(?:js|css|html)$/,
       workbox.strategies.staleWhileRevalidate({
         cacheName: 'static-resources',
       }),
@@ -1531,7 +1526,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "static/hnfp/js/map.landuse.js",
-    "revision": "ef3f8f43c053af8f30eb76869aab003e"
+    "revision": "6ab7f6c9c329f57c756640a3ea841cd8"
   },
   {
     "url": "static/hnfp/js/materialize/materialize_stepper.js",
@@ -1568,6 +1563,10 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "static/hnfp/js/projects.js",
     "revision": "d0a9bd286ad34ba6617ca7694c3af0fa"
+  },
+  {
+    "url": "static/hnfp/js/workbox.js",
+    "revision": "5c061d8f7fda59b5a1a13cbad864e585"
   },
   {
     "url": "templates/base.html",
