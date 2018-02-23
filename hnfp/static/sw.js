@@ -19,7 +19,7 @@ const staleRevalidate = workboxSW.strategies.staleWhileRevalidate({
 if (workbox) {
   console.log('workbox good to go');
 
-  workboxSW.router.registerRoute('*', args => {
+  workbox.router.registerRoute('*', args => {
     return staleRevalidate.handle(args);
   });
 
