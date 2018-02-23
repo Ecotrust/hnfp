@@ -578,8 +578,10 @@ function styleLine(lineColor) {
       strokeWidth = 2.75;
     } else if (resolution < 40) {
       strokeWidth = 2.25;
+    } else if (resolution < 50) {
+      strokeWidth = 2;
     }
-    styleLegend(feature, lineColor);
+    // styleLegend(feature, lineColor);
     return new ol.style.Style({
       stroke: new ol.style.Stroke({
         color: lineColor,
