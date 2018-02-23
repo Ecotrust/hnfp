@@ -129,11 +129,6 @@ var observations = {
       observations.close();
       $drawingForm.html('');
       $drawingForm.prepend(`<p>You are offline.</p><p>Don't worry your observation is safe and will be automatically synced with your account when your back online.</p><p>Add as many observations as you would like. All will be synced.</p>`);
-      return $.ajax({
-        type: 'POST',
-        url: '/observation/create/',
-        data: $form,
-      });
     }
   },
   startTracking: function() {

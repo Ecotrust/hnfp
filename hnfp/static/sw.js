@@ -4,7 +4,8 @@ const queue = new workbox.backgroundSync.Queue('hoonahQueue');
 const createHandler = ({url, event, params}) => {
   return fetch(event.request)
   .catch((response) => {
-    queue.addRequest(event.request)
+    var clone = event.request.clone();
+    queue.addRequest(clone)
   })
 };
 
@@ -1535,7 +1536,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "static/hnfp/js/observations.js",
-    "revision": "9a1cadb8ca7bea4915bcd8f121162fee"
+    "revision": "055cc93a78e942c04180d8bb85bf33e8"
   },
   {
     "url": "static/hnfp/js/offline.js",

@@ -4,7 +4,9 @@ const queue = new workbox.backgroundSync.Queue('hoonahQueue');
 const createHandler = ({url, event, params}) => {
   return fetch(event.request)
   .catch((response) => {
-    queue.addRequest(event.request)
+    var clone = event.request.clone();
+    console.log(clone);
+    queue.addRequest(clone)
   })
 };
 
