@@ -16,14 +16,35 @@
             <h5>Layers</h5>
             <div id="visible-themes">
               <ul>
-                <li>Rd Brush<br />Priority
-                  <ul>
-                    <li><span style="background: rgba(81,77,201,1);"></span>1</li>
-                    <li><span style="background: rgba(58,201,42,1);"></span>2</li>
-                    <li><span style="background: rgba(201,99,44,1);"></span>3</li>
-                  </ul>
-                </li>
-                <li>Rd Open<br />Priority
+                  <li class="polygon">Min<br />Deer (m)
+                    <ul>
+                      <li><span style="background: rgba(40,146,199,1);"></span>L</li>
+                      <li><span style="background: rgba(160,194,155,1);"></span>L-M</li>
+                      <li><span style="background: rgba(250,250,100,1);"></span>M</li>
+                      <li><span style="background: rgba(250,141,52,1);"></span>M-H</li>
+                      <li><span style="background: rgba(232,16,20,1);"></span>H</li>
+                    </ul>
+                  </li>
+                  <li class="polygon">Harvest<br />Treat (yrs)
+                    <ul>
+                      <li><span style="background: rgba(255,0,0,1);"></span>Unthinned</li>
+                      <li><span style="background: rgba(255,200,0,1);"></span>> 15</li>
+                      <li><span style="background: rgba(182,255,143,1);"></span>10 - 15</li>
+                      <li><span style="background: rgba(51,194,255,1);"></span>5 - 10</li>
+                      <li><span style="background: rgba(0,0,255,1);"></span>0 - 5</li>
+                    </ul>
+                  </li>
+                  <li class="line">Stream<br />Cond
+                    <ul>
+                      <li><span style="background: rgba(163,157,42,1);"></span>FAR</li>
+                      <li><span style="background: rgba(49,134,158,1);"></span>NA</li>
+                      <li><span style="background: rgba(173,38,142,1);"></span>PFC</li>
+                    </ul>
+                  </li>
+                  <li class="line"><span style="background: rgba(223,115,255,1);"></span>Probable<br />Resident<br />Fish</li>
+                  <li class="line"><span style="background: rgba(255,167,127,1);"></span>Probable<br />Anadromous<br />Fish</li>
+
+                <li class="line">Rd Open<br />Priority
                   <ul>
                     <li><span style="background: rgba(245,174,93,1);"></span>1</li>
                     <li><span style="background: rgba(235,101,223,1);"></span>2</li>
@@ -32,7 +53,14 @@
                     <li><span style="background: rgba(242,94,117,1);"></span>5</li>
                   </ul>
                 </li>
-                <li>Road<br />Usage<!-- - berries-->
+                <li class="line">Rd Brush<br />Priority
+                  <ul>
+                    <li><span style="background: rgba(81,77,201,1);"></span>1</li>
+                    <li><span style="background: rgba(58,201,42,1);"></span>2</li>
+                    <li><span style="background: rgba(201,99,44,1);"></span>3</li>
+                  </ul>
+                </li>
+                <li class="line">Road<br />Usage<!-- - berries-->
                   <ul>
                     <li><span style="background: rgba(0,0,255,1);"></span>L</li>
                     <li><span style="background: rgba(51,194,255,1);"></span>L - M</li>
@@ -68,16 +96,8 @@
                     <li><span style="background: rgba(255,0,0,1);"></span>High</li>
                   </ul>
                 </li> -->
-                <li>Min<br />Deer (m)
-                  <ul>
-                    <li><span style="background: rgba(40,146,199,1);"></span>L</li>
-                    <li><span style="background: rgba(160,194,155,1);"></span>L-M</li>
-                    <li><span style="background: rgba(250,250,100,1);"></span>M</li>
-                    <li><span style="background: rgba(250,141,52,1);"></span>M-H</li>
-                    <li><span style="background: rgba(232,16,20,1);"></span>H</li>
-                  </ul>
-                </li>
-                <li>Road<br />Crossings
+
+                <li class="point">Road<br />Crossings
                   <ul>
                     <li><span style="background: rgba(164,168,108,1);"></span>Bridge</li>
                     <li><span style="background: rgba(102,85,230,1);"></span>Culvert</li>
@@ -86,37 +106,19 @@
                     <li><span style="background: rgba(245,91,111,1);"></span>Non-<br />engineered</li>
                   </ul>
                 </li>
-                <li>Road<br />Opp
+                <li class="point">Bridge<br />Opp
+                  <ul>
+                    <li><span style="background: rgba(128,168,47,1);"></span>Log</li>
+                    <li><span style="background: rgba(112,42,173,1);"></span>Perm</li>
+                  </ul>
+                </li>
+                <li class="point">Road<br />Opp
                   <ul>
                     <li><span style="background: rgba(255,200,0,1);"></span>H</li>
                     <li><span style="background: rgba(0,0,255,1);"></span>M</li>
                     <li><span style="background: rgba(255,0,81,1);"></span>L</li>
                   </ul>
                 </li>
-                <li>Bridge<br />Opp
-                  <ul>
-                    <li><span style="background: rgba(128,168,47,1);"></span>Log</li>
-                    <li><span style="background: rgba(112,42,173,1);"></span>Perm</li>
-                  </ul>
-                </li>
-                <li>Stream<br />Cond
-                  <ul>
-                    <li><span style="background: rgba(163,157,42,1);"></span>FAR</li>
-                    <li><span style="background: rgba(49,134,158,1);"></span>NA</li>
-                    <li><span style="background: rgba(173,38,142,1);"></span>PFC</li>
-                  </ul>
-                </li>
-                <li>Harvest<br />Treat (yrs)
-                  <ul>
-                    <li><span style="background: rgba(255,0,0,1);"></span>Unthinned</li>
-                    <li><span style="background: rgba(255,200,0,1);"></span>> 15</li>
-                    <li><span style="background: rgba(182,255,143,1);"></span>10 - 15</li>
-                    <li><span style="background: rgba(51,194,255,1);"></span>5 - 10</li>
-                    <li><span style="background: rgba(0,0,255,1);"></span>0 - 5</li>
-                  </ul>
-                </li>
-                <li><span style="background: rgba(223,115,255,1);"></span>Probable<br />Resident<br />Fish</li>
-                <li><span style="background: rgba(255,167,127,1);"></span>Probable<br />Anadromous<br />Fish</li>
               </ul>
             </div>
           </div>
