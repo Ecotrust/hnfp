@@ -595,18 +595,28 @@ function styleLine(lineColor) {
 }
 
 function stylePoint(pointColor) {
-  return new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 8,
-      fill: new ol.style.Fill({
-        color: pointColor
-      }),
-      stroke: new ol.style.Stroke({
-        color: '#ffffff',
-        width: 2
-      })
-    })
-  });
+    return function(feature, resolution) {
+        let radius = 8;
+        if (resolution < 1) {
+          radius = 12;
+        } else if (resolution < 8) {
+          radius = 11
+        } else if (resolution < 30) {
+          radius = 10
+        }
+        return new ol.style.Style({
+          image: new ol.style.Circle({
+          radius: radius,
+          fill: new ol.style.Fill({
+            color: pointColor
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#ffffff',
+            width: 2
+          })
+        })
+      });
+    }
 }
 
 function setStroke(resolution) {
@@ -735,6 +745,61 @@ var residentFish = new ol.layer.Vector({
   visible: false
 });
 
+var brownBearEnhancementUnits = new ol.layer.Vector({
+  title: 'Brown Bear enhancement units',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/bear_enhance.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: stylePolygon('#5d4824'),
+  opacity: .85,
+  visible: false
+});
+
+var blueberryEnhancementUnits = new ol.layer.Vector({
+  title: 'Blueberry enhancement units',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/blueberry_enhance.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: stylePolygon('#6574ff'),
+  opacity: .85,
+  visible: false
+});
+
+var timberDeerEnhancement = new ol.layer.Vector({
+  title: 'Timber/Deer enhancement units',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/deer_timber_enhance.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: stylePolygon('#ff0063'),
+  opacity: .85,
+  visible: false
+});
+
+var streamRestorationHydro = new ol.layer.Vector({
+  title: 'Stream restoration - hdyro',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/stream_opportunities.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: styleLine('#4ea3c2'),
+  opacity: .85,
+  visible: false
+});
+
+var streamRestorationFish = new ol.layer.Vector({
+  title: 'Stream restoration - fish',
+  source: new ol.source.Vector({
+    url: '/static/hnfp/js/data/yg_strm_fish.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: styleLine('#01b9fc'),
+  opacity: .85,
+  visible: false
+});
+
 /**
  * GROUPS
  * for map layer switcher
@@ -744,7 +809,10 @@ var timberGroup = new ol.layer.Group({
   layers: [
     areaHarvested,
     landuseMap.harvestTreatment(),
-    landuseMap.hoonahMinDeer()
+    landuseMap.hoonahMinDeer(),
+    brownBearEnhancementUnits,
+    blueberryEnhancementUnits,
+    timberDeerEnhancement,
   ]
 });
 
@@ -756,6 +824,8 @@ var hydroGroup = new ol.layer.Group({
     hoonahStreams,
     landuseMap.streamCondition(),
     watersheds,
+    streamRestorationHydro,
+    streamRestorationFish,
   ]
 });
 
