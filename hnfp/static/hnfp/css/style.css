@@ -1916,16 +1916,16 @@ path {
   font-size: .8125em;
   font-weight: bold;
   line-height: 1em;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 #visible-themes li ul,
 #visible-themes li ul li {
-  font-size: .9375em;
+  font-size: 1em;
   font-weight: normal;
   float: none;
   line-height: 1em;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 #visible-themes li ul {
@@ -1937,19 +1937,18 @@ path {
 #visible-themes span {
   display: inline-block;
   height: 3px;
-  margin: -1px 3px 0 0;
-  width: 10px;
+  margin: -2px 4px 0 0;
+  width: 8px;
   vertical-align: middle;
 }
 
 #visible-themes .polygon span {
-    height: 10px;
-    vertical-align: baseline;
+    height: 8px;
 }
 
 #visible-themes .point span {
     border-radius: 50%;
-    height: 10px;
+    height: 8px;
 }
 
 /*
