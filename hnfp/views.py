@@ -13,10 +13,9 @@ from django.contrib.auth import login as auth_login
 # Accouts
 from accounts.actions import apply_user_permissions
 from accounts.forms import SignUpForm, LogInForm
-from accounts import views
 # survey, forum, jobs, alerts, observation, landuse
 from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource, ShareObservationWithManager
-from hnfp.forms import ResponseForm, HoonahLogInForm, AlertForm
+from hnfp.forms import ResponseForm, AlertForm
 import hnfp
 # features and shapes
 from django.contrib.gis.geos import Point, Polygon, MultiPolygon, GEOSGeometry
@@ -98,6 +97,7 @@ def survey(request):
         'response_form': form,
         'survey': survey,
         'uses_list': uses_list,
+        'registration_form': SignUpForm(),
     }
     return HttpResponse(template.render(context, request))
 
@@ -141,28 +141,28 @@ def registered(request):
     return HttpResponse(template.render(context, request))
 
 def login(request):
-    template_string = 'hnfp/login.html'
-    template = loader.get_template(template_string)
-    context = {
-    #        'form': form,
-            'title': 'Log in',
-    }
+    if not request.method == 'POST':
+        context = {
+            'form': LogInForm(),
+            'login_title': 'Login',
+            'registration_form': SignUpForm(),
+            'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+            'forgot_password_link': 'Forgot Password?',
+            'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+            'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+            'next': '/dashboard',
+        }
+        from accounts.views import login_page
+        return login_page(request, 'hnfp/login.html', context)
 
-    from accounts.views import login_page
-    return login_page(request, template_string, context)
-#    template = loader.get_template('hnfp/login.html')
-#    form = HoonahLogInForm()
-#
-#    return HttpResponse(template.render(context, request))
-
-def myaccount(request):
-    if request.user.is_anonymous(): # not logged in
-        return login(request)
-    template = loader.get_template('hnfp/account.html')
-    context = {
-        'title': 'Hoonah Steward Profile',
-    }
-    return HttpResponse(template.render(context, request))
+# def myaccount(request):
+#     if request.user.is_anonymous(): # not logged in
+#         return login(request)
+#     template = loader.get_template('hnfp/account.html')
+#     context = {
+#         'title': 'Hoonah Steward Profile',
+#     }
+#     return HttpResponse(template.render(context, request))
 
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')

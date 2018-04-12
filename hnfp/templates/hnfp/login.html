@@ -4,54 +4,45 @@
 {% block site_style %}{% endblock site_style %}
 
 {% block extra_head %}
-  {% include 'hnfp/blocks/extra_head.html' %}
+{% include 'hnfp/blocks/extra_head.html' %}
 {% endblock extra_head %}
 
 {% block extra_css %}
-  {% include 'hnfp/blocks/extra_css.html' %}
+{% include 'hnfp/blocks/extra_css.html' %}
 {% endblock extra_css %}
 
 {% block header %}
-  {% include 'hnfp/blocks/navbar.html' %}
+{% include 'hnfp/blocks/navbar.html' %}
 {% endblock %}
 
 {% block stylesheets %}{% endblock stylesheets %}
 
-{% block content %}{% endblock content %}
-
 {% block outer_content %}
-<main class="login-page">
-  <section class="container section">
-    <div class="login row">
-      <div class="col s8 offset-s2">
-        <h1>{{ title }}</h1>
-        <form class="login-form" method="POST" action="{% url 'account:index' %}{% if next %}?next={{ next }}{% endif %}">
-          {% csrf_token %}
-          {{ form.as_div }}
-          <div class="align-center">
-              <button class="btn btn-success btn-lg" onclick='this.form.submit()'>Login &rarr;</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-  <section class="container section">
-    <div class="row">
-      <div class="col s6 l4 offset-l2">
-        <a href="{% url 'survey' %}">Become a steward</a>
-      </div>
-      <div class="col s6 l4 right-align">
-        <a href="{% url 'account:forgot_password' %}">Forgot password</a>
-      </div>
-    </div>
-  </section>
+<main>
+    <section class="section survey-intro padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col s8 offset-s2 l6 offset-l3">
+                    {% include 'accounts/login_form.html' %}
+                    <div class="divider"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s8 offset-s2 l6 offset-l3 center-align">
+                    <p><strong>Don't have an account?</strong></p>
+                    <a href="/survey/" class="btn btn-link">Become a Steward</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 {% endblock %}
 
-{% block footer %}
-  {% include 'hnfp/blocks/footer.html' %}
-{% endblock footer %}
+    {% block footer %}
+    {% include 'hnfp/blocks/footer.html' %}
+    {% endblock footer %}
 
-{% block extra_js %}
-  {% include 'hnfp/blocks/extra_js.html' %}
-{% endblock %}
+    {% block extra_js %}
+    {% include 'hnfp/blocks/extra_js.html' %}
+    <script src="{% static '/hnfp/js/app.login.js' %}"></script>
+    {% endblock %}

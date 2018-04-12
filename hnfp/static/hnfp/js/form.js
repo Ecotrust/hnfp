@@ -10,7 +10,8 @@ $(document).ready( function() {
     step5Check++;
   });
 
-  $('#btn-register').on( 'click', function() {
+  $('#btn-register').on( 'click', function(event) {
+    event.preventDefault();
     var regForm = document.getElementById('register-form'),
         formData = new FormData( regForm );
     $.ajax({
@@ -20,14 +21,13 @@ $(document).ready( function() {
       contentType: false,
       processData: false,
       success: function(data) {
+          // M.toast({html: 'I am a toast!'})
         console.log('success');
       },
       error: function(error) {
         console.log(error);
       }
-    }).done( function(res) {
-      // console.log(res);
-    });
+    })
   });
 
   $('#register-form').submit(function(event) {

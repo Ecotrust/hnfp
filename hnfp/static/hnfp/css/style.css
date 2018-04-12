@@ -1741,12 +1741,14 @@ path {
   padding: 12vh 0;
 }
 
-.classless-page h1 {
-  text-align: center;
+.login section {
+  margin: 0 auto 1rem;
+  padding-bottom: 1rem;
 }
 
-.login section.section {
-  margin: 0 auto 2rem;
+.login-intro-wrap,
+.login-help-wrap {
+    text-align: center;
 }
 
 /*--------------------

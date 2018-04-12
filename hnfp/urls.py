@@ -1,11 +1,12 @@
 from django.conf import settings
 from django.conf.urls import url, include
+from django.contrib.auth import views as auth_views
 from django.views.generic import ListView, DateDetailView
 from django.conf.urls.static import static
-from . import views
 from hnfp.models import Post, AOI
 from features.views import form_resources
 from hnfp.views import ObservationUpdate, ObservationDelete, LanduseUpdate, LanduseDelete, AlertDelete, AlertUpdate
+from . import views
 
 import django.contrib.gis.forms.widgets
 django.contrib.gis.forms.widgets.OpenLayersWidget.Media.js = (
@@ -18,13 +19,14 @@ django.contrib.gis.forms.widgets.OSMWidget.Media.js = (
 
 urlpatterns = [
     url(r'^home/', views.home, name='home'),
+    url(r'^/?$', views.home),
     url(r'^sw.js', views.sw),
     url(r'^manifest(.*.json)$', views.manifest, name='manifest'),
     url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^survey/$', views.survey, name='survey'),
     url(r'^save_survey/$', views.save_survey, name='save_survey'),
     url(r'^login/?', views.login, name='login'),
-    url(r'^myaccount/?', views.myaccount, name='myaccount'),
+    # url(r'^myaccount/?', views.myaccount, name='myaccount'),
     url(r'^registering/', views.registering, name='registering'),
     url(r'^registered/', views.registered, name='registered'),
     url(r'^dashboard/', views.dashboard, name='dashboard'),
