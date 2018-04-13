@@ -1,23 +1,46 @@
 <div class="collapsible-header active">Your Land Use</div>
 <div class="collapsible-body">
-  <h6>You regularly go to Hoonah Forest to:</h6>
-  <p><em>Select ALL that apply</em></p>
-  <br />
-  <div class="row indent">
-    {% for use in uses_list %}
-      <div class="col s6 l5">
-        <input type="checkbox" class="filled-in" id="{{ use }}" name="forest_use" value="{{ use }}" required />
-        <label for="{{ use }}">{{ use }}</label>
-      </div>
-    {% endfor %}
-  </div>
-  <div class="row indent">
-    <div class="input-field col s11 l8">
-        <input type="text" id="forest_use_other" name="forest_use_other" />
-        <label for="forest_use_other">Other Forest Uses</label>
+    <h6>You regularly go to Hoonah Forest to:</h6>
+    <p><em>Select ALL that apply</em></p>
+    <br />
+    <div class="row indent">
+        <div class="col s6 l5">
+            <input type="checkbox" class="filled-in" id="forest_use_hunt_deer" name="forest_use_hunt_deer" value="Hunt" />
+            <label for="forest_use_hunt_deer">Hunt Deer</label>
+        </div>
+        <div class="col s6 l5">
+            <input type="checkbox" class="filled-in" id="forest_use_gather_herbs" name="forest_use_gather_herbs" value="Gather Herbs" />
+            <label for="forest_use_gather_herbs">Gather Herbs</label>
+        </div>
+        <div class="col s6 l5">
+            <input type="checkbox" class="filled-in" id="forest_use_fish" name="forest_use_fish" value="Fish" />
+            <label for="forest_use_fish">Fish</label>
+        </div>
+        <div class="col s6 l5">
+            <input type="checkbox" class="filled-in" id="forest_use_collect_berries" name="forest_use_collect_berries" value="Collect Berries" />
+            <label for="forest_use_collect_berries">Collect Berries</label>
+        </div>
+        <div class="col s6 l5">
+            <input type="checkbox" class="filled-in" id="forest_use_gather_mushrooms" name="forest_use_gather_mushrooms" value="Gather Mushrooms" />
+            <label for="forest_use_gather_mushrooms">Gather Mushrooms</label>
+        </div>
+        <div class="col s6 l5">
+            <input type="checkbox" class="filled-in" id="forest_use_collect_firewood" name="forest_use_collect_firewood" value="Collect Firewood" />
+            <label for="forest_use_collect_firewood">Collect Firewood</label>
+        </div>
+        <div class="col s6 l5">
+            <input type="checkbox" class="filled-in" id="forest_use_other_activities" name="forest_use_other_activities" value="Other Activities" />
+            <label for="forest_use_other_activities">Other Activities</label>
+        </div>
+
     </div>
-  </div>
-  <div class="row indent">
-    {% include './survey_actions.html' %}
-  </div>
+    <div class="row indent">
+        <div class="input-field col s11 l8">
+            <input type="text" id="forest_use_other" name="forest_use_other" />
+            <label for="forest_use_other">Other Forest Uses</label>
+        </div>
+    </div>
+    <div class="row">
+        {% include './survey_actions.html' %}
+    </div>
 </div>

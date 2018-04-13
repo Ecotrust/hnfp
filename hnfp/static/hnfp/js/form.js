@@ -15,36 +15,47 @@ $(document).ready( function() {
     });
 
     $('.survey-actions .btn').on('click', function(event) {
+        event.preventDefault();
+        $parents = $(this).parentsUntil('ul');
+        $parent = $parents[$parents.length - 1];
+        var stepClass = $parent.classList.item(0);
+        var i = stepClass.indexOf('step');
+        var step = stepClass.slice(i + 4);
+        var next = parseInt(step);
         if (event.target.classList.contains('next-step')) {
-            $parent = $(this).parentsUntil('ul');
-            console.log($parent[$parent.length - 1]);
-        } else {
-            // console.log($(event).parents());
+            next = next - 1;
+            $('.collapsible').collapsible('close', next);
+        } else if (event.target.classList.contains('previous-step')) {
+            next = next - 2;
+            $('.collapsible').collapsible('open', next);
         }
-        $('.collapsible').collapsible('open', 0);
     });
 
     initMap();
 
     $('#btn-register').on( 'click', function(event) {
         event.preventDefault();
-        var regForm = document.getElementById('register-form'),
-        formData = new FormData( regForm );
-        $.ajax({
-            url : '/registering/',
-            method: 'POST',
-            data : formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                $('.collapsible_create_account').collapsible('close', 0);
-                $('.collapsible').collapsible('open', 0);
-                console.log(response);
-            },
-            error: function(response) {
-                console.log(response);
-            }
-        })
+        var regForm = document.getElementById('register-form');
+        if (!regForm.checkValidity()) {
+            regForm.reportValidity();
+        } else {
+            var formData = new FormData( regForm );
+            $.ajax({
+                url : '/registering/',
+                method: 'POST',
+                data : formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    $('.collapsible_create_account').collapsible('close', 0);
+                    $('.registration-response').html('<p style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>You are now a steward!</strong><br /><br />Increase your impact by completing the survey.</strong></p>');
+                    console.log('%csuccessly registered: %o', 'color:green;', response);
+                },
+                error: function(response) {
+                    $('.registration-response').html(`There was an error with registration. Chances are you already have an account. <a href="/login/">Sign in</a> to your account. ${response}`);
+                }
+            })
+        }
     });
 
     $('#survey-form').submit(function(event) {

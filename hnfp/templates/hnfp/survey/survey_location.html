@@ -1,26 +1,28 @@
 <div class="collapsible-header active">Address</div>
 <div class="collapsible-body">
   <div class="row">
-    <div class="input-field col s8 l8">
+    <div class="input-field col s8 l8" style="height: 0; visibility: hidden;">
       <input id="address" type="text" class="validate" autocomplete="address-line1">
       <label for="address">Street Address</label>
     </div>
-    <div class="input-field col s4 l4">
+    <div class="input-field col s4 l4" style="height: 0; visibility: hidden;">
       <input id="address2" type="text" class="validate" autocomplete="address-line2">
       <label for="address2">Unit</label>
     </div>
     <div class="input-field col s8 l6">
-      <input id="city" type="text" class="validate" autocomplete="city">
+      <input id="city" type="text" class="validate" autocomplete="city" value="Hoonah">
       <label for="city">City</label>
     </div>
     <div class="input-field col s4 l2">
       <input id="state" type="text" class="validate" autocomplete="state" value="AK">
       <label for="state">State</label>
     </div>
-    <div class="input-field col s4 l4">
+    <div class="input-field col s4 l4" style="height: 0; visibility: hidden;">
       <input id="zip" type="number" class="validate" autocomplete="postal-code">
       <label for="zip">Zip</label>
     </div>
+  </div>
+  <div class="row hide-prev">
     {% include './survey_actions.html' %}
   </div>
 </div>

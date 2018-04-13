@@ -1,5 +1,6 @@
 # from django.db import model
 from django.conf import settings
+from django.db import models as defaultModel
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point, Polygon, MultiPolygon
 from django.contrib.auth.models import User, Group
@@ -9,6 +10,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django import forms
 from ckeditor.fields import RichTextField
 
 # Create your models here.
@@ -66,21 +68,43 @@ class Post(models.Model):
 
 # registration survey
 class SurveyResults(models.Model):
-	FORESTS_USE_CHOICES = (
-		('Hunt', 'hunt_deer'),
-		('Gather Herbs', 'gather_herbs'),
-		('Fish', 'fish'),
-		('Collect Berries', 'collect_berries'),
-		('Gather Mushrooms', 'gather_mushrooms'),
-		('Collect Firewood', 'collect_firewood'),
-		('Other/None', 'other'),
-	)
-	forest_use = models.CharField(
-		max_length=400,
-		choices=FORESTS_USE_CHOICES,
+
+	forest_use_hunt_deer = models.CharField(
+		max_length=4000,
 		blank=True,
-		null=True
+		null=True,
 	)
+	forest_use_gather_herbs = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+	forest_use_fish = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+	forest_use_collect_berries = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+	forest_use_gather_mushrooms = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+	forest_use_collect_firewood = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+	forest_use_other_activities = models.CharField(
+		max_length=4000,
+		blank=True,
+		null=True,
+	)
+
 	forest_use_other = models.CharField(
 		max_length=4000,
 		blank=True,
@@ -146,13 +170,6 @@ class SurveyResults(models.Model):
 		blank=True,
 		null=True,
 	)
-
-	def get_forest_uses():
-		uses = SurveyResults.FORESTS_USE_CHOICES
-		uses_list = []
-		for use in uses:
-			uses_list.append(use[0])
-		return uses_list
 
 	class Meta:
 		verbose_name_plural = 'Survey Responses'

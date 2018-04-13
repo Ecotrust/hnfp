@@ -1609,6 +1609,10 @@ survey
     padding-right: 1em;
 }
 
+.survey-wrap .hide-prev .previous-step {
+    display: none;
+}
+
 .survey-wrap input[type="checkbox"] + label {
     color: #fff;
 }

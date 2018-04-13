@@ -19,7 +19,6 @@ django.contrib.gis.forms.widgets.OSMWidget.Media.js = (
 
 urlpatterns = [
     url(r'^home/', views.home, name='home'),
-    url(r'^/?$', views.home),
     url(r'^sw.js', views.sw),
     url(r'^manifest(.*.json)$', views.manifest, name='manifest'),
     url(r'^comments/', include('django_comments_xtd.urls')),

@@ -33,6 +33,13 @@ def get_json_error_response(error_msg="Error", status_code=500, context={}):
     response.status_code = status_code
     return response
 
+def is_in_array(item, array):
+    if item in array:
+        value = array[item]
+    else:
+        value = ''
+    return value
+
 ################################################
 ###                 VIEWS                    ###
 ################################################
@@ -95,7 +102,6 @@ def registering(request):
 
 def survey(request):
     template = loader.get_template('hnfp/land_use_survey.html')
-    uses_list = SurveyResults.get_forest_uses()
 
     if Survey.objects.all():
         survey = Survey.objects.order_by('id')[0]
@@ -108,7 +114,6 @@ def survey(request):
         'page': 'survey',
         'response_form': form,
         'survey': survey,
-        'uses_list': uses_list,
         'registration_form': SignUpForm(),
     }
     return HttpResponse(template.render(context, request))
@@ -116,27 +121,43 @@ def survey(request):
 def save_survey(request):
     context = {}
     if request.method == 'POST':
-        forest_use = request.POST['forest_use']
-        rank_hunt = request.POST['rank_hunt']
-        rank_gather_herbs = request.POST['rank_gather_herbs']
-        rank_fish = request.POST['rank_fish']
-        rank_collect_berries = request.POST['rank_collect_berries']
-        rank_gather_mushrooms = request.POST['rank_gather_mushrooms']
-        rank_collect_firewood = request.POST['rank_collect_firewood']
-        gender = request.POST['gender']
-        employment_forest_dependent = request.POST['employment_forest_dependent']
-        occupation = request.POST['occupation']
-        regiontally = request.POST['regional-totals']
+        forest_use_hunt_deer = is_in_array('forest_use_hunt_deer', request.POST)
+        forest_use_gather_herbs = is_in_array('forest_use_gather_herbs', request.POST)
+        forest_use_fish = is_in_array('forest_use_fish', request.POST)
+        forest_use_collect_berries = is_in_array('forest_use_collect_berries', request.POST)
+        forest_use_gather_mushrooms = is_in_array('forest_use_gather_mushrooms', request.POST)
+        forest_use_collect_firewood = is_in_array('forest_use_collect_firewood', request.POST)
+        forest_use_other_activities = is_in_array('forest_use_other_activities', request.POST)
+        forest_use_other = is_in_array('forest_use_other', request.POST)
+        rank_hunt = is_in_array('rank_hunt', request.POST)
+        rank_gather_herbs = is_in_array('rank_gather_herbs', request.POST)
+        rank_fish = is_in_array('rank_fish', request.POST)
+        rank_collect_berries = is_in_array('rank_collect_berries', request.POST)
+        rank_gather_mushrooms = is_in_array('rank_gather_mushrooms', request.POST)
+        rank_collect_firewood = is_in_array('rank_collect_firewood', request.POST)
+        rank_other = is_in_array('rank_other', request.POST)
+        gender = is_in_array('gender', request.POST)
+        employment_forest_dependent = is_in_array('employment_forest_dependent', request.POST)
+        occupation = is_in_array('occupation', request.POST)
+        regiontally = is_in_array('regional-totals', request.POST)
 
         try:
             newRespose = SurveyResults.objects.create(
-                forest_use=forest_use,
+                forest_use_hunt_deer=forest_use_hunt_deer,
+                forest_use_gather_herbs=forest_use_gather_herbs,
+                forest_use_fish=forest_use_fish,
+                forest_use_collect_berries=forest_use_collect_berries,
+                forest_use_gather_mushrooms=forest_use_gather_mushrooms,
+                forest_use_collect_firewood=forest_use_collect_firewood,
+                forest_use_other_activities=forest_use_other_activities,
+                forest_use_other=forest_use_other,
                 rank_hunt=rank_hunt,
                 rank_gather_herbs=rank_gather_herbs,
                 rank_fish=rank_fish,
                 rank_collect_berries=rank_collect_berries,
                 rank_gather_mushrooms=rank_gather_mushrooms,
                 rank_collect_firewood=rank_collect_firewood,
+                rank_other=rank_other,
                 gender=gender,
                 employment_forest_dependent=employment_forest_dependent,
                 occupation=occupation,
@@ -145,7 +166,7 @@ def save_survey(request):
         except:
             return get_json_error_response('Survey Result Failed.', 500)
 
-        context['success'] = true
+        context['success'] = True
         return JsonResponse(context)
 
 def registered(request):

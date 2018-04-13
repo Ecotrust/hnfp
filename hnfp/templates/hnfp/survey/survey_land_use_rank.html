@@ -4,56 +4,55 @@
   <div class="row indent">
     <div class="col s12 l4">
       <div class="input-field inline">
-        <input type="number" min="1" max="5" step="1" id="rank_hunt" name="rank_hunt" value="0" />
+        <input type="number" min="1" max="5" step="1" id="rank_hunt" name="rank_hunt" />
         <label for="rank_hunt"></label>
       </div>
       <span>Hunt Deer</span>
     </div>
     <div class="col s12 l4">
       <div class="input-field inline">
-        <input type="number" min="1" max="5" step="1" id="rank_gather_herbs" name="rank_gather_herbs" value="0" />
+        <input type="number" min="1" max="5" step="1" id="rank_gather_herbs" name="rank_gather_herbs"  />
         <label for="rank_gather_herbs"></label>
       </div>
       <span>Gather Herbs</span>
     </div>
     <div class="col s12 l4">
       <div class="input-field inline">
-        <input type="number" min="1" max="5" step="1" id="rank_fish" name="rank_fish" value="0" />
+        <input type="number" min="1" max="5" step="1" id="rank_fish" name="rank_fish"  />
         <label for="rank_fish"></label>
       </div>
       <span>Fish</span>
     </div>
     <div class="col s12 l4">
       <div class="input-field inline">
-        <input type="number" min="1" max="5" step="1" id="rank_collect_berries" name="rank_collect_berries" value="0" />
+        <input type="number" min="1" max="5" step="1" id="rank_collect_berries" name="rank_collect_berries"  />
         <label for="rank_collect_berries"></label>
       </div>
       <span>Collect Berries</span>
     </div>
     <div class="col s12 l4">
       <div class="input-field inline">
-        <input type="number" min="1" max="5" step="1" id="rank_gather_mushrooms" name="rank_gather_mushrooms" value="0" />
+        <input type="number" min="1" max="5" step="1" id="rank_gather_mushrooms" name="rank_gather_mushrooms"  />
         <label for="rank_gather_mushrooms"></label>
       </div>
       <span>Gather Mushrooms</span>
     </div>
     <div class="col s12 l4">
       <div class="input-field inline">
-        <input type="number" min="1" max="5" step="1" id="rank_collect_firewood" name="rank_collect_firewood" value="0" />
+        <input type="number" min="1" max="5" step="1" id="rank_collect_firewood" name="rank_collect_firewood"  />
         <label for="rank_collect_firewood"></label>
       </div>
       <span>Collect Firewood</span>
     </div>
     <div class="col s12 l4">
       <div class="input-field inline">
-        <input type="text" id="rank_other" name="rank_other" value="0" />
+        <input type="text" id="rank_other" name="rank_other"  />
         <label for="rank_other"></label>
       </div>
       <span>Other Activities</span>
     </div>
-    <div class="step-actions col s12 l6">
-      <button class="waves-effect waves-dark btn next-step">Next <i class="material-icons right">navigate_next</i></button>
-      <button class="waves-effect waves-dark btn-flat previous-step">Previous</button>
-    </div>
+  </div>
+  <div class="row">
+    {% include './survey_actions.html' %}
   </div>
 </div>

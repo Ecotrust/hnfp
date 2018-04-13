@@ -46,10 +46,11 @@
                         {% include './survey/survey_basic_info.html' %}
                     </li>
                 </ul>
+                <div class="registration-response"></div>
             </form>
             <form class="login-form" method="POST" action="/save_survey/" id="survey-form">
                     {% csrf_token %}
-                    <ul class="collapsible popout" data-collapsible="expandable">
+                    <ul class="collapsible" data-collapsible="expandable">
                         <li class="step1">
                             {% include './survey/survey_location.html' %}
                         </li>
@@ -95,17 +96,12 @@
                         <li class="step6">
                             {% include './survey/survey_your_profile_2.html' %}
                         </li>
-                        <li class="step7">
-                            <div class="collapsible-header active">Submit</div>
-                            <div class="collapsible-body">
-                                <div class="row">
-                                    <div class="step-actions col s12 l6">
-                                        <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit" onclick="$('.stepper').submitStepper()">Finish &amp; Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
+                    <div class="row">
+                        <div class="step-actions col s12 l6">
+                            <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit" onclick="$('.stepper').submitStepper()">Finish &amp; Submit</button>
+                        </div>
+                    </div>
                 </form>
         </div>
     </section>
