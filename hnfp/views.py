@@ -23,7 +23,19 @@ import json
 
 from django.views.generic.edit import UpdateView, DeleteView
 
-### VIEWS ###
+################################################
+###                 HELPERS                    ###
+################################################
+def get_json_error_response(error_msg="Error", status_code=500, context={}):
+    context['success'] = False
+    context['error_msg'] = error_msg
+    response = JsonResponse(context)
+    response.status_code = status_code
+    return response
+
+################################################
+###                 VIEWS                    ###
+################################################
 def index(request):
     template = loader.get_template('hnfp/index.html')
     context = {
@@ -102,6 +114,7 @@ def survey(request):
     return HttpResponse(template.render(context, request))
 
 def save_survey(request):
+    context = {}
     if request.method == 'POST':
         forest_use = request.POST['forest_use']
         rank_hunt = request.POST['rank_hunt']
@@ -115,22 +128,25 @@ def save_survey(request):
         occupation = request.POST['occupation']
         regiontally = request.POST['regional-totals']
 
-        newRespose = SurveyResults(
-            forest_use=forest_use,
-            rank_hunt=rank_hunt,
-            rank_gather_herbs=rank_gather_herbs,
-            rank_fish=rank_fish,
-            rank_collect_berries=rank_collect_berries,
-            rank_gather_mushrooms=rank_gather_mushrooms,
-            rank_collect_firewood=rank_collect_firewood,
-            gender=gender,
-            employment_forest_dependent=employment_forest_dependent,
-            occupation=occupation,
-            regiontally=regiontally,
-        );
-        newRespose.save()
+        try:
+            newRespose = SurveyResults.objects.create(
+                forest_use=forest_use,
+                rank_hunt=rank_hunt,
+                rank_gather_herbs=rank_gather_herbs,
+                rank_fish=rank_fish,
+                rank_collect_berries=rank_collect_berries,
+                rank_gather_mushrooms=rank_gather_mushrooms,
+                rank_collect_firewood=rank_collect_firewood,
+                gender=gender,
+                employment_forest_dependent=employment_forest_dependent,
+                occupation=occupation,
+                regiontally=regiontally,
+            );
+        except:
+            return get_json_error_response('Survey Result Failed.', 500)
 
-        return HttpResponse(newRespose, content_type='application/x-javascript', status=200)
+        context['success'] = true
+        return JsonResponse(context)
 
 def registered(request):
     template = loader.get_template('hnfp/welcome_steward.html')

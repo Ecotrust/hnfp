@@ -133,7 +133,7 @@ CACHES = {
 }
 
 ### Django compressor (mp-visualize/base.html)
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OUTPUT_DIR = 'CACHE'

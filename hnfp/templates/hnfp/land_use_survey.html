@@ -2,122 +2,127 @@
 {% load static %}
 
 {% block extra_css %}
-  {{ block.super }}
-  <link href="{% static 'hnfp/css/materialize_stepper.css' %}" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.css'%}">
-  <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
+{{ block.super }}
+<link href="{% static 'hnfp/css/materialize_stepper.css' %}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'hnfp/css/openlayers/ol.css'%}">
+<link rel="stylesheet" href="{% static 'hnfp/css/openlayers/layerswitcher.css' %}" media="screen,projection"/>
 {% endblock extra_css %}
 
 {% block outer_content %}
 <main>
-  <section class="section survey-intro padding-top">
-    <div class="container">
-      <div class="row">
-        <div class="col s8 offset-s2 l4 offset-l4">
-          <a href="/"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s2 offset-s5 border-survey-wrap"></div>
-      </div>
-      <div class="row">
-        <div class="col s12">
-          <h2 class="teal-text center">Take this 5 minute survey to activate your account</h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="container center">
-          <img src="{% static 'hnfp/img/icons/i_clipboard.svg' %}" class="row-icon" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s12 l8 offset-l2 flow-text">
-          <p>This short survey will help the Hoonah Native Forest Partnership understand how the community uses the forests and what the priorities are for management decisions. All personal information will be masked and only shared in aggregate with other users.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section survey-wrap">
-    <div class="container">
-      <form class="login-form" method="POST" action="/save_survey/" id="register-form">
-        {% csrf_token %}
-        <ul class="stepper">
-          <li class="step active">
-            {% include './survey/survey_basic_info.html' %}
-          </li>
-          <li class="step">
-            {% include './survey/survey_location.html' %}
-          </li>
-          <li class="step">
-            {% include './survey/survey_forest_use.html' %}
-          </li>
-          <li class="step">
-            {% include './survey/survey_land_use_rank.html' %}
-          </li>
-          <li class="step">
-            <div class="step-title waves-effect">Regions &amp; Frequency</div>
-            <div class="step-content">
-              <h6>Which area(s) within the Hoonah Forest have you been to within the last year?</h6>
-              <em>Select one region at a time and answer follow up questions</em>
-              <section class="survey-map">
-                <div id="map-wrapper">
-                  <div id="map" class="map"></div>
+    <section class="section survey-intro padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col s8 offset-s2 l4 offset-l4">
+                    <a href="/"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
                 </div>
-                <div id="popup" class="card">
-                  <div class="card-content waves-effect waves-block waves-light">
-                    <div class="region-wrap">
-                      <p class="card-title"><span id="region-name"></span></p>
-                      <p><strong>How many times did you visit this region within the last year?</strong></p>
-                      <input type="hidden" id="region"  name="region" />
-                      <div class="input-field">
-                        <input type="number" id="regiontally" name="regiontally" />
-                        <label for="regiontally">Visits</label>
-                      </div>
-                      <input id="regional-totals" name="regional-totals" style="opacity: 0; height: 0; pointer-events: none;" />
-                    </div>
-                  </div>
-                </div>
-                <div class="region-totals"></div>
-              </section>
-              <div class="row">
-                {% include './survey/survey_actions.html' %}
-              </div>
             </div>
-          </li>
-          <li class="step">
-            {% include './survey/survey_your_profile_1.html' %}
-          </li>
-          <li class="step">
-            {% include './survey/survey_your_profile_2.html' %}
-          </li>
-          <li class="step">
-            <div class="step-title waves-effect">Finish &amp; Submit</div>
-            <div class="step-content">
-              <div class="row">
-                <div class="step-actions col s12 l6">
-                  <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit" onclick="$('.stepper').submitStepper()">Finish &amp; Submit</button>
-                </div>
-              </div>
+            <div class="row">
+                <div class="col s2 offset-s5 border-survey-wrap"></div>
             </div>
-          </li>
-        </ul>
-      </form>
-    </div>
-  </section>
+            <div class="row">
+                <div class="col s12">
+                    <h2 class="teal-text center">Take this 5 minute survey to activate your account</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container center">
+                    <img src="{% static 'hnfp/img/icons/i_clipboard.svg' %}" class="row-icon" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 l8 offset-l2 flow-text">
+                    <p>This short survey will help the Hoonah Native Forest Partnership understand how the community uses the forests and what the priorities are for management decisions. All personal information will be masked and only shared in aggregate with other users.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section survey-wrap">
+        <div class="container">
+            <form class="login-form" method="POST" action="/registering/" id="register-form">
+                {% csrf_token %}
+                <ul class="collapsible_create_account" data-collapsible="expandable">
+                    <li class="step0">
+                        {% include './survey/survey_basic_info.html' %}
+                    </li>
+                </ul>
+            </form>
+            <form class="login-form" method="POST" action="/save_survey/" id="survey-form">
+                    {% csrf_token %}
+                    <ul class="collapsible popout" data-collapsible="expandable">
+                        <li class="step1">
+                            {% include './survey/survey_location.html' %}
+                        </li>
+                        <li class="step2">
+                            {% include './survey/survey_forest_use.html' %}
+                        </li>
+                        <li class="step3">
+                            {% include './survey/survey_land_use_rank.html' %}
+                        </li>
+                        <li class="step4">
+                            <div class="collapsible-header active">Regions &amp; Frequency</div>
+                            <div class="collapsible-body">
+                                <h6>Which area(s) within the Hoonah Forest have you been to within the last year?</h6>
+                                <em>Select one region at a time and answer follow up questions</em>
+                                <section class="survey-map">
+                                    <div id="map-wrapper">
+                                        <div id="map" class="map"></div>
+                                    </div>
+                                    <div id="popup" class="card">
+                                        <div class="card-content waves-effect waves-block waves-light">
+                                            <div class="region-wrap">
+                                                <p class="card-title"><span id="region-name"></span></p>
+                                                <p><strong>How many times did you visit this region within the last year?</strong></p>
+                                                <input type="hidden" id="region"  name="region" />
+                                                <div class="input-field">
+                                                    <input type="number" id="regiontally" name="regiontally" />
+                                                    <label for="regiontally">Visits</label>
+                                                </div>
+                                                <input id="regional-totals" name="regional-totals" style="opacity: 0; height: 0; pointer-events: none;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="region-totals"></div>
+                                </section>
+                                <div class="row">
+                                    {% include './survey/survey_actions.html' %}
+                                </div>
+                            </div>
+                        </li>
+                        <li class="step5">
+                            {% include './survey/survey_your_profile_1.html' %}
+                        </li>
+                        <li class="step6">
+                            {% include './survey/survey_your_profile_2.html' %}
+                        </li>
+                        <li class="step7">
+                            <div class="collapsible-header active">Submit</div>
+                            <div class="collapsible-body">
+                                <div class="row">
+                                    <div class="step-actions col s12 l6">
+                                        <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit" onclick="$('.stepper').submitStepper()">Finish &amp; Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+        </div>
+    </section>
 </main>
 {% endblock outer_content %}
 
 
 {% block extra_js %}
-  {{ block.super }}
+{{ block.super }}
 
-  {% block gmaps_api_call %}{% endblock %}
-  {% block custom_marco_ol3 %}{% endblock %}
-  {% block mp_js %}
-    <script src="{% static '/hnfp/js/materialize/materialize_stepper.js' %}"></script>
-    <script src="{% static '/hnfp/js/form.js' %}"></script>
-    <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
-    <script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
-    <script src="{% static '/hnfp/js/form_map.js' %}"></script>
-  {% endblock mp_js %}
+{% block gmaps_api_call %}{% endblock %}
+{% block custom_marco_ol3 %}{% endblock %}
+{% block mp_js %}
+<script src="{% static '/hnfp/js/materialize/materialize_stepper.js' %}"></script>
+<script src="{% static '/hnfp/js/form.js' %}"></script>
+<script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
+<script src="{% static 'hnfp/js/openlayers/layerswitcher.js' %}"></script>
+<script src="{% static '/hnfp/js/form_map.js' %}"></script>
+{% endblock mp_js %}
 {% endblock extra_js %}
