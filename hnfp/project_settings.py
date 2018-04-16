@@ -257,7 +257,7 @@ REGISTRATION_FORM_FIELDS = {
     'captcha': False,
 }
 
-LOG_IN_WITH_EMAIL = False
+LOG_IN_WITH_EMAIL = True
 
 ADMIN_URL = "/admin/"
 

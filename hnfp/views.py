@@ -177,20 +177,6 @@ def registered(request):
     }
     return HttpResponse(template.render(context, request))
 
-def login(request):
-    if not request.method == 'POST':
-        context = {
-            'form': LogInForm(),
-            'login_title': 'Login',
-            'registration_form': SignUpForm(),
-            'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-            'forgot_password_link': 'Forgot Password?',
-            'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-            'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-            'next': '/dashboard',
-        }
-        from accounts.views import login_page
-        return login_page(request, 'hnfp/login.html', context)
 
 # def myaccount(request):
 #     if request.user.is_anonymous(): # not logged in
