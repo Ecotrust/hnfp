@@ -5,7 +5,7 @@ if (workbox) {
 
     // Background sync
     const bgSyncPlugin = new workbox.backgroundSync.Plugin('hnfpQueue', {
-      maxRetentionTime: 2 * 24 * 60 // Retry for max of 48 Hours
+      maxRetentionTime: 10 * 24 * 60 // Retry for max of 10 days
     });
 
     // cache names
@@ -18,7 +18,7 @@ if (workbox) {
     // background sync queue stored in IndexedDB
     // when browser regains connectivity, a sync event, requests are retried
     workbox.routing.registerRoute(
-      /.*\/create\/.*/g,
+      /.*\/?(create|update|delete|detail)\/?.*/g,
       new workbox.strategies.NetworkOnly({
           cacheName: 'hnfp-bg-sync',
           plugins: [bgSyncPlugin]
@@ -35,8 +35,8 @@ if (workbox) {
         cacheName: 'hnfp-image-cache',
         plugins: [
           new workbox.expiration.Plugin({
-            maxEntries: 60,
-            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+            maxEntries: 2000,
+            maxAgeSeconds: 90 * 24 * 60 * 60, // 90 Days
           }),
         ],
       })
@@ -54,7 +54,7 @@ if (workbox) {
 
     // only allow admin access when connected to network
     workbox.routing.registerRoute(
-      new RegExp('.*/admin/hnfp/.*'),
+      /\.*\/admin\/hnfp\/.*/g,
       workbox.strategies.networkOnly()
     );
 

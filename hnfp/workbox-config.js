@@ -75,6 +75,28 @@ module.exports = {
             'apps/hnfp/hnfp/templates/hnfp/alert_update.html',
             'apps/hnfp/hnfp/templates/hnfp/alert_confirm_delete.html',
         ],
+        '/alert/new/': [
+            'apps/hnfp/hnfp/templates/base.html',
+            'apps/hnfp/hnfp/templates/hnfp/index.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/extra_css.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/extra_head.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/extra_js.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/observation_icons.html',
+            'apps/hnfp/hnfp/templates/hnfp/alert.html',
+            'apps/hnfp/hnfp/templates/hnfp/new_alert.html',
+        ],
+        '/forum': [
+            'apps/hnfp/hnfp/templates/base.html',
+            'apps/hnfp/hnfp/templates/hnfp/index.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/extra_css.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/extra_head.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/extra_js.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/navbar.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/logos.html',
+            'apps/hnfp/hnfp/templates/hnfp/blocks/footer.html',
+            'apps/hnfp/hnfp/templates/hnfp/post_detail.html',
+            'apps/hnfp/hnfp/templates/hnfp/post_list.html',
+        ],
         '/forum': [
             'apps/hnfp/hnfp/templates/base.html',
             'apps/hnfp/hnfp/templates/hnfp/index.html',
@@ -88,7 +110,7 @@ module.exports = {
             'apps/hnfp/hnfp/templates/hnfp/post_list.html',
         ]
     },
-    'maximumFileSizeToCacheInBytes': 10 * 1024 * 1024,
+    'maximumFileSizeToCacheInBytes': 10 * 1024 * 1024, // 10mb max size
     'swDest': 'marineplanner-core/apps/hnfp/hnfp/static/sw.min.js',
     'swSrc': 'marineplanner-core/apps/hnfp/hnfp/static/sw.js',
 };

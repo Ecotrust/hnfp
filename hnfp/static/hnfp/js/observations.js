@@ -128,7 +128,7 @@ var observations = {
       // remove the form and let user know they are offline
       observations.close();
       $drawingForm.html('');
-      $drawingForm.prepend(`<p>You are offline.</p><p>Don't worry your observation is safe and will be automatically synced with your account when your back online.</p><p>Add as many observations as you would like. All will be synced.</p>`);
+      $drawingForm.prepend(`<div class="card teal"><div class="card-content white-text"><span class="card-title">You are offline</span><p>But, don't worry your observation has not been lost.</p><p>It is in queue to sync once reconnected to the internet.</p><p>You don't need to do anything else.</p><p>Add as many observations as you would like.</p></div></div>`);
     }
   },
   startTracking: function() {
