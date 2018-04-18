@@ -20,7 +20,7 @@
         </ul>
         <ul id="nav-mobile" class="side-nav show-on-small">
             {% if user.is_authenticated %}
-                <li><a class="btn btn-flat" href="/account/"><i class="material-icons left">perm_identity</i>{{ user.username }}</a></li>
+                <li><a class="btn btn-flat" href="{% url 'account:index' %}"><i class="material-icons left">perm_identity</i>{{ user.username }}</a></li>
                 <li><div class="divider"></div></li>
                 <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
                 <li><a href="{% url 'observation' %}">My Maps</a></li>
