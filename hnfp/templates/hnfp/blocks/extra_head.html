@@ -10,8 +10,6 @@
   <!-- Links to a JSON file that specifies "installation" credentials for web applications
   <link rel="manifest" href="/manifest.json" type="application/manifest+json"> -->
 
-  <script src="{% static 'hnfp/js/offline.js' %}"></script>
-  
   <!-- iOS Add to Home Screen -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="green">
@@ -27,4 +25,21 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="{% static 'hnfp/img/touch/homescreen192.png' %}">
   <link rel="icon" sizes="128x128" href="{% static 'hnfp/img/touch/homescreen128.png' %}">
+
+  <!-- install service worker -->
+  <script>
+      // Check that service workers are registered
+      if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+              .then(function(response) {
+                  console.log('ServiceWorker registration successful with scope: %o', response);
+                })
+                .catch(function(response) {
+                  console.log('ServiceWorker registration failed: ', response);
+                });
+        });
+      }
+  </script>
 {% endblock %}

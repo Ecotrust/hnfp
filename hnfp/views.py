@@ -456,7 +456,8 @@ class LanduseDelete(DeleteView):
 def sw(request):
     from marineplanner.settings import BASE_DIR
     import os
-    service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'static', 'sw.js')
+    print(request.path)
+    service_worker = os.path.join(BASE_DIR, '..', 'apps', 'hnfp', 'hnfp', 'static', 'sw.min.js')
     jsfile = open(service_worker, 'rb')
     return HttpResponse(jsfile, content_type='application/javascript', status=200)
 
