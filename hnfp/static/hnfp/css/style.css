@@ -1541,6 +1541,10 @@ survey
     color: #fff;
 }
 
+.survey-wrap .collapsible-body {
+    background: rgba(0,0,0,0.3);
+}
+
 .survey-wrap .input-field input:focus,
 .survey-wrap .input-field input {
     padding-left: 4px;
