@@ -4,45 +4,44 @@
 {% block site_style %}{% endblock site_style %}
 
 {% block extra_head %}
-{% include 'hnfp/blocks/extra_head.html' %}
+    {% include 'hnfp/blocks/extra_head.html' %}
 {% endblock extra_head %}
 
 {% block extra_css %}
-{% include 'hnfp/blocks/extra_css.html' %}
+    {% include 'hnfp/blocks/extra_css.html' %}
 {% endblock extra_css %}
 
 {% block header %}
-{% include 'hnfp/blocks/navbar.html' %}
+    {% include 'hnfp/blocks/navbar.html' %}
 {% endblock %}
 
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block outer_content %}
-<main>
-    <section class="section survey-intro padding-top">
-        <div class="container">
-            <div class="row">
-                <div class="col s8 offset-s2 l6 offset-l3">
-                    {% include 'accounts/login_form.html' %}
-                    <div class="divider"></div>
+    <main>
+        <section class="section survey-intro padding-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col s8 offset-s2 l6 offset-l3">
+                        {% include 'accounts/login_form.html' %}
+                        <div class="divider"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s8 offset-s2 l6 offset-l3 center-align">
+                        <p><strong>Don't have an account?</strong></p>
+                        <a href="/survey/" class="btn btn-link">Become a Steward</a>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col s8 offset-s2 l6 offset-l3 center-align">
-                    <p><strong>Don't have an account?</strong></p>
-                    <a href="/survey/" class="btn btn-link">Become a Steward</a>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 {% endblock %}
 
-    {% block footer %}
+{% block footer %}
     {% include 'hnfp/blocks/footer.html' %}
-    {% endblock footer %}
+{% endblock footer %}
 
-    {% block extra_js %}
+{% block extra_js %}
     {% include 'hnfp/blocks/extra_js.html' %}
-    <script src="{% static '/hnfp/js/app.login.js' %}"></script>
-    {% endblock %}
+{% endblock %}

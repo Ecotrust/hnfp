@@ -26,7 +26,7 @@ STYLES_DIR = os.path.realpath(os.path.join(ASSETS_DIR, 'styles'))
 SECRET_KEY = '-u*-d*&7j=c7a7&k5u6e61b4-t=d8ce^2k=jhox#cn8iy8m_%d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '*.hoonahstewards.net', 'hoonahstewards.net', '52.35.10.181', '172.31.2.211', 'www.hoonahstewards.net']
 
@@ -133,7 +133,7 @@ CACHES = {
 }
 
 ### Django compressor (mp-visualize/base.html)
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_OUTPUT_DIR = 'CACHE'
