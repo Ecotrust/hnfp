@@ -177,20 +177,20 @@ def registered(request):
     }
     return HttpResponse(template.render(context, request))
 
-# def login(request):
-#     template = loader.get_template('hnfp/login.html')
-#     context = {
-#         'form': LogInForm(),
-#         'login_title': 'Log in',
-#         'login_intro': 'Access your account',
-#         'registration_form': SignUpForm(),
-#         'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-#         'forgot_password_link': 'Forgot Password?',
-#         'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-#         'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-#         'next': '/dashboard',
-#     }
-#     return HttpResponse(template.render(context, request))
+def login(request):
+    if not request.method == 'POST':
+        context = {
+            'form': LogInForm(),
+            'login_title': 'Login',
+            'registration_form': SignUpForm(),
+            'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+            'forgot_password_link': 'Forgot Password?',
+            'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+            'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+            'next': '/dashboard',
+        }
+        from accounts.views import login_page
+        return login_page(request, 'hnfp/login.html', context)
 
 
 # def myaccount(request):
@@ -388,11 +388,6 @@ def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
 
 ### LAND USE MAP
-def esriIframe(request):
-    template = loader.get_template('hnfp/landuse/landuse_projects.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
-
 def landuse(request):
     template = loader.get_template('hnfp/landuse/page.html')
     # get all alerts
