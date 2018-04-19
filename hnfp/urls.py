@@ -18,10 +18,10 @@ django.contrib.gis.forms.widgets.OSMWidget.Media.js = (
 )
 
 urlpatterns = [
-    url(r'^home/', views.home, name='home'),
+    url(r'^home/?', views.home, name='home'),
     url(r'^sw.js', views.sw),
     url(r'^manifest(.*.json)$', views.manifest, name='manifest'),
-    url(r'^comments/', include('django_comments_xtd.urls')),
+    url(r'^comments/?', include('django_comments_xtd.urls')),
     url(r'^survey/$', views.survey, name='survey'),
     url(r'^save_survey/$', views.save_survey, name='save_survey'),
     url(r'^login/?', views.login, name='login'),
@@ -45,7 +45,8 @@ urlpatterns = [
     url(r'^jobopportunity/(?P<job_id>[0-9]+)/', views.job_detail, name='job_detail'),
     url(r'^forum/$', ListView.as_view(model=Post, paginate_by=3), name='post-list'),
     url(r'^forum/(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', DateDetailView.as_view(date_field="publish", model=Post), name='post-detail'),
-    url(r'^landuse/$', views.landuse, name='landuse'),
+    url(r'^landuse/$', views.esriIframe, name='landuse'),
+    # url(r'^landuse/$', views.landuse, name='landuse'),
     url(r'^landuse/new/', views.new_project, name='new_project'),
     url(r'^landuse/create/', views.project_create, name='project_create'),
     url(r'^landuse/(?P<pk>[0-9]+)/update/', LanduseUpdate.as_view(), name='landuse_update'),

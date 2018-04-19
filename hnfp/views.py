@@ -185,7 +185,7 @@ def login(request):
         # 'registration_form': SignUpForm(),
         'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
         'forgot_password_link': 'Forgot Password?',
-        'register_link': 'reg', # space is needed to hide the defualt and insert a &nbsp; space
+        'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
         'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
         # 'next': '/dashboard',
     }
@@ -387,6 +387,11 @@ def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
 
 ### LAND USE MAP
+def esriIframe(request):
+    template = loader.get_template('hnfp/landuse/landuse_projects.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+
 def landuse(request):
     template = loader.get_template('hnfp/landuse/page.html')
     # get all alerts
