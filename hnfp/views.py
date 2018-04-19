@@ -388,6 +388,11 @@ def job_detail(request, job_id):
     return HttpResponse("You're looking at job %s." % job_id)
 
 ### LAND USE MAP
+def esriIframe(request):
+    template = loader.get_template('hnfp/landuse/landuse_projects.html')
+    context = {}
+    return HttpResponse(template.render(context, request))
+    
 def landuse(request):
     template = loader.get_template('hnfp/landuse/page.html')
     # get all alerts
