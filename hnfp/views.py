@@ -177,20 +177,20 @@ def registered(request):
     }
     return HttpResponse(template.render(context, request))
 
-def login(request):
-    template = loader.get_template('hnfp/login.html')
-    context = {
-        'form': LogInForm(),
-        'login_title': 'Log in',
-        'login_intro': 'Access your account',
-        # 'registration_form': SignUpForm(),
-        'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-        'forgot_password_link': 'Forgot Password?',
-        'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-        'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-        # 'next': '/dashboard',
-    }
-    return HttpResponse(template.render(context, request))
+# def login(request):
+#     template = loader.get_template('hnfp/login.html')
+#     context = {
+#         'form': LogInForm(),
+#         'login_title': 'Log in',
+#         'login_intro': 'Access your account',
+#         'registration_form': SignUpForm(),
+#         'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+#         'forgot_password_link': 'Forgot Password?',
+#         'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+#         'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+#         'next': '/dashboard',
+#     }
+#     return HttpResponse(template.render(context, request))
 
 
 # def myaccount(request):
