@@ -42,7 +42,7 @@
             <form class="login-form" method="POST" action="/registering/" id="register-form">
                 {% csrf_token %}
                 <ul class="collapsible_create_account" data-collapsible="expandable">
-                    <li class="step0">
+                    <li class="step0 show">
                         {% include './survey/survey_basic_info.html' %}
                     </li>
                 </ul>

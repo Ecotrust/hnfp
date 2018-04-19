@@ -1496,8 +1496,8 @@ survey
 }
 
 .survey-wrap input:not(.browser-default) {
-    background: rgba(255,255,255,0.38);
-    color: #fafafa;
+    background: transparent;
+    color: #ffffff;
 }
 
 .survey-wrap *:focus {
@@ -1603,6 +1603,7 @@ survey
 .survey-wrap .previous-step {
     font-family: 'function', sans-serif;
     background: rgba(120,120,120,0.8);
+    color: #fff;
     float: right;
     margin-top: .5rem;
     padding-left: 1em;
