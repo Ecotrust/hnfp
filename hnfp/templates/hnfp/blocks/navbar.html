@@ -10,7 +10,8 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'account:index' %}"><!-- <img class="circle" src="{% static 'hnfp/img/.png' %}"> --> {{ user.username }}</a>
                     {% else %}
-                        <a class="waves-effect waves-light" href="{% url 'account:login' %}">Log in</a>
+                        <!-- <a class="waves-effect waves-light" href="{% url 'account:login' %}">Log in</a> -->
+                        <a class="waves-effect waves-light" href="/login/">Log in</a>
                     {% endif %}
                 </div>
             </li>
@@ -30,7 +31,8 @@
                 <li><div class="divider"></div></li>
                 <li><a href="{% url 'account:logout' %}">Sign out</a></li>
             {% else %}
-                <li><a class="waves-effect waves-light" href="{% url 'account:login' %}">Log in</a></li>
+                <!-- <li><a class="waves-effect waves-light" href="{% url 'account:login' %}">Log in</a></li> -->
+                <a class="waves-effect waves-light" href="/login/">Log in</a>
             {% endif %}
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse show-on-small"><i class="material-icons">menu</i></a>
