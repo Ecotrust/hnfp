@@ -12,17 +12,21 @@
 <main>
     <section class="section survey-intro padding-top">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col s8 offset-s2 l4 offset-l4">
                     <a href="/"><img src="{% static 'hnfp/img/logo.svg' %}" /></a>
                 </div>
             </div>
             <div class="row">
                 <div class="col s2 offset-s5 border-survey-wrap"></div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col s12">
-                    <h2 class="teal-text center">Take this 5 minute survey to activate your account</h2>
+                    {% if not user.is_authenticated %}
+                        <h2 class="teal-text center">Create your account</h2>
+                    {% else %}
+                        <h2 class="teal-text center">Help identify priorities with this 5 minute survey</h2>
+                    {% endif %}
                 </div>
             </div>
             <div class="row">
@@ -32,24 +36,28 @@
             </div>
             <div class="row">
                 <div class="col s12 l8 offset-l2 flow-text">
-                    <p>This short survey will help the Hoonah Native Forest Partnership understand how the community uses the forests and what the priorities are for management decisions. All personal information will be masked and only shared in aggregate with other users.</p>
+                    {% if not user.is_authenticated %}
+                        <p>Start by creating your account. After your account is ready you can have a say in the Hoonah Native Forest Partnership priorities</p>
+                    {% else %}
+                        <p>This short survey will help the Hoonah Native Forest Partnership understand how the community uses the forests and what the priorities are for management decisions. All personal information will be masked and only shared in aggregate with other users.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </section>
     <section class="section survey-wrap">
         <div class="container">
-            <form class="login-form" method="POST" action="/registering/" id="register-form">
-                {% csrf_token %}
-                <ul class="collapsible_create_account" data-collapsible="expandable">
-                    <li class="step0 show">
-                        {% include './survey/survey_basic_info.html' %}
-                    </li>
-                </ul>
-                <div class="registration-response"></div>
-            </form>
-            <form class="login-form" method="POST" action="/save_survey/" id="survey-form">
-                    {% csrf_token %}
+            {% if not user.is_authenticated %}
+                <form class="login-form" method="POST" action="/registering/" id="register-form">
+                    <ul class="collapsible_create_account" data-collapsible="expandable">
+                        <li class="step0 show">
+                            {% include './survey/survey_basic_info.html' %}
+                        </li>
+                    </ul>
+                    <div class="registration-response"></div>
+                </form>
+            {% else %}
+                <form class="login-form" method="POST" action="/save_survey/" id="survey-form">
                     <ul class="collapsible" data-collapsible="expandable">
                         <li class="step1">
                             {% include './survey/survey_location.html' %}
@@ -99,10 +107,11 @@
                     </ul>
                     <div class="row">
                         <div class="step-actions col s12 l6">
-                            <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit" onclick="$('.stepper').submitStepper()">Finish &amp; Submit</button>
+                            <button class="waves-effect waves-dark btn next-step hoverable" id="submit-form" type="submit">Finish &amp; Submit</button>
                         </div>
                     </div>
                 </form>
+            {% endif %}
         </div>
     </section>
 </main>

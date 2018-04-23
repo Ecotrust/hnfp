@@ -1,13 +1,35 @@
 $(document).ready( function() {
 
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
     $('.collapsible').collapsible({
         accordion: false, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-        onOpen: function(el) {
-            console.log(el);
-        }, // Callback for Collapsible open
-        onClose: function(el) {
-            console.log(el);
-        } // Callback for Collapsible close
     });
 
     $('.collapsible_create_account').collapsible({
@@ -33,13 +55,14 @@ $(document).ready( function() {
 
     initMap();
 
-    $('#btn-register').on( 'click', function(event) {
+    $('#btn-register').on('click', function(event) {
         event.preventDefault();
         var regForm = document.getElementById('register-form');
         if (!regForm.checkValidity()) {
             regForm.reportValidity();
         } else {
-            var formData = new FormData( regForm );
+            var formData = new FormData(regForm);
+            formData['X-CSRFTOKEN'] = csrftoken;
             $.ajax({
                 url : '/registering/',
                 method: 'POST',
@@ -50,27 +73,34 @@ $(document).ready( function() {
                     $('.collapsible_create_account').collapsible('close', 0);
                     $('.registration-response').html('<p style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>You are now a steward!</strong><br /><br />Increase your impact by completing the survey.</strong></p>');
                     console.log('%csuccessly registered: %o', 'color:green;', response);
+                    setTimeout(function() {
+                        document.location = '/survey/';
+                    })
                 },
                 error: function(response) {
-                    $('.registration-response').html(`There was an error with registration. Chances are you already have an account. <a href="/login/">Sign in</a> to your account. ${response}`);
+                    $('.registration-response').html(`<p style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>There was an error with registration. You may already have an account. <a href="/login/">Sign in</a> to your account.</strong></p>`);
                 }
             })
         }
     });
 
-    $('#survey-form').submit(function(event) {
+    $('#submit-form').on('click', function(event) {
         event.preventDefault();
-        $regform = $(event.target).serialize();
+        var surveyForm = document.getElementById('survey-form');
+        var formData = new FormData(surveyForm);
         $.ajax({
-            type: 'POST',
             url: '/save_survey/',
-            data: $regform,
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
             success: function(response) {
-                console.log(response);
-                // window.location.pathname = '/registered/';
+                window.location.pathname = '/registered/';
+                console.log('%csuccessly submitted survey: %o', 'color:green;', response);
             },
             error: function(response) {
-                console.log(response);
+                window.location.pathname = '/registered/';
+                console.log('%cerror with survey submission: %o', 'color:red;', response);
             }
         });
     });

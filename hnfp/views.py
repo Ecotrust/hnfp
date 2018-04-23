@@ -1,26 +1,21 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse, render_to_response, HttpResponseRedirect
-from django.contrib.sessions.models import Session
-from django.conf import settings
+from django.shortcuts import render, redirect, HttpResponseRedirect
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
-from django.template import loader, RequestContext
-from django.db import models
-from django.contrib.auth.models import User, Permission
+from django.template import loader
 from django.urls import reverse_lazy
-# from django.core.urlresolvers import reverse
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.models import User
+import json
+from django.conf import settings
 # Accouts
 from accounts.actions import apply_user_permissions
-from accounts.forms import SignUpForm, LogInForm
+from accounts.forms import LogInForm, SignUpForm
 # survey, forum, jobs, alerts, observation, landuse
 from hnfp.models import Question, Survey, Category, SurveyResults, Post, JobOpportunity, Alert, Observation, LandUseProject, ProjectResourceImpact, ImpactType, Resource, ShareObservationWithManager
-from hnfp.forms import ResponseForm, AlertForm
-import hnfp
+from hnfp.forms import ResponseForm
 # features and shapes
 from django.contrib.gis.geos import Point, Polygon, MultiPolygon, GEOSGeometry
-import json
-
 from django.views.generic.edit import UpdateView, DeleteView
 
 ################################################
@@ -40,14 +35,26 @@ def is_in_array(item, array):
         value = ''
     return value
 
+def accounts_context():
+    context = {
+        'form': LogInForm(),
+        'login_title': 'Login',
+        'login_intro': 'Access your account',
+        'registration_form': SignUpForm(),
+        'registration_title': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+        'forgot_password_link': 'Forgot Password?',
+        'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+        'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
+    }
+    return context
+
 ################################################
 ###                 VIEWS                    ###
 ################################################
 def index(request):
     template = loader.get_template('hnfp/index.html')
-    context = {
-        'title': 'HNFP',
-    }
+    context = accounts_context()
+    context['title'] = 'HNFP'
     return HttpResponse(template.render(context, request))
 
 def home(request):
@@ -188,7 +195,7 @@ def login(request):
         'forgot_password_link': 'Forgot Password?',
         'register_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
         'help_link': ' ', # space is needed to hide the defualt and insert a &nbsp; space
-        'next': 'dashboard',
+        # 'next': 'dashboard',
     }
     return HttpResponse(template.render(context, request))
 
