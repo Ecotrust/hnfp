@@ -71,11 +71,12 @@ $(document).ready( function() {
                 processData: false,
                 success: function(response) {
                     $('.collapsible_create_account').collapsible('close', 0);
-                    $('.registration-response').html('<p style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>You are now a steward!</strong><br /><br />Increase your impact by completing the survey.</strong></p>');
+                    $('.registration-response').html('<h1 style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>You are now a steward!</strong><br /><br />Increase your impact by completing the survey.</strong></p>');
                     console.log('%csuccessly registered: %o', 'color:green;', response);
+                    Materialize.toast('I am a toast!', 4000, 'top');
                     setTimeout(function() {
                         document.location = '/survey/';
-                    })
+                    }, 5000)
                 },
                 error: function(response) {
                     $('.registration-response').html(`<p style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>There was an error with registration. You may already have an account. <a href="/login/">Sign in</a> to your account.</strong></p>`);

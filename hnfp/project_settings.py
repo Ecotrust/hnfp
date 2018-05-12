@@ -361,10 +361,18 @@ RECAPTCHA_PUBLIC_KEY = '6Lc30ScUAAAAAE64HuxC_zXrUlEuZxIlZy-WFYf-'
 RECAPTCHA_PRIVATE_KEY = '6Lc30ScUAAAAAFq-pBBz161BKPMrRPvDajNuJu3G'
 
 COMMENTS_APP = 'django_comments_xtd'
-COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_MAX_THREAD_LEVEL = 0
 COMMENTS_XTD_CONFIRM_EMAIL = False
+COMMENTS_XTD_THREADED_EMAILS = False
+COMMENTS_XTD_FROM_EMAIL = "webmaster@hoonahstewards.net"
 COMMENTS_XTD_SALT = '&HK$OYRVG0h5gt073h6gH4p25GS2g5AQ25hTm256yGt134tMP5TgCX'
-
+COMMENTS_XTD_APP_MODEL_OPTIONS = {
+    'default': {
+        'allow_flagging': True,
+        'allow_feedback': True,
+        'show_feedback': True,
+    }
+}
 
 CKEDITOR_CONFIGS = {
     'default': {
