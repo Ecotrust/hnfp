@@ -301,12 +301,16 @@ function addOverlayPopup(feature) {
     `;
     popup.setPosition(coords);
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
+    var alertPhoto = ``;
+    if (featuresProps.alert_photo !== undefined) {
+      alertPhoto = `<p><a href="${featuresProps.alert_photo}" target="_blank"><img src="${featuresProps.alert_photo}" class="alert-photo" alt="alert photo"/></a></p>`;
+    }
     domElement.querySelector('.card-content').innerHTML = `
       <p class="center"><strong>${featuresProps.alert_type}</strong></p>
       <p class="center">${featuresProps.alert_date}</p>
       <p class="center">${featuresProps.alert_time}</p>
       <p><span>${featuresProps.alert_comment}</span></p>
-      <p><img src="${featuresProps.alert_photo}" /></p>
+      ${alertPhoto}
     `;
     domElement.querySelector('.card-action').innerHTML = `
       <a href="/alert/${featuresProps.id}/update/" class="disabled">Edit</a>

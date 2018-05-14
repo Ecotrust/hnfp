@@ -1057,6 +1057,12 @@ plus some alerts
 }
 
 #new-observation .card-action a,
+#new-alert-wrapper .card-action a {
+    background: transparent;
+    margin-right: 0;
+}
+
+#new-observation .card-action a,
 #new-alert-wrapper .card-action a,
 #new-project .card-action a,
 .survey-map .card-action input {
@@ -1375,12 +1381,18 @@ alerts
     width: 100%;
 }
 
-.dashboard #map-panel,
-.alerts #map-panel {
-    overflow: scroll;
+.dashboard #map-panel {
+    overflow: auto;
     padding: 1rem 0;
     position: relative;
     max-height: 280px;
+}
+
+.alerts #map-panel {
+    overflow: auto;
+    padding: 0;
+    position: relative;
+    max-height: 350px;
 }
 
 .dashboard #map-panel article,
@@ -1432,6 +1444,10 @@ alerts
 
 .alerts-wrap .card-content {
     padding: 1rem;
+}
+
+.alert-photo {
+    max-width: 100%;
 }
 
 /*--------------------

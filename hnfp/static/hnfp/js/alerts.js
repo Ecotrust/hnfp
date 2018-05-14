@@ -5,33 +5,6 @@ $(document).ready(function() {
   if (typeof recent_alerts !== 'undefined') {
     alerts.recentAlerts(recent_alerts);
   }
-  function getCookie(name) {
-      var cookieValue = null;
-      if (document.cookie && document.cookie !== '') {
-          var cookies = document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-              var cookie = jQuery.trim(cookies[i]);
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-              }
-          }
-      }
-      return cookieValue;
-  }
-  var csrftoken = getCookie('csrftoken');
-  function csrfSafeMethod(method) {
-      // these HTTP methods do not require CSRF protection
-      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-  }
-  $.ajaxSetup({
-      beforeSend: function(xhr, settings) {
-          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-              xhr.setRequestHeader("X-CSRFToken", csrftoken);
-          }
-      }
-  });
 });
 
 $newAlertsWrap = $('#new-alert-wrapper');
@@ -41,9 +14,14 @@ $alertForm = $( '#alert-form' );
 var alerts = {
   recentAlerts: function(alerts) {
     for (let alert of alerts) {
-      if (alert.alert_comment == null) {
+      if (alert.alert_comment === null) {
         alert.alert_comment = '';
       }
+      var alertPhoto = ``;
+      if (alert.alert_photo !== undefined) {
+          alertPhoto = `<p><a href="${alert.alert_photo}" target="_blank"><img src="${alert.alert_photo}" class="alert-photo" alt="alert photo"/></a></p>`;
+      }
+      alert.alert_photo = ((alert.alert_photo != undefined) ? alert.alert_photo : '');
       $recentAlertsWrap.append(`<div class="row">
         <div class="col s10 offset-s1">
           <article id="alert_${alert.alert_id}">
@@ -51,7 +29,7 @@ var alerts = {
             <h3>${alert.alert_type}</h3>
             <p><em>posted by ${alert.alert_username}<br />${alert.alert_date} ${alert.alert_time}</em></p>
             <p>${alert.alert_comment}</p>
-            <p><img src="${alert.alert_photo}" /></p>
+            ${alertPhoto}
           </article>
         </div>
       </div>`);
@@ -165,6 +143,12 @@ var alerts = {
       $('#choose-from-map').click(function() {
         alertMap.drawLocation();
         alerts.stepTwo();
+      });
+      $('#no-location').click(function() {
+        $('#alert_location').val('0,0');
+        $('#alert_location').attr('disabled', 'disabled');
+        let hide = '#steptwo';
+        alerts.showStepFour(hide);
       });
       /* $('#alert_photo').change(function(e) {
         alerts.photo(e.target.files[0]);

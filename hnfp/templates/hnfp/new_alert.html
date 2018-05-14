@@ -6,8 +6,11 @@
         <span class="center card-title">Alert Location</span>
       </div>
       <div class="card-action">
-        <a id="use-my-location"><i class="material-icons">my_location</i>Use Current</a>
-        <a id="choose-from-map"><i class="material-icons">pin_drop</i>Choose From Map</a>
+        <div class="collection">
+          <a id="use-my-location" class="collection-item"><i class="material-icons">my_location</i>Use Current</a>
+          <a id="choose-from-map" class="collection-item"><i class="material-icons">pin_drop</i>Choose From Map</a>
+          <a id="no-location" class="collection-item"><i class="material-icons">location_off</i>Unknown or None</a>
+        </div>
       </div>
     </section>
     <section id="stepthree" class="card">
@@ -44,11 +47,10 @@
               <option value="">Choose Alert Type</option>
               <option value="bear" class="circle">Bear</option>
               <option value="earthquake" class="circle">Earthquake</option>
-              <option value="hazard" class="circle">Hazard</option>
-              <option value="plant" class="circle">Plant</option>
               <option value="road" class="circle">Road</option>
-              <option value="water" class="circle">Water</option>
-              <option value="weather" class="circle">Weather</option>
+              <option value="contaminated site" class="circle">Contaminated Site</option>
+              <option value="damaged gathering site" class="circle">Damaged Gathering Site</option>
+              <option value="invasive plant" class="circle">Invasive Plant</option>
               <option value="other" class="circle">Other</option>
             </select>
           </div>
