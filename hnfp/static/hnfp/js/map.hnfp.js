@@ -551,22 +551,25 @@ function addObservationToMap(feat) {
 }
 
 function addAlertsToMap(feat) {
-  if (feat !== undefined) {
-    let geo = JSON.parse(feat.alert_location),
-        coords = geo.coordinates,
-        a_id = feat['alert_id'];
-        point = new ol.Feature(),
-        style = alertMap.styleAlert(a_id),
-    vectorSource.addFeature(point);
-    point.setGeometry(new ol.geom.Point(coords));
-    point.setStyle(style);
-    point.setProperties({
-      'id': a_id,
-      'alert_type': feat.alert_type,
-      'alert_date': feat.alert_date,
-      'alert_time': feat.alert_time,
-      'alert_comment': feat.alert_comment,
-    });
+  console.log(feat);
+  if (feat) {
+    let geo = JSON.parse(feat.alert_location);
+    if (geo) {
+      let coords = geo.coordinates;
+      let a_id = feat['alert_id'];
+      let point = new ol.Feature();
+      let style = alertMap.styleAlert(a_id);
+      vectorSource.addFeature(point);
+      point.setGeometry(new ol.geom.Point(coords));
+      point.setStyle(style);
+      point.setProperties({
+        'id': a_id,
+        'alert_type': feat.alert_type,
+        'alert_date': feat.alert_date,
+        'alert_time': feat.alert_time,
+        'alert_comment': feat.alert_comment,
+      });
+    }
   }
 }
 
