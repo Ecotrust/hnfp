@@ -124,7 +124,7 @@ def survey(request):
         'registration_form': SignUpForm(),
     }
     return HttpResponse(template.render(context, request))
-    
+
 def save_survey(request):
     context = {}
     if request.method == 'POST':

@@ -38,9 +38,9 @@ input[type=submit] {
 
 <main class="landuse-delete">
   <section class="container">
+    {% csrf_token %}
     <form action="" method="post">
       <h1>Are you sure you want to delete "{{ object }}"?</h1>
-      {% csrf_token %}
       <input type="submit" value="Confirm" />
       <a href="/landuse/" class="btn">Cancel</a>
     </form>

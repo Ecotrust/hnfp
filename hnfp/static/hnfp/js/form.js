@@ -1,33 +1,5 @@
 $(document).ready( function() {
 
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getCookie('csrftoken');
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
     $('.collapsible').collapsible({
         accordion: false, // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     });
@@ -73,10 +45,10 @@ $(document).ready( function() {
                     $('.collapsible_create_account').collapsible('close', 0);
                     $('.registration-response').html('<h1 style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>You are now a steward!</strong><br /><br />Increase your impact by completing the survey.</strong></p>');
                     console.log('%csuccessly registered: %o', 'color:green;', response);
-                    Materialize.toast('I am a toast!', 4000, 'top');
+                    Materialize.toast('You are now a steward! Increase your impact by completing the survey.', 4000, 'top');
                     setTimeout(function() {
                         document.location = '/survey/';
-                    }, 5000)
+                    }, 4000)
                 },
                 error: function(response) {
                     $('.registration-response').html(`<p style="background: rgba(0,0,0,0.8); color:#fff; padding: 10px;"><strong>There was an error with registration. You may already have an account. <a href="/login/">Sign in</a> to your account.</strong></p>`);

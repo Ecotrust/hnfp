@@ -1,4 +1,4 @@
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox-sw.js');
 
 if (workbox) {
     console.log(`Yay! Workbox is loaded 🎉`);
@@ -11,7 +11,7 @@ if (workbox) {
     // cache names
     workbox.core.setCacheNameDetails({
       prefix: 'hnfp',
-      suffix: 'v2'
+      suffix: 'v3'
     });
 
     // JSON post requests off network add to background sync queue

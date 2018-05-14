@@ -369,8 +369,8 @@ COMMENTS_XTD_SALT = '&HK$OYRVG0h5gt073h6gH4p25GS2g5AQ25hTm256yGt134tMP5TgCX'
 COMMENTS_XTD_APP_MODEL_OPTIONS = {
     'default': {
         'allow_flagging': True,
-        'allow_feedback': True,
-        'show_feedback': True,
+        'allow_feedback': False,
+        'show_feedback': False,
     }
 }
 

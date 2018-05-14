@@ -1,4 +1,7 @@
+{% extends "base.html" %}
 {% load static %}
+
+{% block site_style %}
 <style>
 body {
   color: #2b384a;
@@ -35,14 +38,17 @@ input[type=submit] {
 <script src="{% static 'hnfp/js/jquery-3.2.1.min.js' %}"></script>
 <script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
 <script src="{% static 'gis/js/OLMapWidget.js' %}"></script>
+{% endblock site_style %}
 
+{% block content %}
 <main class="observation-update">
   <section class="container">
     <form action="" method="post">
-      <h1>Are you sure you want to delete "{{ object }}"?</h1>
       {% csrf_token %}
+      <h1>Are you sure you want to delete "{{ object }}"?</h1>
       <input type="submit" value="Confirm" />
       <a href="/observation/" class="btn">Cancel</a>
     </form>
   </section>
 </main>
+{% endblock content %}
