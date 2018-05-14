@@ -288,12 +288,16 @@ function addOverlayPopup(feature) {
    * observations will always have an observation type
    */
   if (typeof(featuresProps.observation_type) !== 'undefined') {
+    var observationPhoto = ``;
+    if (featuresProps.observation_photo !== undefined) {
+      observationPhoto = `<p><a href="${featuresProps.observation_photo}" target="_blank"><img src="${featuresProps.observation_photo}" class="alert-photo" alt="alert photo"/></a></p>`;
+    }
     domElement.querySelector('.card-content').innerHTML = `
       <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
       <span class="center card-title">${featuresProps.observation_type}</span>
       <p><em>${featuresProps.observation_date} ${featuresProps.observation_time}</em></p>
       <p>${featuresProps.comments}</p>
-      <p><img src="${featuresProps.observation_photo}" /></p>
+      ${observationPhoto}
     `;
     domElement.querySelector('.card-action').innerHTML = `
       <a href="/observation/${featuresProps.id}/update/" class="disabled">Edit</a>
