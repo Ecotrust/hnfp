@@ -11,7 +11,7 @@ if (workbox) {
     // cache names
     workbox.core.setCacheNameDetails({
       prefix: 'hnfp',
-      suffix: 'v3'
+      suffix: 'v3.1'
     });
 
     // JSON post requests off network add to background sync queue
