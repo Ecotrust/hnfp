@@ -211,7 +211,8 @@ def login(request):
 
 def dashboard(request):
     template = loader.get_template('hnfp/dashboard.html')
-    posts = Post.objects.get_queryset()
+    posts = Post.objects.filter(is_event=False)
+    events = Post.objects.filter(is_event=True)
     user_alerts = [x.to_dict() for x in Alert.objects.filter(alert_username=request.user.username)]
     all_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True)]
     recent_alerts = [x.to_dict() for x in Alert.objects.filter(alert_confirmed=True).order_by('-alert_updated')]
@@ -227,6 +228,7 @@ def dashboard(request):
     context = {
         'title': '',
         'posts': posts,
+        'events': events,
         'user_alerts': json.dumps(user_alerts),
         'alerts': json.dumps(all_alerts),
         'recent_alerts': json.dumps(recent_alerts),

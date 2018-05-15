@@ -8,15 +8,15 @@ from hnfp.models import Post, PublicManager, Question, Category, Survey, SurveyR
 # Blog posts for forum
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'publish', 'allow_comments')
+    list_display = ('title', 'publish', 'is_event', 'allow_comments')
     list_filter = ('publish',)
-    search_fields = ('title', 'body')
+    search_fields = ('title', 'body', 'is_event')
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'publish'
-    ordering = ['publish']
+    ordering = ['publish', 'is_event', 'allow_comments']
     fieldsets = ((None,
                   {'fields': ('title', 'slug', 'body',
-                              'allow_comments', 'publish',)}),)
+                              'allow_comments', 'is_event', 'publish',)}),)
 
 # Register your models here.
 class QuestionInline(admin.TabularInline):

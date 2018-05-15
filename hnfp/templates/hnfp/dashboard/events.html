@@ -10,11 +10,14 @@
 </div>
 
 <div class="row">
-  <section class="bg_green_light section">
-    <!-- TODO add events loop -->
-    <div class="container">
-      <!-- <h5 class="center"></h5> -->
-      <p class="center border-bottom">Nothing Scheduled</p>
-    </div>
+  <section class="bg_green_light section events-section z-depth-2">
+      {% for event in events %}
+        <article class="container section">
+          <div class="row center">
+            <h4><a href="{{ event.get_absolute_url }}" class="blue_grey">{{ event.title }}</a></h4>
+            <p>{{ event.body|linebreaks|truncatewords:100 }}</p>
+          </div>
+        </article>
+      {% endfor %}
   </section>
 </div>

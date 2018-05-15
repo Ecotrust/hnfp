@@ -50,6 +50,7 @@ class Post(models.Model):
 	slug = models.SlugField(max_length=250, unique_for_date='publish')
 	body = models.TextField()
 	allow_comments = models.BooleanField('allow comments', default=True)
+	is_event = models.BooleanField('event', default=False)
 	publish = models.DateTimeField(default=timezone.now)
 	objects = PublicManager()  # Our custom manager.
 

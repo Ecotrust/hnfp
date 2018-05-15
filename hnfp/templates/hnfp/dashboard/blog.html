@@ -11,20 +11,13 @@
 </div>
 
 <div class="row blog-roll">
-  <section class="col s12 bg_green_light">
+  <section class="col s12 bg_green_light z-depth-2">
     {% for post in posts %}
       <article class="container section">
         <div class="row">
           <h4 class="center"><a href="{{ post.get_absolute_url }}" class="blue_grey">{{ post.title }}</a></h4>
           <p class="center"><em>{{ post.publish }}</em></p>
           <p class="center">{{ post.body|truncatewords:30|linebreaks }}</p>
-        </div>
-        <div class="row comments">
-          <div class="col s12">
-            <a href="/forum" class="brand-logo"><img src="{% static 'hnfp/img/icons/i_comment.svg' %}" alt="comment" /></a>
-            <h4 class="blue_grey num">{{ post }}</h4>
-            <p>Responses</p>
-          </div>
         </div>
       </article>
     {% endfor %}

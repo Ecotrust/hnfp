@@ -1,6 +1,6 @@
 var mapView = new ol.View({
   center: ol.proj.fromLonLat([-135.44, 58.10]),
-  zoom: 10
+  zoom: 11
 });
 
 var paramsObsMap = {
