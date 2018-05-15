@@ -404,6 +404,10 @@ home
     font-size: inherit;
 }
 
+.icons-row > .col {
+    margin-bottom: 1rem;
+}
+
 .home-mid .col {
     float: none;
     display: inline-block;

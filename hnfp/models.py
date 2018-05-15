@@ -318,8 +318,10 @@ class Observation(models.Model):
 		('Firewood', 'firewood'),
 		('Mushrooms', 'mushrooms'),
 		('Crab', 'crab'),
-		('Fish', 'fish'),
 		('Shellfish', 'shellfish'),
+		('Salmon', 'salmon'),
+		('Other Fish', 'other_fish'),
+		('Basket Making', 'basket_making'),
 		('Custom', 'custom'),
 	)
 

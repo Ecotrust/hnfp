@@ -289,8 +289,8 @@ function addOverlayPopup(feature) {
    */
   if (typeof(featuresProps.observation_type) !== 'undefined') {
     var observationPhoto = ``;
-    if (featuresProps.observation_photo !== undefined) {
-      observationPhoto = `<p><a href="${featuresProps.observation_photo}" target="_blank"><img src="${featuresProps.observation_photo}" class="alert-photo" alt="alert photo"/></a></p>`;
+    if (featuresProps.observation_photo !== undefined && featuresProps.observation_photo !== '') {
+      observationPhoto = `<p><a href="${featuresProps.observation_photo}" target="_blank"><img src="${featuresProps.observation_photo}" class="alert-photo" alt="observation photo"/></a></p>`;
     }
     domElement.querySelector('.card-content').innerHTML = `
       <p class="center card-tally">${featuresProps.observation_tally} <img src="${featuresProps.icon}" class="activator icon-img" /></p>
@@ -306,7 +306,7 @@ function addOverlayPopup(feature) {
     popup.setPosition(coords);
   } else if (typeof(featuresProps.alert_type) !== 'undefined') {
     var alertPhoto = ``;
-    if (featuresProps.alert_photo !== undefined) {
+    if (featuresProps.alert_photo !== undefined && featuresProps.alert_photo !== '') {
       alertPhoto = `<p><a href="${featuresProps.alert_photo}" target="_blank"><img src="${featuresProps.alert_photo}" class="alert-photo" alt="alert photo"/></a></p>`;
     }
     domElement.querySelector('.card-content').innerHTML = `
