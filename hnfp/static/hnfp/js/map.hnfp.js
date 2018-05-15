@@ -358,7 +358,7 @@ function drawLocation(style) {
   }
   locPoint.setStyle(style);
   map.addInteraction(modify);
-  allowDragPan(false);
+  // allowDragPan(false);
 }
 
 var alertMap = {
@@ -370,6 +370,10 @@ var alertMap = {
   drawLocation: function() {
     let style = alertMap.styleAlert();
     drawLocation(style);
+  },
+  noLocation: function() {
+    locPoint.setGeometry(new ol.geom.Point([0,0]));
+    // map.addInteraction(modify);
   },
   selectAlert: function() {
     let selectClick = new ol.interaction.Select({

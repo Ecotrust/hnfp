@@ -18,10 +18,9 @@ var alerts = {
         alert.alert_comment = '';
       }
       var alertPhoto = ``;
-      if (alert.alert_photo !== undefined) {
+      if (alert.alert_photo != undefined) {
           alertPhoto = `<p><a href="${alert.alert_photo}" target="_blank"><img src="${alert.alert_photo}" class="alert-photo" alt="alert photo"/></a></p>`;
       }
-      alert.alert_photo = ((alert.alert_photo != undefined) ? alert.alert_photo : '');
       $recentAlertsWrap.append(`<div class="row">
         <div class="col s10 offset-s1">
           <article id="alert_${alert.alert_id}">
@@ -145,14 +144,14 @@ var alerts = {
         alerts.stepTwo();
       });
       $('#no-location').click(function() {
-        $('#alert_location').val('0,0');
-        $('#alert_location').attr('disabled', 'disabled');
+        alertMap.noLocation();
+        $('#alert_location').val(getLocationPoint());
         let hide = '#steptwo';
         alerts.showStepFour(hide);
       });
-      /* $('#alert_photo').change(function(e) {
-        alerts.photo(e.target.files[0]);
-      }); */
+      // $('#alert_photo').change(function(e) {
+      //   alerts.photo(e.target.files[0]);
+      // });
     });
   },
   photo: function(p) {
