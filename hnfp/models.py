@@ -8,7 +8,7 @@ from drawing.models import AOI as drawing_AOI
 from features.registry import register
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
+from django.core.urls import reverse
 from django.utils import timezone
 from django import forms
 from ckeditor.fields import RichTextField
