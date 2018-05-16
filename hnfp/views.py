@@ -98,6 +98,8 @@ def registering(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
+                    # create sharing option. defaults to false
+                    sharing = ShareObservationWithManager.objects.get_or_create(user=user)
                     auth_login(request, user)
                     return HttpResponse({}, content_type='application/x-javascript', status=200)
     else:
@@ -314,8 +316,8 @@ class AlertDelete(DeleteView):
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
     all_observation = [x.to_dict() for x in Observation.objects.filter(observer_username=request.user.username)]
-    share = ShareObservationWithManager.objects.all()
-    sharing = share.to_dict()
+    share = ShareObservationWithManager.user_is_sharing(request.user.pk)
+    sharing = share.share
     context = {
         'title': 'My Hunt, Gather, Observe Map',
         'year': '2017',

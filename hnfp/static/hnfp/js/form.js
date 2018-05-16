@@ -34,7 +34,7 @@ $(document).ready( function() {
             regForm.reportValidity();
         } else {
             var formData = new FormData(regForm);
-            formData['X-CSRFTOKEN'] = csrftoken;
+            // formData['X-CSRFTOKEN'] = csrftoken;
             $.ajax({
                 url : '/registering/',
                 method: 'POST',

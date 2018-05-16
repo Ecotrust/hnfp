@@ -8,7 +8,7 @@ from drawing.models import AOI as drawing_AOI
 from features.registry import register
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core.exceptions import ValidationError
-from django.core.urls import reverse
+from django.urls import reverse
 from django.utils import timezone
 from django import forms
 from ckeditor.fields import RichTextField
@@ -30,10 +30,14 @@ class AOI(drawing_AOI):
 		show_template = 'aoi/show.html'
 
 class ShareObservationWithManager(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    share = models.BooleanField(
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	share = models.BooleanField(
 		default=False,
 	)
+
+	def user_is_sharing(userpk):
+		sharing = ShareObservationWithManager.objects.get(user=userpk)
+		return sharing
 
 # blog posts for forum
 class PublicManager(models.Manager):
