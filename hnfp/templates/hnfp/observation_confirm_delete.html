@@ -1,53 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block site_style %}
-<style>
-body {
-  color: #2b384a;
-  font-family: sans-serif;
-  min-height: 100vh;
-  padding: 2rem 0;
-}
-.container {
-  font-size: .875em;
-  margin: 0 auto;
-  width: 90%;
-}
-form > div,
-p {
-  display: block;
-  margin-bottom: 2rem;
-  width: 100%;
-}
-.btn {
-  display: inline-block;
-  color: #888;
-  margin-left: 2rem;
-}
-input[type=submit] {
-  border: none;
-  color: #fff;
-  background: teal;
-  font-size: 1.125em;
-  padding: 6px 12px;
-}
-</style>
-
-<link rel="stylesheet" href="{% static 'hnfp/css/openlayers/ol.css' %}" media="screen,projection"/>
-<script src="{% static 'hnfp/js/jquery-3.2.1.min.js' %}"></script>
-<script src="{% static 'hnfp/js/openlayers/ol.js' %}"></script>
-<script src="{% static 'gis/js/OLMapWidget.js' %}"></script>
-{% endblock site_style %}
-
 {% block content %}
 <main class="observation-update">
-  <section class="container">
+  <section class="container padding-top">
     <form action="" method="post">
       {% csrf_token %}
-      <h1>Are you sure you want to delete "{{ object }}"?</h1>
-      <input type="submit" value="Confirm" />
-      <a href="/observation/" class="btn">Cancel</a>
+      <h3>Are you sure you want to delete</h3>
+      <h5>{{ object }}</h5>
+      <input class="btn" type="submit" value="Confirm" />
+      <a href="/observation/" class="btn-flat">Cancel</a>
     </form>
   </section>
 </main>

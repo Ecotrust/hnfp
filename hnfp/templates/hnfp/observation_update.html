@@ -3,49 +3,11 @@
 
 {% block site_style %}
 <style>
-body {
-  color: #2b384a;
-  font-family: sans-serif;
-  font-size: 1em;
-  font-weight: normal;
-  min-height: 100vh;
-  position: relative;
-}
-
-main {
-  padding: 1rem;
-}
-
-.observation-update .container {
-  font-size: .875em;
-  margin: 0 auto;
-  width: 90%;
-  max-width: 48em;
-}
-p {
-  margin: 0 0 1rem;
-}
 form > div {
   display: block;
   margin-bottom: 2rem;
   width: 100%;
 }
-
-.btn {
-  display: inline-block;
-  color: #888;
-  font-size: .8125em;
-  margin-left: 2rem;
-}
-
-input[type=submit] {
-  border: none;
-  color: #fff;
-  background: teal;
-  font-size: 1.125em;
-  padding: 6px 12px;
-}
-
 </style>
 
 <link rel="stylesheet" href="{% static 'hnfp/css/openlayers/ol.css' %}" media="screen,projection"/>
@@ -56,12 +18,14 @@ input[type=submit] {
 
 {% block content %}
 <main class="observation-update">
-  <section class="container">
+  <section class="container padding-top">
     <form action="" method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" value="Update" />
-      <a href="/observation/" class="btn">Cancel</a>
+      <div>
+        <input class="btn" type="submit" value="Update" />
+        <a href="/observation/" class="btn-flat">Cancel</a>
+      </div>
     </form>
   </section>
 </main>

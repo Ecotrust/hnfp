@@ -18,8 +18,14 @@ var alerts = {
         alert.alert_comment = '';
       }
       var alertPhoto = ``;
-      if (alert.alert_photo != undefined) {
+      if (alert.alert_photo !== undefined && alert.alert_photo !== '') {
           alertPhoto = `<p><a href="${alert.alert_photo}" target="_blank"><img src="${alert.alert_photo}" class="alert-photo" alt="alert photo"/></a></p>`;
+      }
+      if (alert.alert_date === null) {
+        alert.alert_date = '';
+      }
+      if (alert.alert_time === null) {
+        alert.alert_time = '';
       }
       $recentAlertsWrap.append(`<div class="row">
         <div class="col s10 offset-s1">
