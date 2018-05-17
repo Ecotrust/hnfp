@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^observation/(?P<pk>[0-9]+)/detail/', views.observation_detail, name='observation_detail'),
     url(r'^observation/new/', views.new_observation, name='new_observation'),
     url(r'^observation/create/', views.observation_create, name='observation_create'),
+    url(r'^observation/share_with_land_managers/', views.share_with_land_managers),
     url(r'^job/', views.job, name='job'),
     url(r'^jobopportunity/(?P<job_id>[0-9]+)/', views.job_detail, name='job_detail'),
     url(r'^forum/$', ListView.as_view(model=Post, paginate_by=3), name='post-list'),

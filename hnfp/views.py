@@ -316,8 +316,11 @@ class AlertDelete(DeleteView):
 def observation(request):
     template = loader.get_template('hnfp/observation.html')
     all_observation = [x.to_dict() for x in Observation.objects.filter(observer_username=request.user.username)]
-    share = ShareObservationWithManager.user_is_sharing(request.user.pk)
-    sharing = share.share
+    if ShareObservationWithManager.objects.filter(user=request.user.pk).exists():
+        share = ShareObservationWithManager.user_is_sharing(request.user.pk)
+        sharing = share.share
+    else:
+        sharing = False
     context = {
         'title': 'My Hunt, Gather, Observe Map',
         'year': '2017',
@@ -378,6 +381,21 @@ class ObservationDelete(DeleteView):
     model = Observation
     success_url = reverse_lazy('observation')
     template_name_suffix = '_confirm_delete'
+
+def share_with_land_managers(request):
+    if request.method == 'POST':
+        update_share = is_in_array('datashare[]', request.POST)
+        if update_share == 'on':
+            sharing = True
+        else:
+            sharing = False
+        print(update_share)
+        user_share = ShareObservationWithManager.objects.update_or_create(
+            user=request.user,
+            defaults={'share':sharing},
+        )
+        return HttpResponseRedirect('/observation/')
+
 
 def job(request):
     template = loader.get_template('hnfp/job.html')
