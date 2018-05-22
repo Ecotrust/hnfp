@@ -2,7 +2,7 @@
   "name": "Hoonah Stewards",
   "short_name": "Stewards",
   "scope": "https://www.hoonahstewards.net/",
-  "start_url": "https://www.hoonahstewards.net/dashboard/",
+  "start_url": "https://www.hoonahstewards.net/dashboard",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#009688",

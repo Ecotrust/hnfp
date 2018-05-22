@@ -4,33 +4,48 @@ if (workbox) {
     console.log(`Yay! Workbox is loaded 🎉`);
 
     // Background sync
-    const bgSyncPlugin = new workbox.backgroundSync.Plugin('hnfpQueue', {
-      maxRetentionTime: 10 * 24 * 60 // Retry for max of 10 days
+    const hnfpQueue = new workbox.backgroundSync.Plugin('hnfpQueue', {
+      maxRetentionTime: 24 * 60 // Retry for max of 24 Hours
     });
-
+    
     // cache names
     workbox.core.setCacheNameDetails({
       prefix: 'hnfp',
-      suffix: 'v3.2'
+      suffix: 'v3.10'
     });
 
     // JSON post requests off network add to background sync queue
     // background sync queue stored in IndexedDB
     // when browser regains connectivity, a sync event, requests are retried
+
     workbox.routing.registerRoute(
-      /.*\/?(create|update|delete|detail)\/?.*/g,
+      /.*\/?(create|update|delete|detail)\/?.*/,
       new workbox.strategies.NetworkOnly({
-          cacheName: 'hnfp-bg-sync',
-          plugins: [bgSyncPlugin]
+        plugins: [hnfpQueue]
       }),
       'POST'
+    );
+
+    // Google storage
+    workbox.routing.registerRoute(
+      /.*(?:googleapis)\.com.*$/,
+      workbox.strategies.staleWhileRevalidate({
+        cacheName: 'googleapis',
+      }),
+    );
+
+    workbox.routing.registerRoute(
+      /.*(?:gstatic)\.com.*$/,
+      workbox.strategies.staleWhileRevalidate({
+        cacheName: 'gstatic',
+      }),
     );
 
     // cache and serve images
     // fallback to network
     // cache for 30 days
     workbox.routing.registerRoute(
-      /.*\.(?:png|jpg|jpeg|svg|gif)/g,
+      /.*\.(?:png|jpg|jpeg|svg|gif)/,
       new workbox.strategies.CacheFirst({
         cacheName: 'hnfp-image-cache',
         plugins: [
@@ -54,14 +69,18 @@ if (workbox) {
 
     // only allow admin access when connected to network
     workbox.routing.registerRoute(
-      /\.*\/admin\/hnfp\/.*/g,
-      workbox.strategies.networkOnly()
+      /\.*\/admin\/hnfp\/.*/,
+      new workbox.strategies.NetworkOnly()
     );
 
     workbox.routing.setDefaultHandler(({url, event, params}) => {
         workbox.strategies.staleWhileRevalidate()
     });
 
+    workbox.googleAnalytics.initialize();
+
+    workbox.skipWaiting();
+    workbox.clientsClaim();
 
 } else {
     console.log(`Boo! Workbox didn't load 😬`);

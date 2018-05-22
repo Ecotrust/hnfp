@@ -51,6 +51,7 @@ def accounts_context():
 ################################################
 ###                 VIEWS                    ###
 ################################################
+
 def index(request):
     template = loader.get_template('hnfp/index.html')
     context = accounts_context()
