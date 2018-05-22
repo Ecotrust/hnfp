@@ -16,25 +16,17 @@ if (workbox) {
       maxRetentionTime: 24 * 60 * 2
     });
 
-    // JSON post requests off network add to background sync queue
-    // background sync queue stored in IndexedDB
-    // when browser regains connectivity, a sync event, requests are retried
+    const hnfpAlertQueue = new workbox.backgroundSync.Plugin('hnfpAlertQueue', {
+      maxRetentionTime: 24 * 60 * 2
+    });
 
-    workbox.routing.registerRoute(
-      new RegExp('(.*)(?:create|delete|update|detail)(.*)'),
-      workbox.strategies.networkFirst({
-        networkTimetoutSeconds: 3,
-        cacheName: 'hnfp-queue',
-        plugins: [hnfpQueue],
-      }),
-    );
+    const matchCb = ({url, event}) => {
+      return (url.pathname === '/observation/create/');
+    };
 
-    workbox.routing.registerRoute(
-      /.*\.(?:html)/,
-      workbox.strategies.staleWhileRevalidate({
-        cacheName: 'html-cache'
-      }),
-    );
+    const matchAlertCb = ({url, event}) => {
+      return (url.pathname === '/alert/create/');
+    };
 
     workbox.routing.registerRoute(
       /(.*)observation(.*)/,
@@ -48,6 +40,29 @@ if (workbox) {
       workbox.strategies.staleWhileRevalidate({
         cacheName: 'alert-cache'
       })
+    );
+
+    workbox.routing.registerRoute(
+      matchCb,
+      workbox.strategies.networkOnly({
+        plugins: [hnfpQueue],
+      }),
+      'POST'
+    );
+
+    workbox.routing.registerRoute(
+      matchAlertCb,
+      workbox.strategies.networkOnly({
+        plugins: [hnfpAlertQueue],
+      }),
+      'POST'
+    );
+
+    workbox.routing.registerRoute(
+      /.*\.(?:html)/,
+      workbox.strategies.staleWhileRevalidate({
+        cacheName: 'html-cache'
+      }),
     );
 
     // Google storage
@@ -70,7 +85,7 @@ if (workbox) {
     // cache for 30 days
     workbox.routing.registerRoute(
       /.*\.(?:png|jpg|jpeg|svg|gif)/,
-      workbox.strategies.CacheFirst({
+      workbox.strategies.cacheFirst({
         cacheName: 'hnfp-image-cache',
         plugins: [
           new workbox.expiration.Plugin({
@@ -91,17 +106,9 @@ if (workbox) {
       }),
     );
 
-    // only allow admin access when connected to network
-    workbox.routing.registerRoute(
-      /\.*\/admin\/hnfp\/.*/,
-      new workbox.strategies.NetworkOnly()
-    );
-
     workbox.routing.setDefaultHandler(({url, event, params}) => {
         workbox.strategies.staleWhileRevalidate()
     });
-
-    workbox.googleAnalytics.initialize();
 
     workbox.skipWaiting();
     workbox.clientsClaim();
