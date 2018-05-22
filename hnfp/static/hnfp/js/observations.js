@@ -119,6 +119,7 @@ var observations = {
           addObservationToMap(data[newData]);
           observations.close();
           $drawingForm.html('');
+          $drawingForm.prepend(`<div class="card teal" style="font-size: 1.06375em"><div class="card-content white-text"><span class="card-title">Your observation has been successfully added!</span><p>Your observation may not appear on the map immediatly.</p><p>Don't worry your observation has not been lost.</p><p>It is processing in the background and should appear on the next page refresh.</p><p>You don't need to do anything else.</p><p>You can do a page refresh to see your new observation on the map</p><p>Add more observations if you would like.</p></div></div>`);
         },
         error: function (error) {
           $drawingForm.prepend(error);
