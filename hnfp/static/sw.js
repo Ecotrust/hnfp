@@ -29,7 +29,7 @@ if (workbox) {
     // observations
     workbox.routing.registerRoute(
       '/observation',
-      new workbox.strategies.staleWhileRevalidate({
+      workbox.strategies.staleWhileRevalidate({
         cacheName: 'observations'
       }),
     )
