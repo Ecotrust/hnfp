@@ -3,15 +3,17 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox
 if (workbox) {
     console.log(`Yay! Workbox is loaded 🎉`);
 
-    // Background sync
-    const hnfpQueue = new workbox.backgroundSync.Plugin('hnfpQueue', {
-      maxRetentionTime: 24 * 60 // Retry for max of 24 Hours
-    });
-
-    // cache names
+    workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
     workbox.core.setCacheNameDetails({
       prefix: 'hnfp',
-      suffix: 'v3.10'
+      suffix: 'v3.11'
+    });
+
+    workbox.precaching.precacheAndRoute([]);
+
+    // Background sync
+    const hnfpQueue = new workbox.backgroundSync.Plugin('hnfpQueue', {
+      maxRetentionTime: 24 * 60 * 2
     });
 
     // JSON post requests off network add to background sync queue
@@ -19,20 +21,34 @@ if (workbox) {
     // when browser regains connectivity, a sync event, requests are retried
 
     workbox.routing.registerRoute(
-      /.*\/?(create|update|delete|detail)\/?.*/,
-      new workbox.strategies.NetworkOnly({
-        plugins: [hnfpQueue]
+      new RegExp('(.*)(?:create|delete|update|detail)(.*)'),
+      workbox.strategies.networkFirst({
+        networkTimetoutSeconds: 3,
+        cacheName: 'hnfp-queue',
+        plugins: [hnfpQueue],
       }),
-      'POST'
     );
 
-    // observations
     workbox.routing.registerRoute(
-      '/observation',
+      /.*\.(?:html)/,
       workbox.strategies.staleWhileRevalidate({
-        cacheName: 'observations'
+        cacheName: 'html-cache'
       }),
-    )
+    );
+
+    workbox.routing.registerRoute(
+      /(.*)observation(.*)/,
+      workbox.strategies.staleWhileRevalidate({
+        cacheName: 'observation-cache'
+      }),
+    );
+
+    workbox.routing.registerRoute(
+      /(.*)alert(.*)/,
+      workbox.strategies.staleWhileRevalidate({
+        cacheName: 'alert-cache'
+      })
+    );
 
     // Google storage
     workbox.routing.registerRoute(
@@ -54,7 +70,7 @@ if (workbox) {
     // cache for 30 days
     workbox.routing.registerRoute(
       /.*\.(?:png|jpg|jpeg|svg|gif)/,
-      new workbox.strategies.CacheFirst({
+      workbox.strategies.CacheFirst({
         cacheName: 'hnfp-image-cache',
         plugins: [
           new workbox.expiration.Plugin({
@@ -93,5 +109,3 @@ if (workbox) {
 } else {
     console.log(`Boo! Workbox didn't load 😬`);
 }
-
-workbox.precaching.precacheAndRoute([])
