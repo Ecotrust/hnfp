@@ -43,6 +43,13 @@ if (workbox) {
     );
 
     workbox.routing.registerRoute(
+      /(.*)dashboard(.*)/,
+      workbox.strategies.staleWhileRevalidate({
+        cacheName: 'dashboard-cache'
+      })
+    );
+
+    workbox.routing.registerRoute(
       matchCb,
       workbox.strategies.networkOnly({
         plugins: [hnfpQueue],
