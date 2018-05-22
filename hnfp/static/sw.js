@@ -7,7 +7,7 @@ if (workbox) {
     const hnfpQueue = new workbox.backgroundSync.Plugin('hnfpQueue', {
       maxRetentionTime: 24 * 60 // Retry for max of 24 Hours
     });
-    
+
     // cache names
     workbox.core.setCacheNameDetails({
       prefix: 'hnfp',
@@ -25,6 +25,14 @@ if (workbox) {
       }),
       'POST'
     );
+
+    // observations
+    workbox.routing.registerRoute(
+      '/observation',
+      new workbox.strategies.staleWhileRevalidate({
+        cacheName: 'observations'
+      }),
+    )
 
     // Google storage
     workbox.routing.registerRoute(
