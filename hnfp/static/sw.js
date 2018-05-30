@@ -7,7 +7,7 @@ if (workbox) {
 
     workbox.core.setCacheNameDetails({
       prefix: 'hnfp',
-      suffix: 'v3.21'
+      suffix: 'v3.7'
     });
 
     workbox.precaching.precacheAndRoute([]);
@@ -23,17 +23,15 @@ if (workbox) {
       'POST'
     );
 
-    const hnfpAlertQueue = new workbox.backgroundSync.Plugin('hnfpAlertQueue', {
-      maxRetentionTime: 24 * 60 * 5
-    });
+    const hnfpAlertQueue = new workbox.backgroundSync.Plugin('hnfpAlertQueue');
 
-    const matchCb = ({url, event}) => {
-      return (url.pathname === '/observation/create/');
-    };
-
-    const matchAlertCb = ({url, event}) => {
-      return (url.pathname === '/alert/create/');
-    };
+    workbox.routing.registerRoute(
+      ({url}) => url.pathname === '/alert/create/',
+      new workbox.strategies.NetworkOnly({
+        plugins: [hnfpAlertQueue],
+      }),
+      'POST'
+    );
 
     workbox.routing.registerRoute(
       /(.*)observation(.*)/,
@@ -54,22 +52,6 @@ if (workbox) {
       workbox.strategies.staleWhileRevalidate({
         cacheName: 'dashboard-cache'
       })
-    );
-
-    // workbox.routing.registerRoute(
-    //   matchCb,
-    //   workbox.strategies.networkOnly({
-    //     plugins: [hnfpQueue],
-    //   }),
-    //   'POST'
-    // );
-
-    workbox.routing.registerRoute(
-      matchAlertCb,
-      workbox.strategies.networkOnly({
-        plugins: [hnfpAlertQueue],
-      }),
-      'POST'
     );
 
     workbox.routing.registerRoute(

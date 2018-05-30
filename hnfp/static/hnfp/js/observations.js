@@ -93,6 +93,7 @@ var observations = {
       });
       $drawingForm.submit(function(e) {
         e.preventDefault();
+        e.stopPropagation();
         observations.create(e.target);
       });
       $('#steptwo').addClass('visible');
@@ -109,28 +110,23 @@ var observations = {
   },
   create: function(form) {
     $form = $(form).serialize();
-    if (navigator.onLine) {
-      return $.ajax({
-        type: 'POST',
-        url: '/observation/create/',
-        data: $form,
-        success: function(data) {
-          let newData = data.length - 1;
-          addObservationToMap(data[newData]);
-          observations.close();
-          $drawingForm.html('');
-          $drawingForm.prepend(`<div class="card teal" style="font-size: 1.06375em"><div class="card-content white-text"><span class="card-title">Your observation has been successfully added!</span><p>Your observation may not appear on the map immediatly.</p><p>Don't worry your observation has not been lost.</p><p>It is processing in the background and should appear on the next page refresh.</p><p>You don't need to do anything else.</p><p>You can do a page refresh to see your new observation on the map</p><p>Add more observations if you would like.</p></div></div>`);
-        },
-        error: function (error) {
-          $drawingForm.prepend(error);
-        }
-      });
-    } else {
-      // remove the form and let user know they are offline
-      observations.close();
-      $drawingForm.html('');
-      $drawingForm.prepend(`<div class="card teal"><div class="card-content white-text"><span class="card-title">You are offline</span><p>But, don't worry your observation has not been lost.</p><p>It is in queue to sync once reconnected to the internet.</p><p>You don't need to do anything else.</p><p>Add as many observations as you would like.</p></div></div>`);
-    }
+    return $.ajax({
+      type: 'POST',
+      url: '/observation/create/',
+      data: $form,
+      success: function(data) {
+        let newData = data.length - 1;
+        addObservationToMap(data[newData]);
+        observations.close();
+        $drawingForm.html('');
+        $drawingForm.prepend(`<div class="card teal" style="font-size: 1.06375em"><div class="card-content white-text"><span class="card-title">Your observation has been successfully added!</span><p>Your observation may not appear on the map immediatly.</p><p>Don't worry your observation has not been lost.</p><p>It is processing in the background and should appear on the next page refresh.</p><p>You don't need to do anything else.</p><p>You can do a page refresh to see your new observation on the map</p><p>Add more observations if you would like.</p></div></div>`);
+      },
+      error: function (error) {
+        observations.close();
+        $drawingForm.html('');
+        $drawingForm.prepend(`<div class="card teal"><div class="card-content white-text"><span class="card-title">You are offline</span><p>But, don't worry your observation has not been lost.</p><p>It is in queue to sync once reconnected to the internet.</p><p>You don't need to do anything else.</p><p>Add as many observations as you would like.</p></div></div>`);
+      }
+    });
   },
   startTracking: function() {
     trackLocation();
