@@ -752,6 +752,15 @@ div.mapgroup h3 {
     width: 40px;
 }
 
+.container.profile-wrap {
+    padding: 10vh 5vh;
+}
+
+.container.profile-wrap .btn {
+    background: #2b384a;
+    margin: 1em 0;
+}
+
 /*--------------------
 map
 --------------------*/

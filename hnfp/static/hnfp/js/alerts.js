@@ -137,6 +137,7 @@ var alerts = {
       });
       $alertForm.submit(function(e) {
         e.preventDefault();
+        e.stopPropagation();
         alerts.create(e.target);
       });
       $('#steptwo').addClass('visible');
