@@ -1,7 +1,7 @@
 {% load static %}
 <nav role="navigation" class="{% if user.is_authenticated %}nav-extended{% endif %} white">
     <div class="nav-wrapper">
-        <a id="logo-container" href="/" class="brand-logo">
+        <a id="logo-container" href="{% url 'dashboard' %}" class="brand-logo">
             <img src="{% static 'hnfp/img/logo.svg' %}" alt="logo" />
         </a>
         <ul class="right hide-on-med-and-down">

@@ -12,12 +12,13 @@ module.exports = {
         'static/hnfp/js/*.js',
         'static/hnfp/js/openlayers/*.js',
         'static/hnfp/js/materialize/*.js',
-        'static/hnfp/js/data/*.geojson',
+        'static/hnfp/js/data/hoonah_landownership.geojson',
+        'static/hnfp/js/data/hoonah_roads.geojson',
     ],
     'globIgnores': [
         'workbox-config.js',
     ],
-    'maximumFileSizeToCacheInBytes': 40 * 1024 * 1024, // 40mb max size
+    'maximumFileSizeToCacheInBytes': 10 * 1024 * 1024, // 40mb max size
     'swDest': 'static/sw.min.js',
     'swSrc': 'static/sw.js',
 };

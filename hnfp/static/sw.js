@@ -4,20 +4,27 @@ if (workbox) {
     console.log(`Yay! Workbox is loaded 🎉`);
 
     workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
+
     workbox.core.setCacheNameDetails({
       prefix: 'hnfp',
-      suffix: 'v3.11'
+      suffix: 'v3.21'
     });
 
     workbox.precaching.precacheAndRoute([]);
 
     // Background sync
-    const hnfpQueue = new workbox.backgroundSync.Plugin('hnfpQueue', {
-      maxRetentionTime: 24 * 60 * 2
-    });
+    const hnfpQueue = new workbox.backgroundSync.Plugin('hnfpQueue');
+
+    workbox.routing.registerRoute(
+      ({url}) => url.pathname === '/observation/create/',
+      new workbox.strategies.NetworkOnly({
+        plugins: [hnfpQueue],
+      }),
+      'POST'
+    );
 
     const hnfpAlertQueue = new workbox.backgroundSync.Plugin('hnfpAlertQueue', {
-      maxRetentionTime: 24 * 60 * 2
+      maxRetentionTime: 24 * 60 * 5
     });
 
     const matchCb = ({url, event}) => {
@@ -49,13 +56,13 @@ if (workbox) {
       })
     );
 
-    workbox.routing.registerRoute(
-      matchCb,
-      workbox.strategies.networkOnly({
-        plugins: [hnfpQueue],
-      }),
-      'POST'
-    );
+    // workbox.routing.registerRoute(
+    //   matchCb,
+    //   workbox.strategies.networkOnly({
+    //     plugins: [hnfpQueue],
+    //   }),
+    //   'POST'
+    // );
 
     workbox.routing.registerRoute(
       matchAlertCb,

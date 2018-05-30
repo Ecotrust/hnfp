@@ -213,6 +213,8 @@ def login(request):
 #     return HttpResponse(template.render(context, request))
 
 def dashboard(request):
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/')
     template = loader.get_template('hnfp/dashboard.html')
     posts = Post.objects.filter(is_event=False)
     events = Post.objects.filter(is_event=True)
