@@ -393,7 +393,15 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-DEFAULT_FROM_EMAIL = "noreply@hoonahstewards.net"
+
+EMAIL_HOST_USER = 'webmaster@hoonahstewards.net'
+DEFAULT_FROM_EMAIL = 'webmaster@hoonahstewards.net'
+SERVER_EMAIL = 'webmaster@hoonahstewards.net'
+PROJECT_SITE = 'https://www.hoonahstewards.net'
+PROJECT_NAME = 'Hoonah Stewards'
+
+FORGOT_EMAIL_SUBJECT = 'Password Reset Request - Hoonah Stewards'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 try:
