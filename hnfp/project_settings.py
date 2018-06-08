@@ -393,15 +393,18 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-EMAIL_HOST_USER = 'webmaster@hoonahstewards.net'
-DEFAULT_FROM_EMAIL = 'webmaster@hoonahstewards.net'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'ip-172-31-2-211.us-west-2.compute.internal'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'Hoonah Stewards <webmaster@hoonahstewards.net>'
+
 SERVER_EMAIL = 'webmaster@hoonahstewards.net'
 PROJECT_SITE = 'https://www.hoonahstewards.net'
 PROJECT_NAME = 'Hoonah Stewards'
-
 FORGOT_EMAIL_SUBJECT = 'Password Reset Request - Hoonah Stewards'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 try:
     from marineplanner.local_settings import *
